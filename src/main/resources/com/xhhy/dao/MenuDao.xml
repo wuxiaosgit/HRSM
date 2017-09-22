@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xhhy.dao.MenuDao">
+	<resultMap type="MenuBean" id="menu">
+		<id property="menuId" column="menu_id" />
+		<result property="menuState" column="menu_state" />
+		<result property="menuName" column="menu_name" />
+		<result property="menuUrl" column="menu_url" />
+		<result property="topId" column="top_id" />
+	</resultMap>
+	<select id="selectMenu" parameterType="MenuBean" resultMap="menu">
+		select * from menu_tb
+		<where>
+			<if test="menuName != null and menuName != ''">
+				menu_name like "%"#{menuName}"%"
+			</if>
+			<if test="menuState != null">
+				and menu_state =#{menuState}
+			</if>
+		</where>
+	</select>
+	<select id="getMenu" parameterType="int" resultMap="menu">
+		SELECT m.*
+		from role_menu_tb rm left JOIN menu_tb m
+		on m.menu_id=rm.menu_id and rm.role_id=#{roleId}
+
+	</select>
+
+</mapper>

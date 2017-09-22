@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xhhy.dao.MianshiDao" >
+  <resultMap id="BaseResultMap" type="com.xhhy.domain.MianshiBean" >
+    <id column="mianshiId" property="mianshiid" jdbcType="INTEGER" />
+    <result column="jianliId" property="jianliid" jdbcType="INTEGER" />
+    <result column="mianshiren" property="mianshiren" jdbcType="VARCHAR" />
+    <result column="mianshiTime" property="mianshitime" jdbcType="DATE" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="pingjia" property="pingjia" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    mianshiId, jianliId, mianshiren, mianshiTime, state,
+    pingjia
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from mianshi_tb
+    where mianshiId = #{mianshiid,jdbcType=INTEGER}
+  </select>
+  
+  <resultMap id="BaseResultMap2" type="com.xhhy.domain.MianshiBean" >
+    <id column="mianshiId" property="mianshiid" jdbcType="INTEGER" />
+    <result column="jianliId" property="jianliid" jdbcType="INTEGER" />
+    <result column="mianshiren" property="mianshiren" jdbcType="VARCHAR" />
+    <result column="mianshiTime" property="mianshitime" jdbcType="DATE" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="pingjia" property="pingjia" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <select id="selectAll" resultMap="BaseResultMap">
+  	select 
+  	 <include refid="Base_Column_List" />
+  	 from mianshi_tb
+  	 where state in (1,2,3)
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from mianshi_tb
+    where mianshiId = #{mianshiid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xhhy.domain.MianshiBean" >
+    insert into mianshi_tb (mianshiId, jianliId, mianshiren, 
+      mianshiTime, state, pingjia
+      )
+    values (#{mianshiid,jdbcType=INTEGER}, #{jianliid,jdbcType=INTEGER}, #{mianshiren,jdbcType=VARCHAR}, 
+      #{mianshitime,jdbcType=DATE}, #{state,jdbcType=INTEGER}, #{pingjia,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.xhhy.domain.MianshiBean" >
+    insert into mianshi_tb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mianshiid != null" >
+        mianshiId,
+      </if>
+      <if test="jianliid != null" >
+        jianliId,
+      </if>
+      <if test="mianshiren != null" >
+        mianshiren,
+      </if>
+      <if test="mianshitime != null" >
+        mianshiTime,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+      <if test="pingjia != null" >
+        pingjia,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mianshiid != null" >
+        #{mianshiid,jdbcType=INTEGER},
+      </if>
+      <if test="jianliid != null" >
+        #{jianliid,jdbcType=INTEGER},
+      </if>
+      <if test="mianshiren != null" >
+        #{mianshiren,jdbcType=VARCHAR},
+      </if>
+      <if test="mianshitime != null" >
+        #{mianshitime,jdbcType=DATE},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="pingjia != null" >
+        #{pingjia,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xhhy.domain.MianshiBean" >
+    update mianshi_tb
+    <set >
+      <if test="jianliid != null" >
+        jianliId = #{jianliid,jdbcType=INTEGER},
+      </if>
+      <if test="mianshiren != null" >
+        mianshiren = #{mianshiren,jdbcType=VARCHAR},
+      </if>
+      <if test="mianshitime != null" >
+        mianshiTime = #{mianshitime,jdbcType=DATE},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="pingjia != null" >
+        pingjia = #{pingjia,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where mianshiId = #{mianshiid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xhhy.domain.MianshiBean" >
+    update mianshi_tb
+    set jianliId = #{jianliid,jdbcType=INTEGER},
+      mianshiren = #{mianshiren,jdbcType=VARCHAR},
+      mianshiTime = #{mianshitime,jdbcType=DATE},
+      state = #{state,jdbcType=INTEGER},
+      pingjia = #{pingjia,jdbcType=LONGVARCHAR}
+    where mianshiId = #{mianshiid,jdbcType=INTEGER}
+  </update>
+</mapper>

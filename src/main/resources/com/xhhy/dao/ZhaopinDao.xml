@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xhhy.dao.ZhaopinDao" >
+  <resultMap id="BaseResultMap" type="com.xhhy.domain.ZhaopinBean" >
+    <id column="zhaopin_id" property="zhaopinId" jdbcType="INTEGER" />
+    <result column="dept_id" property="deptId" jdbcType="INTEGER" />
+    <result column="zhaopin_type" property="zhaopinType" jdbcType="VARCHAR" />
+    <result column="zhaopin_num" property="zhaopinNum" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="dengjiren" property="dengjiren" jdbcType="VARCHAR" />
+    <result column="startTime" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endTime" jdbcType="TIMESTAMP" />
+   	<result column="jobmiaoshu" property="jobmiaoshu" jdbcType="LONGVARCHAR" />
+    <result column="yaoqiu" property="yaoqiu" jdbcType="LONGVARCHAR" />
+    <result column="state" property="state" jdbcType="INTEGER"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    zhaopin_id, dept_id, zhaopin_type, zhaopin_num, role_id, dengjiren, startTime, endTime,
+     jobmiaoshu,yaoqiu,state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from zhaopin_tb
+    where zhaopin_id = #{zhaopinId,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+  	select * from zhaopin_tb where state=1
+  </select>
+  <resultMap id="ZhaopinRoleDept" type="com.xhhy.domain.ZhaopinBean" extends="BaseResultMap">
+  	<association property="roleBean" javaType="RoleBean" column="role_id">
+  		 <id property="roleId" column="role_id" />
+		<result property="roleState" column="role_state" />
+		<result property="roleName" column="role_name" />
+		<result property="roleNumber" column="role_number" />
+		<result property="deptId" column="dept_id" />
+		<result property="roleRemark" column="role_remark" />
+		<result property="roleDescribe" column="role_describe" />
+		<association property="deptBean" javaType="DeptBean"
+			select="com.xhhy.dao.DeptDao.getDeptById" column="dept_id"></association>
+  	</association>
+  </resultMap>
+  <select id="selectZhaoRoleDept">
+  	
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from zhaopin_tb
+    where zhaopin_id = #{zhaopinId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.xhhy.domain.ZhaopinBean" >
+    insert into zhaopin_tb (zhaopin_id, dept_id, zhaopin_type, 
+      zhaopin_num,role_id, dengjiren, 
+      startTime, endTime, jobmiaoshu, 
+      yaoqiu,state)
+    values (#{zhaopinId,jdbcType=INTEGER}, #{deptId,jdbcType=INTEGER}, #{zhaopinType,jdbcType=VARCHAR}, 
+      #{zhaopinNum,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, #{dengjiren,jdbcType=VARCHAR}, 
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{jobmiaoshu,jdbcType=LONGVARCHAR}, 
+      #{yaoqiu,jdbcType=LONGVARCHAR},#{state,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xhhy.domain.ZhaopinBean" >
+    insert into zhaopin_tb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="zhaopinId != null" >
+        zhaopin_id,
+      </if>
+      <if test="deptId != null" >
+        dept_id,
+      </if>
+      <if test="zhaopinType != null" >
+        zhaopin_type,
+      </if>
+      <if test="zhaopinNum != null" >
+        zhaopin_num,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="dengjiren != null" >
+        dengjiren,
+      </if>
+      <if test="startTime != null" >
+        startTime,
+      </if>
+      <if test="endTime != null" >
+        endTime,
+      </if>
+      <if test="jobmiaoshu != null" >
+        jobmiaoshu,
+      </if>
+      <if test="yaoqiu != null" >
+        yaoqiu,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="zhaopinId != null" >
+        #{zhaopinId,jdbcType=INTEGER},
+      </if>
+      <if test="deptId != null" >
+        #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="zhaopinType != null" >
+        #{zhaopinType,jdbcType=VARCHAR},
+      </if>
+      <if test="zhaopinNum != null" >
+        #{zhaopinNum,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="dengjiren != null" >
+        #{dengjiren,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobmiaoshu != null" >
+        #{jobmiaoshu,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="yaoqiu != null" >
+        #{yaoqiu,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xhhy.domain.ZhaopinBean" >
+    update zhaopin_tb
+    <set >
+      <if test="deptId != null" >
+        dept_id = #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="zhaopinType != null" >
+        zhaopin_type = #{zhaopinType,jdbcType=VARCHAR},
+      </if>
+      <if test="zhaopinNum != null" >
+        zhaopin_num = #{zhaopinNum,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="dengjiren != null" >
+        dengjiren = #{dengjiren,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null" >
+        startTime = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null" >
+        endTime = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobmiaoshu != null" >
+        jobmiaoshu = #{jobmiaoshu,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="yaoqiu != null" >
+        yaoqiu = #{yaoqiu,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where zhaopin_id = #{zhaopinId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xhhy.domain.ZhaopinBean" >
+    update zhaopin_tb
+    set dept_id = #{deptId,jdbcType=INTEGER},
+      zhaopin_type = #{zhaopinType,jdbcType=VARCHAR},
+      zhaopin_num = #{zhaopinNum,jdbcType=INTEGER},
+      role_id = #{roleId,jdbcType=INTEGER},
+      dengjiren = #{dengjiren,jdbcType=VARCHAR},
+      startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
+      jobmiaoshu = #{jobmiaoshu,jdbcType=LONGVARCHAR},
+      yaoqiu = #{yaoqiu,jdbcType=LONGVARCHAR}
+    where zhaopin_id = #{zhaopinId,jdbcType=INTEGER}
+  </update>
+</mapper>

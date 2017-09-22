@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xhhy.dao.UserDao">
+
+	<sql id="my_sql">
+		select
+		user_id,role_id,user_login,user_password,user_name,user_state,user_gender,user_idcard,user_phone,user_telephone,user_email,user_picture,user_remark from
+		user_tb
+	</sql>
+	<resultMap type="UserBean" id="user">
+		<id property="userId" column="user_id" />
+		<result property="userLogin" column="user_login" />
+		<result property="roleId" column="role_id" />
+		<result property="userPassword" column="user_password" />
+		<result property="userState" column="user_state" />
+		<result property="userGender" column="user_gender" />
+		<result property="userEmail" column="user_email" />
+		<result property="userAddress" column="user_address" />
+		<result property="userIdcard" column="user_idcard" />
+		<result property="userPhone" column="user_phone" />
+		<result property="userTelephone" column="user_telephone" />
+		<result property="userRemark" column="user_remark" />
+		<result property="userPicture" column="user_picture" />
+	</resultMap>
+	<insert id="insertUser" parameterType="UserBean">
+		
+	</insert>
+	<select id="listUser" parameterType="UserBean" resultMap="user">
+		select
+		u.* from
+		user_tb u,role_tb r
+		<where>
+		u.role_id=r.role_id 
+			<if test="userName != null and userName !=''">
+			and u.user_name like #{userName}
+			</if>
+			<if test="roleId != null">
+			and  u.role_id = #{roleId}
+			</if>
+			<if test="deptId != null">
+			and  r.dept_id = #{deptId} 
+			</if>
+		</where>
+		
+	</select>
+	<select id="login" parameterType="UserBean"   resultMap="user">
+		<include refid="my_sql" />
+		where user_login=#{userLogin} and user_password=#{userPassword}
+	</select>
+</mapper>
+
+ 

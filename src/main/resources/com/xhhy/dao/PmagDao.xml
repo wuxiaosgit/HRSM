@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+	
+<mapper namespace="com.xhhy.dao.PmagDao">
+	<sql id="my_sql">
+		select pmag_id,pmag_code,pmag_state,pmag_verifystate,pmag_bank,pmag_bankid,pmag_insuranceid,pmag_peg,pmag_time,pmag_family,pmag_remark,pmag_dept,pmag_doom,pmag_doomcode,pmag_name,pmag_sex,pmag_email,
+			  pmag_phone,pmag_address,pmag_shen,pmag_hukou,pmag_miao,pmag_xiao,pmag_ye,pmag_li,pmag_jing,pmag_cheng
+		from pmag_tb 
+	</sql>
+	<resultMap type="com.xhhy.domain.PmagBean" id="pmag">
+		<id property="pmagId" column="pmag_id"/>
+		<result property="pmagDept" column="pmag_dept"/>
+		<result property="pmagDoom" column="pmag_doom"/>
+		<result property="pmagDoomCode" column="pmag_doomcode"/>
+		<result property="pmagCheng" column="pmag_cheng"/>
+		<result property="pmagName" column="pmag_name"/>
+		<result property="pmagSex" column="pmag_sex"/>
+		<result property="pmagEmai" column="pmag_email"/>
+		<result property="pmagPhone" column="pmag_phone"/>
+		<result property="pmagAddress" column="pmag_address"/>
+		<result property="pmagShen" column="pmag_shen"/>
+		<result property="pmagHuKou" column="pmag_hukou"/>
+		<result property="pmagMiao" column="pmag_miao"/>
+		<result property="pmagXiao" column="pmag_xiao"/>
+		<result property="pmagYe" column="pmag_ye"/>
+		<result property="pmagLi" column="pmag_li"/>
+		<result property="pmagJing" column="pmag_jing"/>
+		<result property="pmagCode" column="pmag_code"/>
+		<result property="pmagState" column="pmag_state"/>
+		<result property="pmagVerifyState" column="pmag_verifystate"/>
+		<result property="pmagMoney" column="pmag_money"/>
+		<result property="pmagBank" column="pmag_bank"/>
+		<result property="pmagBankId" column="pmag_bankid"/>
+		<result property="pmagInsuranceId" column="pmag_insuranceid"/>
+		<result property="pmagPeg" column="pmag_peg"/>
+		<result property="pmagTime" column="pmag_time"/>
+		<result property="pmagFamily" column="pmag_family"/>
+		<result property="pmagRemark" column="pmag_remark"/>	
+	</resultMap>
+	<insert id="insertPmag" parameterType="com.xhhy.domain.PmagBean" >
+		insert into pmag_tb(pmag_code,pmag_state,pmag_verifystate,pmag_money,pmag_bank,pmag_bankid,pmag_insuranceid,pmag_peg,pmag_time,pmag_family,pmag_remark,
+							pmag_dept,pmag_doom,pmag_doomcode,pmag_name,pmag_sex,pmag_email,pmag_phone,pmag_address,pmag_shen,pmag_hukou,pmag_miao,pmag_xiao,pmag_ye,pmag_li,pmag_jing,pmag_cheng)
+					 values(#{pmagCode},#{pmagState},#{pmagVerifyState},#{pmagMoney},#{pmagBank},#{pmagBankId},#{pmagInsuranceId},#{pmagPeg},#{pmagTime},#{pmagFamily},#{pmagRemark},
+					 	#{pmagDept},#{pmagDoom},#{pmagDoomCode},#{pmagName},#{pmagSex},#{pmagEmai},#{pmagPhone},#{pmagAddress},#{pmagShen},#{pmagHuKou},#{pmagMiao},#{pmagXiao},#{pmagYe},#{pmagLi},#{pmagJing},${pmagCheng})
+	</insert>
+	<!-- 模糊查询 -->
+	<select id="queryLike"  parameterType="map" resultMap="pmag">
+		<include refid="my_sql"></include> 
+		where 1=1
+		<if test="pmagName!=null and pmagName!=''">
+			and pmag_name like "%"#{pmagName}"%"
+		</if>
+		<if test="pmagState!=null and upmagState > 0">
+			and pmag_state = #{pmagBean.pmagState}
+		</if>
+		<if test="pmagVerifyState!=null and pmagVerifyState !=''">
+			and pmag_verifyState = #{pmagBean.pmagVerifyState}
+		</if>
+		<if test="pmagTime!=null and pmagTime!=''">			
+		</if> 		
+	</select> 
+</mapper>

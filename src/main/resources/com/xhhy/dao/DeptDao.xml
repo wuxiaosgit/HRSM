@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xhhy.dao.DeptDao">
+		<resultMap type="DeptBean" id="dept">
+			<id property="deptId" column="dept_id"/>
+			<result property="deptState" column="dept_state"/>
+			<result property="deptName" column="dept_name"/>
+			<result property="deptShortName" column="dept_shortname"/>
+			<result property="deptUp" column="dept_up"/>
+			<result property="deptAdress" column="dept_address"/>
+			<result property="deptJianjie" column="dept_jianjie"/>
+			<result property="deptRemark" column="dept_remark"/>
+		</resultMap>
+
+
+	<select id="listDept" resultMap="dept">
+		select * from dept_tb
+	</select>
+	<select id="getDeptById" parameterType="int" resultMap="dept">
+		select * from dept_tb where dept_id=#{deptId}
+	</select>
+
+</mapper>

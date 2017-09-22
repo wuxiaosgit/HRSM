@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xhhy.dao.TrainDao">
+
+<sql id="addTrain">
+insert into train_tb(
+train_id,train_name,train_teacher,train_goal,train_starttime,train_endtime,train_people,
+train_jianjie,train_ziliao,train_sumup,train_state,train_feekback
+)
+values(
+null,#{trainName},#{trainTeacher},#{trainGoal},#{trainStarttime},#{trainEndtime},#{trainPeople},
+#{trainJianjie},#{trainZiliao},#{trainSumup},#{trainState},#{trainFeekBack}
+)
+</sql>
+
+<sql id="queryTrainList">
+select train_id trainId,train_name trainName,train_teacher trainTeacher,train_goal trainGoal,train_starttime trainStarttime,train_endtime trainEndtime,train_people trainPeople,
+train_jianjie trainJianjie,train_ziliao trainZiliao,train_sumup trainSumup,train_state trainState,train_feekback trainFeekBack
+from train_tb
+</sql>
+
+
+<insert id="insertTrain" parameterType="com.xhhy.domain.TrainBean">
+<include refid="addTrain"/>
+</insert>
+
+<select id="listTrain" resultType="com.xhhy.domain.TrainBean">
+<include refid="queryTrainList"/>
+</select>
+
+<select id="queryLike" parameterType="com.xhhy.domain.TrainBean"  resultType="com.xhhy.domain.TrainBean">
+<include refid="queryTrainList" />
+<where>
+	<if test="trainName!=null">
+		train_name like  "%"#{trainName}"%"
+	</if>
+	<if test="trainState!=null">
+		and train_state = #{trainState}
+	</if>
+	<if test="trainStarttime!=null">
+		and train_starttime = #{trainStarttime}
+	</if>
+	<if test="trainEndtime !=null">
+		and train_enttime  = #{trainEndtime}
+	</if>
+</where>
+</select>
+
+</mapper>
