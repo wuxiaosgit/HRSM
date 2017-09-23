@@ -22,15 +22,7 @@
 <script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
 	<script type="text/javascript">
-		$(function(){
-				$.post("../menu/ajaxMenu.do","", function(result) {
-					var top=document.getElementById("topId");
-					for ( var i in result) {
-						top.add(new Option(result[i].menuName,result[i].menuId),null);
-					}
-				});
-			
-		});
+	
 	</script>
     <body >
 
@@ -46,24 +38,27 @@
 
         <div style="font-size: 13px;margin: 10px 5px">
             <form action="../menu/insertMenu.do" method="post" >
+            <input type="hidden" name="menuId" value="${menuBean.menuId }">
             <table border="1" width="100%" class="table_a">
                 <tr>
                     <td width="120px;">菜单名称<span style="color:red">*</span>：</td>
-                    <td><input type="text" name="menuName" value="${ menuName}" /></td>
+                    <td><input type="text" name="menuName" value="${menuBean.menuName}" /></td>
                 </tr>
                 <tr>
                     <td>上级菜单<span style="color:red">*</span>：</td>
                     <td>
                        <select name="topId" id="topId">
 						<option value="0">顶级菜单</option>
-						
+						<c:forEach items="${topMenus }" var="item">
+						<option value="${item.menuId }"  <c:if test="${item.menuId eq menuBean.menuId }">selected="selected"</c:if> >${item.menuName}</option>
+						</c:forEach>
 					   </select>
                     </td>
                 </tr>
 				  <tr>
                     <td>URL<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text"  name="menuUrl" value="${ menuUrl}" />
+						<input type="text"  name="menuUrl" value="${ menuBean.menuUrl}" />
 					</td>
                 </tr>
                
@@ -71,15 +66,15 @@
                     <td>状态<span style="color:red">*</span>：</td>
                     <td>
 						 <select name="menuState">
-							<option value="1">启用</option>
-							<option value="0">禁用</option>						
+							<option value="1" <c:if test="${menuBean.menuState eq 1 }">selected="selected"</c:if> >启用</option>
+							<option value="0"<c:if test="${menuBean.menuState eq 0 }">selected="selected"</c:if>>禁用</option>						
 						 </select>
 					</td>
                 </tr>
                 <tr>
                     <td>备注：</td>
                     <td>
-						<input type="text"  name="menuRemark" value="${menuRemark }" />
+						<input type="text"  name="menuRemark" value="${menuBean.menuRemark }" />
 					</td>
                 </tr>
               
@@ -88,7 +83,7 @@
 				
                 <tr>
                     <td colspan="2" align="center">
-                        <input type="submit" value="添加">
+                        <input type="submit" value="提交">
 						<input type="reset" value="清空">
                     </td>
                 </tr>  

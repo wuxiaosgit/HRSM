@@ -17,26 +17,28 @@ public class MenuController {
 	@Autowired
 	private MenuService menuService;
 	
-	@RequestMapping("ajaxMenu.do")
-	public @ResponseBody List<MenuBean> ajaxMenu(){
-		return menuService.getTopMenu();
-	}
+	
 	
 	@RequestMapping("insertMenu.do")
 	public ModelAndView insretMenu(MenuBean menuBean){
-		if (menuBean.getTopId()!=0) {
-			MenuBean topMenu=menuService.getMenuById(menuBean.getTopId());
-			menuBean.setMenuPaixu(topMenu.getMenuPaixu()+1);
-		}else{
-			int paixu=menuService.getMaxPaixu();
-			if (paixu%2==0) {
-				menuBean.setMenuPaixu(paixu+1);
-				
-			}else{ 
-				menuBean.setMenuPaixu(paixu+2);
+		if (menuBean.getMenuId()==null) {
+			//添加该做的事
+			if (menuBean.getTopId()!=0) {
+				MenuBean topMenu=menuService.getMenuById(menuBean.getTopId());
+				menuBean.setMenuPaixu(topMenu.getMenuPaixu()+1);
+			}else{
+				int paixu=menuService.getMaxPaixu();
+				if (paixu%2==0) {
+					menuBean.setMenuPaixu(paixu+1);
+					
+				}else{ 
+					menuBean.setMenuPaixu(paixu+2);
+				}
 			}
+			menuService.insertMenu(menuBean);
+		}else{
+			menuService.updateMenu(menuBean);
 		}
-		menuService.insertMenu(menuBean);
 		return selectMenu(null);
 	}
 	
@@ -50,12 +52,35 @@ public class MenuController {
 			menuBean.setMenuState(null);
 		}
 		List<MenuBean> menuBeans= menuService.selectMenu(menuBean);
-		for (MenuBean menuBean2 : menuBeans) {
+		/*for (MenuBean menuBean2 : menuBeans) {
 			System.out.println(menuBean2);
-		}
+		}*/
 		
 		mav.addObject("menuBeans",menuBeans);
 		return mav;
 	}
-	
+	@RequestMapping("getMenu.do")
+	public ModelAndView getMenu(Integer menuId){
+		
+		ModelAndView mav= new ModelAndView("../html/resource/demo8/add.jsp");
+		mav.addObject("topMenus",menuService.getTopMenu());
+		if (menuId!=null) {
+			
+			mav.addObject("menuBean",menuService.getMenuById(menuId));
+			
+		}
+		return mav;
+	}
+	@RequestMapping("deleteMenu.do")
+	public ModelAndView deleteMenu(Integer menuId){
+		menuService.deleteMenu(menuId);
+		return selectMenu(null);
+	}
+	@RequestMapping("noDeleteMenu.do")
+	public ModelAndView noDeleteMenu(Integer menuId){
+		MenuBean menu = menuService.getMenuById(menuId);
+		menu.setMenuState(0);
+		menuService.updateMenu(menu);
+		return selectMenu(null);
+	}
 }

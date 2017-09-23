@@ -106,10 +106,22 @@
                         <td><a href="view.html">${item.userName }</a></td> 
 						<td>${item.roleBean.roleName }</td> 	
 						<td>${item.roleBean.deptBean.deptName}</td> 						                        
-						<td>${item.userState}</td> 						                        
+						<td>
+						<c:choose>
+						<c:when test="${item.userState eq 1 }">启用</c:when>
+						<c:otherwise>禁用</c:otherwise>
+						</c:choose>
+						</td> 						                        
                         <td>
 							<a href="../dept/getDept.do?type=update&userId=${item.userId }">修改</a>						   
-							<a href="../user/deleteUser.do?userId=${item.userId }">真删除</a>
+                        <c:choose>
+						<c:when test="${item.userState eq 1 }">
+							<a href="../user/noDeleteUser.do?userId=${item.userId }">禁用</a>
+						</c:when>
+						<c:otherwise>
+							<a href="../user/deleteUser.do?userId=${item.userId }">删除</a>
+						</c:otherwise>
+						</c:choose>
 						</td>                        
                     </tr> 
 					</c:forEach>

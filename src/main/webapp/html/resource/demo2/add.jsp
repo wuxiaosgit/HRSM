@@ -54,30 +54,29 @@
 				<tr>
 					<td>登录账号<span style="color: red">*</span>：
 					</td>
-					<td><input type="text" id=1 name="userLogin" value="${user.userLogin }" />
+					<td><input required="required" type="text" id=1 name="userLogin" value="${user.userLogin }" />
 					</td>
 				</tr>
 
 				<tr>
 					<td>用户姓名<span style="color: red">*</span>：
 					</td>
-					<td><input type="text" id=2 name="userName" value="${user.userName }" /></td>
+					<td><input required="required" type="text" id=2 name="userName" value="${user.userName }" /></td>
 				</tr>
 				<tr>
 					<td>密码<span style="color: red">*</span>：
 					</td>
-					<td><input type="password" id=3 name="userPassword"
+					<td><input required="required" type="password" id=3 name="userPassword"
 						value="${user.userPassword }" /></td>
 				</tr>
 				<tr>
 					<td>所属部门<span style="color: red">*</span>：
 					</td>
-					<td><select name="deptId" onchange="selectrole(this.value);">
+					<td><select name="deptId" required="required" onchange="selectrole(this.value);">
 
 							<option value="-1">--请选择--</option>
 							<c:forEach items="${deptBeans }" var="item">
-								<option value="${item.deptId }">${item.deptName }</option>
-
+								<option value="${item.deptId }" <c:if test="${user.deptId eq item.deptId }">selected="selected"</c:if> >${item.deptName }</option>
 							</c:forEach>
 
 					</select></td>
@@ -85,8 +84,15 @@
 				<tr>
 					<td>所属职位<span style="color: red">*</span>：
 					</td>
-					<td><select name="roleId" id="roleId">
-							<option value="-1">--请选择--</option>
+					<td><select name="roleId" id="roleId" required="required">
+						<c:choose>
+							<c:when test="${user eq null }">
+								<option value="-1">--请选择--</option>
+							</c:when>
+							<c:otherwise>
+								<option value="${user.roleBean.roleId }">${user.roleBean.roleName }</option>
+							</c:otherwise>
+						</c:choose>
 
 					</select></td>
 				</tr>

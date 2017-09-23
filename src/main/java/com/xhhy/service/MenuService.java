@@ -11,4 +11,6 @@ public interface MenuService {
 	public Integer getMaxPaixu();
 	public List<MenuBean> selectMenu(MenuBean menuBean);
 	public void insertMenu(MenuBean menuBean);
+	public void updateMenu(MenuBean menuBean);
+	public void deleteMenu(Integer menuId);
 }

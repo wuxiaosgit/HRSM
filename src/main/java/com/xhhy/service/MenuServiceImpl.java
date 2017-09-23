@@ -57,4 +57,14 @@ public class MenuServiceImpl implements MenuService {
 		return menuDao.getMenuById(menuId);
 	}
 
+	public void updateMenu(MenuBean menuBean) {
+		// TODO Auto-generated method stub
+		menuDao.updateMenu(menuBean);
+	}
+
+	public void deleteMenu(Integer menuId) {
+		// TODO Auto-generated method stub
+		menuDao.deleteMenu(menuId);
+	}
+
 }

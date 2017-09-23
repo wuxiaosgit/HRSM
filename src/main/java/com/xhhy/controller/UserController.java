@@ -3,6 +3,8 @@ package com.xhhy.controller;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import com.xhhy.service.UserService;
 @Controller
 @RequestMapping("user")
 @SessionAttributes(value={"user","menus"}, types={UserBean.class,MenuBean.class})
+
 public class UserController {
 	@Autowired
 	private UserService userService;
@@ -44,6 +47,13 @@ public class UserController {
 	@RequestMapping("deleteUser.do")
 	public ModelAndView deleteUser(Integer userId){
 		userService.deleteUser(userId);
+		return selectUser(null);
+	}
+	@RequestMapping("noDeleteUser.do")
+	public ModelAndView noDeleteUser(Integer userId){
+		UserBean userBean = userService.getUserById(userId);
+		userBean.setUserState(0);
+		userService.updateUser(userBean);
 		return selectUser(null);
 	}
 	
@@ -70,7 +80,9 @@ public class UserController {
 	}
 
 	@RequestMapping("login.do")
-	public ModelAndView login(UserBean userBean){
+	public ModelAndView login(HttpServletRequest re,UserBean userBean){
+		ServletContext servletContext = re.getSession().getServletContext();
+		
 		ModelAndView mav=new ModelAndView("../html/index.jsp");
 		UserBean user=userService.login(userBean);
 	
@@ -79,16 +91,17 @@ public class UserController {
 			mav.setViewName("../html/login.jsp");
 		}else{
 			mav.addObject("user",user);
+			servletContext.setAttribute("user",user);
 			System.out.println(user);
 			List<MenuBean> menus=menuService.getMenu(user.getRoleId());
-			for (MenuBean menuBean : menus) {
+			/*for (MenuBean menuBean : menus) {
 				System.out.println();
 				System.out.println(menuBean);
 				for (MenuBean m : menuBean.getMenuList()) {
 					System.out.println(m);
 				}
 				System.out.println();
-			}
+			}*/
 			mav.addObject("menus",menus);
 			
 		}
