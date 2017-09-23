@@ -29,18 +29,16 @@
     	function selectrole(obj){
     		
     		$.post("../role/ajaxRole.do",{deptId:obj},function(result){
-    			alert(result);
-    			/* var $json=$.parseJSON(result);
-    			 var docselect = document.getElementById("docid"); 
-    			docselect.innerHTML="";
-    			docselect.add(new Option("--请选择--",-1),null);
-    			$($json).each(function(i,item){
-    				 var a=parseInt(item.countmax)-parseInt(item.count); 
-    				if(a>0){
-    					 docselect.add(new Option(item.dname+"可以出诊"+a+"次",item.did),null);
-    				}
-    				 
-    			}); */
+    			 var role = document.getElementById("roleId"); 
+    			 role.innerHTML="";
+    			 role.add(new Option("--请选择--",-1),null);
+    			
+    			for ( var sss in result) {
+					
+    			 role.add(new Option(result[sss].roleName,result[sss].roleId),null);
+				}
+    			
+    			
     		
     		});
     		
@@ -55,7 +53,7 @@
             <span>
                 <span style="float: left;">当前位置是：系统管理-》用户管理</span>
                 <span style="float: right; margin-right: 8px; font-weight: bold;">
-                    <a style="text-decoration: none;" href="add.html">【添加】</a>
+                    <a style="text-decoration: none;" href="../dept/getDept.do?type=add">【添加】</a>
 					<a style="text-decoration: none;" href="#">【删除】</a>
                 </span>
             </span>
@@ -68,7 +66,7 @@
                   	   姓名：
 					<input type="text"  name="userName" value="${userName }" />
 					 所属部门: 
-					<select name="deptId" onclick="selectrole(this.value);">
+					<select name="deptId" onchange="selectrole(this.value);">
 				
 					<option value="-1">--请选择--</option>
 					<c:forEach items="${deptBeans }" var="item">
@@ -79,7 +77,7 @@
 					</select>	
 					 角色: 
 					<select name="roleId" id="roleId">
-					<option value="1">1</option>
+						<option value="-1">--请选择--</option>
 				
 					</select>
                     <input value="查询" type="submit" />
@@ -95,8 +93,9 @@
                         <td width="30px;"><input type="checkbox" /></td>						
 						<td width="80px;">账号</td>
                         <td width="80px;">姓名</td>
-                        <td >角色</td>
+                        <td width="80px;">角色</td>
 						<td width="100px;">所属部门</td>                                        
+						<td width="100px;">状态</td>                                        
                         <td align="center" width="100px;">操作</td>
                     </tr>
 				<c:forEach items="${userBeans }" var="item">
@@ -105,11 +104,24 @@
                         <td><input type="checkbox" /></td>
 						<td>${item.userLogin }</td>
                         <td><a href="view.html">${item.userName }</a></td> 
-						<td>人力资源负责人</td> 	
-						<td>人力资源</td> 						                        
+						<td>${item.roleBean.roleName }</td> 	
+						<td>${item.roleBean.deptBean.deptName}</td> 						                        
+						<td>
+						<c:choose>
+						<c:when test="${item.userState eq 1 }">启用</c:when>
+						<c:otherwise>禁用</c:otherwise>
+						</c:choose>
+						</td> 						                        
                         <td>
-							<a href="add.html">修改</a>						   
-							<a href="#">删除</a>
+							<a href="../dept/getDept.do?type=update&userId=${item.userId }">修改</a>						   
+                        <c:choose>
+						<c:when test="${item.userState eq 1 }">
+							<a href="../user/noDeleteUser.do?userId=${item.userId }">禁用</a>
+						</c:when>
+						<c:otherwise>
+							<a href="../user/deleteUser.do?userId=${item.userId }">删除</a>
+						</c:otherwise>
+						</c:choose>
 						</td>                        
                     </tr> 
 					</c:forEach>

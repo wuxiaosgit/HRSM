@@ -37,5 +37,9 @@ public class RoleServiceImpl implements RoleService {
 		System.out.println(roleName);
 		return roleDao.selectRoleByRoleName(roleName);
 	}
+	public void insertRole(RoleBean roleBean) {
+		// TODO Auto-generated method stub
+		roleDao.insertRole(roleBean);
+	}
 
 }

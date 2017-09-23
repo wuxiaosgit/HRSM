@@ -28,21 +28,38 @@ public class RoleController {
 		roleBean.setDeptId(deptId);
 		return roleService.listRole( roleBean);
 	}
+	@RequestMapping("getMenu.do")
+	public ModelAndView getMenu(String type,Integer roleId){
+		
+		ModelAndView mav=new ModelAndView("../html/resource/demo3/add.jsp");
+		return mav;
+				
+	}
+	@RequestMapping("insertRole.do")
+	public ModelAndView insertRole(RoleBean roleBean){
+		System.out.println(roleBean);
+		roleService.insertRole(roleBean);
+		
+		return selectRole(null);
+	}
+	
 	@RequestMapping("selectRole.do")
-	public ModelAndView listdept(RoleBean roleBean){
+	public ModelAndView selectRole(RoleBean roleBean){
 		ModelAndView mav=new ModelAndView("../html/resource/demo3/list.jsp");
+		if (roleBean==null) {
+			roleBean=new RoleBean();
+		}
 		if (roleBean.getDeptId()!=null&&roleBean.getDeptId()==-1) {
 			roleBean.setDeptId(null);
 		}
-		System.out.println(roleBean);
 		if (roleBean.getRoleState()!=null&&roleBean.getRoleState() == -1) {
 			roleBean.setRoleState(null);
 		}
 		List<RoleBean> roleBeans= roleService.listRole(roleBean);
-		for (RoleBean roleBean2 : roleBeans) {
+		/*for (RoleBean roleBean2 : roleBeans) {
 			System.out.println(roleBean2);
 			System.out.println(roleBean2.getDeptBean());
-		}
+		}*/
 		mav.addObject("roleBeans",roleBeans);
 		
 		mav.addObject("deptBeans",deptService.listDept());

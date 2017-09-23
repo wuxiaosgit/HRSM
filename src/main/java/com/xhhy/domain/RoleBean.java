@@ -63,8 +63,9 @@ public class RoleBean implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "RoleBean [roleId=" + roleId + ", deptId=" + deptId + ", roleName=" + roleName + ", roleDescribe="
-				+ roleDescribe + ", roleRemark=" + roleRemark + ", roleState=" + roleState + "]";
+		return "RoleBean [roleId=" + roleId + ", deptId=" + deptId + ", deptBean=" + deptBean + ", roleName=" + roleName
+				+ ", roleNumber=" + roleNumber + ", roleDescribe=" + roleDescribe + ", roleRemark=" + roleRemark
+				+ ", roleState=" + roleState + "]";
 	}
 	
 	

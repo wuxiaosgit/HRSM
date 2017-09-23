@@ -7,7 +7,7 @@ public class DeptBean implements Serializable {
 	private Integer deptState;
 	private String deptName;
 	private String deptShortName;
-	private String deptUp;
+	private Integer deptUp;
 	private String deptAdress;
 	private String deptJianjie;
 	private String deptRemark;
@@ -35,10 +35,11 @@ public class DeptBean implements Serializable {
 	public void setDeptShortName(String deptShortName) {
 		this.deptShortName = deptShortName;
 	}
-	public String getDeptUp() {
+	
+	public Integer getDeptUp() {
 		return deptUp;
 	}
-	public void setDeptUp(String deptUp) {
+	public void setDeptUp(Integer deptUp) {
 		this.deptUp = deptUp;
 	}
 	public String getDeptAdress() {
