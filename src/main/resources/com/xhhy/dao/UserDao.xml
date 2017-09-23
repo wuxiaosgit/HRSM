@@ -179,13 +179,35 @@
 			<if test="deptId != null">
 			and  r.dept_id = #{deptId} 
 			</if>
+			ORDER BY user_id DESC
+			
+			limit #{currentNum},8
 		</where>
-		
 	</select>
+		
+	<select id="max" parameterType="UserBean" resultType="int">
+		select
+		count(*) from
+		user_tb u,role_tb r
+		<where>
+		u.role_id=r.role_id 
+			<if test="userName != null and userName !=''">
+			and u.user_name like "%"#{userName}"%"
+			</if>
+			<if test="roleId != null">
+			and  u.role_id = #{roleId}
+			</if>
+			<if test="deptId != null">
+			and  r.dept_id = #{deptId} 
+			</if>
+		</where>
+	</select>
+	
 	<select id="login" parameterType="UserBean"   resultMap="user">
 		<include refid="my_sql" />
 		where user_login=#{userLogin} and user_password=#{userPassword}
 	</select>
+	
 	<select id="getUserById" parameterType="int"   resultMap="user">
 		<include refid="my_sql" />
 		where user_id=#{userId} 

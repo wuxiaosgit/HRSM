@@ -34,8 +34,11 @@ public class UserServiceImpl implements UserService {
 
 	public List<UserBean> listUser(UserBean userBean) {
 		// TODO Auto-generated method stub
+		userBean.setCurrentNum((userBean.getCurrentNum()-1)*8);
+		List<UserBean> listUser = userDao.listUser(userBean);
+		userBean.setCurrentNum(userBean.getCurrentNum()/8+1);
 		
-		return userDao.listUser(userBean);
+		return listUser;
 	}
 
 
@@ -63,6 +66,15 @@ public class UserServiceImpl implements UserService {
 	public void updateUser(UserBean userBean) {
 		// TODO Auto-generated method stub
 		userDao.updateUser(userBean);
+	}
+
+
+
+
+
+	public Integer max(UserBean userBean) {
+		// TODO Auto-generated method stub
+		return userDao.max(userBean);
 	}
 
 }

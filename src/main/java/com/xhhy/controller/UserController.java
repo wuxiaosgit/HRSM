@@ -20,6 +20,7 @@ import com.xhhy.domain.MenuBean;
 import com.xhhy.domain.UserBean;
 import com.xhhy.service.DeptService;
 import com.xhhy.service.MenuService;
+import com.xhhy.service.RoleService;
 import com.xhhy.service.UserService;
 
 @Controller
@@ -32,10 +33,13 @@ public class UserController {
 	@Autowired
 	private DeptService deptService;
 	@Autowired
+	private RoleService roleService;
+	@Autowired
 	private MenuService menuService;
 	
 	@RequestMapping("insertUser.do")
 	public ModelAndView insertUser(UserBean userBean){
+		userBean.setUserState(1);
 		userService.insertUser(userBean);
 		return selectUser(null);
 	}
@@ -70,12 +74,21 @@ public class UserController {
 			userBean.setRoleId(null);
 		}
 		List<UserBean> userBeans=userService.listUser(userBean);
+		Integer max=userService.max(userBean);
+		System.out.println(max);
 		/*for (UserBean userBean2 : userBeans) {
 			System.out.println(userBean2);
 		}*/
 		mav.addObject("userBeans",userBeans);
 		mav.addObject("deptBeans",deptService.listDept());
 		mav.addObject("userName",userBean.getUserName());
+		mav.addObject("deptId",userBean.getDeptId());
+		mav.addObject("role",roleService.getRoleById(userBean.getRoleId()));
+		
+		
+		mav.addObject("maxSize",max);
+		mav.addObject("pageNum", (int)Math.ceil(max/8.0));
+		mav.addObject("currentPage", userBean.getCurrentNum());
 		return mav;
 	}
 

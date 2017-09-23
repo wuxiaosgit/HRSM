@@ -11,4 +11,5 @@ public interface UserService {
 	public void updateUser(UserBean userBean);
 	public void deleteUser(Integer userId);
 	public List<UserBean> listUser(UserBean userBean);
+	public Integer max(UserBean userBean);
 }
