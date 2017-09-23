@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="Utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
@@ -67,8 +68,8 @@
                     <td>
                        <select name="zhaopinType">
 						<option value="">-请选择-</option>
-						<option value="社会招聘">社会招聘</option>
-						<option value="校园招聘">校园招聘</option>
+						<option value="社会招聘" <c:if test="${jianliBean.zhaopinType eq '社会招聘'}">selected="selected"</c:if>>社会招聘</option>
+						<option value="校园招聘" <c:if test="${jianliBean.zhaopinType eq '校园招聘'}">selected="selected"</c:if>>校园招聘</option>
 					   </select>
                     </td>                
                 </tr>
@@ -124,8 +125,8 @@
                     <td>
 						  <select name="xueli">
 						<option>-请选择-</option>
-						<option value="本科">本科</option>
-						<option value="硕士">硕士</option>
+						<option value="本科" <c:if test="${jianliBean.xueli eq '本科'}">selected="selected"</c:if>>本科</option>
+						<option value="硕士" <c:if test="${jianliBean.xueli eq '硕士'}">selected="selected"</c:if>>硕士</option>
 					   </select>
                     </td>
                 </tr>
@@ -152,8 +153,8 @@
                     <td>
                         <select name="zizhi">
 							<option>-请选择-</option>
-							<option value="在职">在职</option>
-							<option value="离职">离职</option>
+							<option value="在职" <c:if test="${jianliBean.zizhi eq '在职'}">selected="selected"</c:if>>在职</option>
+							<option value="离职" <c:if test="${jianliBean.zizhi eq '离职'}">selected="selected"</c:if>>离职</option>
 						</select>
                     </td>                
                 </tr>
@@ -162,8 +163,8 @@
                     <td>
                          <select name="yinjiesheng">
 							<option>-请选择-</option>
-							<option value="应届">应届</option>
-							<option value="毕业">毕业</option>
+							<option value="应届" <c:if test="${jianliBean.yinjiesheng eq '应届'}">selected="selected"</c:if>>应届</option>
+							<option value="毕业" <c:if test="${jianliBean.yinjiesheng eq '毕业'}">selected="selected"</c:if>>毕业</option>
 						</select>
                     </td>                
                 </tr>
@@ -197,8 +198,8 @@
                     <td>
                       <select name="tuijian">
 							<option>-请选择-</option>
-							<option value="是">是</option>
-							<option value="否">否</option>
+							<option value="是" <c:if test="${jianliBean.tuijian eq '是'}">selected="selected"</c:if>>是</option>
+							<option value="否" <c:if test="${jianliBean.tuijian eq '否'}">selected="selected"</c:if>>否</option>
 						</select>
 						推荐人：<input type="text" name="tuijianren" value="${jianliBean.tuijianren }"/>
 						推荐时间：<input type="text" name="tuijiantime" value="${jianliBean.tuijiantime }"

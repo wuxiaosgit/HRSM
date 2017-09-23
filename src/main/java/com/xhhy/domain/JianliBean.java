@@ -55,6 +55,8 @@ public class JianliBean {
     private String yijian;
     
     private int state;
+    
+    private RoleBean roleBean;
 
     public Integer getJianliId() {
         return jianliId;
@@ -262,6 +264,14 @@ public class JianliBean {
 
 	public void setState(int state) {
 		this.state = state;
+	}
+	
+	public RoleBean getRoleBean() {
+		return roleBean;
+	}
+
+	public void setRoleBean(RoleBean roleBean) {
+		this.roleBean = roleBean;
 	}
 
 	@Override

@@ -1,11 +1,15 @@
 <%@ page language="java" import="java.util.*" pageEncoding="Utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
         <title>简历管理添加</title>
         <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-        <link href="../../css/mine.css" type="text/css" rel="stylesheet" />
-        <script language="javascript" type="text/javascript" src="../../My97DatePicker/WdatePicker.js"></script>
+        <link href="../html/css/mine.css" type="text/css" rel="stylesheet" />
+          <script type="text/javascript" src="../html/js/jquery-3.2.1.min.js"></script>
+         <script type="text/javascript" src="../html/js/zhaopin.js"></script>
+          <script type="text/javascript" src="../html/js/jquery.validate.js"></script>
+        <script language="javascript" type="text/javascript" src="../html/My97DatePicker/WdatePicker.js"></script>
     </head>
 
     <body>
@@ -30,6 +34,9 @@
                     <td>
 					<select id="demo2_add_roleName">
 						<option value="0">--请选择--</option>
+						<c:forEach items="${ roles}" var = "role">
+							<option value="${role.roleName }">${role.roleName }</option>
+						</c:forEach>
 					</select>
 					
 					</td>
@@ -45,7 +52,7 @@
                 <tr>
                     <td>职位分类<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text" readonly id="demo2_add_deptShortname" name="deptShortname" value="" />
+						<input type="text" readonly id="demo2_add_deptShortname" name="deptShortName" value="" />
 					</td>
                 </tr>
                 <tr>
@@ -185,7 +192,7 @@
 					<tr>
                     <td>简历附件：</td>
                     <td>
-                        <input type="file" name="fujian" />
+                        <input type="file" name="" />
                     </td>                
                 </tr>
 			

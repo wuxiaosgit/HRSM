@@ -1,6 +1,7 @@
 package com.xhhy.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,14 @@ public class JianliServiceImpl implements JianliService{
 	public void insertSelective(JianliBean jianliBean) {
 		// TODO Auto-generated method stub
 		jianliDao.insertSelective(jianliBean);
+	}
+	public List<JianliBean> selectJianliRoleDept() {
+		// TODO Auto-generated method stub
+		return jianliDao.selectJianliRoleDept();
+	}
+	public List<JianliBean> selectJianliRoleDeptPages(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return jianliDao.selectJianliRoleDeptPages();
 	}
 
 }

@@ -3,6 +3,7 @@ package com.xhhy.dao;
 import java.util.List;
 
 import com.xhhy.domain.JianliBean;
+import com.xhhy.domain.ZhaopinBean;
 
 public interface JianliDao {
     int deleteByPrimaryKey(Integer jianliId);
@@ -18,4 +19,8 @@ public interface JianliDao {
     int updateByPrimaryKey(JianliBean record);
 
 	List<JianliBean> selectAll();
+
+	List<JianliBean> selectJianliRoleDept();
+
+	List<JianliBean> selectJianliRoleDeptPages();
 }

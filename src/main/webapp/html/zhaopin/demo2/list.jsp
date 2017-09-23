@@ -8,6 +8,31 @@
         <title>简历管理</title>
 
         <link href="../html/css/mine.css" type="text/css" rel="stylesheet" />
+       <script type="text/javascript" src="../html/js/jquery-3.2.1.min.js"></script>
+       <script type="text/javascript">
+	function showMsg() {
+		var msg = document.getElementById("msg").value;
+		if (msg != null && msg != "") {
+			alert(msg);
+		}
+	}
+	function tiaozhuan(){
+	
+		var num =document.getElementById("num").value;
+		alert(num);
+		var totlePages = document.getElementById("tp").value;
+		alert(totlePages);
+		if(num < 1 || num > totlePages){
+			if(totlePages != 1){
+				alert("请输入1到"+totlePages+"的数字!");
+			}else{
+				alert("数据只有1页!");
+			}
+		}else{
+			location.href="../zhaopin/selectZhaoRoleDeptPages.do?pageNum="+num;
+		}
+	}
+</script>
     </head>
     <body>
         <style>
@@ -66,16 +91,17 @@
 						<td>${list.time }</td>
 						
                         <td>
+              
 							<a href="../jianli/selectByPrimaryKey.do?jianliId=${list.jianliId}&method=change">修改</a>						   
 							<a href="../jianli/updateByPrimaryKeySelective.do?jianliId=${list.jianliId}&method=del">删除</a>
-							<select name="state">
-							<option value="存档">存档</option>
-							<option value="推荐面试">推荐面试</option>
-							<option value="推荐二面">推荐二面</option>
-							<option value="推荐三面">推荐三面</option>
-							<option value="建议录用">建议录用</option>
-							<option value="录用">录用</option>
-							<option value="删除">删除</option>
+							<select name="state" id="demo2_select_state">
+							<option value="0" <c:if test="${list.state eq 0}">selected="selected" </c:if>>删除</option>
+							<option value="1" <c:if test="${list.state eq 1}">selected="selected" </c:if>>推荐面试</option>
+							<option value="2" <c:if test="${list.state eq 2}">selected="selected" </c:if>>推荐二面</option>
+							<option value="3" <c:if test="${list.state eq 3}">selected="selected" </c:if>>推荐三面</option>
+							<option value="4" <c:if test="${list.state eq 4}">selected="selected" </c:if>>建议录用</option>
+							<option value="5" <c:if test="${list.state eq 5}">selected="selected" </c:if>>录用</option>
+							<option value="6" <c:if test="${list.state eq 6}">selected="selected" </c:if> >存档</option>
 						</select>
 						</td>         
 						</tr>
@@ -93,7 +119,7 @@
                         <td>
 							<a href="add.jsp">修改</a>						   
 							<a href="#">删除</a>
-							<select>
+							<select name="state">
 							<option>存档</option>
 							<option>推荐面试</option>
 							<option>推荐二面</option>
@@ -179,8 +205,33 @@
                     </tr> 
                     <tr>
                         <td colspan="10" style="text-align: center;">						
-						<a style="text-decoration: none;" href="#">
-                            首页 上一页  ... 7 8 9 10 11 12 ... 下一页 尾页 共1234条 每页显示 10/23 </a>
+		<input type="hidden" value="${totlePages }" id="tp" />
+					<span>显示第${(pageNum-1)*pageRows +1 }条到<c:choose>
+								<c:when test="${((pageNum-1)*pageRows +pageRows) <= totleRows }">
+				${(pageNum-1)*pageRows +pageRows }
+			    </c:when>
+								<c:otherwise>
+				${totleRows }
+			</c:otherwise>
+							</c:choose>条记录，总共${totleRows }条
+					</span> <span> <a href="../zhaopin/selectZhaoRoleDeptPages.do?pageNum=1">首页</a> <c:if
+								test="${pageNum == 1 }">
+				上一页
+			</c:if> <c:if test="${pageNum > 1 }">
+								<a href="../zhaopin/selectZhaoRoleDeptPages.do?pageNum=${pageNum-1 }">上一页</a>
+							</c:if> <c:forEach begin="1" end="${totlePages }" step="1" var="pn">
+								<c:if test="${pn == pageNum }">${pn }</c:if>
+								<c:if test="${pn != pageNum }">
+									<a href="../zhaopin/selectZhaoRoleDeptPages.do?pageNum=${pn }">${pn }</a>
+								</c:if>
+							</c:forEach> <c:if test="${pageNum == totlePages }">
+				下一页
+			</c:if> 
+			<c:if test="${pageNum < totlePages }">
+				<a href="../zhaopin/selectZhaoRoleDeptPages.do?pageNum=${pageNum+1 }">下一页</a>
+			</c:if> <a href="../zhaopin/selectZhaoRoleDeptPages.do?pageNum=${totlePages }">尾页</a> 转到
+			<input type="number" style="width: 50px" id="num" />页 
+			<input type="button" value="GO" onclick="tiaozhuan()" /></span>
                         </td>
                     </tr>
                 </tbody>
