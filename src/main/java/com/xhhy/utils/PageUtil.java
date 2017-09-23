@@ -48,4 +48,11 @@ public class PageUtil {
 	public int getStart(){
 		return (pageNum-1)*pageRows;
 	}
+	@Override
+	public String toString() {
+		return "PageUtil [pageNum=" + pageNum + ", pageRows=" + pageRows + ", totleRows=" + totleRows + ", totlePages="
+				+ totlePages + "]";
+	}
+	
+	
 }

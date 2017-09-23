@@ -23,15 +23,13 @@
         <div style="font-size: 13px;margin: 10px 5px">
            <!--  <form action="../../../zhaopin/insertSelective.do" method="post"> -->
             <%-- ../jianli/selectByPrimaryKey.do?jianliId=${list.jianliId } --%>
-             <form action="../../../jianli/insertSelective.do" method="post">
+             <form action="../jianli/insertSelective.do" method="post">
             <table border="1" width="100%" class="table_a">
                 <tr>
                     <td width="120px;">应聘职位名称<span style="color:red">*</span>：</td>
                     <td>
-					<select>
-						<option>---请选择---</option>
-						<option>---技术培训师---</option>
-					
+					<select id="demo2_add_roleName">
+						<option value="0">--请选择--</option>
 					</select>
 					
 					</td>
@@ -40,14 +38,15 @@
                 <tr>
                     <td>应聘职位编码<span style="color:red">*</span>：</td>
                     <td>
-                       <input type="text" readonly name="f_goods_name" value="BDQN-BM03" /> 
+                       <input type="text" readonly id="demo2_add_roleNumber" name="roleNumber" /> 
                     </td>
                 </tr>
                
                 <tr>
                     <td>职位分类<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text" name="f_goods_price"  /></td>
+						<input type="text" readonly id="demo2_add_deptShortname" name="deptShortname" value="" />
+					</td>
                 </tr>
                 <tr>
                     <td>姓名<span style="color:red">*</span>：</td>

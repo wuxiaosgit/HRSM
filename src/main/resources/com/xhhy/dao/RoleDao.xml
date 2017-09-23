@@ -31,4 +31,10 @@
 	<select id="SelectRoleDept" resultMap="role">
 		select * from role_tb ,dept_tb where role_tb.dept_id = dept_tb.dept_id
 	</select>
+	<select id="selectRoleByDeptName" resultMap="role" parameterType="String" >
+		select * from role_tb ,dept_tb where role_tb.dept_id = dept_tb.dept_id and dept_name=#{deptName}
+	</select>
+	<select id="selectRoleByRoleName" resultMap="role" parameterType="String">
+			select * from role_tb where role_name=#{roleName}
+	</select>
 </mapper>

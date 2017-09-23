@@ -1,6 +1,7 @@
 package com.xhhy.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.xhhy.domain.ZhaopinBean;
 
@@ -18,4 +19,10 @@ public interface ZhaopinDao {
     int updateByPrimaryKey(ZhaopinBean record);
 
 	List<ZhaopinBean> selectAll();
+
+	List<ZhaopinBean> selectZhaoRoleDept();
+
+	ZhaopinBean selectAZhaoRoleDept(Integer zhaopinId);
+
+	List<ZhaopinBean> selectZhaoRoleDeptPages(Map<String, Object> map);
 }

@@ -6,6 +6,9 @@ public class ZhaopinBean {
 	private String zhaopinType;
 	private int zhaopinNum;
 	private int roleId;
+	public int getRoleId() {
+		return roleId;
+	}
 	private String dengjiren;
 	private String startTime;
 	private String endTime;
@@ -35,6 +38,7 @@ public class ZhaopinBean {
 	}
 	
 	public void setRoleId(int roleId) {
+		/*roleId = Integer.parseInt(roleId);*/
 		this.roleId = roleId;
 	}
 	

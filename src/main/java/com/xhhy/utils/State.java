@@ -6,7 +6,7 @@ public class State {
 	public static final int CHECKING = 2;//审核中
 	public static final int PASS = 3;//审核通过
 	
-	public static final int PAGEROWS = 10;//分页每页显示的条数
+	public static final int PAGEROWS = 5;//分页每页显示的条数
 	
 	//招聘信息
 	public static final int DEL = 0;//已删除

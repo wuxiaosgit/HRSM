@@ -27,8 +27,8 @@
   <select id="selectAll" resultMap="BaseResultMap">
   	select * from zhaopin_tb where state=1
   </select>
-  <resultMap id="ZhaopinRoleDept" type="com.xhhy.domain.ZhaopinBean" extends="BaseResultMap">
-  	<association property="roleBean" javaType="RoleBean" column="role_id">
+  <resultMap id="ZhaopinRole" type="com.xhhy.domain.ZhaopinBean" extends="BaseResultMap">
+  	<association property="roleBean" javaType="RoleBean">
   		 <id property="roleId" column="role_id" />
 		<result property="roleState" column="role_state" />
 		<result property="roleName" column="role_name" />
@@ -36,13 +36,79 @@
 		<result property="deptId" column="dept_id" />
 		<result property="roleRemark" column="role_remark" />
 		<result property="roleDescribe" column="role_describe" />
-		<association property="deptBean" javaType="DeptBean"
-			select="com.xhhy.dao.DeptDao.getDeptById" column="dept_id"></association>
-  	</association>
-  </resultMap>
-  <select id="selectZhaoRoleDept">
-  	
+		<association property="deptBean" javaType="DeptBean">
+			<id property="deptId" column="dept_id"/>
+			<result property="deptState" column="dept_state"/>
+			<result property="deptName" column="dept_name"/>
+			<result property="deptShortName" column="dept_shortname"/>
+			<result property="deptUp" column="dept_up"/>
+			<result property="deptAdress" column="dept_address"/>
+			<result property="deptJianjie" column="dept_jianjie"/>
+			<result property="deptRemark" column="dept_remark"/>
+		</association>
+		</association>
+	</resultMap> 
+  <select id="selectZhaoRoleDept" resultMap="ZhaopinRole" parameterType="Map">
+  	select 
+  	zhaopin_id, z.dept_id, zhaopin_type, zhaopin_num, z.role_id, dengjiren, startTime, endTime,jobmiaoshu,yaoqiu,state,
+r.role_id,role_state,role_name,role_number,r.dept_id,role_remark,role_describe,
+d.dept_id,dept_state,dept_name,dept_shortname,dept_up,dept_address,dept_jianjie,dept_remark
+  	from zhaopin_tb z,role_tb r,dept_tb d
+	<!-- where z.role_id = r.role_id and r.dept_id = d.dept_id and state = 1 -->
+	<where>
+		z.role_id = r.role_id and r.dept_id = d.dept_id and state = 1
+		<if test="role_name != null">
+			and role_name = #{roleBean.roleName}
+		</if>
+		<if test="dept_shortname != null">
+			and dept_shortname = #{deptBean.deptShortName}
+		</if> 
+		<if test="startTime !=null">
+			and startTime = #{zhaopinBean.startTime}
+		</if>
+		<if test="startTime !=null">
+			and endTime = #{zhaopinBean.endTime}
+		</if>
+	</where>
   </select>
+  
+    <select id="selectZhaoRoleDeptPages" parameterType="Map" resultMap="ZhaopinRole">
+  	select 
+  	zhaopin_id, z.dept_id, zhaopin_type, zhaopin_num, z.role_id, dengjiren, startTime, endTime,jobmiaoshu,yaoqiu,state,
+r.role_id,role_state,role_name,role_number,r.dept_id,role_remark,role_describe,
+d.dept_id,dept_state,dept_name,dept_shortname,dept_up,dept_address,dept_jianjie,dept_remark
+  	from zhaopin_tb z,role_tb r,dept_tb d
+	<where>
+		z.role_id = r.role_id and r.dept_id = d.dept_id and state = 1
+	<!-- 	<if test="roleName !=null">
+			and role_name like "%"#{zb.roleBean.roleName}"%"
+		</if>
+		<if test="deptShortName !=null ">
+			and dept_shortname = #{zb.roleBean.deptBean.deptShortName}
+		</if> 
+		<if test="startTime !=null ">
+			and startTime = #{zb.startTime}
+		</if>
+		<if test="startTime !=null">
+			and endTime = #{zb.endTime}
+		</if> -->
+		 limit #{pageStart},#{pageUtil.pageRows}
+	</where>
+  </select>
+  
+  
+  <select id="selectAZhaoRoleDept" resultMap="ZhaopinRole" parameterType="java.lang.Integer">
+  	select 
+  	zhaopin_id, z.dept_id, zhaopin_type, zhaopin_num, z.role_id, dengjiren, startTime, endTime,jobmiaoshu,yaoqiu,state,
+r.role_id,role_state,role_name,role_number,r.dept_id,role_remark,role_describe,
+d.dept_id,dept_state,dept_name,dept_shortname,dept_up,dept_address,dept_jianjie,dept_remark
+  	from zhaopin_tb z,role_tb r,dept_tb d
+	where z.role_id = r.role_id and r.dept_id = d.dept_id 
+	and state = 1 and zhaopin_id = #{zhaopinId}
+  </select>
+  
+  
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from zhaopin_tb
     where zhaopin_id = #{zhaopinId,jdbcType=INTEGER}

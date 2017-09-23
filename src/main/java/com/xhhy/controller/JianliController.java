@@ -7,8 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.xhhy.domain.DeptBean;
 import com.xhhy.domain.JianliBean;
+import com.xhhy.domain.RoleBean;
+import com.xhhy.service.DeptService;
 import com.xhhy.service.JianliService;
+import com.xhhy.service.RoleService;
 import com.xhhy.utils.State;
 
 @Controller
@@ -16,7 +20,10 @@ import com.xhhy.utils.State;
 public class JianliController {
 	@Autowired
 	private JianliService jianliService;
-	
+	@Autowired
+	private RoleService roleService;
+	@Autowired
+	private DeptService deptService;
 	//------------------------查询所以有简历信息------------------------------
 	@RequestMapping("selectAll")
 	public String selectAll(Model model){
@@ -65,4 +72,17 @@ public class JianliController {
 		jianliService.insertSelective(jianliBean);
 		return "selectAll.do";
 	}
+	
+	
+	
+	//------------------------获取部门信息和职位信息-----------------------------------------
+		@RequestMapping("SelectRoleDept")
+		public String listRole(Model model){
+			List<RoleBean> roles = roleService.SelectRoleDept();
+			List<DeptBean> db = deptService.listDept();
+			//System.out.println(roles);
+			model.addAttribute("roles",roles);
+			model.addAttribute("db", db);
+			return "/html/zhaopin/demo2/add.jsp";
+		}
 }

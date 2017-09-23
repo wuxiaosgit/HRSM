@@ -17,7 +17,7 @@
             <span>
                 <span style="float: left;">当前位置是：招聘管理-》简历管理</span>
                 <span style="float: right; margin-right: 8px; font-weight: bold;">
-                    <a style="text-decoration: none;" href="../html/zhaopin/demo2/add.jsp">【添加】</a>
+                    <a style="text-decoration: none;" href="../jianli/SelectRoleDept.do">【添加】</a>
                 </span>
             </span>
         </div>
