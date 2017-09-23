@@ -19,7 +19,7 @@ import com.xhhy.domain.UserBean;
 import com.xhhy.service.DeptService;
 import com.xhhy.service.MenuService;
 import com.xhhy.service.UserService;
-
+//王连杰
 @Controller
 @RequestMapping("user")
 @SessionAttributes(value={"user","menus"}, types={UserBean.class,MenuBean.class})
