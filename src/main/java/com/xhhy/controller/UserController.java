@@ -19,7 +19,7 @@ import com.xhhy.domain.UserBean;
 import com.xhhy.service.DeptService;
 import com.xhhy.service.MenuService;
 import com.xhhy.service.UserService;
-//王连杰
+
 @Controller
 @RequestMapping("user")
 @SessionAttributes(value={"user","menus"}, types={UserBean.class,MenuBean.class})
@@ -31,17 +31,38 @@ public class UserController {
 	@Autowired
 	private MenuService menuService;
 	
+	@RequestMapping("insertUser.do")
+	public ModelAndView insertUser(UserBean userBean){
+		userService.insertUser(userBean);
+		return selectUser(null);
+	}
+	@RequestMapping("updateUser.do")
+	public ModelAndView updateUser(UserBean userBean){
+		userService.updateUser(userBean);
+		return selectUser(null);
+	}
+	@RequestMapping("deleteUser.do")
+	public ModelAndView deleteUser(Integer userId){
+		userService.deleteUser(userId);
+		return selectUser(null);
+	}
+	
 	@RequestMapping("selectUser.do")
 	public ModelAndView selectUser(UserBean userBean){
 		ModelAndView mav=new ModelAndView("../html/resource/demo2/list.jsp");
+		if (userBean==null) {
+			 userBean=new UserBean();
+		}
 		if (userBean.getDeptId()!=null&&userBean.getDeptId()==-1) {
 			userBean.setDeptId(null);
 		}
-		userBean.setRoleId(4);
-		List<UserBean> userBeans=userService.listUser(userBean);
-		for (UserBean userBean2 : userBeans) {
-			//System.out.println(userBean2);
+		if (userBean.getRoleId()!=null&&userBean.getRoleId()==-1) {
+			userBean.setRoleId(null);
 		}
+		List<UserBean> userBeans=userService.listUser(userBean);
+		/*for (UserBean userBean2 : userBeans) {
+			System.out.println(userBean2);
+		}*/
 		mav.addObject("userBeans",userBeans);
 		mav.addObject("deptBeans",deptService.listDept());
 		mav.addObject("userName",userBean.getUserName());
@@ -61,12 +82,12 @@ public class UserController {
 			System.out.println(user);
 			List<MenuBean> menus=menuService.getMenu(user.getRoleId());
 			for (MenuBean menuBean : menus) {
-				//System.out.println();
-				//System.out.println(menuBean);
+				System.out.println();
+				System.out.println(menuBean);
 				for (MenuBean m : menuBean.getMenuList()) {
-					//System.out.println(m);
+					System.out.println(m);
 				}
-				//System.out.println();
+				System.out.println();
 			}
 			mav.addObject("menus",menus);
 			

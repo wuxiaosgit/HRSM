@@ -6,7 +6,7 @@
 
 	<sql id="my_sql">
 		select
-		user_id,role_id,user_login,user_password,user_name,user_state,user_gender,user_idcard,user_phone,user_telephone,user_email,user_picture,user_remark from
+		user_id,role_id,user_login,user_password,user_name,user_state,user_gender,user_idcard,user_phone,user_telephone,user_email,user_picture,user_remark,user_address from
 		user_tb
 	</sql>
 	<resultMap type="UserBean" id="user">
@@ -14,6 +14,7 @@
 		<result property="userLogin" column="user_login" />
 		<result property="roleId" column="role_id" />
 		<result property="userPassword" column="user_password" />
+		<result property="userName" column="user_name" />
 		<result property="userState" column="user_state" />
 		<result property="userGender" column="user_gender" />
 		<result property="userEmail" column="user_email" />
@@ -23,10 +24,146 @@
 		<result property="userTelephone" column="user_telephone" />
 		<result property="userRemark" column="user_remark" />
 		<result property="userPicture" column="user_picture" />
+		<association property="roleBean" javaType="RoleBean" select="com.xhhy.dao.RoleDao.getRoleById" column="role_id"></association>
 	</resultMap>
+	<delete id="deleteUser" parameterType="int">
+		DELETE FROM user_tb where user_id=#{userId}
+	</delete>
+	
 	<insert id="insertUser" parameterType="UserBean">
-		
+		insert into user_tb
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			
+			<if test="userLogin != null">
+				user_login,
+			</if>
+			<if test="userPassword != null">
+				user_password,
+			</if>
+			<if test="userName != null">
+				user_name,
+			</if>
+			<if test="roleId != null">
+				role_id,
+			</if>
+			<if test="userState != null">
+				user_state,
+			</if>
+			<if test="userGender != null">
+				user_gender,
+			</if>
+			<if test="userEmail != null">
+				user_email,
+			</if>
+			<if test="userAddress != null">
+				user_address,
+			</if>
+			<if test="userIdcard != null">
+				user_idcard,
+			</if>
+			<if test="userPhone != null">
+				user_phone,
+			</if>
+			<if test="userTelephone != null">
+				user_telephone,
+			</if>
+			<if test="userRemark != null">
+				user_remark,
+			</if>
+			<if test="userPicture != null">
+				user_picture,
+			</if>
+			
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userLogin != null">
+				#{userLogin},
+			</if>
+			<if test="userPassword != null">
+				#{userPassword},
+			</if>
+			<if test="userName != null">
+				#{userName},
+			</if>
+			<if test="roleId != null">
+				#{roleId},
+			</if>
+			<if test="userState != null">
+				#{userState},
+			</if>
+			<if test="userGender != null">
+				#{userGender},
+			</if>
+			<if test="userEmail != null">
+				#{userEmail},
+			</if>
+			<if test="userAddress != null">
+				#{userAddress},
+			</if>
+			<if test="userIdcard != null">
+				#{userIdcard},
+			</if>
+			<if test="userPhone != null">
+				#{userPhone},
+			</if>
+			<if test="userTelephone != null">
+				#{userTelephone},
+			</if>
+			<if test="userRemark != null">
+				#{userRemark},
+			</if>
+			<if test="userPicture != null">
+				#{userPicture},
+			</if>
+		</trim>
 	</insert>
+	<update id="updateUser" parameterType="UserBean">
+		update user_tb
+		<set>
+			<if test="userLogin != null">
+				user_login = #{userLogin},
+			</if>
+			<if test="roleId != null">
+				role_id = #{roleId},
+			</if>
+			<if test="userName != null">
+				user_name = #{userName},
+			</if>
+			<if test="userAddress != null">
+				user_address = #{userAddress},
+			</if>
+			<if test="userPassword != null">
+				user_password = #{userPassword},
+			</if>
+			<if test="userState != null">
+				user_state= #{userState},
+			</if>
+			<if test="userGender != null">
+				user_gender = #{userGender},
+			</if>
+			<if test="userIdcard != null">
+				user_idcard = #{userIdcard},
+			</if>
+			<if test="userPhone != null">
+				user_phone = #{userPhone},
+			</if>
+			<if test="userTelephone != null">
+				user_telephone = #{userTelephone},
+			</if>
+			<if test="userEmail != null">
+				user_email = #{userEmail},
+			</if>
+			<if test="userPicture != null">
+				user_picture = #{userPicture},
+			</if>
+			<if test="userRemark != null">
+				user_remark = #{userRemark},
+			</if>
+			
+		</set>
+		where user_id = #{userId}
+	</update>
+	
 	<select id="listUser" parameterType="UserBean" resultMap="user">
 		select
 		u.* from
@@ -34,7 +171,7 @@
 		<where>
 		u.role_id=r.role_id 
 			<if test="userName != null and userName !=''">
-			and u.user_name like #{userName}
+			and u.user_name like "%"#{userName}"%"
 			</if>
 			<if test="roleId != null">
 			and  u.role_id = #{roleId}
@@ -48,6 +185,10 @@
 	<select id="login" parameterType="UserBean"   resultMap="user">
 		<include refid="my_sql" />
 		where user_login=#{userLogin} and user_password=#{userPassword}
+	</select>
+	<select id="getUserById" parameterType="int"   resultMap="user">
+		<include refid="my_sql" />
+		where user_id=#{userId} 
 	</select>
 </mapper>
 

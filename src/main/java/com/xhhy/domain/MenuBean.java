@@ -10,9 +10,25 @@ public class MenuBean implements Serializable {
 	private Integer menuState;
 	private String  menuName;
 	private String  menuUrl;
+	private String  menuRemark;
+	private Integer menuPaixu;
+	
 	private List<MenuBean> menuList=new ArrayList<MenuBean>();
 	
 	
+	public String getMenuRemark() {
+		return menuRemark;
+	}
+	public void setMenuRemark(String menuRemark) {
+		this.menuRemark = menuRemark;
+	}
+	
+	public Integer getMenuPaixu() {
+		return menuPaixu;
+	}
+	public void setMenuPaixu(Integer menuPaixu) {
+		this.menuPaixu = menuPaixu;
+	}
 	public Integer getTopId() {
 		return topId;
 	}

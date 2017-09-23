@@ -18,6 +18,7 @@
 	<select id="listDept" resultMap="dept">
 		select * from dept_tb
 	</select>
+	
 	<select id="getDeptById" parameterType="int" resultMap="dept">
 		select * from dept_tb where dept_id=#{deptId}
 	</select>
