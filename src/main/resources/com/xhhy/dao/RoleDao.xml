@@ -37,4 +37,5 @@
 	<select id="selectRoleByRoleName" resultMap="role" parameterType="String">
 			select * from role_tb where role_name=#{roleName}
 	</select>
+	
 </mapper>
