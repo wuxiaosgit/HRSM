@@ -23,6 +23,18 @@
 			</if>
 		</where>
 			order by menu_paixu
+			limit #{currentNum},8
+	</select>
+	<select id="max" parameterType="MenuBean" resultType="int">
+		select count(*) from menu_tb
+		<where>
+			<if test="menuName != null and menuName != ''">
+				menu_name like "%"#{menuName}"%"
+			</if>
+			<if test="menuState != null">
+				and menu_state =#{menuState}
+			</if>
+		</where>
 	</select>
 	
 	<select id="getMenu" parameterType="int" resultMap="menu">

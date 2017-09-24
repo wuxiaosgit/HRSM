@@ -12,7 +12,8 @@ public class MenuBean implements Serializable {
 	private String  menuUrl;
 	private String  menuRemark;
 	private Integer menuPaixu;
-	
+	//分页
+	private Integer currentNum=1;
 	private List<MenuBean> menuList=new ArrayList<MenuBean>();
 	
 	
@@ -23,6 +24,12 @@ public class MenuBean implements Serializable {
 		this.menuRemark = menuRemark;
 	}
 	
+	public Integer getCurrentNum() {
+		return currentNum;
+	}
+	public void setCurrentNum(Integer currentNum) {
+		this.currentNum = currentNum;
+	}
 	public Integer getMenuPaixu() {
 		return menuPaixu;
 	}

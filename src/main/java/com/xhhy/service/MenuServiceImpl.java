@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.xhhy.dao.MenuDao;
 import com.xhhy.domain.MenuBean;
+import com.xhhy.domain.UserBean;
 @Service
 public class MenuServiceImpl implements MenuService {
 	@Autowired
@@ -34,7 +35,12 @@ public class MenuServiceImpl implements MenuService {
 
 	public List<MenuBean> selectMenu(MenuBean menuBean) {
 		// TODO Auto-generated method stub
-		return menuDao.selectMenu(menuBean);
+		menuBean.setCurrentNum((menuBean.getCurrentNum()-1)*8);
+		List<MenuBean> list=menuDao.selectMenu(menuBean);
+		menuBean.setCurrentNum(menuBean.getCurrentNum()/8+1);
+		
+		return list;
+		
 	}
 
 	public void insertMenu(MenuBean menuBean) {
@@ -65,6 +71,11 @@ public class MenuServiceImpl implements MenuService {
 	public void deleteMenu(Integer menuId) {
 		// TODO Auto-generated method stub
 		menuDao.deleteMenu(menuId);
+	}
+
+	public Integer max(MenuBean menuBean) {
+		// TODO Auto-generated method stub
+		return menuDao.max(menuBean);
 	}
 
 }
