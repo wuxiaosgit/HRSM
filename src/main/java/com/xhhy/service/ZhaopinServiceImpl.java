@@ -42,14 +42,24 @@ public class ZhaopinServiceImpl implements ZhaopinService {
 		return zhaopinDao.selectZhaoRoleDept();
 	}
 
-	public ZhaopinBean selectAZhaoRoleDept(int zhaopinId) {
+	public ZhaopinBean selectAZhaoRoleDept(ZhaopinBean zhaopinBean) {
 		// TODO Auto-generated method stub
-		return zhaopinDao.selectAZhaoRoleDept(zhaopinId);
+		return zhaopinDao.selectAZhaoRoleDept(zhaopinBean);
 	}
 
 	public List<ZhaopinBean> selectZhaoRoleDeptPages(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return zhaopinDao.selectZhaoRoleDeptPages(map);
+	}
+
+	public List<ZhaopinBean> selective(ZhaopinBean zhaopinBean) {
+		// TODO Auto-generated method stub
+		return zhaopinDao.selective(zhaopinBean);
+	}
+
+	public List<ZhaopinBean> selectiveALl(ZhaopinBean zhaopinBean) {
+		// TODO Auto-generated method stub
+		return zhaopinDao.selectiveALl(zhaopinBean);
 	}
 
 

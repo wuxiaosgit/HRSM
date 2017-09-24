@@ -164,7 +164,7 @@
 					<tr>
                     <td>登记时间：</td>
                     <td>
-                        <input type="text" name="f_goods_image" value="${jianliBean.time }" />
+                        <input type="text" name="f_goods_image" value="${jianliBean.dtime }" />
                     </td>                
                 </tr>
 				

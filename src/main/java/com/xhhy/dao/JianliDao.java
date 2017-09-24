@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.xhhy.domain.JianliBean;
-import com.xhhy.domain.ZhaopinBean;
 
 public interface JianliDao {
     int deleteByPrimaryKey(Integer jianliId);
@@ -24,4 +23,6 @@ public interface JianliDao {
 	List<JianliBean> selectJianliRoleDept();
 
 	List<JianliBean> selectJianliRoleDeptPages(Map<String, Object> map);
+
+	void updateByPrimaryKeyAndState( int state,int roleId);
 }

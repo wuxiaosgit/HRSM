@@ -32,6 +32,7 @@
                 <tr>
                     <td width="120px;">应聘职位名称<span style="color:red">*</span>：</td>
                     <td>
+                    <input type="hidden" id="demo2_add_hidden" name="jobId" />
 					<select id="demo2_add_roleName">
 						<option value="0">--请选择--</option>
 						<c:forEach items="${ roles}" var = "role">
@@ -178,7 +179,7 @@
 					<tr>
                     <td>登记时间：</td>
                     <td>
-                        <input type="text" name="time" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                        <input type="text" name="dtime"  onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
                     </td>                
                 </tr>
 				
@@ -192,7 +193,7 @@
 					<tr>
                     <td>简历附件：</td>
                     <td>
-                        <input type="file" name="" />
+                        <input type="file" name="fujian" />
                     </td>                
                 </tr>
 			

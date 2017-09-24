@@ -25,13 +25,12 @@
         <div></div>
         <div style="font-size: 13px;margin: 10px 5px">
             <form action="../zhaopin/updateByPrimaryKeySelective.do" method="post">
-            <input type="hidden" name="zhaopinId" id="${zhaopinBean.zhaopinId }"/>
-            <input type="hidden" name="method" value="change"/>
-            <input type="hidden" name="jobId" id="demo1_up_hidden"/>
             <table border="1" width="100%" class="table_a">
                 <tr>
                     <td width="120px;">部门<span style="color:red">*</span>：</td>
-                    <td><select id="demo1_up_select" name="deptName">
+                    <td>
+                   
+                    <select id="demo1_up_select" name="deptName">
 						<c:forEach items="${db}" var="dept">
 							<option value="${dept.deptName }">${dept.deptName }</option>
 						</c:forEach>
@@ -76,13 +75,13 @@
 				<tr>
                     <td>登记人<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text" readonly name="dengjiren" value="${zhaopinBean.dengjiren }" />
+						<input type="text" readonly name="dengjiren" value="${user.userName }" />
 					</td>
                 </tr>
                 <tr>
                     <td>登记时间<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="text" name="startTime" value="${zhaopinBean.startTime }"
+                        <input type="text" name="startTime" value="${zhaopinBean.endTime}"
                         onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
                     </td>
                 </tr>
@@ -115,8 +114,11 @@
 				
                 <tr>
                     <td colspan="2" align="center">
-                        <input type="submit" value=" 发布 ">
-						<input type="button" value=" 返回 " onclick="javascript:history.back(-1);">
+                      <input type="hidden" name="zhaopinId" value="${zhaopinBean.zhaopinId }"/><br/>
+            			<input type="hidden" name="method" value="change"/><br/>
+           			 	<input type="hidden" name="roleId" value="${zhaopinBean.roleId }" id="demo1_up_hidden"/><br/>
+                        <input type="submit" value=" 发布 " />
+						<input type="button" value=" 返回 " onclick="javascript:history.back(-1);" />
                     </td>
                 </tr>  
             </table>

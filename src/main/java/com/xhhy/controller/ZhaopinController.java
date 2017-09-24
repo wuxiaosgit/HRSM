@@ -52,7 +52,7 @@ public class ZhaopinController {
 	//-----------------删除招聘信息-----------------------------------------
 	@RequestMapping("updateByPrimaryKeySelective")
 	public String updateByPrimaryKeySelective(ZhaopinBean zhaopinBean,String method ){
-		System.out.println(method);
+		//System.out.println(method);
 		if(method!=null&&method.equals("del")){
 			zhaopinService.updateByPrimaryKeySelective(zhaopinBean);
 			return "selectZhaoRoleDeptPages.do";
@@ -65,11 +65,10 @@ public class ZhaopinController {
 	
 	//-------------------添加招聘信息-------------------------------------------
 	@RequestMapping("insertSelective")
-	public String insertSelective(ZhaopinBean zhaopinBean,String role_id){
-		System.out.println(role_id);
+	public String insertSelective(ZhaopinBean zhaopinBean){
 		
 		zhaopinBean.setState(State.UNDEL);
-		zhaopinBean.setRoleId(Integer.parseInt(role_id));
+		//System.out.println(zhaopinBean.getRoleId());
 		zhaopinService.insertSelective(zhaopinBean);
 		return "selectZhaoRoleDeptPages.do";
 	}
@@ -84,6 +83,7 @@ public class ZhaopinController {
 		model.addAttribute("db", db);
 		//System.out.println(zhaopinBean);
 		model.addAttribute("zhaopinBean",zhaopinBean);
+		//System.out.println(zhaopinBean.getZhaopinId());
 		if(method.equals("change")){
 			return "/html/zhaopin/demo1/up.jsp";
 		}else{
@@ -123,6 +123,69 @@ public class ZhaopinController {
 		response.setContentType("text/xml;charset=UTF-8"); 
 		return rb;
 	} 
+	//------------------------查询特定条件的招聘信息并分页展示------------------------------
+	@RequestMapping("selective")
+	public String selective(Model model,ZhaopinBean zhaopinBean,
+			PageUtil pageUtil,String roleName,String deptShortName){
+		RoleBean rb = new RoleBean();
+		DeptBean db = new DeptBean();
+		db.setDeptShortName(deptShortName);
+		rb.setDeptBean(db);
+		rb.setRoleName(roleName);
+		zhaopinBean.setRoleBean(rb);
+		zhaopinBean.setPageUtil(pageUtil);
+		//System.out.println(zhaopinBean.getRoleBean().getDeptBean().getDeptShortName());
+		
+		int pageNum = 1;//页码
+		int pn = zhaopinBean.getPageUtil().getPageNum();
+		//System.out.println(pn);
+	/*	if(pn != null){
+			pageNum = Integer.parseInt(pn);
+		}*/
+		if(pn !=0){
+			pageNum = pn;
+		}
+		//分页参数
+		int pageRows = State.PAGEROWS;//每页显示的记录数
+		int totleRows = 0;//符合条件的所有记录数
+		int totlePages = 0;//总共的页数
+		//计算符合条件的记录数
+		List<ZhaopinBean> list = zhaopinService.selectiveALl(zhaopinBean);
+		totleRows = list.size();
+		System.out.println(totleRows);
+		//计算总共的页数
+		totlePages = totleRows%pageRows==0?totleRows/pageRows:totleRows/pageRows+1;
+	
+		
+		zhaopinBean.getPageUtil().setPageNum(pageNum);
+		zhaopinBean.getPageUtil().setPageRows(pageRows);
+		zhaopinBean.getPageUtil().setTotlePages(totlePages);
+		zhaopinBean.getPageUtil().setTotleRows(totleRows);
+		
+		int pageStart = zhaopinBean.getPageUtil().getStart();
+		System.out.println(pageStart);
+		System.out.println(pageNum);
+		System.out.println(totlePages);
+		System.out.println(totleRows);
+		System.out.println(pageRows);
+		/*Map<String,Object> map =new HashMap<String, Object>();
+		map.put("zb", zhaopinBean);
+		map.put("pageUtil", pageUtil);
+		map.put("pageStart", pageStart);*/
+		//System.out.println(map.get("zb"));
+		List<ZhaopinBean> lists = zhaopinService.selective(zhaopinBean);
+		System.out.println(lists.size());
+		model.addAttribute("list", lists);
+		model.addAttribute("pageNum", pageNum);
+		model.addAttribute("pageRows", pageRows);
+		model.addAttribute("totlePages", totlePages);
+		model.addAttribute("totleRows", totleRows);
+		model.addAttribute("pn", pn);
+		/*for (ZhaopinBean zhaopinBean : list) {
+			System.out.println(zhaopinBean.getRoleBean());
+		}*/
+		return "/html/zhaopin/demo1/list.jsp";
+	}
 	//---------------------------分页展示所有招聘信息-------------------------------------
 	@RequestMapping("selectZhaoRoleDeptPages")
 	public String selectZhaoRoleDeptPages(Model model,RoleBean roleBean,
@@ -190,9 +253,9 @@ public class ZhaopinController {
 		}
 	//--------------------页面展示单条招聘信息-------------------------------------
 	@RequestMapping("selectAZhaoRoleDept")
-	public String selectAZhaoRoleDept(Model model,int zhaopinId,String method){
+	public String selectAZhaoRoleDept(Model model,ZhaopinBean zhaopinBean,String method){
 		//System.out.println(zhaopinId);
-		ZhaopinBean zb = zhaopinService.selectAZhaoRoleDept(zhaopinId);
+		ZhaopinBean zb = zhaopinService.selectAZhaoRoleDept(zhaopinBean);
 		//System.out.println(zb);
 		model.addAttribute("zb", zb);
 		//zb.getRoleBean().getDeptBean().getDeptName()

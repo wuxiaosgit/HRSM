@@ -21,7 +21,7 @@ $(document).ready(function(){
     			for(var i=1;i<=maxIndex;i++){
     				$("#demo1_add_roleName option[index='"+i+"']").remove();
     			}*/
-    			alert(data[0].deptBean.deptShortName)
+    			//alert(data[0].deptBean.deptShortName)
     			$("#demo1_add_deptShortname").val(data[0].deptBean.deptShortName);
     			$("#demo1_add_roleName").empty();
     			$("#demo1_add_roleName").prepend("<option value=''>--请选择--<option>");
@@ -65,8 +65,7 @@ $(document).ready(function(){
     	});
     });
     
-    $(function(){
-    	$("#demo1_add_roleName").change(function(){
+    $("#demo1_add_roleName").change(function(){
     		var getValue = $("#demo1_add_roleName").val();
     		//var checkIndex=$("#demo1_add_select ").get(0).selectedIndex;
     		//alert(checkIndex);
@@ -106,6 +105,7 @@ $(document).ready(function(){
         	});
     	});
     });
+ 
     
     //----------------------------简历管理----------------------------------
     $("#demo2_add_select").change(function(){
@@ -122,7 +122,7 @@ $(document).ready(function(){
     			for(var i=1;i<=maxIndex;i++){
     				$("#demo1_add_roleName option[index='"+i+"']").remove();
     			}*/
-    			alert(data[0].deptBean.deptShortName)
+    			//alert(data[0].deptBean.deptShortName)
     			$("#demo1_add_deptShortname").val(data[0].deptBean.deptShortName);
     			$("#demo1_add_roleName").empty();
     			$("#demo1_add_roleName").append("<option>--请选择--<option>");
@@ -144,11 +144,11 @@ $(document).ready(function(){
         		url: encodeURI(encodeURI('../jianli/selectRoleByRoleName.do?roleName='+getValue)),
         		success:function(data){
         			alert(data.deptBean.deptShortName)
-        			//$("#demo1_add_hidden").val(data.roleId);
+        			$("#demo2_add_hidden").val(data.roleId);
         			$("#demo2_add_roleNumber").val(data.roleNumber);
         			$("#demo2_add_deptShortname").val(data.deptBean.deptShortName);
         		}
         	});
     	});
     });
- });
+    

@@ -22,7 +22,11 @@ public interface ZhaopinDao {
 
 	List<ZhaopinBean> selectZhaoRoleDept();
 
-	ZhaopinBean selectAZhaoRoleDept(Integer zhaopinId);
+	ZhaopinBean selectAZhaoRoleDept(ZhaopinBean zhaopinBean);
 
 	List<ZhaopinBean> selectZhaoRoleDeptPages(Map<String, Object> map);
+
+	List<ZhaopinBean> selective(ZhaopinBean zhaopinBean);
+
+	List<ZhaopinBean> selectiveALl(ZhaopinBean zhaopinBean);
 }

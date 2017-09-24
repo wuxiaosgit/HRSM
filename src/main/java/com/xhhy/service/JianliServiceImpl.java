@@ -38,5 +38,9 @@ public class JianliServiceImpl implements JianliService{
 		// TODO Auto-generated method stub
 		return jianliDao.selectJianliRoleDeptPages(map);
 	}
+	public void updateByPrimaryKeyAndState(int state, int roleId) {
+		// TODO Auto-generated method stub
+		jianliDao.updateByPrimaryKeyAndState(state,roleId);
+	}
 
 }

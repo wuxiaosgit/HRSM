@@ -13,6 +13,8 @@ public interface ZhaopinService {
 	public void insertSelective(ZhaopinBean zhaopinBean);
 	public ZhaopinBean selectByPrimaryKey(int zhaopinId);
 	public List<ZhaopinBean> selectZhaoRoleDept();
-	public ZhaopinBean selectAZhaoRoleDept(int zhaopinId);
+	public ZhaopinBean selectAZhaoRoleDept(ZhaopinBean zhaopinBean);
 	public List<ZhaopinBean> selectZhaoRoleDeptPages(Map<String, Object> map);
+	public List<ZhaopinBean> selective(ZhaopinBean zhaopinBean);
+	public List<ZhaopinBean> selectiveALl(ZhaopinBean zhaopinBean);
 }
