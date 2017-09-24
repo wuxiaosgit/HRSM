@@ -11,4 +11,6 @@ public interface RoleDao {
 	public List<RoleBean> selectRoleByDeptName(String deptName);
 	public RoleBean selectRoleByRoleName(String roleName);
 	public void insertRole(RoleBean roleBean);
+	public void updateRole(RoleBean roleBean);
+	public void deleteRole(Integer roleId);
 }

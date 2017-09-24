@@ -42,4 +42,14 @@ public class RoleServiceImpl implements RoleService {
 		roleDao.insertRole(roleBean);
 	}
 
+	public void updateRole(RoleBean roleBean) {
+		// TODO Auto-generated method stub
+		roleDao.updateRole(roleBean);
+	}
+
+	public void deleteRole(Integer roleId) {
+		// TODO Auto-generated method stub
+		roleDao.deleteRole(roleId);
+	}
+
 }

@@ -75,6 +75,34 @@
 			</if>
 		</trim>
 	</insert>
+	<update id="updateRole" parameterType="RoleBean">
+		update role_tb
+		<set>
+			<if test="deptId != null">
+				dept_id = #{deptId},
+			</if>
+			<if test="roleName != null">
+				role_name = #{roleName},
+			</if>
+			
+			<if test="roleState != null">
+				role_state= #{roleState},
+			</if>
+			<if test="roleNumber != null">
+				role_number = #{roleNumber},
+			</if>
+			<if test="roleDescribe != null">
+				role_describe = #{roleDescribe},
+			</if>
+			<if test="roleRemark != null">
+				role_remark = #{roleRemark},
+			</if>
+		</set>
+		where role_id = #{roleId}
+	</update>
+	<delete id="deleteRole" parameterType="int">
+		DELETE FROM role_tb where role_id=#{roleId}
+	</delete>
 	<select id="SelectRoleDept" resultMap="role">
 		select * from role_tb ,dept_tb where role_tb.dept_id = dept_tb.dept_id
 	</select>

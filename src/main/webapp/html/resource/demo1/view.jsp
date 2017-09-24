@@ -1,9 +1,20 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%@ page language="java" import="java.util.*" pageEncoding="Utf-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/html/";
+%>
+
+<!doctype html public "-//w3c//dtd xhtml 1.0 frameset//en" "http://www.w3.org/tr/xhtml1/dtd/xhtml1-frameset.dtd">
 <html>
-    <head>
-        <title>薪酬标准管理</title>
+
+<head>
+	<base href="<%=basePath%>">
+	<title>部门管理</title>
         <meta http-equiv="content-type" content="text/html;charset=utf-8">
-        <link href="../../css/mine.css" type="text/css" rel="stylesheet">
+        <link href="css/mine.css" type="text/css" rel="stylesheet">
     </head>
 
     <body>
@@ -12,9 +23,9 @@
             <span>
                 <span style="float:left">当前位置是：-系统管理》部门管理</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
-				    <a style="text-decoration: none" href="add.html">【修改】</a>					
-					<a style="text-decoration: none" href="add.html">【添加子部门】</a>					
-					<a style="text-decoration: none" href="list.html">【删除】</a>
+				    <a style="text-decoration: none" href="../dept/getTopDept.do?deptId=${deptBean.deptId }">【修改部门】</a>					
+					<a style="text-decoration: none" href="../dept/getTopDept.do">【添加部门】</a>					
+					<a style="text-decoration: none" href="../dept/noDeleteDept.do?deptId=${deptBean.deptId }">【删除部门】</a>
                 </span>
             </span>
         </div>
@@ -26,37 +37,37 @@
                 <tr>
                     <td width="120px;">部门编码：</td>
                     <td>
-						10001
+						${deptBean.deptId }
 					</td>
                 </tr>
                 <tr>
                     <td>部门简称：</td>
                     <td>
-						人事部
+						${deptBean.deptShortName }
 					</td>
                 </tr>
                 <tr>
                     <td>部门全称：</td>
                      <td>
-						人力资源管理部门
+						${deptBean.deptName }
 					</td>
                 </tr>
                 <tr>
                     <td>上级部门：</td>
                      <td>
-						启明星辰科技有限公司
+						${deptBean.deptBean.deptName }
 					</td>
                 </tr>
                 <tr>
                     <td>地址：</td>
                      <td>
-						XXXXXX
+					${deptBean.deptAddress }
 					</td>
                 </tr>
                 <tr>
                     <td>简介：</td>
                      <td>
-						部门简介，部门名称
+						${deptBean.deptJianjie}
 					</td>
                 </tr>
 
@@ -64,14 +75,14 @@
 				<tr>
                     <td>备注：</td>
                      <td>
-						备注
+						${deptBean.deptRemark }
 					</td>               
                 </tr>
 
 				<tr>
                     <td>是否启用：</td>
                      <td>
-						是
+						${deptBean.deptState }
 					</td>                
                 </tr>
             </table>

@@ -2,6 +2,7 @@ package com.xhhy.service;
 
 import java.util.List;
 
+import com.xhhy.domain.DeptBean;
 import com.xhhy.domain.RoleBean;
 
 public interface RoleService {
@@ -11,5 +12,6 @@ public interface RoleService {
 	public List<RoleBean> selectRoleByDeptName(String deptName);
 	public RoleBean selectRoleByRoleName(String roleName);
 	public void insertRole(RoleBean roleBean);
-
+	public void updateRole(RoleBean roleBean);
+	public void deleteRole(Integer roleId);
 }
