@@ -18,6 +18,13 @@ public class WageBean {
 	private float housePay;
 	private float missionPay;
 	private float overtimePay;
+	private int wageStatment;
+	public int getWageStatment() {
+		return wageStatment;
+	}
+	public void setWageStatment(int wageStatment) {
+		this.wageStatment = wageStatment;
+	}
 	private float all;
 	public String getWageBm() {
 		return wageBm;

@@ -1,5 +1,7 @@
 package com.xhhy.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,5 +16,10 @@ public class WageServiceImpl implements WageService{
 
 	public void insertWage(WageBean wage) {
 		wageDao.insertWage(wage);
+	}
+
+	public List<WageBean> listWage() {
+		
+		return wageDao.selectAll();
 	}
 }

@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import com.xhhy.domain.WageBean;
 
 public interface WageDao {
-	@Select(value = { "select ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,travel_pay,phone_pay,"
+	@Select(value = { "select ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,travel_pay,phone_pay,"
 			+ "meal_pay,house_pay,mission_pay,overtime_pay,ss_remark from salary_standard_tb" })
 	@Results({@Result(id=true,property="wageId",column="ss_id"),
 		@Result(property="wageBm",column="ss_bm"),
@@ -28,12 +28,13 @@ public interface WageDao {
 		@Result(property="overtimePay",column="overtime_pay"),
 		@Result(property="allpay",column="all_pay"),
 		@Result(property="remark",column="ss_remark"),
+		@Result(property="wageStatment",column="ss_statment"),
 //		wageName,wageDate,zzrName,djrName,basePay,awarPay,travelPay,phonePay,mealPay,housePay,missionPay,overtimePay,remark
 //		ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,travel_pay,phone_pay,meal_pay,house_pay,mission_pay,overtime_pay,all_pay,ss_remark
 	})
 	public List<WageBean> selectAll();
-	@Insert(value = { "insert into salary_standard_tb(ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,travel_pay,phone_pay,meal_pay,house_pay,mission_pay,overtime_pay,all_pay,ss_remark) values"
+	@Insert(value = { "insert into salary_standard_tb(ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,travel_pay,phone_pay,meal_pay,house_pay,mission_pay,overtime_pay,all_pay,ss_remark,ss_statment) values"
 			+ "(null,#{wageBm},#{wageName},#{wageDate},#{zzrName},#{djrName},#{basePay},#{awarPay},#{travelPay},#{phonePay},"
-			+ "#{mealPay},#{housePay},#{missionPay},#{overtimePay},#{all},#{remark})" })
+			+ "#{mealPay},#{housePay},#{missionPay},#{overtimePay},#{all},#{remark},#{wageStatment	})" })
 	public void insertWage(WageBean wage);
 }

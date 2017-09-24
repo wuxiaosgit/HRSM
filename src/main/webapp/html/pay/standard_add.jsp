@@ -121,10 +121,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <td>薪酬总额：</td>
                     <td>
 						 <input type="text" readonly name="all" id="all" value="0" />元
+						 <input type="hidden" name="wageStatment" value="1">
                     </td>
                 </tr>
-
-
 				<tr>
                     <td>备注：</td>
                     <td>

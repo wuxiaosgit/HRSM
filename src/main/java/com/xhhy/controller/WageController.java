@@ -1,6 +1,7 @@
 package com.xhhy.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.runner.Request;
@@ -20,8 +21,7 @@ import com.xhhy.service.WageService;
 public class WageController {
 	@Autowired
 	private WageService service;
-	@ResponseBody
-	@RequestMapping(value="insertwage.do",method=RequestMethod.POST)
+	@RequestMapping(value="insertwage.do")
 	public String insertWage(WageBean wage){
 		String result="添加成功";
 		System.out.println(111);
@@ -32,5 +32,16 @@ public class WageController {
 			e.printStackTrace();
 		}
 		return "/html/pay/succe.jsp";
+	}
+	@RequestMapping(value="list.do",method=RequestMethod.GET)
+	public ModelAndView selectList(){
+		ModelAndView mav=new ModelAndView("/html/pay/list_standard.jsp");
+		List<WageBean> list = service.listWage();
+		for (WageBean wageBean : list) {
+			System.out.println(wageBean.getWageBm());
+			
+		}
+		mav.addObject("list",list);
+		return mav;
 	}
 }
