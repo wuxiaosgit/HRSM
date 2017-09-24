@@ -52,14 +52,11 @@ public class ZhaopinController {
 	//-----------------删除招聘信息-----------------------------------------
 	@RequestMapping("updateByPrimaryKeySelective")
 	public String updateByPrimaryKeySelective(ZhaopinBean zhaopinBean,String method ){
-		//System.out.println(method);
+		System.out.println(method);
 		if(method!=null&&method.equals("del")){
-			zhaopinBean.setState(State.DEL);
 			zhaopinService.updateByPrimaryKeySelective(zhaopinBean);
 			return "selectZhaoRoleDeptPages.do";
 		}else{
-			zhaopinBean.setState(State.UNDEL);
-			//System.out.println(zhaopinBean);
 			zhaopinService.updateByPrimaryKeySelective(zhaopinBean);
 			return "selectZhaoRoleDeptPages.do";
 		}
@@ -82,6 +79,9 @@ public class ZhaopinController {
 	public String selectByPrimaryKey(Model model,int zhaopinId,String method){
 		//System.out.println(zhaopinId);
 		ZhaopinBean zhaopinBean = zhaopinService.selectByPrimaryKey(zhaopinId);
+		List<DeptBean> db = deptService.listDept();
+		//System.out.println(roles);
+		model.addAttribute("db", db);
 		//System.out.println(zhaopinBean);
 		model.addAttribute("zhaopinBean",zhaopinBean);
 		if(method.equals("change")){
@@ -127,7 +127,7 @@ public class ZhaopinController {
 	@RequestMapping("selectZhaoRoleDeptPages")
 	public String selectZhaoRoleDeptPages(Model model,RoleBean roleBean,
 			DeptBean deptBean,ZhaopinBean zhaopinBean,PageUtil pageUtil){
-		System.out.println(pageUtil);
+		//System.out.println(pageUtil);
 
 		deptBean.setDeptState(State.UNDEL);
 		roleBean.setRoleState(State.UNDEL);
@@ -139,7 +139,7 @@ public class ZhaopinController {
 		List<ZhaopinBean> list = zhaopinService.selectZhaoRoleDept();
 		int pageNum = 1;//页码
 		int pn = pageUtil.getPageNum();
-		System.out.println(pn);
+		//System.out.println(pn);
 	/*	if(pn != null){
 			pageNum = Integer.parseInt(pn);
 		}*/
@@ -162,13 +162,13 @@ public class ZhaopinController {
 		pageUtil.setTotleRows(totleRows);
 		
 		int pageStart = pageUtil.getStart();
-		System.out.println(pageStart);
+		//System.out.println(pageStart);
 		
 		Map<String,Object> map =new HashMap<String, Object>();
 		map.put("zb", zhaopinBean);
 		map.put("pageUtil", pageUtil);
 		map.put("pageStart", pageStart);
-		System.out.println(map.get("zb"));
+		//System.out.println(map.get("zb"));
 		List<ZhaopinBean> lists = zhaopinService.selectZhaoRoleDeptPages(map);
 		model.addAttribute("list", lists);
 		model.addAttribute("pageNum", pageNum);
