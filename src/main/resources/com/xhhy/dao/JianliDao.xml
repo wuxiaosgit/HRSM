@@ -50,7 +50,7 @@
   <resultMap type="com.xhhy.domain.JianliBean" id="selectJianliRoleDeptMap" extends="BaseResultMap">
   	<association property="roleBean" column="job_id"  select="com.xhhy.dao.RoleDao.selectByPrimaryKey" javaType="RoleBean"></association>
   </resultMap>
-  <select id="selectJianliRoleDept" parameterType="Map" resultMap="selectJianliRoleDeptMap">
+  <select id="selectJianliRoleDept"  resultMap="selectJianliRoleDeptMap">
   	select * from 
   	jianli_tb,role_tb,dept_tb 
   	where 
@@ -63,10 +63,9 @@
   	where 
   	job_id = role_tb.role_id and role_tb.dept_id = dept_tb.dept_id
   	and jianli_tb.state not in (0)
-  	limit #{pageStart},#{pageUtil.pageRows}
+  limit #{pageStart},#{pageUtil.pageRows}
   </select>
-  
-  
+ 
   
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from jianli_tb

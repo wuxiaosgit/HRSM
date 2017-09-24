@@ -108,7 +108,7 @@ public class JianliController {
 		
 		//---------------------------分页展示所有简历信息-------------------------------------
 		@RequestMapping("selectJianliRoleDeptPages")
-		public String selectJianliRoleDeptPages(Model model,PageUtil pageUtil){
+		public String selectJianliRoleDeptPages2(Model model,PageUtil pageUtil){
 			//System.out.println(pageUtil);
 
 			//deptBean.setDeptState(State.UNDEL);
@@ -119,6 +119,7 @@ public class JianliController {
 			//jianliBean.setState(State.SAVE);
 			
 			List<JianliBean> list = jianliService.selectJianliRoleDept();
+			System.out.println(list.get(0).getRoleBean().getDeptBean().getDeptName());
 			int pageNum = 1;//页码
 			int pn = pageUtil.getPageNum();
 			//System.out.println(pn);
@@ -150,12 +151,9 @@ public class JianliController {
 			//map.put("zb", jianliBean);
 			map.put("pageUtil", pageUtil);
 			map.put("pageStart", pageStart);
-			//System.out.println(map.get("zb"));
+
 			List<JianliBean> lists = jianliService.selectJianliRoleDeptPages(map);
-			PageUtil pu = (PageUtil) map.get("pageUtil");
-			int a = (Integer) map.get("pageStart");
-			System.out.println(pu.getPageNum());
-			System.out.println(a);
+
 			model.addAttribute("list", lists);
 			model.addAttribute("pageNum", pageNum);
 			model.addAttribute("pageRows", pageRows);
@@ -165,6 +163,6 @@ public class JianliController {
 			/*for (ZhaopinBean zhaopinBean : list) {
 				System.out.println(zhaopinBean.getRoleBean());
 			}*/
-			return "/html/zhaopin/demo1/list.jsp";
+			return "/html/zhaopin/demo2/list.jsp";
 		}
 }

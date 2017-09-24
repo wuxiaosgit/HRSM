@@ -36,7 +36,7 @@ public class JianliServiceImpl implements JianliService{
 	}
 	public List<JianliBean> selectJianliRoleDeptPages(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return jianliDao.selectJianliRoleDeptPages();
+		return jianliDao.selectJianliRoleDeptPages(map);
 	}
 
 }

@@ -29,7 +29,7 @@
 				alert("数据只有1页!");
 			}
 		}else{
-			location.href="../zhaopin/selectZhaoRoleDeptPages.do?pageNum="+num;
+			location.href="../jianli/selectJianliRoleDeptPages.do?pageNum="+num;
 		}
 	}
 </script>
@@ -80,13 +80,12 @@
 					<c:forEach items="${list }" var="list">
 						<tr id="product1">
 						<td><a href="../jianli/selectByPrimaryKey.do?jianliId=${list.jianliId }&method=view">${list.xingming }</a>
-						<a href="../jianli/insertSelective.do">tianjia</a>
 						</td>
                         <td>${list.xingbie }</td>
 						<td>${list.school }</td>
                         <td>${list.xueli }</td> 
 						<td>${list.zhuanye }</td> 						
-                        <td>高级工程师</td>
+                        <td>${list.roleBean.roleName }</td>
 						<td>${list.jianyan }</td>
 						<td>${list.time }</td>
 						
@@ -214,22 +213,22 @@
 				${totleRows }
 			</c:otherwise>
 							</c:choose>条记录，总共${totleRows }条
-					</span> <span> <a href="../zhaopin/selectZhaoRoleDeptPages.do?pageNum=1">首页</a> <c:if
+					</span> <span> <a href="../jianli/selectJianliRoleDeptPages.do?pageNum=1">首页</a> <c:if
 								test="${pageNum == 1 }">
 				上一页
 			</c:if> <c:if test="${pageNum > 1 }">
-								<a href="../zhaopin/selectZhaoRoleDeptPages.do?pageNum=${pageNum-1 }">上一页</a>
+								<a href="../jianli/selectJianliRoleDeptPages.do?pageNum=${pageNum-1 }">上一页</a>
 							</c:if> <c:forEach begin="1" end="${totlePages }" step="1" var="pn">
 								<c:if test="${pn == pageNum }">${pn }</c:if>
 								<c:if test="${pn != pageNum }">
-									<a href="../zhaopin/selectZhaoRoleDeptPages.do?pageNum=${pn }">${pn }</a>
+									<a href="../jianli/selectJianliRoleDeptPages.do?pageNum=${pn }">${pn }</a>
 								</c:if>
 							</c:forEach> <c:if test="${pageNum == totlePages }">
 				下一页
 			</c:if> 
 			<c:if test="${pageNum < totlePages }">
-				<a href="../zhaopin/selectZhaoRoleDeptPages.do?pageNum=${pageNum+1 }">下一页</a>
-			</c:if> <a href="../zhaopin/selectZhaoRoleDeptPages.do?pageNum=${totlePages }">尾页</a> 转到
+				<a href="../jianli/selectJianliRoleDeptPages.do?pageNum=${pageNum+1 }">下一页</a>
+			</c:if> <a href="../jianli/selectJianliRoleDeptPages.do?pageNum=${totlePages }">尾页</a> 转到
 			<input type="number" style="width: 50px" id="num" />页 
 			<input type="button" value="GO" onclick="tiaozhuan()" /></span>
                         </td>
