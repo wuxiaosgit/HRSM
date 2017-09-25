@@ -9,6 +9,8 @@
 
         <link href="../html/css/mine.css" type="text/css" rel="stylesheet" />
        <script type="text/javascript" src="../html/js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="../html/js/zhaopin.js"></script>
+        <script language="javascript" type="text/javascript" src="../html/My97DatePicker/WdatePicker.js"></script>
        <script type="text/javascript">
 	function showMsg() {
 		var msg = document.getElementById("msg").value;
@@ -57,7 +59,7 @@
 					工作经验: 
 					<input type="text" size="10px" />
 					登记日期: 
-					<input type="text" size="20px" />
+					<input type="text" size="20px" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
                     <input value="查询" type="submit" />
 					
                 </form>
@@ -87,22 +89,22 @@
 						<td>${list.zhuanye }</td> 						
                         <td>${list.roleBean.roleName }</td>
 						<td>${list.jianyan }</td>
-						<td>${list.time }</td>
+						<td>${list.dtime }</td>
 						
                         <td>
               
 							<a href="../jianli/selectByPrimaryKey.do?jianliId=${list.jianliId}&method=change">修改</a>						   
 							<a href="../jianli/updateByPrimaryKeySelective.do?jianliId=${list.jianliId}&method=del">删除</a>
-							<select name="state" id="demo2_select_state">
-							<option value="0" <c:if test="${list.state eq 0}">selected="selected" </c:if>>删除</option>
-							<option value="1" <c:if test="${list.state eq 1}">selected="selected" </c:if>>推荐面试</option>
-							<option value="2" <c:if test="${list.state eq 2}">selected="selected" </c:if>>推荐二面</option>
-							<option value="3" <c:if test="${list.state eq 3}">selected="selected" </c:if>>推荐三面</option>
-							<option value="4" <c:if test="${list.state eq 4}">selected="selected" </c:if>>建议录用</option>
-							<option value="5" <c:if test="${list.state eq 5}">selected="selected" </c:if>>录用</option>
-							<option value="6" <c:if test="${list.state eq 6}">selected="selected" </c:if> >存档</option>
+							<select name="state" id="demo2_select_state${list.jianliId}" onchange="stateChange(this)">
+							<option jianliId="${list.jianliId}" value="0" <c:if test="${list.state eq 0}">selected="selected" </c:if>>删除</option>
+							<option jianliId="${list.jianliId}" value="1" <c:if test="${list.state eq 1}">selected="selected" </c:if>>推荐面试</option>
+							<option jianliId="${list.jianliId}" value="2" <c:if test="${list.state eq 2}">selected="selected" </c:if>>推荐二面</option>
+							<option jianliId="${list.jianliId}" value="3" <c:if test="${list.state eq 3}">selected="selected" </c:if>>推荐三面</option>
+							<option jianliId="${list.jianliId}" value="4" <c:if test="${list.state eq 4}">selected="selected" </c:if>>建议录用</option>
+							<option jianliId="${list.jianliId}" value="5" <c:if test="${list.state eq 5}">selected="selected" </c:if>>录用</option>
+							<option jianliId="${list.jianliId}" value="6" <c:if test="${list.state eq 6}">selected="selected" </c:if> >存档</option>
 						</select>
-						</td>         
+						</td>        
 						</tr>
 					</c:forEach>
                     <tr id="product1">
@@ -236,5 +238,26 @@
                 </tbody>
             </table>
         </div>
+        <script>
+        function stateChange(e){
+        	state = e.value;
+        	  var index = e.selectedIndex;
+        	  var store_num = e.options[index].getAttribute("jianliId");
+        	
+
+        	var xmlHttp = null;
+    		if (window.ActiveXObject) {//判断是IE
+    			xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+    		} else if (window.XMLHttpRequest) {//是Mozilla
+    			xmlHttp = new XMLHttpRequest();
+    		}
+        	xmlHttp.open("post", "updateByPrimaryKeyAndState.do?state="+state+"&jianliId="+store_num, true);
+        	xmlHttp.onreadystatechange=function(){
+        		
+        		alert("修改成功");
+        	};
+        	xmlHttp.send(null);
+        }
+        </script>
     </body>
 </html>

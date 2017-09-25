@@ -21,7 +21,7 @@ public class MianshiController {
 		public String selectAll(Model model){
 			
 			List<MianshiBean> list = mianshiService.selectAll();
-			System.out.println(list);
+			//System.out.println(list);
 			model.addAttribute("list",list);
 			
 			return "/html/zhaopin/demo3/list.jsp";

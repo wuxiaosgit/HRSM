@@ -25,7 +25,7 @@
 
         <div style="font-size: 13px;margin: 10px 5px">
             <form action="../zhaopin/insertSelective.do" method="post">
-       
+       		
             <table border="1" width="100%" class="table_a">
                 <tr>
                     <td width="120px;">部门<span style="color:red">*</span>：</td>
@@ -117,6 +117,7 @@
 				
                 <tr>
                     <td colspan="2" align="center">
+                   		
                         <input type="submit" value=" 发布 "/>
 						<input type="button" value=" 返回 " onclick="javascript:history.back(-1);"/>
                     </td>

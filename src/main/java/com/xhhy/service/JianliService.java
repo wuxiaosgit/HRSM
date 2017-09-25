@@ -13,4 +13,5 @@ public interface JianliService {
 	public void insertSelective(JianliBean jianliBean);
 	public List<JianliBean> selectJianliRoleDeptPages(Map<String, Object> map);
 	public List<JianliBean> selectJianliRoleDept();
+	public void updateByPrimaryKeyAndState(int state, int roleId);
 }

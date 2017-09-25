@@ -13,7 +13,7 @@
 
         <div class="div_head">
             <span>
-                <span style="float:left">当前位置是：招聘管理-》简历管理-》简历登记</span>
+                <span style="float:left">当前位置是：招聘管理-》简历管理-》简历修改</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
                     <a style="text-decoration: none" href="#" onclick="javascript:history.back(-1);">【返回】</a>
                 </span>
@@ -23,16 +23,14 @@
 
         <div style="font-size: 13px;margin: 10px 5px">
             <form action="../jianli/updateByPrimaryKeySelective.do" method="post">
-            <input type="hidden" name="jianliId" value="${jianliBean.jianliId}"/>
+          
             <table border="1" width="100%" class="table_a">
                 <tr>
                     <td width="120px;">应聘职位名称<span style="color:red">*</span>：</td>
                     <td>
-					<select>
-						<option>---请选择---</option>
-						<option>---技术培训师---</option>
-					
-					</select>
+                     <input type="hidden" name="state" value="${jianliBean.state}" />
+					<input type="hidden" name="jianliId" value="${jianliBean.jianliId}"/>
+					<input type="text" name= "roleName" value="${jianliBean.roleBean.roleName }" />
 					
 					</td>
                 </tr>
@@ -40,14 +38,14 @@
                 <tr>
                     <td>应聘职位编码<span style="color:red">*</span>：</td>
                     <td>
-                       <input type="text" readonly name="f_goods_name" value="BDQN-BM03" /> 
+                       <input type="text" readonly name="f_goods_name" value="${jianliBean.roleBean.roleNumber }" /> 
                     </td>
                 </tr>
                
                 <tr>
                     <td>职位分类<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text" name="f_goods_price"  /></td>
+						<input type="text" name="deptShortName"  value="${jianliBean.roleBean.deptBean.deptShortName }" /></td>
                 </tr>
                 <tr>
                     <td>姓名<span style="color:red">*</span>：</td>
@@ -172,7 +170,7 @@
 					<tr>
                     <td>登记时间：</td>
                     <td>
-                        <input type="text" name="time" value="${jianliBean.time }"
+                        <input type="text" name="dtime" value="${jianliBean.dtime }"
                         onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
                     </td>                
                 </tr>

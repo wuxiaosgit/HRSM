@@ -63,21 +63,32 @@ public class JianliController {
 		if(method!=null&&method.equals("del")){
 			jianliBean.setState(State.DEL);
 			jianliService.updateByPrimaryKeySelective(jianliBean);
-			return "selectAll.do";
+			return "selectJianliRoleDeptPages.do";
 		}else{
-			jianliBean.setState(State.UNDEL);
+			//jianliBean.setState(State.UNDEL);
 			jianliService.updateByPrimaryKeySelective(jianliBean);
-			return "selectAll.do";
+			return "selectJianliRoleDeptPages.do";
 		}
 		
 	}
+	//---------------------------------------------
+	
+	@RequestMapping("updateByPrimaryKeyAndState")
+	public void updateByPrimaryKeyAndState(int state,int jianliId){
+			System.out.println("state="+state);
+			System.out.println(jianliId);
+			jianliService.updateByPrimaryKeyAndState(state,jianliId);
+		}
+		
+	
+	
 	//-------------------------添加简历--------------------------
 	@RequestMapping("insertSelective")
 	public String insertSelective(JianliBean jianliBean){
-		System.out.println(jianliBean);
+		//System.out.println(jianliBean);
 		jianliBean.setState(State.SAVE);
 		jianliService.insertSelective(jianliBean);
-		return "selectAll.do";
+		return "selectJianliRoleDeptPages.do";
 	}
 	
 	
@@ -165,4 +176,5 @@ public class JianliController {
 			}*/
 			return "/html/zhaopin/demo2/list.jsp";
 		}
+		//------------------修改简历-----------------------------
 }

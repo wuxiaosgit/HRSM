@@ -49,9 +49,9 @@
 	</div>
 	<div></div>
 	<div class="div_search">
-			<form action="../zhaopin/selectZhaoRoleDeptPages.do" method="post">
+			<form action="../zhaopin/selective.do" method="post">
 				职位名称:
-				<input type="text" name="roleName" /> 
+				<input type="text" name="roleName" id="demo1_input_roleId" /> 
 				
 				职位分类:
 				<select name="deptShortName" style="width: 100px;">

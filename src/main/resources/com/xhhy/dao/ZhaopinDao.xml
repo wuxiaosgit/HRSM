@@ -43,13 +43,54 @@
 		</association>
 		</association>
 	</resultMap> 
-  <select id="selectZhaoRoleDept" resultMap="ZhaopinRole" parameterType="Map">
+	<select id="selectiveALl" resultMap="ZhaopinRole" parameterType="com.xhhy.domain.ZhaopinBean">
+		select * from zhaopin_tb z,role_tb r,dept_tb d
+		<where>
+		z.role_id = r.role_id and r.dept_id = d.dept_id and state = 1
+		<if test="roleBean !=null and roleBean.roleName != null">
+			and r.role_name = #{roleBean.roleName}
+		</if>
+		<if test=" roleBean !=null and roleBean.deptBean != null and roleBean.deptBean.deptShortName != null">
+			and d.dept_shortname = #{roleBean.deptBean.deptShortName}
+		</if> 
+		<if test="startTime !=null">
+			and startTime &gt; #{startTime}
+		</if>
+		<if test="startTime !=null">
+			and endTime &lt; #{endTime}
+		</if>
+		</where>
+		order by startTime,endTime
+	</select>
+	<select id="selective" resultMap="ZhaopinRole" parameterType="com.xhhy.domain.ZhaopinBean">
+		select * from zhaopin_tb z,role_tb r,dept_tb d
+		<where>
+		z.role_id = r.role_id and r.dept_id = d.dept_id and state = 1
+	<!-- 	<if test="roleBean.roleName != null and _parameter !=''">
+			and r.role_name = #{roleBean.roleName}
+		</if>
+		<if test="roleBean.deptBean.deptShortName != null and _parameter != ''">
+			and d.dept_shortname = #{roleBean.deptBean.deptShortName}
+		</if>  -->
+		<if test="startTime !=null">
+			and startTime &gt; #{startTime}
+		</if>
+		<if test="startTime !=null">
+			and endTime &lt; #{endTime}
+		</if>
+	</where>
+	<if test="pageStart !=null and pageStart!='' and pageUtil.pageRows!=null and pageUtil.pageRows!=''">
+			limit #{pageStart},#{pageUtil.pageRows}
+		</if>
+	order by startTime,endTime
+	</select>
+	
+  <select id="selectZhaoRoleDept" resultMap="ZhaopinRole" >
   	select 
   	zhaopin_id, z.dept_id, zhaopin_type, zhaopin_num, z.role_id, dengjiren, startTime, endTime,jobmiaoshu,yaoqiu,state,
 r.role_id,role_state,role_name,role_number,r.dept_id,role_remark,role_describe,
 d.dept_id,dept_state,dept_name,dept_shortname,dept_up,dept_address,dept_jianjie,dept_remark
   	from zhaopin_tb z,role_tb r,dept_tb d
-	<!-- where z.role_id = r.role_id and r.dept_id = d.dept_id and state = 1 -->
 	<where>
 		z.role_id = r.role_id and r.dept_id = d.dept_id and state = 1
 		<if test="role_name != null">
@@ -64,8 +105,12 @@ d.dept_id,dept_state,dept_name,dept_shortname,dept_up,dept_address,dept_jianjie,
 		<if test="startTime !=null">
 			and endTime = #{zhaopinBean.endTime}
 		</if>
+
 	</where>
+	order by startTime,endTime
   </select>
+  
+  
   <select id="selectByPrimaryKey" resultMap="ZhaopinRole" parameterType="java.lang.Integer" >
     select 
     *
@@ -82,19 +127,27 @@ d.dept_id,dept_state,dept_name,dept_shortname,dept_up,dept_address,dept_jianjie,
   	from zhaopin_tb z,role_tb r,dept_tb d
 	<where>
 		z.role_id = r.role_id and r.dept_id = d.dept_id and state = 1
-		 limit #{pageStart},#{pageUtil.pageRows}
 	</where>
+	order by startTime,endTime
+	 limit #{pageStart},#{pageUtil.pageRows}
   </select>
   
   
-  <select id="selectAZhaoRoleDept" resultMap="ZhaopinRole" parameterType="java.lang.Integer">
+  <select id="selectAZhaoRoleDept" resultMap="ZhaopinRole" parameterType="ZhaopinBean">
   	select 
   	zhaopin_id, z.dept_id, zhaopin_type, zhaopin_num, z.role_id, dengjiren, startTime, endTime,jobmiaoshu,yaoqiu,state,
 r.role_id,role_state,role_name,role_number,r.dept_id,role_remark,role_describe,
 d.dept_id,dept_state,dept_name,dept_shortname,dept_up,dept_address,dept_jianjie,dept_remark
   	from zhaopin_tb z,role_tb r,dept_tb d
 	where z.role_id = r.role_id and r.dept_id = d.dept_id 
-	and state = 1 and zhaopin_id = #{zhaopinId}
+	and state = 1 
+	<if test="zhaopinId !=0">
+	and zhaopin_id = #{zhaopinId}
+	</if>
+	<if test="roleId !=0">
+	and role_id = #{roleId}
+	</if>
+	order by startTime,endTime
   </select>
   
   
