@@ -27,7 +27,7 @@
         <div style="font-size: 13px;margin: 10px 5px">
            <!--  <form action="../../../zhaopin/insertSelective.do" method="post"> -->
             <%-- ../jianli/selectByPrimaryKey.do?jianliId=${list.jianliId } --%>
-             <form action="../jianli/insertSelective.do" method="post">
+             <form action="../jianli/insertSelective.do" method="post" id="" enctype="multipart/form-data">
             <table border="1" width="100%" class="table_a">
                 <tr>
                     <td width="120px;">应聘职位名称<span style="color:red">*</span>：</td>
@@ -193,7 +193,7 @@
 					<tr>
                     <td>简历附件：</td>
                     <td>
-                        <input type="file" name="fujian" />
+                        <input type="file" name="newfile" />
                     </td>                
                 </tr>
 			

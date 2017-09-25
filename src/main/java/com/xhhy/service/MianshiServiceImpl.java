@@ -33,4 +33,9 @@ public class MianshiServiceImpl implements MianshiService {
 		mianshiDao.insertSelective(mianshiBean);
 	}
 
+	public List<MianshiBean> selectByJianliId(int jianliId) {
+		// TODO Auto-generated method stub
+		return mianshiDao.selectByJianliId(jianliId);
+	}
+
 }

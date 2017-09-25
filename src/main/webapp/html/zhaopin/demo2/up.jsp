@@ -187,7 +187,7 @@
 					<tr>
                     <td>简历附件：</td>
                     <td>
-                        <input type="file" name="fujian" value="${jianliBean.fujian }" />
+                        <input type="file" name="fujian" value="${jianliBean.filename }" />
                     </td>                
                 </tr>
 

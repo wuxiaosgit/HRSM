@@ -14,4 +14,6 @@ public interface MianshiService {
 
 	void insertSelective(MianshiBean mianshiBean);
 
+	List<MianshiBean> selectByJianliId(int jianliId);
+
 }

@@ -51,10 +51,10 @@
 	<div class="div_search">
 			<form action="../zhaopin/selective.do" method="post">
 				职位名称:
-				<input type="text" name="roleName" id="demo1_input_roleId" /> 
+				<input type="text" name="roleBean.roleName" id="demo1_input_roleId" /> 
 				
 				职位分类:
-				<select name="deptShortName" style="width: 100px;">
+				<select name="roleBean.deptBean.deptShortName" style="width: 100px;">
 					<option selected="selected">-请选择-</option>
 					<option value="管理">管理</option>
 					<option value="技术">技术</option>

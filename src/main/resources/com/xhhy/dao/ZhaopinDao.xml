@@ -66,22 +66,19 @@
 		select * from zhaopin_tb z,role_tb r,dept_tb d
 		<where>
 		z.role_id = r.role_id and r.dept_id = d.dept_id and state = 1
-	<!-- 	<if test="roleBean.roleName != null and _parameter !=''">
-			and r.role_name = #{roleBean.roleName}
+		<if test=" roleBean !=null and roleBean.roleName != null and roleBean.roleName !=''">
+			and role_name like "%"#{roleBean.roleName}"%"
 		</if>
-		<if test="roleBean.deptBean.deptShortName != null and _parameter != ''">
-			and d.dept_shortname = #{roleBean.deptBean.deptShortName}
-		</if>  -->
-		<if test="startTime !=null">
+		<if test="roleBean!=null and roleBean.deptBean !=null and roleBean.deptBean.deptShortName != null and roleBean.deptBean.deptShortName != '--请选择--'">
+			and dept_shortname = #{roleBean.deptBean.deptShortName}
+		</if> 
+		<if test="startTime !=null and startTime !=''">
 			and startTime &gt; #{startTime}
 		</if>
-		<if test="startTime !=null">
+		<if test="endTime !=null and endTime=''">
 			and endTime &lt; #{endTime}
 		</if>
 	</where>
-	<if test="pageStart !=null and pageStart!='' and pageUtil.pageRows!=null and pageUtil.pageRows!=''">
-			limit #{pageStart},#{pageUtil.pageRows}
-		</if>
 	order by startTime,endTime
 	</select>
 	

@@ -1,5 +1,10 @@
 package com.xhhy.controller;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,8 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.xhhy.domain.DeptBean;
 import com.xhhy.domain.JianliBean;
@@ -75,23 +83,53 @@ public class JianliController {
 	
 	@RequestMapping("updateByPrimaryKeyAndState")
 	public void updateByPrimaryKeyAndState(int state,int jianliId){
-			System.out.println("state="+state);
-			System.out.println(jianliId);
+			//System.out.println("state="+state);
+			//System.out.println(jianliId);
 			jianliService.updateByPrimaryKeyAndState(state,jianliId);
 		}
 		
 	
 	
-	//-------------------------添加简历--------------------------
+	//-------------------------添加简历-上传文件-------------------------
 	@RequestMapping("insertSelective")
-	public String insertSelective(JianliBean jianliBean){
+	public String insertSelective(JianliBean jianliBean,HttpServletRequest request,HttpServletResponse response){
 		//System.out.println(jianliBean);
+		 MultipartHttpServletRequest multipartRequest =(MultipartHttpServletRequest) request;
+		 MultipartFile file = multipartRequest.getFile("newfile");
+		 String fileName = file.getOriginalFilename();
+		 String fujian = "f:/"+fileName;
+		 try {
+			InputStream in = file.getInputStream();
+			
+			OutputStream out = new FileOutputStream(fujian);
+			FileCopyUtils.copy(in, out);
+			out.close();
+			in.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		jianliBean.setState(State.SAVE);
+		jianliBean.setFujian(fujian);
+		jianliBean.setFilename(fileName);
 		jianliService.insertSelective(jianliBean);
+		
 		return "selectJianliRoleDeptPages.do";
 	}
-	
-	
+	//-------------------------文件下载-------------------------------
+	@RequestMapping("download.do")
+	public void download(HttpServletRequest request , HttpServletResponse response,int jianliId){
+		JianliBean jianliBean = jianliService.selectByPrimaryKey(jianliId);
+		response.setHeader("content-disposition", "attachment;filename=" + jianliBean.getFilename()); // 下载文件的时候 有一个中文乱码的问题（文件名）
+		try {
+			// 获取一个输入流 指向 savePath
+			InputStream in = new FileInputStream(jianliBean.getFujian());
+			OutputStream out = response.getOutputStream();//输出流指向了 客户端
+			FileCopyUtils.copy(in, out);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 	//------------------------获取部门信息和职位信息-----------------------------------------
 		@RequestMapping("SelectRoleDept")
@@ -130,7 +168,7 @@ public class JianliController {
 			//jianliBean.setState(State.SAVE);
 			
 			List<JianliBean> list = jianliService.selectJianliRoleDept();
-			System.out.println(list.get(0).getRoleBean().getDeptBean().getDeptName());
+			//System.out.println(list.get(0).getRoleBean().getDeptBean().getDeptName());
 			int pageNum = 1;//页码
 			int pn = pageUtil.getPageNum();
 			//System.out.println(pn);
@@ -156,8 +194,8 @@ public class JianliController {
 			pageUtil.setTotleRows(totleRows);
 			
 			int pageStart = pageUtil.getStart();
-			System.out.println(pageStart);
-			System.out.println(pageNum);
+			//System.out.println(pageStart);
+			//System.out.println(pageNum);
 			Map<String,Object> map =new HashMap<String, Object>();
 			//map.put("zb", jianliBean);
 			map.put("pageUtil", pageUtil);
@@ -176,5 +214,13 @@ public class JianliController {
 			}*/
 			return "/html/zhaopin/demo2/list.jsp";
 		}
-		//------------------修改简历-----------------------------
+		
+		//---------------------------多条件分页展示所有简历信息-------------------------------------
+				@RequestMapping("selectJianliRoleDeptPagesBySelective")
+				public String selectJianliRoleDeptPagesBySelective(Model model,JianliBean jianliBean){
+
+					List<JianliBean> list = jianliService.selectJianliRoleDeptPagesBySelective(jianliBean);
+					model.addAttribute("list", list);
+					return "/html/zhaopin/demo2/list.jsp";
+				}
 }

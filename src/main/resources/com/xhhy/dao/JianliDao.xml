@@ -25,7 +25,7 @@
     <result column="tuijianren" property="tuijianren" jdbcType="VARCHAR" />
     <result column="tuijianTime" property="tuijiantime" jdbcType="TIMESTAMP" />
     <result column="jianli" property="jianli" jdbcType="LONGVARCHAR" />
-    <result column="fujian" property="fujian" jdbcType="LONGVARBINARY" />
+    <result column="fujian" property="fujian" jdbcType="VARCHAR" />
     <result column="yijian" property="yijian" jdbcType="LONGVARCHAR" />
     <result column="state" property="state" jdbcType="INTEGER"/>
   </resultMap>
@@ -52,6 +52,20 @@
   	job_id = role_tb.role_id and role_tb.dept_id = dept_tb.dept_id
   	and jianli_tb.state not in (0)
   </select>
+  <select id="selectJianliMianshiRoleDept"  resultMap="selectJianliRoleDeptMap">
+  	select * from 
+  	jianli_tb,role_tb,dept_tb 
+  	where 
+  	job_id = role_tb.role_id and role_tb.dept_id = dept_tb.dept_id
+  	and jianli_tb.state not in (0,4,5,6)
+  </select>
+  <select id="selectJianliLuyongRoleDept"  resultMap="selectJianliRoleDeptMap">
+  	select * from 
+  	jianli_tb,role_tb,dept_tb 
+  	where 
+  	job_id = role_tb.role_id and role_tb.dept_id = dept_tb.dept_id
+  	and jianli_tb.state not in (0,1,2,3,6)
+  </select>
   
    <select id="selectByPrimaryKey" resultMap="selectJianliRoleDeptMap" parameterType="java.lang.Integer" >
     select *
@@ -69,8 +83,86 @@
   	and jianli_tb.state not in (0)
   limit #{pageStart},#{pageUtil.pageRows}
   </select>
+   <select id="selectJianliMianshiRoleDeptPages" parameterType="Map" resultMap="selectJianliRoleDeptMap">
+  	select * from 
+  	jianli_tb,role_tb,dept_tb 
+  	where 
+  	job_id = role_tb.role_id and role_tb.dept_id = dept_tb.dept_id
+  	and jianli_tb.state not in (0,4,5,6)
+  limit #{pageStart},#{pageUtil.pageRows}
+  </select>
+   <select id="selectJianliLuyongRoleDeptPages" parameterType="Map" resultMap="selectJianliRoleDeptMap">
+  	select * from 
+  	jianli_tb,role_tb,dept_tb 
+  	where 
+  	job_id = role_tb.role_id and role_tb.dept_id = dept_tb.dept_id
+  	and jianli_tb.state not in (0,1,2,3,6)
+  limit #{pageStart},#{pageUtil.pageRows}
+  </select>
  
+ 	<select  id="selectJianliRoleDeptPagesBySelective" parameterType="JianliBean" resultMap="selectJianliRoleDeptMap">
+ 		select * from jianli_tb,role_tb
+		where jianli_tb.job_id = role_tb.role_id 
+		and jianli_tb.state not in (0)
+		<if test="xingming !=null and xingming!=''">
+			and xingming like  "%"#{xingming}"%"
+		</if>
+		<if test="roleBean!=null and roleBean.roleName!=null and roleBean.roleName!=''">
+			and role_name like "%"#{roleBean.roleName}"%"
+		</if>
+		<if test="jianyan !=null and jianyan!=''">
+			and jianyan like "%"#{jianyan}"%"
+		</if>
+		<if test="state != null and state!=0 and state !=''" >
+            and state = #{state}
+      </if>
+		<if test="dtime !=null and dtime!=''">
+			and dtime &gt; #{dtime}
+		</if>
+ 	</select>
   
+  	<select  id="selectJianliRoleDeptPagesBySelective2" parameterType="JianliBean" resultMap="selectJianliRoleDeptMap">
+ 		select * from jianli_tb,role_tb
+		where jianli_tb.job_id = role_tb.role_id 
+		and jianli_tb.state not in (0,4,5,6)
+		<if test="xingming !=null and xingming!=''">
+			and xingming like  "%"#{xingming}"%"
+		</if>
+		<if test="roleBean!=null and roleBean.roleName!=null and roleBean.roleName!=''">
+			and role_name like "%"#{roleBean.roleName}"%"
+		</if>
+		<if test="jianyan !=null and jianyan!=''">
+			and jianyan like "%"#{jianyan}"%"
+		</if>
+		<if test="state != null and state!=0 and state !=''" >
+            and state = #{state}
+      </if>
+		<if test="dtime !=null and dtime!=''">
+			and dtime &gt; #{dtime}
+		</if>
+ 	</select>
+ 
+ <select  id="selectJianliRoleDeptPagesBySelective3" parameterType="JianliBean" resultMap="selectJianliRoleDeptMap">
+ 		select * from jianli_tb,role_tb
+		where jianli_tb.job_id = role_tb.role_id 
+		and jianli_tb.state not in (0,1,2,3,6)
+		<if test="xingming !=null and xingming!=''">
+			and xingming like  "%"#{xingming}"%"
+		</if>
+		<if test="roleBean!=null and roleBean.roleName!=null and roleBean.roleName!=''">
+			and role_name like "%"#{roleBean.roleName}"%"
+		</if>
+		<if test="jianyan !=null and jianyan!=''">
+			and jianyan like "%"#{jianyan}"%"
+		</if>
+		<if test="state != null and state!=0 and state !=''" >
+            and state = #{state}
+      </if>
+		<if test="dtime !=null and dtime!=''">
+			and dtime &gt; #{dtime}
+		</if>
+ 	</select>
+ 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from jianli_tb
     where jianli_id = #{jianliId,jdbcType=INTEGER}
@@ -92,7 +184,7 @@
       #{xueli,jdbcType=VARCHAR}, #{zhuanye,jdbcType=VARCHAR}, #{jianyan,jdbcType=VARCHAR}, 
       #{xizi,jdbcType=DOUBLE}, #{yinjiesheng,jdbcType=VARCHAR}, #{zizhi,jdbcType=VARCHAR}, 
       #{dtime,jdbcType=TIMESTAMP}, #{tuijian,jdbcType=VARCHAR}, #{tuijianren,jdbcType=VARCHAR}, 
-      #{tuijiantime,jdbcType=TIMESTAMP}, #{jianli,jdbcType=LONGVARCHAR}, #{fujian,jdbcType=LONGVARBINARY}, 
+      #{tuijiantime,jdbcType=TIMESTAMP}, #{jianli,jdbcType=LONGVARCHAR}, #{fujian,jdbcType=VARCHAR}, 
       #{yijian,jdbcType=LONGVARCHAR}, #{state,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.xhhy.domain.JianliBean" >
@@ -169,6 +261,9 @@
       </if>
       <if test="fujian != null" >
         fujian,
+      </if>
+      <if test="filename != null" >
+        filename,
       </if>
       <if test="yijian != null" >
         yijian,
@@ -248,7 +343,10 @@
         #{jianli,jdbcType=LONGVARCHAR},
       </if>
       <if test="fujian != null" >
-        #{fujian,jdbcType=LONGVARBINARY},
+        #{fujian,jdbcType=VARCHAR},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
       </if>
       <if test="yijian != null" >
         #{yijian,jdbcType=LONGVARCHAR},
@@ -328,7 +426,7 @@
         jianli = #{jianli,jdbcType=LONGVARCHAR},
       </if>
       <if test="fujian != null" >
-        fujian = #{fujian,jdbcType=LONGVARBINARY},
+        fujian = #{fujian,jdbcType=VARCHAR},
       </if>
       <if test="yijian != null" >
         yijian = #{yijian,jdbcType=LONGVARCHAR},
