@@ -5,47 +5,110 @@
 <mapper namespace="com.xhhy.dao.TrainDao">
 
 <sql id="addTrain">
-insert into train_tb(
-train_id,train_name,train_teacher,train_goal,train_starttime,train_endtime,train_people,
-train_jianjie,train_ziliao,train_sumup,train_state,train_feekback
-)
-values(
-null,#{trainName},#{trainTeacher},#{trainGoal},#{trainStarttime},#{trainEndtime},#{trainPeople},
-#{trainJianjie},#{trainZiliao},#{trainSumup},#{trainState},#{trainFeekBack}
-)
+	insert into train_tb(
+	train_id,train_name,train_teacher,train_goal,train_starttime,train_endtime,train_people,
+	train_jianjie,train_ziliao,train_sumup,train_state,train_feekback,is_delete,train_idea,train_result
+	)
+	values(
+	null,#{trainName},#{trainTeacher},#{trainGoal},#{trainStarttime},#{trainEndtime},#{trainPeople},
+	#{trainJianjie},#{trainZiliao},#{trainSumup},#{trainState},#{trainFeekBack},#{isDelete},#{trainIdea},#{trainResult}
+	)
 </sql>
 
 <sql id="queryTrainList">
-select train_id trainId,train_name trainName,train_teacher trainTeacher,train_goal trainGoal,train_starttime trainStarttime,train_endtime trainEndtime,train_people trainPeople,
-train_jianjie trainJianjie,train_ziliao trainZiliao,train_sumup trainSumup,train_state trainState,train_feekback trainFeekBack
-from train_tb
+	select train_id trainId,train_name trainName,train_teacher
+	trainTeacher,train_goal trainGoal,train_starttime
+	trainStarttime,train_endtime trainEndtime,train_people trainPeople,
+	train_jianjie trainJianjie,train_ziliao trainZiliao,train_sumup
+	trainSumup,train_state trainState,train_feekback trainFeekBack,is_delete isDelete,train_idea trainIdea,
+	train_result trainResult
+	from train_tb
 </sql>
 
 
 <insert id="insertTrain" parameterType="com.xhhy.domain.TrainBean">
-<include refid="addTrain"/>
+	<include refid="addTrain" />
 </insert>
 
-<select id="listTrain" resultType="com.xhhy.domain.TrainBean">
-<include refid="queryTrainList"/>
+<select id="listTrain" resultType="com.xhhy.domain.TrainBean" parameterType="com.xhhy.domain.TrainBean">
+	<include refid="queryTrainList" />
+	<where>
+	<if test="trainName != null and trainName != ''">
+			train_name like "%"#{trainName}"%"
+		</if>
+		<if test="trainState != null">
+			and train_state = #{trainState}
+		</if>
+		<if test="trainStarttime != null">
+			and train_starttime = #{trainStarttime}
+		</if>
+		<if test="trainEndtime !=null">
+			and train_endtime = #{trainEndtime}
+		</if>
+			and is_delete = 0
+	</where>
+	
 </select>
 
-<select id="queryLike" parameterType="com.xhhy.domain.TrainBean"  resultType="com.xhhy.domain.TrainBean">
-<include refid="queryTrainList" />
-<where>
-	<if test="trainName!=null">
-		train_name like  "%"#{trainName}"%"
-	</if>
-	<if test="trainState!=null">
-		and train_state = #{trainState}
-	</if>
-	<if test="trainStarttime!=null">
-		and train_starttime = #{trainStarttime}
-	</if>
-	<if test="trainEndtime !=null">
-		and train_enttime  = #{trainEndtime}
-	</if>
-</where>
+<select id="queryById" parameterType="int" resultType="com.xhhy.domain.TrainBean">
+	<include refid="queryTrainList" />
+		where	is_delete = 0 and train_id = #{trainId} 
 </select>
+
+<select id="queryByState" parameterType="int" resultType="com.xhhy.domain.TrainBean" >
+	<include refid="queryTrainList"/>
+	where train_state = #{trainState} and is_delete = 0
+</select>
+
+<delete id="deleteById" parameterType="int">
+	update train_tb  set is_delete = 1 where train_id =#{trainId}
+</delete>
+
+<update id="updateById" parameterType="com.xhhy.domain.TrainBean">
+	update train_tb
+	<set>
+		<if test="trainName !=null and trainName !=''">
+			train_name = #{trainName},
+		</if>
+		<if test="trainTeacher !=null and trainTeacher !=''">
+			train_teacher = #{trainTeacher},
+		</if>
+		<if test="trainGoal !=null and trainGoal !=''">
+			train_goal = #{trainGoal},
+		</if>
+		<if test="trainStarttime !=null">
+			train_starttime = #{trainStarttime},
+		</if>
+		<if test="trainEndtime !=null">
+			train_endtime = #{trainEndtime},
+		</if>
+		<if test="trainPeople !=null and trainPeople !='' ">
+			train_people = #{trainPeople},
+		</if>
+		<if test="trainJianjie !=null and trainJianjie !='' ">
+			train_jianjie =#{trainJianjie},
+		</if>
+		<if test="trainZiliao !=null and trainZiliao !='' ">
+			train_ziliao =#{trainZiliao},
+		</if>
+		<if test="trainSumup !=null and trainSumup !='' ">
+			train_sumup = #{trainSumup},
+		</if>
+		<if test="trainState !=null ">
+			train_state =#{trainState},
+		</if>
+		<if test="trainFeekBack !=null">
+			train_feekBack =#{trainFeekBack},
+		</if>
+		<if test="trainIdea != null and trainIdea != '' ">
+			train_idea = #{trainIdea},
+		</if>
+		<if test="trainResult !=null and trainResult != '' ">
+			train_result = #{trainResult}
+		</if>
+		
+	</set>
+		where train_id = #{trainId} and is_delete = 0
+</update>
 
 </mapper>
