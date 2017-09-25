@@ -10,14 +10,22 @@ public class WageBean {
 	private String wageDate;
 	private String zzrName;
 	private String djrName;
-	private float basePay;
-	private float awarPay;
-	private float travelPay;
-	private float phonePay;
-	private float mealPay;
-	private float housePay;
-	private float missionPay;
-	private float overtimePay;
+	@Override
+	public String toString() {
+		return "WageBean [wageId=" + wageId + ", wageBm=" + wageBm + ", wageName=" + wageName + ", wageDate=" + wageDate
+				+ ", zzrName=" + zzrName + ", djrName=" + djrName + ", basePay=" + basePay + ", awarPay=" + awarPay
+				+ ", travelPay=" + travelPay + ", phonePay=" + phonePay + ", mealPay=" + mealPay + ", housePay="
+				+ housePay + ", missionPay=" + missionPay + ", overtimePay=" + overtimePay + ", wageStatment="
+				+ wageStatment + ", all=" + all + ", remark=" + remark + "]";
+	}
+	private Float basePay;
+	private Float awarPay;
+	private Float travelPay;
+	private Float phonePay;
+	private Float mealPay;
+	private Float housePay;
+	private Float missionPay;
+	private Float overtimePay;
 	private int wageStatment;
 	public int getWageStatment() {
 		return wageStatment;

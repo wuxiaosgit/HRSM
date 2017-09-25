@@ -22,4 +22,21 @@ public class WageServiceImpl implements WageService{
 		
 		return wageDao.selectAll();
 	}
+
+	public WageBean selectById(int wageId) {
+		WageBean wage = wageDao.selectById(wageId);
+		return wage;
+	}
+
+	public void updateWage(WageBean wage) {
+		wageDao.updateWage(wage);
+	}
+
+	public void deleteWage(int wageId) {
+		wageDao.deleteWage(wageId);
+	}
+
+	public List<WageBean> selectBySta(int wageSta) {
+		return wageDao.selectBySta(wageSta);
+	}
 }

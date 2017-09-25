@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xhhy.dao.WageDao" >
+	<resultMap type="com.xhhy.domain.WageBean" id="wage">
+		<id property="wageId" column="ss_id"></id>
+		<result property="wageBm" column="ss_bm"></result>
+		<result property="wageName" column="ss_name"></result>
+		<result property="wageDate" column="ss_date"></result>
+		<result property="zzrName" column="ss_zzr"></result>
+		<result property="djrName" column="ss_djr"></result>
+		<result property="basePay" column="base_pay"></result>
+		<result property="awarPay"  column="award_pay"></result>
+		<result property="travelPay" column="travel_pay"></result>
+		<result property="phonePay" column="phone_pay"></result>
+		<result property="mealPay" column="meal_pay"></result>
+		<result property="housePay" column="house_pay"></result>
+		<result property="missionPay" column="mission_pay"></result>
+		<result property="overtimePay" column="overtime_pay"></result>
+		<result property="allpay" column="all_pay"></result>
+		<result property="remark" column="ss_remark"></result>
+		<result property="wageStatment" column="ss_statment"></result>
+	</resultMap>
+	<select id="selectAll" resultMap="wage">
+		select ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,
+		travel_pay,phone_pay,meal_pay,house_pay,mission_pay,overtime_pay,
+		ss_remark from salary_standard_tb
+	</select>
+	<select id="selectById" resultMap="wage" parameterType="int">
+		select ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,travel_pay,phone_pay,
+		meal_pay,house_pay,mission_pay,overtime_pay,ss_remark from salary_standard_tb where ss_id=#{wageId}
+	</select>
+	<insert id="insertWage" parameterType="com.xhhy.domain.WageBean">
+		insert into salary_standard_tb(ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,travel_pay,
+		phone_pay,meal_pay,house_pay,mission_pay,overtime_pay,all_pay,ss_remark,ss_statment) values
+		(null,#{wageBm},#{wageName},#{wageDate},#{zzrName},#{djrName},#{basePay},#{awarPay},#{travelPay},#{phonePay},
+		#{mealPay},#{housePay},#{missionPay},#{overtimePay},#{all},#{remark},#{wageStatment}
+	</insert>
+	<update id="updateWage" parameterType="com.xhhy.domain.WageBean">
+		update salary_standard_tb set ss_bm=#{wageBm},ss_name=#{wageName},
+		ss_date=#{wageDate},ss_zzr=#{zzrName},ss_djr=#{djrName},
+		base_pay=#{basePay},award_pay=#{awarPay},travel_pay=#{travelPay},
+		phone_pay=#{phonePay},meal_pay=#{mealPay},house_pay=#{housePay},
+		mission_pay=#{missionPay},overtime_pay=#{overtimePay},
+		ss_remark=#{remark},all_pay=#{all} where ss_id=#{wageId}
+	</update>
+	<delete id="deleteWage" parameterType="int">
+		delete from salary_standard_tb where ss_id=#{wageId}
+	</delete>
+	<select id="selectBySta" resultMap="wage" parameterType="int">
+		select ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,
+		travel_pay,phone_pay,meal_pay,house_pay,mission_pay,overtime_pay,
+		ss_remark from salary_standard_tb where ss_statment=#{wageSta}
+	</select>
+</mapper>
