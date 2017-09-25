@@ -5,14 +5,15 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>   
 <html>
 <head>
+<style>
+    .tr_color{background-color: #9F88FF}
+</style>
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <title>培训管理</title>
     <link href="../html/css/mine.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
- <style>
-        .tr_color{background-color: #9F88FF}
-        </style>
+
         <div class="div_head">
             <span>
                 <span style="float: left;">当前位置是：培训管理-》培训计划</span>
@@ -23,8 +24,8 @@
         </div>
         <div></div>
         <div class="div_search">
-            <span>
-                <form action="../train/queryLike.do" method="post">
+                <form action="train/list.do" method="post">
+                <input type="hidden" id="currentNum" name="currentNum" value="${currentPage }">
                 	培训名称: <input type="text"  name="trainName"/>
 					审核状态: 
 					<select name="trainState">
@@ -38,7 +39,6 @@
 					<input type="text"/>至<input type="text"/>
                     <input value="查询" type="submit" onclick="onSubmitSearch();"/>
                 </form>
-            </span>
         </div>
         <div style="font-size: 13px; margin: 10px 5px;">
             <table class="table_a" border="1" width="100%">
@@ -89,42 +89,14 @@
 							
 						</td>                        
                     </tr> 
-				
-				
-				
-				
 				</c:forEach>
-                   
-					<!--  <tr id="product1">
-                        <td>技术专家和教学专家的合作</td>
-                        <td>杨驰</td>
-						<td>2013-12-10</td>
-                        <td></td> 
-						<td>起草</td> 				
-                        <td>
-							<a href="add.html">修改</a>
-							<a href="add.html">明细</a>
-							<a href="">删除</a>
-						</td>                        
-                    </tr>
 					
-					 <tr id="product1">
-                        <td>自动化测试</td>
-                        <td>王芹芹</td>
-						<td>2013-12-1</td>
-                        <td></td> 
-						<td>审核中</td> 			
-                        <td>
-							<a href="add.html">明细</a>
-						</td>                        
-                    </tr> -->
-					
-                    <tr>
-                        <td colspan="20" style="text-align: center;">						
-						<a style="text-decoration: none;" href="#">
-                            首页 上一页  ... 7 8 9 10 11 12 ... 下一页 尾页 共1234条 每页显示 10/23 </a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td colspan="20" style="text-align: center;">						
+					<a style="text-decoration: none;" href="#">
+                        首页 上一页  ... 7 8 9 10 11 12 ... 下一页 尾页 共1234条 每页显示 10/23 </a>
+                    </td>
+                </tr>
                 </tbody>
             </table>
         </div>

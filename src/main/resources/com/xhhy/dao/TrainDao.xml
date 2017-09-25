@@ -45,6 +45,8 @@ from train_tb
 	<if test="trainEndtime !=null">
 		and train_enttime  = #{trainEndtime}
 	</if>
+		order by train_id DESC;
+		limit #{currentNum},10
 </where>
 </select>
 

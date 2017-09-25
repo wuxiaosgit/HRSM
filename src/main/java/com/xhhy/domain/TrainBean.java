@@ -6,17 +6,27 @@ public class TrainBean {
 
 	private  Integer trainId;
 	private  String  trainName;
-	private  String  trainTeacher;
+	private  String  trainTeacher;//培训讲师
 	private  String  trainGoal;//培训目的
-	private  Date    trainStarttime;
-	private  Date    trainEndtime;
-	private  String  trainPeople;
-	private  String  trainJianjie;
-	private  String  trainZiliao;
+	private  Date    trainStarttime;//开始事件
+	private  Date    trainEndtime;//结束事件
+	private  String  trainPeople;//参会人员
+	private  String  trainJianjie;//简介
+	private  String  trainZiliao;//资料
 	private  String  trainSumup;//培训总结
 	private  Integer trainState;//审核状态 0：起草 1：审核中 2审核通过 3 驳回
 	private  Integer trainFeekBack; //审核(培训)反馈 1优 2 良 3差
 	
+	private Integer currentNum = 1;//当前数据，第几条，默认第一条，用作分页
+	
+	public Integer getCurrentNum() {
+		return currentNum;
+	}
+
+	public void setCurrentNum(Integer currentNum) {
+		this.currentNum = currentNum;
+	}
+
 	public Integer getTrainFeekBack() {
 		return trainFeekBack;
 	}
