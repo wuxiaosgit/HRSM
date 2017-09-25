@@ -37,4 +37,34 @@ public class MenuServiceImpl implements MenuService {
 		return menuDao.selectMenu(menuBean);
 	}
 
+	public void insertMenu(MenuBean menuBean) {
+		// TODO Auto-generated method stub
+		menuDao.insertMenu(menuBean);
+	}
+
+	public List<MenuBean> getTopMenu() {
+		// TODO Auto-generated method stub
+		return menuDao.getTopMenu();
+	}
+
+	public Integer getMaxPaixu() {
+		// TODO Auto-generated method stub
+		return menuDao.getMaxPaixu();
+	}
+
+	public MenuBean getMenuById(Integer menuId) {
+		// TODO Auto-generated method stub
+		return menuDao.getMenuById(menuId);
+	}
+
+	public void updateMenu(MenuBean menuBean) {
+		// TODO Auto-generated method stub
+		menuDao.updateMenu(menuBean);
+	}
+
+	public void deleteMenu(Integer menuId) {
+		// TODO Auto-generated method stub
+		menuDao.deleteMenu(menuId);
+	}
+
 }

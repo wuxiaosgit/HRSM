@@ -15,7 +15,7 @@
 	<meta charset="utf-8" />
 	 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
-        <title>薪酬标准管理</title>
+        <title>菜单管理</title>
 
         <link href="css/mine.css" type="text/css" rel="stylesheet" />
     </head>
@@ -27,7 +27,7 @@
             <span>
                 <span style="float: left;">当前位置是：系统管理-》菜单管理</span>
                 <span style="float: right; margin-right: 8px; font-weight: bold;">
-                    <a style="text-decoration: none;" href="add.html">【添加】</a>
+                    <a style="text-decoration: none;" href="../menu/getMenu.do">【添加】</a>
 					<a style="text-decoration: none;" href="#">【删除】</a>
                 </span>
             </span>
@@ -67,10 +67,23 @@
                         <td><input type="checkbox" /></td>
 						<td>${item.menuName }</td>
                         <td><a href="view.html">${item.menuUrl }</a></td> 
-						<td>${item.menuState }</td> 						
+						<td>
+						<c:choose>
+						<c:when test="${item.menuState eq 1 }">启用</c:when>
+						<c:otherwise>禁用</c:otherwise>
+						</c:choose>
+						
+						</td> 						
                         <td>
-							<a href="add.html">修改</a>						   
-							<a href="#">删除</a>
+							<a href="../menu/getMenu.do?menuId=${item.menuId }">修改</a>						   
+							<c:choose>
+						<c:when test="${item.menuState eq 1 }">
+							<a href="../menu/noDeleteMenu.do?menuId=${item.menuId }">禁用</a>
+						</c:when>
+						<c:otherwise>
+						</c:otherwise>
+						</c:choose>
+							<a href="../menu/deleteMenu.do?menuId=${item.menuId }">删除</a>
 						</td>                        
                     </tr>
 				</c:forEach>

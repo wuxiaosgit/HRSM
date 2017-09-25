@@ -27,4 +27,19 @@ public class RoleServiceImpl implements RoleService {
 		return roleDao.SelectRoleDept();
 	}
 
+	public List<RoleBean> selectRoleByDeptName(String deptName) {
+		// TODO Auto-generated method stub
+		return roleDao.selectRoleByDeptName(deptName);
+	}
+
+	public RoleBean selectRoleByRoleName(String roleName) {
+		// TODO Auto-generated method stub
+		System.out.println(roleName);
+		return roleDao.selectRoleByRoleName(roleName);
+	}
+	public void insertRole(RoleBean roleBean) {
+		// TODO Auto-generated method stub
+		roleDao.insertRole(roleBean);
+	}
+
 }

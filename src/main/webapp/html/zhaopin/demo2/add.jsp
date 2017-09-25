@@ -1,11 +1,15 @@
 <%@ page language="java" import="java.util.*" pageEncoding="Utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
         <title>简历管理添加</title>
         <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-        <link href="../../css/mine.css" type="text/css" rel="stylesheet" />
-        <script language="javascript" type="text/javascript" src="../../My97DatePicker/WdatePicker.js"></script>
+        <link href="../html/css/mine.css" type="text/css" rel="stylesheet" />
+          <script type="text/javascript" src="../html/js/jquery-3.2.1.min.js"></script>
+         <script type="text/javascript" src="../html/js/zhaopin.js"></script>
+          <script type="text/javascript" src="../html/js/jquery.validate.js"></script>
+        <script language="javascript" type="text/javascript" src="../html/My97DatePicker/WdatePicker.js"></script>
     </head>
 
     <body>
@@ -23,15 +27,17 @@
         <div style="font-size: 13px;margin: 10px 5px">
            <!--  <form action="../../../zhaopin/insertSelective.do" method="post"> -->
             <%-- ../jianli/selectByPrimaryKey.do?jianliId=${list.jianliId } --%>
-             <form action="../../../jianli/insertSelective.do" method="post">
+             <form action="../jianli/insertSelective.do" method="post">
             <table border="1" width="100%" class="table_a">
                 <tr>
                     <td width="120px;">应聘职位名称<span style="color:red">*</span>：</td>
                     <td>
-					<select>
-						<option>---请选择---</option>
-						<option>---技术培训师---</option>
-					
+                    <input type="hidden" id="demo2_add_hidden" name="jobId" />
+					<select id="demo2_add_roleName">
+						<option value="0">--请选择--</option>
+						<c:forEach items="${ roles}" var = "role">
+							<option value="${role.roleName }">${role.roleName }</option>
+						</c:forEach>
 					</select>
 					
 					</td>
@@ -40,14 +46,15 @@
                 <tr>
                     <td>应聘职位编码<span style="color:red">*</span>：</td>
                     <td>
-                       <input type="text" readonly name="f_goods_name" value="BDQN-BM03" /> 
+                       <input type="text" readonly id="demo2_add_roleNumber" name="roleNumber" /> 
                     </td>
                 </tr>
                
                 <tr>
                     <td>职位分类<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text" name="f_goods_price"  /></td>
+						<input type="text" readonly id="demo2_add_deptShortname" name="deptShortName" value="" />
+					</td>
                 </tr>
                 <tr>
                     <td>姓名<span style="color:red">*</span>：</td>
@@ -172,7 +179,7 @@
 					<tr>
                     <td>登记时间：</td>
                     <td>
-                        <input type="text" name="time" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                        <input type="text" name="dtime"  onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
                     </td>                
                 </tr>
 				

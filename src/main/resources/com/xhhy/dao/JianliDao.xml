@@ -20,7 +20,7 @@
     <result column="xizi" property="xizi" jdbcType="DOUBLE" />
     <result column="yinjiesheng" property="yinjiesheng" jdbcType="VARCHAR" />
     <result column="zizhi" property="zizhi" jdbcType="VARCHAR" />
-    <result column="time" property="time" jdbcType="TIMESTAMP" />
+    <result column="dtime" property="dtime" jdbcType="TIMESTAMP" />
     <result column="tuijian" property="tuijian" jdbcType="VARCHAR" />
     <result column="tuijianren" property="tuijianren" jdbcType="VARCHAR" />
     <result column="tuijianTime" property="tuijiantime" jdbcType="TIMESTAMP" />
@@ -31,19 +31,46 @@
   </resultMap>
   <sql id="Base_Column_List" >
     jianli_id, job_id, xingming, xingbie, zhaopin_type, email, tel, address, live, mianmao, 
-    IDCard, school, xueli, zhuanye, jianyan, xizi, yinjiesheng, zizhi, time, tuijian, 
+    IDCard, school, xueli, zhuanye, jianyan, xizi, yinjiesheng, zizhi, dtime, tuijian, 
     tuijianren, tuijianTime,
     jianli, fujian, yijian,state
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from jianli_tb
-    where jianli_id = #{jianliId,jdbcType=INTEGER}
-  </select>
+ 
   <select id="selectAll" resultMap="BaseResultMap">
   	select * from jianli_tb where state not in (0)
   </select>
+  
+  
+  
+  <resultMap type="com.xhhy.domain.JianliBean" id="selectJianliRoleDeptMap" extends="BaseResultMap">
+  	<association property="roleBean" column="job_id"  select="com.xhhy.dao.RoleDao.selectByPrimaryKey" javaType="RoleBean"></association>
+  </resultMap>
+  <select id="selectJianliRoleDept"  resultMap="selectJianliRoleDeptMap">
+  	select * from 
+  	jianli_tb,role_tb,dept_tb 
+  	where 
+  	job_id = role_tb.role_id and role_tb.dept_id = dept_tb.dept_id
+  	and jianli_tb.state not in (0)
+  </select>
+  
+   <select id="selectByPrimaryKey" resultMap="selectJianliRoleDeptMap" parameterType="java.lang.Integer" >
+    select *
+    from jianli_tb,role_tb,dept_tb
+    where 
+    job_id = role_tb.role_id and role_tb.dept_id = dept_tb.dept_id
+     and jianli_id = #{jianliId,jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectJianliRoleDeptPages" parameterType="Map" resultMap="selectJianliRoleDeptMap">
+  	select * from 
+  	jianli_tb,role_tb,dept_tb 
+  	where 
+  	job_id = role_tb.role_id and role_tb.dept_id = dept_tb.dept_id
+  	and jianli_tb.state not in (0)
+  limit #{pageStart},#{pageUtil.pageRows}
+  </select>
+ 
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from jianli_tb
     where jianli_id = #{jianliId,jdbcType=INTEGER}
@@ -55,7 +82,7 @@
       mianmao, IDCard, school, 
       xueli, zhuanye, jianyan, 
       xizi, yinjiesheng, zizhi, 
-      time, tuijian, tuijianren, 
+      dtime, tuijian, tuijianren, 
       tuijianTime, jianli, fujian, 
       yijian,state)
     values (#{jianliId,jdbcType=INTEGER}, #{jobId,jdbcType=VARCHAR}, #{xingming,jdbcType=VARCHAR}, 
@@ -64,7 +91,7 @@
       #{mianmao,jdbcType=VARCHAR}, #{idcard,jdbcType=VARCHAR}, #{school,jdbcType=VARCHAR}, 
       #{xueli,jdbcType=VARCHAR}, #{zhuanye,jdbcType=VARCHAR}, #{jianyan,jdbcType=VARCHAR}, 
       #{xizi,jdbcType=DOUBLE}, #{yinjiesheng,jdbcType=VARCHAR}, #{zizhi,jdbcType=VARCHAR}, 
-      #{time,jdbcType=TIMESTAMP}, #{tuijian,jdbcType=VARCHAR}, #{tuijianren,jdbcType=VARCHAR}, 
+      #{dtime,jdbcType=TIMESTAMP}, #{tuijian,jdbcType=VARCHAR}, #{tuijianren,jdbcType=VARCHAR}, 
       #{tuijiantime,jdbcType=TIMESTAMP}, #{jianli,jdbcType=LONGVARCHAR}, #{fujian,jdbcType=LONGVARBINARY}, 
       #{yijian,jdbcType=LONGVARCHAR}, #{state,jdbcType=INTEGER})
   </insert>
@@ -125,8 +152,8 @@
       <if test="zizhi != null" >
         zizhi,
       </if>
-      <if test="time != null" >
-        time,
+      <if test="dtime != null" >
+        dtime,
       </if>
       <if test="tuijian != null" >
         tuijian,
@@ -205,8 +232,8 @@
       <if test="zizhi != null" >
         #{zizhi,jdbcType=VARCHAR},
       </if>
-      <if test="time != null" >
-        #{time,jdbcType=TIMESTAMP},
+      <if test="dtime != null" >
+        #{dtime,jdbcType=TIMESTAMP},
       </if>
       <if test="tuijian != null" >
         #{tuijian,jdbcType=VARCHAR},
@@ -285,8 +312,8 @@
       <if test="zizhi != null" >
         zizhi = #{zizhi,jdbcType=VARCHAR},
       </if>
-      <if test="time != null" >
-        time = #{time,jdbcType=TIMESTAMP},
+      <if test="dtime != null" >
+        dtime = #{dtime,jdbcType=TIMESTAMP},
       </if>
       <if test="tuijian != null" >
         tuijian = #{tuijian,jdbcType=VARCHAR},
@@ -312,34 +339,11 @@
     </set>
     where jianli_id = #{jianliId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.xhhy.domain.JianliBean" >
+  <update id="updateByPrimaryKeyAndState">
     update jianli_tb
-    set job_id = #{jobId,jdbcType=VARCHAR},
-      xingming = #{xingming,jdbcType=VARCHAR},
-      xingbie = #{xingbie,jdbcType=VARCHAR},
-      zhaopin_type = #{zhaopinType,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      tel = #{tel,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      live = #{live,jdbcType=VARCHAR},
-      mianmao = #{mianmao,jdbcType=VARCHAR},
-      IDCard = #{idcard,jdbcType=VARCHAR},
-      school = #{school,jdbcType=VARCHAR},
-      xueli = #{xueli,jdbcType=VARCHAR},
-      zhuanye = #{zhuanye,jdbcType=VARCHAR},
-      jianyan = #{jianyan,jdbcType=VARCHAR},
-      xizi = #{xizi,jdbcType=DOUBLE},
-      yinjiesheng = #{yinjiesheng,jdbcType=VARCHAR},
-      zizhi = #{zizhi,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP},
-      tuijian = #{tuijian,jdbcType=VARCHAR},
-      tuijianren = #{tuijianren,jdbcType=VARCHAR},
-      tuijianTime = #{tuijiantime,jdbcType=TIMESTAMP},
-      jianli = #{jianli,jdbcType=LONGVARCHAR},
-      fujian = #{fujian,jdbcType=LONGVARBINARY},
-      yijian = #{yijian,jdbcType=LONGVARCHAR},
-      state= #{state,jdbcType=INTEGER}
-    where jianli_id = #{jianliId,jdbcType=INTEGER}
+    set 
+      state= #{0}
+    where jianli_id = #{1}
   </update>
   
 </mapper>

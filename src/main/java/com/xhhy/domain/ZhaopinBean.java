@@ -1,11 +1,16 @@
 package com.xhhy.domain;
 
+import com.xhhy.utils.PageUtil;
+
 public class ZhaopinBean {
 	private int zhaopinId;
 	private int deptId;
 	private String zhaopinType;
 	private int zhaopinNum;
 	private int roleId;
+	public int getRoleId() {
+		return roleId;
+	}
 	private String dengjiren;
 	private String startTime;
 	private String endTime;
@@ -13,6 +18,9 @@ public class ZhaopinBean {
 	private String yaoqiu;
 	private int state;
 	private RoleBean roleBean;
+	
+	private PageUtil pageUtil;
+	private int pageStart;
 	
 	public String getZhaopinType() {
 		return zhaopinType;
@@ -34,8 +42,9 @@ public class ZhaopinBean {
 		this.deptId = deptId;
 	}
 	
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
+	public void setRoleId(String roleId) {
+		/*roleId = Integer.parseInt(roleId);*/
+		this.roleId = Integer.parseInt(roleId);
 	}
 	
 	public String getDengjiren() {
@@ -71,8 +80,8 @@ public class ZhaopinBean {
 	public int getZhaopinId() {
 		return zhaopinId;
 	}
-	public void setZhaopinId(int zhaopinId) {
-		this.zhaopinId = zhaopinId;
+	public void setZhaopinId(String zhaopinId) {
+		this.zhaopinId = Integer.parseInt(zhaopinId);
 	}
 	
 	public int getState() {
@@ -95,6 +104,18 @@ public class ZhaopinBean {
 				+ ", zhaopinNum=" + zhaopinNum + ", roleId=" + roleId + ", dengjiren=" + dengjiren + ", startTime="
 				+ startTime + ", endTime=" + endTime + ", jobmiaoshu=" + jobmiaoshu + ", yaoqiu=" + yaoqiu + ", state="
 				+ state + ", roleBean=" + roleBean + "]";
+	}
+	public PageUtil getPageUtil() {
+		return pageUtil;
+	}
+	public void setPageUtil(PageUtil pageUtil) {
+		this.pageUtil = pageUtil;
+	}
+	public int getPageStart() {
+		return pageStart;
+	}
+	public void setPageStart(int pageStart) {
+		this.pageStart = pageStart;
 	}
 
 	

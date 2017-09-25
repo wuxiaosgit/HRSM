@@ -9,10 +9,27 @@
     <result column="state" property="state" jdbcType="INTEGER" />
     <result column="pingjia" property="pingjia" jdbcType="LONGVARCHAR" />
   </resultMap>
+  
+  
+   <resultMap type="com.xhhy.domain.MianshiBean" id="selectMianshiJianliMap" extends="BaseResultMap">
+  	<association property="jianliBean" column="jianliId"  select="com.xhhy.dao.RoleDao.selectByPrimaryKey" javaType="JianliBean"></association>
+  </resultMap>
+  
+  
   <sql id="Base_Column_List" >
     mianshiId, jianliId, mianshiren, mianshiTime, state,
     pingjia
   </sql>
+  
+  <select id="selectMianshiJianliPages" parameterType="Map" resultMap="selectMianshiJianliMap">
+  	select * from 
+  	jianli_tb,role_tb,dept_tb 
+  	where 
+  	job_id = role_tb.role_id and role_tb.dept_id = dept_tb.dept_id
+  	and jianli_tb.state not in (0)
+  limit #{pageStart},#{pageUtil.pageRows}
+  </select>
+  
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
