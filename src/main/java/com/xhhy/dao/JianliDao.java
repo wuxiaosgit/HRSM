@@ -25,4 +25,18 @@ public interface JianliDao {
 	List<JianliBean> selectJianliRoleDeptPages(Map<String, Object> map);
 
 	void updateByPrimaryKeyAndState( int state,int roleId);
+
+	List<JianliBean> selectJianliMianshiRoleDept();
+
+	List<JianliBean> selectJianliMianshiRoleDeptPages(Map<String, Object> map);
+
+	List<JianliBean> selectJianliLuyongRoleDept();
+
+	List<JianliBean> selectJianliLuyongRoleDeptPages(Map<String, Object> map);
+
+	List<JianliBean> selectJianliRoleDeptPagesBySelective(JianliBean jianliBean);
+
+	List<JianliBean> selectJianliRoleDeptPagesBySelective2(JianliBean jianliBean);
+
+	List<JianliBean> selectJianliRoleDeptPagesBySelective3(JianliBean jianliBean);
 }

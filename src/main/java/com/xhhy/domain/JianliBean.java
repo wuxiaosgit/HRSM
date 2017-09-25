@@ -50,11 +50,13 @@ public class JianliBean {
     
     private String jianli;
 
-    private byte[] fujian;
+    private String fujian;
 
     private String yijian;
     
     private int state;
+    
+    private String filename;
     
     private RoleBean roleBean;
 
@@ -245,11 +247,13 @@ public class JianliBean {
 		this.jianli = jianli;
 	}
 
-	public byte[] getFujian() {
+	
+
+	public String getFujian() {
 		return fujian;
 	}
 
-	public void setFujian(byte[] fujian) {
+	public void setFujian(String fujian) {
 		this.fujian = fujian;
 	}
 
@@ -277,6 +281,14 @@ public class JianliBean {
 		this.roleBean = roleBean;
 	}
 
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+
 	@Override
 	public String toString() {
 		return "JianliBean [jianliId=" + jianliId + ", jobId=" + jobId + ", xingming=" + xingming + ", xingbie="
@@ -285,9 +297,12 @@ public class JianliBean {
 				+ ", xueli=" + xueli + ", zhuanye=" + zhuanye + ", jianyan=" + jianyan + ", xizi=" + xizi
 				+ ", yinjiesheng=" + yinjiesheng + ", zizhi=" + zizhi + ", dtime=" + dtime + ", tuijian=" + tuijian
 				+ ", tuijianren=" + tuijianren + ", tuijiantime=" + tuijiantime + ", jianli=" + jianli + ", fujian="
-				+ Arrays.toString(fujian) + ", yijian=" + yijian + ", state=" + state + "]";
+				+ fujian + ", yijian=" + yijian + ", state=" + state + ", filename=" + filename + ", roleBean="
+				+ roleBean + "]";
 	}
 
+	
+	
 	
 	
 	

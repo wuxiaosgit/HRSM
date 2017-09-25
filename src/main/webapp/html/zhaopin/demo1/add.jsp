@@ -9,6 +9,7 @@
          <script type="text/javascript" src="../html/js/jquery-3.2.1.min.js"></script>
          <script type="text/javascript" src="../html/js/zhaopin.js"></script>
           <script type="text/javascript" src="../html/js/jquery.validate.js"></script>
+           <script type="text/javascript" src="../html/js/zhaopin_validate.js"></script>
          <script language="javascript" type="text/javascript" src="../html/My97DatePicker/WdatePicker.js"></script>
     </head>
 
@@ -24,7 +25,7 @@
         <div></div>
 
         <div style="font-size: 13px;margin: 10px 5px">
-            <form action="../zhaopin/insertSelective.do" method="post">
+            <form action="../zhaopin/insertSelective.do" method="post" id="demo1_add_form">
        		
             <table border="1" width="100%" class="table_a">
                 <tr>
@@ -54,7 +55,7 @@
                 <tr>
                     <td>招聘人数<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text" name="zhaopinNum"  /></td>
+						<input type="text" id="zhaopinNum" name="zhaopinNum"  /></td>
                 </tr>
                 <tr>
                     <td>职位名称<span style="color:red">*</span>：</td>
@@ -86,20 +87,20 @@
                 <tr>
                     <td>登记时间<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="text" name="startTime" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+                        <input type="text" id = "startTime" name="startTime" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
                     </td>
                 </tr>
 <tr>
                     <td>截止时间<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="text" name="endTime" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                        <input type="text" id="endTime" name="endTime" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" required/>
                     </td>
                 </tr>
 
 				<tr>
                     <td>职位描述<span style="color:red">*</span>：</td>
                     <td>
-                       <textarea cols="70" id="demo1_add_roleDescribe" rows="12" name="jobmiaoshu">  
+                       <textarea cols="70" id="demo1_add_roleDescribe" rows="12" id="jobmiaoshu" name="jobmiaoshu">  
 					
 					 	${role.roleDescribe }
 					   </textarea>
@@ -109,7 +110,7 @@
 				<tr>
                     <td>招聘要求<span style="color:red">*</span>：</td>
                     <td>
-                       <textarea cols="70" rows="12" name="yaoqiu"> 
+                       <textarea cols="70" rows="12" id="yaoqiu" name="yaoqiu"> 
 					
 					   </textarea>
                     </td>                

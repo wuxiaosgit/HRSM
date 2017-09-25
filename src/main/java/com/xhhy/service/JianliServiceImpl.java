@@ -42,5 +42,33 @@ public class JianliServiceImpl implements JianliService{
 		// TODO Auto-generated method stub
 		jianliDao.updateByPrimaryKeyAndState(state,roleId);
 	}
+	public List<JianliBean> selectJianliMianshiRoleDept() {
+		// TODO Auto-generated method stub
+		return jianliDao.selectJianliMianshiRoleDept();
+	}
+	public List<JianliBean> selectJianliMianshiRoleDeptPages(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return jianliDao.selectJianliMianshiRoleDeptPages(map);
+	}
+	public List<JianliBean> selectJianliLuyongRoleDept() {
+		// TODO Auto-generated method stub
+		return jianliDao.selectJianliLuyongRoleDept();
+	}
+	public List<JianliBean> selectJianliLuyongRoleDeptPages(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return jianliDao.selectJianliLuyongRoleDeptPages(map);
+	}
+	public List<JianliBean> selectJianliRoleDeptPagesBySelective(JianliBean jianliBean) {
+		// TODO Auto-generated method stub
+		return jianliDao.selectJianliRoleDeptPagesBySelective(jianliBean);
+	}
+	public List<JianliBean> selectJianliRoleDeptPagesBySelective2(JianliBean jianliBean) {
+		// TODO Auto-generated method stub
+		return jianliDao.selectJianliRoleDeptPagesBySelective2(jianliBean);
+	}
+	public List<JianliBean> selectJianliRoleDeptPagesBySelective3(JianliBean jianliBean) {
+		// TODO Auto-generated method stub
+		return jianliDao.selectJianliRoleDeptPagesBySelective3(jianliBean);
+	}
 
 }
