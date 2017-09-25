@@ -47,7 +47,7 @@ public class RoleServiceImpl implements RoleService {
 	public void insertRole(RoleBean roleBean,List<Integer> menu) {
 		// TODO Auto-generated method stub
 		roleDao.insertRole(roleBean);
-		System.out.println(roleBean);
+//		System.out.println(roleBean);
 		for (Integer integer : menu) {
 			Map<String, Object> map =new HashMap<String, Object>();
 			map.put("roleId", roleBean.getRoleId());
@@ -62,7 +62,6 @@ public class RoleServiceImpl implements RoleService {
 		roleDao.updateRole(roleBean);
 		roleDao.deleteRoleMenu(roleBean.getRoleId());
 		for (Integer integer : menu) {
-			
 			Map<String, Object> map =new HashMap<String, Object>();
 			map.put("roleId", roleBean.getRoleId());
 			map.put("menuId", integer);
