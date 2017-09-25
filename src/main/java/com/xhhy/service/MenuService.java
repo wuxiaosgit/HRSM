@@ -6,6 +6,7 @@ import com.xhhy.domain.MenuBean;
 
 public interface MenuService {
 	public List<MenuBean> getMenu(Integer roleId);
+	public List<MenuBean> getMenus();
 	public MenuBean getMenuById(Integer menuId);
 	public List<MenuBean> getTopMenu();
 	public Integer getMaxPaixu();

@@ -138,7 +138,7 @@
                         <td>${item.userId }</td>
                         <td><input type="checkbox" /></td>
 						<td>${item.userLogin }</td>
-                        <td><a href="view.html">${item.userName }</a></td> 
+                        <td><a href="../user/getUserById.do?userId=${item.userId }">${item.userName }</a></td> 
 						<td>${item.roleBean.roleName }</td> 	
 						<td>${item.roleBean.deptBean.deptName}</td> 						                        
 						<td>

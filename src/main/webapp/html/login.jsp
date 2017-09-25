@@ -38,23 +38,24 @@
 							<ul>
 								<li class="user_main_text">用户名：</li>
 								<li class="user_main_input"><input name="userLogin"
-									maxlength="20" id="userLogin" class="txtusernamecssclass">
+									maxlength="20" id="userLogin" value="${cookie.userLogin.value }" class="txtusernamecssclass">
 								</li>
 							</ul>
 							<ul>
 								<li class="user_main_text">密 码：</li>
 								<li class="user_main_input"><input type="password"
-									name="userPassword" id="userPassword" class="txtpasswordcssclass">
+									name="userPassword" id="userPassword"  value="${cookie.userPassword.value }" class="txtpasswordcssclass">
 								</li>
 							</ul>
 							<ul>
 								<li class="user_main_text">Cookie：</li>
-								<li class="user_main_input"><select name="DropExpiration"
-									id="DropExpiration">
-										<option selected="" value="None">不保存</option>
-										<option value="Day">保存一天</option>
-										<option value="Month">保存一月</option>
-										<option value="Year">保存一年</option>
+								<li class="user_main_input"><select name="cookie"
+									id="cookie">
+										<option  value="0" <c:if test="${cookie.maxDay.value eq 0 }"> selected="selected"  </c:if> >不保存</option>
+										<option value="1" <c:if test="${cookie.maxDay.value eq 1 }"> selected="selected"  </c:if> >保存一天</option>
+										<option value="30" <c:if test="${cookie.maxDay.value eq 30 }"> selected="selected"  </c:if> >保存一月</option>
+										<option value="90" <c:if test="${cookie.maxDay.value eq 90 }"> selected="selected"  </c:if>  >保存一季度</option>
+										<option value="365" <c:if test="${cookie.maxDay.value eq 365 }"> selected="selected"  </c:if> >保存一年</option>
 								</select></li>
 							</ul>
 						</div>

@@ -78,4 +78,23 @@ public class MenuServiceImpl implements MenuService {
 		return menuDao.max(menuBean);
 	}
 
+	public List<MenuBean> getMenus() {
+		
+		List<MenuBean> LIST=new ArrayList<MenuBean>();
+		List<MenuBean> list=menuDao.getMenus();
+		for (MenuBean menuBean : list) {
+			if (menuBean.getTopId()==0) {
+				LIST.add(menuBean);
+			}
+		}
+		for (MenuBean menuBean : LIST) {
+			for (MenuBean m : list) {
+				if (m.getTopId()==menuBean.getMenuId()) {
+					menuBean.getMenuList().add(m);
+				}
+			}
+		}
+		return LIST;
+	}
+
 }

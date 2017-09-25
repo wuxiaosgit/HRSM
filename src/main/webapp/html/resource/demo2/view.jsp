@@ -4,7 +4,7 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
+			+ path + "/html/";
 %>
 
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
 	<meta charset="utf-8" />
 	<title>用户管理</title>
         <meta http-equiv="content-type" content="text/html;charset=utf-8">
-        <link href="../../css/mine.css" type="text/css" rel="stylesheet">
+        <link href="css/mine.css" type="text/css" rel="stylesheet">
     </head>
 
     <body>
@@ -24,7 +24,7 @@
             <span>
                 <span style="float:left">当前位置是：-》用户管理</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
-                    <a style="text-decoration: none" href="list.html">【返回】</a>
+                    <a style="text-decoration: none" href="../user/selectUser.do">【返回】</a>
                 </span>
             </span>
         </div>
@@ -36,49 +36,49 @@
                 <tr>
                     <td width="120px;">用户编号：</td>
                     <td>
-						201501010
+						${user.userId }
 					</td>
                 </tr>
 				<tr>
                     <td width="120px;">登录账号：</td>
                     <td>
-						zhangsan
+					${user.userLogin }
 					</td>
                 </tr>
                 <tr>
                     <td>用户姓名：</td>
                     <td>
-						张三
+						${user.userName }
 					</td>
                 </tr>
                 <tr>
                     <td>密码：</td>
                      <td>
-						......
+						${user.userPassword}
 					</td>
                 </tr>
                 <tr>
                     <td>用户角色：</td>
                      <td>
-						人事部负责人
+						${user.roleBean.roleName }
 					</td>
                 </tr>
                 <tr>
                     <td>所属部门：</td>
                      <td>
-						人事部
+						${user.roleBean.deptBean.deptName }
 					</td>
                 </tr>
 				<tr>
                     <td>身份证：</td>
                     <td>
-                        372902198708084567
+                       ${user.userIdcard }
                     </td>                
                 </tr>
                 <tr>
                     <td>联系电话：</td>
                      <td>
-						17718181920
+						 ${user.userPhone }
 					</td>
                 </tr>
 
@@ -86,14 +86,14 @@
 				<tr>
                     <td>邮箱：</td>
                      <td>
-						AAA@163.com
+						 ${user.userEmail }
 					</td>               
                 </tr>
 
 				<tr>
                     <td>联系地址：</td>
                      <td>
-						海淀区软件园孵化器
+						 ${user.userAddress }
 					</td>                
                 </tr>
 

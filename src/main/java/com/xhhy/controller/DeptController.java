@@ -46,8 +46,8 @@ public class DeptController {
 		}else if("add".equals(type)) {
 			
 		}else if("update".equals(type)) {
-			mav.addObject("user",userService.getUserById(userId));
-			System.out.println(userService.getUserById(userId));
+			mav.addObject("user1",userService.getUserById(userId));
+//			System.out.println(userService.getUserById(userId));
 		}
 			
 		mav.addObject("deptBeans",deptService.listDept());
@@ -67,12 +67,12 @@ public class DeptController {
 	public ModelAndView selectDept(){
 		ModelAndView mav=new ModelAndView("../html/resource/demo1/ifm.jsp");
 		List<DeptBean> listDept = deptService.getListDept();
-		for (DeptBean deptBean2 : listDept) {
+		/*for (DeptBean deptBean2 : listDept) {
 			System.out.println(deptBean2);
 			for (DeptBean deptBean3 : deptBean2.getDeptBeans()) {
 				System.out.println(deptBean3);
 			}
-		}
+		}*/
 		mav.addObject("deptBeans",listDept);
 		return mav;
 	}
@@ -89,7 +89,7 @@ public class DeptController {
 	}
 	@RequestMapping("insertDept.do")
 	public ModelAndView insertDept(DeptBean deptBean){
-		System.out.println(deptBean);
+//		System.out.println(deptBean);
 		if (deptBean.getDeptId()==null) {
 			//添加该做的事
 			deptService.insertDept(deptBean);

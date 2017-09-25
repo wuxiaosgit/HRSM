@@ -21,10 +21,18 @@
 			<if test="menuState != null">
 				and menu_state =#{menuState}
 			</if>
+			
 		</where>
 			order by menu_paixu
 			limit #{currentNum},8
 	</select>
+	<select id="getMenus" resultMap="menu">
+		select * from menu_tb
+		where menu_state =1
+			order by menu_paixu 
+	
+	</select>
+	
 	<select id="max" parameterType="MenuBean" resultType="int">
 		select count(*) from menu_tb
 		<where>
@@ -39,14 +47,14 @@
 	
 	<select id="getMenu" parameterType="int" resultMap="menu">
 		SELECT m.*
-		from role_menu_tb rm left JOIN menu_tb m
-		on m.menu_id=rm.menu_id and rm.role_id=#{roleId}
+		from role_menu_tb rm , menu_tb m
+		where m.menu_id=rm.menu_id and rm.role_id =#{roleId} and m.menu_state = 1
 	</select>
 	
 	<select id="getTopMenu"  resultMap="menu">
 		SELECT *
 		from  menu_tb 
-		where top_id=0
+		where top_id=0 and menu_state=1
 	</select>
 	<select id="getMaxPaixu"  resultType="int">
 		SELECT max(menu_paixu) MAX FROM menu_tb 

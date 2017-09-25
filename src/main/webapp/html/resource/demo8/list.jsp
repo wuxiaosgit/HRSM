@@ -116,9 +116,9 @@ function nextpage(obj){
 							<a href="../menu/noDeleteMenu.do?menuId=${item.menuId }">禁用</a>
 						</c:when>
 						<c:otherwise>
+							<a href="../menu/deleteMenu.do?menuId=${item.menuId }">删除</a>
 						</c:otherwise>
 						</c:choose>
-							<a href="../menu/deleteMenu.do?menuId=${item.menuId }">删除</a>
 						</td>                        
                     </tr>
 				</c:forEach>

@@ -42,12 +42,12 @@
             <table border="1" width="100%" class="table_a">
                 <tr>
                     <td width="120px;">菜单名称<span style="color:red">*</span>：</td>
-                    <td><input type="text" name="menuName" value="${menuBean.menuName}" /></td>
+                    <td><input type="text" required="required" name="menuName" value="${menuBean.menuName}" /></td>
                 </tr>
                 <tr>
                     <td>上级菜单<span style="color:red">*</span>：</td>
                     <td>
-                       <select name="topId" id="topId">
+                       <select name="topId" id="topId" >
 						<option value="0">顶级菜单</option>
 						<c:forEach items="${topMenus }" var="item">
 						<option value="${item.menuId }"  <c:if test="${item.menuId eq menuBean.menuId }">selected="selected"</c:if> >${item.menuName}</option>

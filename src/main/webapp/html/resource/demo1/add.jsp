@@ -37,14 +37,14 @@
                 <tr>
                     <td>部门简称：<span style="color:red">*</span>：</td>
                     <td>
-                       <input type="text" name="deptShortName" value="${deptBean.deptShortName }" /> 
+                       <input type="text" required="required" name="deptShortName" value="${deptBean.deptShortName }" /> 
                     </td>
                 </tr>
                
                 <tr>
                     <td>部门全称：<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text" name="deptName" value="${deptBean.deptName }" /></td>
+						<input type="text" required="required" name="deptName" value="${deptBean.deptName }" /></td>
                 </tr>
                 <tr>
                     <td>上级部门：<span style="color:red">*</span>：</td>

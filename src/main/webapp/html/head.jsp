@@ -26,7 +26,7 @@
                     >当前用户：${user.userName} &nbsp;&nbsp; 
 					<a style="color: #fff"  href=""  target=main>修改口令</a> 
 					&nbsp;&nbsp; 
-					<a style="color: #fff"  href="../html/login.jsp" target=_top>退出系统</a> 
+					<a style="color: #fff"  href="../user/out.do" target=_top>退出系统</a> 
 														<!-- onclick="if (confirm('确定要退出吗？')) return true; else return false;"  -->
                 </td>
                 <td align=right width=268><a href="index.html"><img height=56 

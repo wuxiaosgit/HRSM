@@ -31,55 +31,61 @@
         <div></div>
 
         <div style="font-size: 13px;margin: 10px 5px">
-            <form action="./admin.php?c=goods&a=add" method="post" enctype="multipart/form-data">
+            <form action="../user/gerenUser.do" method="post" enctype="multipart/form-data">
+          <input type="hidden" name="userId" value="${user.userId }" />
             <table border="1" width="100%" class="table_a">
                 <tr>
                     <td width="120px">姓名</td>
                     <td>
-						<input type="text" name="f_goods_name" />
+						<input type="text" name="userName" value="${user.userName }"/>
 					</td>
                 </tr>
                 <tr>
                     <td>性别</td>
                     <td>
-                       	<input type="radio" name="sex" checked value="1"/>男 <input type="radio" name="sex" value="0"/>女 
+                       	<input type="radio" name="userGender" 
+                       	<c:if test="${user.userGender eq 1 }"> checked </c:if>
+                       	 value="1"/>男
+                       	<input type="radio" name="userGender" 
+                       	<c:if test="${user.userGender eq 0 }"> checked </c:if>
+                       	 value="0"/>女 
                     </td>
                 </tr>
               
                 <tr>
                     <td>身份证号：</td>
                     <td>
-						<input type="text" name="f_goods_name" />
+						<input type="text" name="userIdcard" value="${user.userIdcard }"/>
 					</td>
                 </tr>
                 <tr>
                     <td>办公电话：</td>
                     <td>
-						<input type="text" name="f_goods_name" />
+						<input type="text" name="userTelephone" value="${user.userTelephone }"/>
 					</td>
                 </tr>
                 <tr>
                     <td>手机：</td>
                     <td>
-                       	<input type="text" name="f_goods_name" />
+                       	<input type="text" name="userPhone" value="${user.userPhone }"/>
                     </td>
                 </tr>
 				<tr>
                     <td>邮箱：</td>
                     <td>
-                        	<input type="text" name="f_goods_name" />
+                        	<input type="text" name="userEmail" value="${user.userEmail }" />
                     </td>
                 </tr>
 				<tr>
                     <td>更换头像：</td>
                     <td>
-						<input type="file" name="f_goods_image" />
+						<input type="file" name="file" />
 					</td>
                 </tr>
 				<tr>
                     <td>备注：</td>
                     <td>
-                        <textarea name="f_goods_introduce"></textarea>
+                        <textarea name="userRemark" >${user.userRemark }</textarea>
                     </td>
                 </tr>
                 
