@@ -49,10 +49,10 @@ function nextpage(obj){
 
         <link href="css/mine.css" type="text/css" rel="stylesheet" />
     </head>
-    <body>
         <style>
             .tr_color{background-color: #9F88FF}
         </style>
+    <body>
         <div class="div_head">
             <span>
                 <span style="float: left;">当前位置是：系统管理-》菜单管理</span>
@@ -64,9 +64,10 @@ function nextpage(obj){
         </div>
         <div></div>
         <div class="div_search">
-            <span>
+         
+              <input type="hidden" id="currentNum" name="currentNum"  value="${currentPage }" >
                 <form action="../menu/selectMenu.do" method="post">
-                 <input type="hidden" id="currentNum" name="currentNum" value="${currentPage }">
+                 <input type="hidden"  name="currentNum" value="1">
                   	  菜单名称: 
 					<input type="text" name="menuName" value="${menuName }" />
 					 状态: 
@@ -83,7 +84,7 @@ function nextpage(obj){
                     <input value="查询" type="submit" />
 					
                 </form>
-            </span>
+          
         </div>
         <div style="font-size: 13px; margin: 10px 5px;">
             <table class="table_a" border="1" width="100%">
@@ -101,7 +102,7 @@ function nextpage(obj){
                         <td>${item.menuId }</td>
                         <td><input type="checkbox" /></td>
 						<td>${item.menuName }</td>
-                        <td><a href="view.html">${item.menuUrl }</a></td> 
+                        <td>${item.menuUrl }</td> 
 						<td>
 						<c:choose>
 						<c:when test="${item.menuState eq 1 }">启用</c:when>

@@ -173,10 +173,10 @@
 			<if test="userName != null and userName !=''">
 			and u.user_name like "%"#{userName}"%"
 			</if>
-			<if test="roleId != null">
+			<if test="roleId != null and roleId != -1">
 			and  u.role_id = #{roleId}
 			</if>
-			<if test="deptId != null">
+			<if test="deptId != null and deptId != -1">
 			and  r.dept_id = #{deptId} 
 			</if>
 			ORDER BY user_id DESC
@@ -205,7 +205,7 @@
 	
 	<select id="login" parameterType="UserBean"   resultMap="user">
 		<include refid="my_sql" />
-		where user_login=#{userLogin} and user_password=#{userPassword}
+		where user_login=#{userLogin} and user_password=#{userPassword} and user_state=1
 	</select>
 	
 	<select id="getUserById" parameterType="int"   resultMap="user">
@@ -215,6 +215,10 @@
 	<select id="oldPasswrod" parameterType="UserBean"   resultMap="user">
 		<include refid="my_sql" />
 		where user_id=#{userId} and  user_password=#{userPassword}
+	</select>
+	<select id="ajaxLogin" parameterType="string"   resultMap="user">
+		<include refid="my_sql" />
+		where user_login=#{ajaxLogin}
 	</select>
 </mapper>
 

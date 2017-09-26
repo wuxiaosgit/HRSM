@@ -58,6 +58,16 @@ public class UserController {
 			return "ok";
 		}
 	}
+	@RequestMapping("ajaxLogin.do")
+	@ResponseBody
+	public String ajaxLogin(String ajaxLogin){
+		List<UserBean> userBeans = userService.ajaxLogin(ajaxLogin);
+		if (userBeans==null ||userBeans.size()==0) {
+			return "no";
+		}else{
+			return "yes";
+		}
+	}
 	@RequestMapping("insertUser.do")
 	public ModelAndView insertUser(UserBean userBean){
 		userBean.setUserState(1);
@@ -100,12 +110,19 @@ public class UserController {
 		userService.updateUser(userBean);
 		return selectUser(null);
 	}
+	@RequestMapping("yesDeleteUser.do")
+	public ModelAndView yesDeleteUser(Integer userId){
+		UserBean userBean = userService.getUserById(userId);
+		userBean.setUserState(1);
+		userService.updateUser(userBean);
+		return selectUser(null);
+	}
 	
 	@RequestMapping("selectUser.do")
 	public ModelAndView selectUser(UserBean userBean){
 		ModelAndView mav=new ModelAndView("../html/resource/demo2/list.jsp");
 		if (userBean==null) {
-			 userBean=new UserBean();
+			userBean=new UserBean();
 		}
 		if (userBean.getDeptId()!=null&&userBean.getDeptId()==-1) {
 			userBean.setDeptId(null);
@@ -121,11 +138,10 @@ public class UserController {
 		}*/
 		mav.addObject("userBeans",userBeans);
 		mav.addObject("deptBeans",deptService.listDept());
-		mav.addObject("userName",userBean.getUserName());
 		mav.addObject("deptId",userBean.getDeptId());
+		mav.addObject("userName",userBean.getUserName());
 		mav.addObject("role",roleService.getRoleById(userBean.getRoleId()));
-		
-		
+			
 		mav.addObject("maxSize",max);
 		mav.addObject("pageNum", (int)Math.ceil(max/8.0));
 		mav.addObject("currentPage", userBean.getCurrentNum());

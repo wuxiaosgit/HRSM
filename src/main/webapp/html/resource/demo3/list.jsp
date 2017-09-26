@@ -47,11 +47,21 @@
 			
 			location.href="../role/selectRole.do?roleName=${roleName}&deptId=${deptId}&roleState=${roleState}&currentNum="+currentNum;
 		}
+    
+    
+
+/* 	function quanbu(){
+		
+		$("#roleState").val(-1);
+		$("#deptId").val(-1);
+		$("#roleName").val("");
+		$("#form").submit();
+	} */
     </script>
-    <body>
         <style>
             .tr_color{background-color: #9F88FF}
         </style>
+    <body>
         <div class="div_head">
             <span>
                 <span style="float: left;">当前位置是：系统管理-》职位设置</span>
@@ -63,28 +73,28 @@
         </div>
         <div></div>
         <div class="div_search">
-            <span>
-                <form action="../role/selectRole.do" method="post">
-                  <input type="hidden" id="currentNum" name="currentNum" value="${currentPage }">
-               	   职位名称: 
-					<input type="text" name="roleName" />
+          <input type="hidden" id="currentNum" name="currentNum"  value="${currentPage }" >
+                <form id="form" action="../role/selectRole.do" method="post" >
+                 <input type="hidden"  name="currentNum"   value="1" >
+				 职位名称: 
+					<input type="text" name="roleName" id=roleName value="${roleName }" />
 					 所属部门: 
-					<select name="deptId" >				
+					<select name="deptId" id=deptId >				
 						<option value="-1">--请选择--</option>
 						<c:forEach items="${deptBeans }" var="item">
-							<option value="${item.deptId }">${item.deptName }</option>
+						<option value="${item.deptId }"	<c:if test="${item.deptId eq deptId }">selected="selected"</c:if> 
+							>${item.deptName }</option>
 						</c:forEach>
 					</select>
 					是否启用: 
-					<select name ="roleState">
+					<select name ="roleState" id="roleState">
 						<option value="-1">---请选择---</option>
-						<option value="1" >是</option>
-						<option value="0" >否</option>
+						<option value="1" <c:if test="${roleState eq 1 }">selected="selected"</c:if> >是</option>
+						<option value="0" <c:if test="${roleState eq 0 }">selected="selected"</c:if> >否</option>
 					</select>
                     <input value="查询" type="submit" />
-					
+				<!-- 	<button  onclick="quanbu()">查询全部</button> -->
                 </form>
-            </span>
         </div>
         <div style="font-size: 13px; margin: 10px 5px;">
             <table class="table_a" border="1" width="100%">
@@ -103,7 +113,7 @@
                         <td>${item.roleId }</td>
                         <td><input type="checkbox" /></td>
 						<td>${item.roleNumber }</td>
-                        <td><a href="view.html">${item.roleName }</a></td> 
+                        <td>${item.roleName }</td> 
 						<td>${item.deptBean.deptShortName }</td> 						
                         <td>${item.deptBean.deptName }</td>
 						<td>

@@ -13,4 +13,6 @@ public interface UserService {
 	public List<UserBean> listUser(UserBean userBean);
 	public Integer max(UserBean userBean);
 	public UserBean oldPasswrod(UserBean userBean);
+	public List<UserBean> ajaxLogin(String ajaxLogin);
+
 }

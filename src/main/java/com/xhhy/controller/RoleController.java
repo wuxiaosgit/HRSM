@@ -106,6 +106,9 @@ public class RoleController {
 			System.out.println(roleBean2.getDeptBean());
 		}*/
 		mav.addObject("roleBeans",roleBeans);
+		mav.addObject("roleName",roleBean.getRoleName());
+		mav.addObject("roleState",roleBean.getRoleState());
+		mav.addObject("deptId",roleBean.getDeptId());
 		
 		mav.addObject("deptBeans",deptService.listDept());
 		mav.addObject("maxSize",max);

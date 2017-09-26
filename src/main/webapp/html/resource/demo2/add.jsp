@@ -35,6 +35,39 @@
 		});
 
 	}
+	function f(){
+		var roleId=$("#roleId").val();
+		var deptId=$("#deptId").val();
+		var userLogin=$("#1").val();
+		 if (deptId == -1) {
+			 alert("请选择部门");
+			 return false;
+		}
+		 if (roleId == -1 ) {
+			 alert("请选择角色");
+			 return false;
+		}
+		return ajaxLogin(userLogin);
+	}
+	function ajaxLogin(obj){
+		var flagAjax="test";
+		$.ajax({
+    		type:"POST",
+    		url:"../user/ajaxLogin.do?ajaxLogin="+obj,
+    		async:false,
+    		success:function(result) {
+    			flagAjax=result;
+    		}
+    	});
+		if (flagAjax == "no") {
+			$("#4").html("数据库没有");
+					return true;
+		}else if(flagAjax == "yes"){
+			$("#4").html("数据库有了,请换一个账号");
+				return false;
+		}
+		return false;
+	}
 </script>
 <body>
 
@@ -48,13 +81,14 @@
 	<div></div>
 
 	<div style="font-size: 13px; margin: 10px 5px">
-		<form action="../user/insertUser.do" method="post">
+		<form action="../user/insertUser.do" method="post" onsubmit="return f();">
 			<input type="hidden" name="userId" value="${user1.userId }" />
 			<table border="1" width="100%" class="table_a">
 				<tr>
 					<td>登录账号<span style="color: red">*</span>：
 					</td>
-					<td><input required="required" type="text" id=1 name="userLogin" value="${user1.userLogin }" />
+					<td><input required="required" type="text" id=1 name="userLogin" value="${user1.userLogin }" onblur="ajaxLogin(this.value)"/>
+					<span id=4></span>
 					</td>
 				</tr>
 
@@ -72,7 +106,7 @@
 				<tr>
 					<td>所属部门<span style="color: red">*</span>：
 					</td>
-					<td><select name="deptId" required="required" onchange="selectrole(this.value);">
+					<td><select name="deptId" id=deptId required="required" onchange="selectrole(this.value);">
 
 							<option value="-1">--必须选择--</option>
 							<c:forEach items="${deptBeans }" var="item">

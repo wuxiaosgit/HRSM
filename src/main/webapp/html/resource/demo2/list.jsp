@@ -71,12 +71,20 @@
     			
     			location.href="../user/selectUser.do?userName=${userName}&deptId=${deptId}&roleId=${roleId}&currentNum="+currentNum;
     		}
+    	
+    	function quanbu(){
+    		
+    		$("#deptId").val(-1);
+    		$("#roleId").val(-1);
+    		$("#userName").val("");
+    		$("#form").submit();
+    	}
     </script>
     
-    <body>
         <style>
             .tr_color{background-color: #9F88FF}
         </style>
+    <body>
         <div class="div_head">
             <span>
                 <span style="float: left;">当前位置是：系统管理-》用户管理</span>
@@ -90,16 +98,25 @@
         <div></div>
         <div class="div_search">
            
-                <form action="../user/selectUser.do" method="post">
-                <input type="hidden" id="currentNum" name="currentNum" value="${currentPage }">
+                <c:choose>
+                <c:when test=""></c:when>
+                <c:otherwise></c:otherwise>
+                </c:choose>
+                 <input type="hidden" id="currentNum" name="currentNum"  value="${currentPage }" >
+                <form id=form action="../user/selectUser.do" method="post">
+               
+                 <input type="hidden"  name="currentNum"   value="1" >
+               
                   	   姓名：
-					<input type="text"  name="userName" value="${userName }" />
+					<input type="text" id=userName  name="userName" value="${userName }" />
 					 所属部门: 
-					<select name="deptId" onchange="selectrole(this.value);">
+					<select name="deptId" id=deptId onchange="selectrole(this.value);">
 				
 					<option value="-1">--请选择--</option>
 					<c:forEach items="${deptBeans }" var="item">
-					<option value="${item.deptId }" <c:if test="${item.deptId eq deptId }">selected="selected"</c:if> >${item.deptName }</option>
+					<option value="${item.deptId }" 
+					<c:if test="${item.deptId eq deptId }">selected="selected"</c:if> 
+					>${item.deptName }</option>
 					
 					</c:forEach>
 				
@@ -111,12 +128,13 @@
 								<option value="-1">--请选择--</option>
 							</c:when>
 							<c:otherwise>
-								<option value="${role.roleId }">${role.roleName }</option>
+								<option value="-1">--请选择--</option>
+								<option value="${role.roleId }" selected="selected">${role.roleName }</option>
 							</c:otherwise>
 						</c:choose>
 					</select>
                     <input value="查询" type="submit" />
-					
+					<button  onclick="quanbu()">查询全部</button>
                 </form>
            
         </div>
@@ -154,6 +172,7 @@
 							<a href="../user/noDeleteUser.do?userId=${item.userId }">禁用</a>
 						</c:when>
 						<c:otherwise>
+							<a href="../user/yesDeleteUser.do?userId=${item.userId }">启用</a>
 							<a href="../user/deleteUser.do?userId=${item.userId }">删除</a>
 						</c:otherwise>
 						</c:choose>
