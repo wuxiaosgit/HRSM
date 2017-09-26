@@ -35,10 +35,11 @@
 		});
 
 	}
-	function f(){
+	function f(user1){
 		var roleId=$("#roleId").val();
 		var deptId=$("#deptId").val();
-		var userLogin=$("#1").val();
+		//var userLogin=$("#1").val();
+		var id=$("#6").val();
 		 if (deptId == -1) {
 			 alert("请选择部门");
 			 return false;
@@ -47,8 +48,17 @@
 			 alert("请选择角色");
 			 return false;
 		}
+		 if (user1 == null ) {
+			 //添加
+			 alert("添加");
 		return ajaxLogin(userLogin);
+		}else{
+			 alert("修改");
+			//修改
+			return true;
+		}
 	}
+	
 	function ajaxLogin(obj){
 		var flagAjax="test";
 		$.ajax({
@@ -81,14 +91,22 @@
 	<div></div>
 
 	<div style="font-size: 13px; margin: 10px 5px">
-		<form action="../user/insertUser.do" method="post" onsubmit="return f();">
-			<input type="hidden" name="userId" value="${user1.userId }" />
+		<form action="../user/insertUser.do" method="post" onsubmit="return f(${user1});">
+			<input type="hidden" id=6 name="userId" value="${user1.userId }" />
 			<table border="1" width="100%" class="table_a">
 				<tr>
 					<td>登录账号<span style="color: red">*</span>：
 					</td>
-					<td><input required="required" type="text" id=1 name="userLogin" value="${user1.userLogin }" onblur="ajaxLogin(this.value)"/>
+					<td>
+					<c:choose>
+							<c:when test="${user1 eq null }">
+					<input required="required" type="text" id=1 name="userLogin" value="${user1.userLogin }" onblur="ajaxLogin(this.value)"/>
 					<span id=4></span>
+							</c:when>
+							<c:otherwise>
+					<input required="required" type="text" id=1 name="userLogin" value="${user1.userLogin }" />
+							</c:otherwise>
+						</c:choose>
 					</td>
 				</tr>
 

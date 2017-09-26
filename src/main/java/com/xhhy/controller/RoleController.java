@@ -56,6 +56,8 @@ public class RoleController {
 		}
 		mav.addObject("deptBeans",deptService.getListDept());
 		mav.addObject("menus",menuService.getMenus());
+		mav.addObject("roleMenus",menuService.getMenu(roleId));
+		
 		return mav;
 	}
 	@RequestMapping("insertRole.do")
