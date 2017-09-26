@@ -108,6 +108,13 @@ public class UserController {
 		userService.deleteUser(userId);
 		return selectUser(null);
 	}
+	@RequestMapping("deleteUserAll.do")
+	public ModelAndView deleteUserAll(Integer[] ids){
+		for (int i = 0; i < ids.length; i++) {
+			userService.deleteUser(ids[i]);
+		}
+		return selectUser(null);
+	}
 	@RequestMapping("noDeleteUser.do")
 	public ModelAndView noDeleteUser(Integer userId){
 		UserBean userBean = userService.getUserById(userId);

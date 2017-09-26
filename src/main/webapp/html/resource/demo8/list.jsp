@@ -10,7 +10,36 @@
 <!DOCTYPE html>
 <html>
 <script type="text/javascript">
+function checkall() {
+	var alls = document.getElementsByName("check");
+	var ch = document.getElementById("checkall");
+	if (ch.checked) {
+		for ( var i = 0; i < alls.length; i++) {
+			alls[i].checked = true;
+		}
+	} else {
+		for ( var i = 0; i < alls.length; i++) {
+			alls[i].checked = false;
+		}
+	}
+}
+function delAll() {
+	var alls = document.getElementsByName("check");
+	var ids = new Array();
+	for ( var i = 0; i < alls.length; i++) {
+		if (alls[i].checked) {
+			ids.push(alls[i].value);
+		}
+	}
+	if (ids.length > 0) {
+		if (confirm("确认操作?")) {
+			window.location.href = "../menu/deleteMenuAll.do?ids="+ids;
 
+		}
+	} else {
+		alert("请选中要操作的项");
+	}
+}
 //分页函数
 //pageNum:最大页数
 //maxSize：最大条数
@@ -58,7 +87,7 @@ function nextpage(obj){
                 <span style="float: left;">当前位置是：系统管理-》菜单管理</span>
                 <span style="float: right; margin-right: 8px; font-weight: bold;">
                     <a style="text-decoration: none;" href="../menu/getMenu.do">【添加】</a>
-					<a style="text-decoration: none;" href="#">【删除】</a>
+					<a style="text-decoration: none;" onClick="delAll()">【删除】</a>
                 </span>
             </span>
         </div>
@@ -90,7 +119,7 @@ function nextpage(obj){
             <table class="table_a" border="1" width="100%">
                 <tbody><tr style="font-weight: bold;">
                         <td width="40px;">序号</td>
-                        <td width="30px;"><input type="checkbox" /></td>						
+                        <td width="30px;"><input type="checkbox" onChange="checkall()" id="checkall"/></td>						
                         <td width="80px;">菜单名称</td>
                         <td >URL</td>
 						<td width="100px;">状态</td>
@@ -100,7 +129,7 @@ function nextpage(obj){
 				<c:forEach items="${menuBeans }" var="item">
                     <tr id="product1">
                         <td>${item.menuId }</td>
-                        <td><input type="checkbox" /></td>
+                        <td><input type="checkbox" value="${item.menuId }" name="check" /></td>
 						<td>${item.menuName }</td>
                         <td>${item.menuUrl }</td> 
 						<td>

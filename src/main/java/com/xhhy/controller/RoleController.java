@@ -77,7 +77,13 @@ public class RoleController {
 	@RequestMapping("deleteRole.do")
 	public ModelAndView deleteRole(Integer  roleId){
 		roleService.deleteRole(roleId);
-		
+		return selectRole(null);
+	}
+	@RequestMapping("deleteRoleAll.do")
+	public ModelAndView deleteRoleAll(Integer[] ids){
+		for (int i = 0; i < ids.length; i++) {
+			roleService.deleteRole(ids[i]);
+		}
 		return selectRole(null);
 	}
 	@RequestMapping("noDeleteRole.do")
