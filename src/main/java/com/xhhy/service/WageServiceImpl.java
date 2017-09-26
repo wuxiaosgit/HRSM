@@ -1,6 +1,7 @@
 package com.xhhy.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,5 +39,10 @@ public class WageServiceImpl implements WageService{
 
 	public List<WageBean> selectBySta(int wageSta) {
 		return wageDao.selectBySta(wageSta);
+	}
+
+	@Override
+	public List<WageBean> queryByLike(Map<String, Object> map) {
+		return wageDao.queryByLike(map);
 	}
 }

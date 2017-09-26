@@ -26,7 +26,6 @@ public class WageController {
 	//添加wage对象
 	@RequestMapping(value="insertwage.do",method=RequestMethod.POST)
 	public String insertWage(WageBean wage){
-		System.out.println(wage.getDjrName());
 		service.insertWage(wage);
 		return "list.do";
 	}
@@ -60,7 +59,6 @@ public class WageController {
 	//从前端获取对象传入后台然后修改wage
 	@RequestMapping(value="standard_update2.do")
 	public String standardUpdate2(@ModelAttribute WageBean wage){
-		System.out.println(wage);
 		service.updateWage(wage);
 		return "list.do";
 	}
@@ -82,10 +80,39 @@ public class WageController {
 	}
 	//根据ID查出对象在前端显示然后审批
 	@RequestMapping(value="auditing.do")
-	public ModelAndView auditing(int wageId,int statment){
+	public ModelAndView auditing(int wageId){
 		WageBean wage = service.selectById(wageId);
 		ModelAndView mav=new ModelAndView("/html/pay/standard_edit.jsp");
 		mav.addObject("wage", wage);
+		return mav;
+	}
+	//修改状态值
+	@RequestMapping(value="wageSp.do")
+	public  String wageSp(int wageId,int stat){
+		System.out.println(wageId+stat);
+		WageBean wage = service.selectById(wageId);
+		wage.setWageStatment(stat);
+		service.updateWage(wage);
+		return "selectBySta.do";
+	}
+	//传入bm和审核状态查询出List
+	@RequestMapping(value="queryListByLike.do")
+	public ModelAndView queryByLike(String wagebmm,Integer wagestat){
+		System.out.println(wagebmm+wagestat);
+		ModelAndView mav=new ModelAndView("/html/pay/list_standard.jsp");
+		/*int sta=0;
+		if (stat=="-- 请选择--") {
+			sta=0;
+		}if(stat=="-- 审核中--"){
+			sta=1;
+		}if(stat=="-- 已通过--"){
+			sta=2;
+		} */
+		Map<String, Object> map = new HashMap<>();
+		map.put("wageBm", wagebmm);
+		map.put("sta", wagestat);
+		List<WageBean> list = service.queryByLike(map);
+		mav.addObject("list",list);
 		return mav;
 	}
 }

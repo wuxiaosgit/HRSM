@@ -1,6 +1,7 @@
 package com.xhhy.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -17,6 +18,7 @@ public interface WageDao {
 	public void insertWage(WageBean wage);
 	public WageBean selectById(int wageId);
 	public void updateWage(WageBean wage);
-	public void deleteWage(int wageId);
+	public void deleteWage(int wageId);   
 	public List<WageBean> selectBySta(int wageSta);
+	public List<WageBean> queryByLike(Map<String,Object> map);
 }

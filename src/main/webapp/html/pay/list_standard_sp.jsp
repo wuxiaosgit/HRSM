@@ -7,6 +7,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<!-- 全部查询并且展示 -->
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
@@ -30,7 +31,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<span>
 			<form action="#" method="get">
 				薪酬标准编号: <input type="text" /> <input value="查询" type="submit" />
-
 			</form>
 		</span>
 	</div>

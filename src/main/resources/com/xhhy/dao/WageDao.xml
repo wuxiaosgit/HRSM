@@ -35,7 +35,7 @@
 		insert into salary_standard_tb(ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,travel_pay,
 		phone_pay,meal_pay,house_pay,mission_pay,overtime_pay,all_pay,ss_remark,ss_statment) values
 		(null,#{wageBm},#{wageName},#{wageDate},#{zzrName},#{djrName},#{basePay},#{awarPay},#{travelPay},#{phonePay},
-		#{mealPay},#{housePay},#{missionPay},#{overtimePay},#{all},#{remark},#{wageStatment}
+		#{mealPay},#{housePay},#{missionPay},#{overtimePay},#{all},#{remark},#{wageStatment})
 	</insert>
 	<update id="updateWage" parameterType="com.xhhy.domain.WageBean">
 		update salary_standard_tb set ss_bm=#{wageBm},ss_name=#{wageName},
@@ -43,7 +43,7 @@
 		base_pay=#{basePay},award_pay=#{awarPay},travel_pay=#{travelPay},
 		phone_pay=#{phonePay},meal_pay=#{mealPay},house_pay=#{housePay},
 		mission_pay=#{missionPay},overtime_pay=#{overtimePay},
-		ss_remark=#{remark},all_pay=#{all} where ss_id=#{wageId}
+		ss_remark=#{remark},all_pay=#{all},ss_statment=#{wageStatment} where ss_id=#{wageId}
 	</update>
 	<delete id="deleteWage" parameterType="int">
 		delete from salary_standard_tb where ss_id=#{wageId}
@@ -52,5 +52,18 @@
 		select ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,
 		travel_pay,phone_pay,meal_pay,house_pay,mission_pay,overtime_pay,
 		ss_remark from salary_standard_tb where ss_statment=#{wageSta}
+	</select>
+	<select id="queryByLike" parameterType="map"  resultMap="wage">
+		select ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,
+		travel_pay,phone_pay,meal_pay,house_pay,mission_pay,overtime_pay,
+		ss_remark  ss_statment from salary_standard_tb 
+		<where>
+		 <if test="wageBm!=null and wageBm=''"> 
+				and ss_bm=#{wageBm}
+			</if> 
+			<if test="sta!=null and sta=''"> 
+				and ss_statment=#{sta}
+			</if> 
+		</where>
 	</select>
 </mapper>

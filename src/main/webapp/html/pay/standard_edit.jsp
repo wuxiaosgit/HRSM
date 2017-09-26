@@ -5,13 +5,21 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/html/pay/";
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- 展示具体数据审核通过或者驳回 -->
 <html>
     <head>
+    	 <script type="text/javascript">
+			function sh(sta){
+				var oinput=document.getElementById("stat");
+				console.log(oinput);
+				oinput.value=sta;
+				document.forms[0].submit();
+			}
+		</script>
         <title>薪酬——审核</title>
         <meta http-equiv="content-type" content="text/html;charset=utf-8">
         <link href="../css/mine.css" type="text/css" rel="stylesheet">
     </head>
-
     <body>
 
         <div class="div_head">
@@ -25,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div></div>
 
         <div style="font-size: 13px;margin: 10px 5px">
-            <form action="./admin.php?c=goods&a=add" method="post" enctype="multipart/form-data">
+            <form action="wageSp.do" method="post" enctype="multipart/form-data">
             <table border="1" width="100%" class="table_a">
                 <tr>
                     <td width="120px;">薪酬标准编号<span style="color:red">*</span>：</td>
@@ -35,6 +43,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <td>薪酬标准名称<span style="color:red">*</span>：</td>
                     <td>
                        <input type="text" name="f_goods_name" readonly value="${wage.wageName }" /> 
+                       <input type="hidden" id="stat" name="stat" value=""/>
+          			   <input type="hidden"  name="wageId" value="${wage.wageId}"/>
                     </td>
                 </tr>
                
@@ -126,8 +136,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
-                        <input type="submit" value="审核通过">
-						<input type="submit" value="驳回">
+                        <input type="button" value="审核通过" onclick="sh(2)">
+						<input type="button" value="驳回"  onclick="sh(1)">
                     </td>
                 </tr>  
             </table>

@@ -5,7 +5,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/html/pay/";
 %> 
-
+<!-- 审核页面 -->
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span>
                 <span style="float: left;">当前位置是：薪酬管理-》薪酬标准管理</span>
                 <span style="float: right; margin-right: 8px; font-weight: bold;">
-                    <a style="text-decoration: none;" href="standard_add.jsp">【添加】</a>
+                    <a style="text-decoration: none;" href="http://localhost:8080/YXSS/html/pay/standard_add.jsp">【添加】</a>
 					<a style="text-decoration: none;" href="#">【删除】</a>
                 </span>
             </span>
@@ -31,15 +31,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div></div>
         <div class="div_search">
             <span>
-                <form action="#" method="get">
-                    薪酬标准类型: 
-					<input type="text"  />
+                <form action="queryListByLike.do" method="post">
+                  		  薪酬标准类型: 
+					<input type="text" name="wagebmm" />
 					 审核状态: 
-					<select>
-						<option>-- 请选择--</option>
-						<option>-- 起草--</option>
-						<option>-- 审核中--</option>
-						<option>-- 已通过--</option>
+					<select name="wagestat">
+						<option  value="0">-- 请选择--</option>
+						<option  value="1">-- 审核中--</option>
+						<option  value="2">-- 已通过--</option>
 					</select>
 					   <input value="查询" type="submit" />
                 </form>
