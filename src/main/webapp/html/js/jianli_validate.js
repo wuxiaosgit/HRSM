@@ -1,35 +1,27 @@
-
-	$.validator.setDefaults({
+$.validator.setDefaults({
 		submitHandler: function(form) {
 			 form.submit(); 
 		}
 	});
 	$().ready(function() {
-		// validate the comment form when it is submitted
-		//$("#demo1_add_form").validate();
-
-		// validate signup form on keyup and submit
-		$("#demo1_add_form").validate({
+		$("#demo2_add_roleName").validate({
 			rules: {
 
 				demo2_add_roleName: "required",
+				demo2_add_deptShortname: "required",
+				xingming:"required",
 				xingbie:"required",
 				zhaopinType:"required",
 				zhaopinNum: {
-					required: true
-				},
-				endTime: {
 					required: true,
-					date:true
+					min:0
 				},
-				startTime: {
-					required: true,
-					date:true
+				email:{
+					email:true
 				},
-				jobmiaoshu: {
-					required: true
-				},
-				yaoqiu: "required"
+				tel: {
+					
+				}
 			},
 			messages: {
 				//firstname: "Please enter your firstname",
