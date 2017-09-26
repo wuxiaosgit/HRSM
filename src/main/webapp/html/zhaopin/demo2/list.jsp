@@ -51,15 +51,15 @@
         <div></div>
          <div class="div_search">
             <span>
-                <form action="#" method="get">
+                <form action="../jianli/selectJianliRoleDeptPagesBySelective.do" method="post">
 					姓名: 
-					<input type="text" size="10px" />
+					<input type="text" name="xingming" size="10px" />
 					 应聘职位: 
-					<input type="text" size="20px" />
+					<input type="text" name="roleBean.roleName" size="20px" />
 					工作经验: 
-					<input type="text" size="10px" />
+					<input type="text" name="jianyan" size="10px" />
 					登记日期: 
-					<input type="text" size="20px" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+					<input type="text" size="20px" name="dtime" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
                     <input value="查询" type="submit" />
 					
                 </form>

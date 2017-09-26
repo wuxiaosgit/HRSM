@@ -77,4 +77,13 @@ public class UserServiceImpl implements UserService {
 		return userDao.max(userBean);
 	}
 
+
+
+
+
+	public UserBean oldPasswrod(UserBean userBean) {
+		// TODO Auto-generated method stub
+		return userDao.oldPasswrod(userBean);
+	}
+
 }

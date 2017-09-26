@@ -18,18 +18,26 @@
 <script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
 </head>
 	<script type="text/javascript">
-		$(function(){
-				$.post("../dept/ajaxdept.do","", function(result) {
-					/* alert(reslut); */
-					var dept=document.getElementById("deptId");
-					for ( var i in result) {
-						dept.add(new Option(result[i].deptName,result[i].deptId),null);
-					}
-				});
-				
-			
-		});
-	</script>
+	var flagAjax="test";
+	function testdeptId(){
+    	var deptId=document.getElementById("deptId").value;
+		if(deptId == -1){
+ 				alert("部门必须选择");
+			return false;
+		}else{
+			return true;
+		}
+	}
+	
+    function confirm(){
+ 		
+		 if(testdeptId()){
+ 			return true;
+ 		 }
+ 	
+ 		return false;
+ 	}
+</script>
     <body>
 
         <div class="div_head">
@@ -43,24 +51,32 @@
         <div></div>
 
         <div style="font-size: 13px;margin: 10px 5px">
-            <form action="../role/insertRole.do" method="post" enctype="multipart/form-data">
+            <form action="../role/insertRole.do" method="post"  onsubmit="return confirm();" enctype="multipart/form-data">
+            <input type="hidden" name="roleId" value="${roleBean.roleId }">
             <table border="1" width="100%" class="table_a">
                 <tr>
                     <td width="120px;">职位编码<span style="color:red">*</span>：</td>
-                    <td><input type="text" name="roleNumber" value="${roleNumber }" /></td>
+                    <td><input type="text" required="required" name="roleNumber" value="${roleBean.roleNumber }" /></td>
                 </tr>
                
                 <tr>
                     <td>职位名称<span style="color:red">*</span>：</td>
-                    <td><input type="text" name="roleName" value="${roleName }" /></td>
+                    <td><input type="text" required="required" name="roleName" value="${roleBean.roleName }" />
+                    <span id="nameInfo"></span>
+                    </td>
                 </tr>
                 
                 <tr>
                     <td>所属部门<span style="color:red">*</span>：</td>
                     <td>
                        
-						 <select name="deptId" id="deptId" >
-							
+						 <select name="deptId" id="deptId" required="required">
+							<option value="-1">--请选择--</option>
+						<c:forEach items="${deptBeans }" var="item">
+							<option value="${item.deptId }"
+							 <c:if test="${roleBean.deptId eq item.deptId  }">selected="selected"</c:if>
+							>${item.deptName }</option>
+						</c:forEach>
 						</select>
                     </td>
                 </tr>
@@ -68,14 +84,14 @@
 				<tr>
                     <td>菜单权限<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="checkbox"/>个人信息<br/>
-					&nbsp;&nbsp;&nbsp;<input type="checkbox"/>个人信息修改<br/>
-					&nbsp;&nbsp;&nbsp;<input type="checkbox"/>密码修改<br/>
-					<input type="checkbox"/>薪酬管理<br/>
-					&nbsp;&nbsp;&nbsp;<input type="checkbox" />薪酬标准管理<br/>
-					&nbsp;&nbsp;&nbsp;<input type="checkbox"/>薪酬标准审批<br/>
-					&nbsp;&nbsp;&nbsp;<input type="checkbox"/>薪酬发放管理<br/>
-						 
+                    
+					<c:forEach items="${menus }" var="top">
+					  <input type="checkbox" name="menu" value="${top.menuId }" />${top.menuName }<br/>
+	                    <c:forEach items="${top.menuList }" var="item">
+						&nbsp;&nbsp;&nbsp;<input type="checkbox" name="menu" value="${item.menuId }"/>${item.menuName }<br/>
+                        </c:forEach>
+					</c:forEach>
+                       
                     </td>
                 </tr>
 
@@ -84,7 +100,7 @@
                     <td>职位描述<span style="color:red">*</span>：</td>
                     <td>
                         <textarea name="roleDescribe" >
-                        ${roleDescribe }
+                        ${roleBean.roleDescribe }
                         </textarea>
                     </td>                
                 </tr>
@@ -93,7 +109,7 @@
                     <td>备       注：</td>
                     <td>
                         <textarea name="roleRemark">
-                        ${roleRemark }
+                        ${roleBean.roleRemark }
                         </textarea>
                     </td>                
                 </tr>
@@ -101,8 +117,11 @@
                     <td>是否启用：</td>
                     <td>
                         <select name="roleState">
-							<option value="1">是</option>
-							<option value="0">否</option>
+                       
+							<option value="1" 
+		 <c:if test="${roleBean.roleState eq 1 }">selected="selected"</c:if>
+		  >是</option>
+							<option value="0"  <c:if test="${roleBean.roleState eq 0 }">selected="selected"</c:if> >否</option>
 						</select>
                     </td>                
                 </tr>

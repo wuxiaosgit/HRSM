@@ -1,19 +1,22 @@
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" import="java.util.*" pageEncoding="Utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
         <title>面试管理</title>
+
         <meta http-equiv="content-type" content="text/html;charset=utf-8" />
         <link href="../html/css/mine.css" type="text/css" rel="stylesheet"/>
-        <script language="javascript" type="text/javascript" src="../../My97DatePicker/WdatePicker.js"></script>
+        <script language="javascript" type="text/javascript" src="../html/My97DatePicker/WdatePicker.js"></script>
+        <script type="text/javascript" src="../html/js/jquery-3.2.1.min.js"></script>
     </head>
 
     <body>
 
         <div class="div_head">
             <span>
-                <span style="float:left">当前位置是：面试管理-》面试结果展示</span>
+                <span style="float:left">当前位置是：面试管理-》面试结果登记</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
                     <a style="text-decoration: none" href="#" onclick="javascript:history.back(-1);">【返回】</a>
                 </span>
@@ -22,8 +25,7 @@
         <div></div>
 
         <div style="font-size: 13px;margin: 10px 5px">
-            <form action="./admin.php?c=goods&a=add" method="post" enctype="multipart/form-data">
-       <table border="1" width="100%" class="table_a">
+           <table border="1" width="100%" class="table_a">
                 <tr>
                     <td width="120px;">应聘职位名称<span style="color:red">*</span>：</td>
                     <td>
@@ -186,7 +188,7 @@
 					<tr>
                     <td>简历附件：</td>
                     <td>
-                        <input type="file" name="fujian" value="${jianliBean.fujian }" />
+                        <a href="../jianli/download.do?jianliId=${jianliBean.jianliId}">${jianliBean.filename}</a>
                     </td>                
                 </tr>
 
@@ -210,26 +212,47 @@
                        	${jianliBean.yijian }
                        </textarea>
                     </td>                
-                </tr>		
+                </tr>
             </table>
 			<br/>
-	   面试结果：  <hr color="#009966" size="1px" />
-            <form action="">
+			
+             面试结果：  <hr color="#009966" size="1px" />
+                     <% 
+                     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                     	String date = sdf.format(new Date());
+                     %>
+            <form action="../mianshi/insertSelective.do" method="post">
 			<table border="1" width="100%" class="table_a">
 			<tr>
 					<td colspan="2">
+					<input type="hidden" name="jianliid" value="${jianliBean.jianliId}" />
+					<input type="hidden" id="demo3_up_hidden" name="method" value="up"/>
 						面试结果：	
-					 <select name="state">
+					 <select name="state" id="demo3_up_select">
 							<option>-请选择-</option>
-							<option value="删除" <c:if test="${jianliBean.state eq '0'}">selected="selected"</c:if>>删除</option>
-							<option value="推荐面试" <c:if test="${jianliBean.state eq '1'}">selected="selected"</c:if>>推荐面试</option>
-							<option value="推荐二面" <c:if test="${jianliBean.state eq '2'}">selected="selected"</c:if>>推荐二面</option>
-							<option value="推荐三面" <c:if test="${jianliBean.state eq '3'}">selected="selected"</c:if>>推荐三面</option>
-							<option value="建议录用" <c:if test="${jianliBean.state eq '4'}">selected="selected"</c:if>>建议录用</option>
-							<option value="录用" <c:if test="${jianliBean.state eq '5'}">selected="selected"</c:if>>录用</option>
-							<option value="存档" <c:if test="${jianliBean.state eq '6'}">selected="selected"</c:if>>存档</option>
+							<option value="0" <c:if test="${jianliBean.state eq '0'}">selected="selected"</c:if>>删除</option>
+							<option value="1" <c:if test="${jianliBean.state eq '1'}">selected="selected"</c:if>>推荐面试</option>
+							<option value="2" <c:if test="${jianliBean.state eq '2'}">selected="selected"</c:if>>推荐二面</option>
+							<option value="3" <c:if test="${jianliBean.state eq '3'}">selected="selected"</c:if>>推荐三面</option>
+							<option value="4" <c:if test="${jianliBean.state eq '4'}">selected="selected"</c:if>>建议录用</option>
+							<option value="5" <c:if test="${jianliBean.state eq '5'}">selected="selected"</c:if>>录用</option>
+							<option value="6" <c:if test="${jianliBean.state eq '6'}">selected="selected"</c:if>>存档</option>
 						</select>
-						
+						<script>
+							$(function(){
+								$("#demo3_up_select").change(function(){
+									
+									var getValue = $("#demo3_up_select").val();
+									alert(getValue);
+									if(getValue==0){
+										$("#demo3_up_hidden").val("del");
+									}else{
+										$("#demo3_up_hidden").val("up");
+									}
+								});
+								
+							});
+						</script>
 					</td>
 				</tr>
 				
@@ -237,17 +260,17 @@
 				 	<c:when test="${jianliBean.state==1}">
 	
 				 		<tr>
-                    <td>一面面试人：<input type="text" value=""/> 面试时间：
-                    <input value=""/>
+                    <td>一面面试人：<input type="text" name="mianshiren" value="${user.userName }"/> 面试时间：
+                    <input name="mianshitime" value="<%=date %>"/>
 					</td>
                     <td>
-                     二面面试人：<input type="text" value="" /> 面试时间：
+                     二面面试人：<input type="text"  value="" /> 面试时间：
                      <input  value=""/>
                     </td>
                 </tr>
 				</tr>
 					<tr>
-                    <td>一面面试评价：<textarea cols="70" rows="3"></textarea></td>
+                    <td>一面面试评价：<textarea cols="70" rows="3" name="pingjia"></textarea></td>
                     <td>
                       二面面试评价：<textarea cols="70" rows="3"></textarea>
                     </td>                
@@ -273,15 +296,15 @@
                     <input value="${lists[0].mianshitime }"/>
 					</td>
                     <td>
-                     二面面试人：<input type="text" value="" /> 面试时间：
-                     <input  value=""/>
+                     二面面试人：<input type="text" name="mianshiren" value="${user.userName }" /> 面试时间：
+                     <input name="mianshitime"  value="<%=date %>"/>
                     </td>
                 </tr>
 				</tr>
 					<tr>
                     <td>一面面试评价：<textarea cols="70" rows="3">${lists[0].pingjia }</textarea></td>
                     <td>
-                      二面面试评价：<textarea cols="70" rows="3"></textarea>
+                      二面面试评价：<textarea cols="70" rows="3" name="pingjia"></textarea>
                     </td>                
                 </tr>
 				</tr>
@@ -318,21 +341,22 @@
                 </tr>
 				</tr>
 					<tr>
-                    <td>三面面试人：<input type="text" value=""/> 面试时间：<input value=""/></td>
+                    <td>三面面试人：<input name="mianshiren" type="text" value="${user.userName }"/> 
+                    	面试时间：<input name="mianshitime" value="<%=date %>"/></td>
                     <td>
-                      三面面试评价：<textarea cols="70" rows="3"></textarea>
+                      三面面试评价：<textarea cols="70" rows="3" name="pingjia"></textarea>
                     </td>                
                 </tr>
 				 <tr>
                     <td colspan="2" align="center">
-  						<input type="submit" value="提交" />
+                    	<input type="submit" value="提交" />
 						<input type="button" value="返回" onclick="javascript:history.back(-1);" />
                     </td>
                 </tr>
 				 	</c:when>
 				 </c:choose>
 			</table>
-</form>
+			</form>
         </div>
     </body>
 </html>

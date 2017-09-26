@@ -49,34 +49,34 @@
 
 	<div style="font-size: 13px; margin: 10px 5px">
 		<form action="../user/insertUser.do" method="post">
-			<input type="hidden" name="userId" value="${user.userId }" />
+			<input type="hidden" name="userId" value="${user1.userId }" />
 			<table border="1" width="100%" class="table_a">
 				<tr>
 					<td>登录账号<span style="color: red">*</span>：
 					</td>
-					<td><input required="required" type="text" id=1 name="userLogin" value="${user.userLogin }" />
+					<td><input required="required" type="text" id=1 name="userLogin" value="${user1.userLogin }" />
 					</td>
 				</tr>
 
 				<tr>
 					<td>用户姓名<span style="color: red">*</span>：
 					</td>
-					<td><input required="required" type="text" id=2 name="userName" value="${user.userName }" /></td>
+					<td><input required="required" type="text" id=2 name="userName" value="${user1.userName }" /></td>
 				</tr>
 				<tr>
 					<td>密码<span style="color: red">*</span>：
 					</td>
 					<td><input required="required" type="password" id=3 name="userPassword"
-						value="${user.userPassword }" /></td>
+						value="${user1.userPassword }" /></td>
 				</tr>
 				<tr>
 					<td>所属部门<span style="color: red">*</span>：
 					</td>
 					<td><select name="deptId" required="required" onchange="selectrole(this.value);">
 
-							<option value="-1">--请选择--</option>
+							<option value="-1">--必须选择--</option>
 							<c:forEach items="${deptBeans }" var="item">
-								<option value="${item.deptId }" <c:if test="${user.deptId eq item.deptId }">selected="selected"</c:if> >${item.deptName }</option>
+								<option value="${item.deptId }" <c:if test="${user1.roleBean.deptId eq item.deptId }">selected="selected"</c:if> >${item.deptName }</option>
 							</c:forEach>
 
 					</select></td>
@@ -86,11 +86,11 @@
 					</td>
 					<td><select name="roleId" id="roleId" required="required">
 						<c:choose>
-							<c:when test="${user eq null }">
+							<c:when test="${user1 eq null }">
 								<option value="-1">--请选择--</option>
 							</c:when>
 							<c:otherwise>
-								<option value="${user.roleBean.roleId }">${user.roleBean.roleName }</option>
+								<option value="${user1.roleBean.roleId }">${user1.roleBean.roleName }</option>
 							</c:otherwise>
 						</c:choose>
 
@@ -103,27 +103,27 @@
 					<td>身份证<span style="color: red">*</span>：
 					</td>
 					<td><input type="text" id=4 name="userIdcard"
-						value="${user.userIdcard }" /></td>
+						value="${user1.userIdcard }" /></td>
 				</tr>
 
 				<tr>
 					<td>联系电话<span style="color: red">*</span>：
 					</td>
-					<td><input type="text" id=5 name="userPhone" value="${user.userPhone }" />
+					<td><input type="text" id=5 name="userPhone" value="${user1.userPhone }" />
 					</td>
 				</tr>
 
 				<tr>
 					<td>邮箱<span style="color: red">*</span>：
 					</td>
-					<td><input type="text" id=6 name="userEmail" value="${user.userEmail }" />
+					<td><input type="text" id=6 name="userEmail" value="${user1.userEmail }" />
 					</td>
 				</tr>
 
 				<tr>
 					<td>联系地址：</td>
 					<td><input type="text" name="userAddress" id=7
-						value="${user.userAddress }" /></td>
+						value="${user1.userAddress }" /></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">

@@ -52,11 +52,17 @@ public class MenuController {
 			menuBean.setMenuState(null);
 		}
 		List<MenuBean> menuBeans= menuService.selectMenu(menuBean);
+		Integer max=menuService.max(menuBean);
 		/*for (MenuBean menuBean2 : menuBeans) {
 			System.out.println(menuBean2);
 		}*/
 		
 		mav.addObject("menuBeans",menuBeans);
+		mav.addObject("menuName",menuBean.getMenuName());
+		mav.addObject("menuState",menuBean.getMenuState());
+		mav.addObject("maxSize",max);
+		mav.addObject("pageNum", (int)Math.ceil(max/8.0));
+		mav.addObject("currentPage", menuBean.getCurrentNum());
 		return mav;
 	}
 	@RequestMapping("getMenu.do")

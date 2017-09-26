@@ -5,7 +5,7 @@
     <id column="mianshiId" property="mianshiid" jdbcType="INTEGER" />
     <result column="jianliId" property="jianliid" jdbcType="INTEGER" />
     <result column="mianshiren" property="mianshiren" jdbcType="VARCHAR" />
-    <result column="mianshiTime" property="mianshitime" jdbcType="DATE" />
+    <result column="mianshiTime" property="mianshitime" jdbcType="TIMESTAMP" />
     <result column="state" property="state" jdbcType="INTEGER" />
     <result column="pingjia" property="pingjia" jdbcType="LONGVARCHAR" />
   </resultMap>
@@ -35,6 +35,13 @@
     <include refid="Base_Column_List" />
     from mianshi_tb
     where mianshiId = #{mianshiid,jdbcType=INTEGER}
+  </select>
+  
+   <select id="selectByJianliId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from mianshi_tb
+    where jianliId = #{jianliid,jdbcType=INTEGER}
   </select>
   
   <resultMap id="BaseResultMap2" type="com.xhhy.domain.MianshiBean" >

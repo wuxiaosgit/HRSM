@@ -20,4 +20,6 @@ public interface MianshiDao {
     int updateByPrimaryKey(MianshiBean record);
 
 	List<MianshiBean> selectAll();
+
+	List<MianshiBean> selectByJianliId(int jianliId);
 }

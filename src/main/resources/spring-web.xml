@@ -14,7 +14,15 @@
 	<context:component-scan base-package="com.xhhy.controller">
 	</context:component-scan>
 
-		<bean id="mappingJackson2HttpMessageConverter"
+	<!-- 拦截器 -->
+	 <!-- <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean name="loginIntceptor" class="com.xhhy.utils.LoginInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+	
+	<bean id="mappingJackson2HttpMessageConverter"
 		class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
 		<property name="supportedMediaTypes">
 			<list>
@@ -25,7 +33,7 @@
 		</property>
 	</bean>
 		
-		<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="messageConverters" >
 			<list>
 				<ref bean="mappingJackson2HttpMessageConverter" />

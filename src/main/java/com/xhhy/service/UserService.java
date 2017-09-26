@@ -12,4 +12,5 @@ public interface UserService {
 	public void deleteUser(Integer userId);
 	public List<UserBean> listUser(UserBean userBean);
 	public Integer max(UserBean userBean);
+	public UserBean oldPasswrod(UserBean userBean);
 }

@@ -212,6 +212,10 @@
 		<include refid="my_sql" />
 		where user_id=#{userId} 
 	</select>
+	<select id="oldPasswrod" parameterType="UserBean"   resultMap="user">
+		<include refid="my_sql" />
+		where user_id=#{userId} and  user_password=#{userPassword}
+	</select>
 </mapper>
 
  

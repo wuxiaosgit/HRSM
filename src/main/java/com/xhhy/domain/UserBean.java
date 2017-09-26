@@ -17,7 +17,7 @@ public class UserBean implements Serializable{
 	private String userLogin;
 	private String userAddress;
 	private String userPassword;
-	private Integer userState;
+	private Integer userState=1;
 	private String userGender;
 	private String userIdcard;
 	private String userPhone;
