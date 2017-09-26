@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
@@ -86,9 +87,14 @@
 					</td>
                 </tr>
                 <tr>
+                <%
+			
+              		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+              		String date = sdf.format(new Date());
+              %>
                     <td>登记时间<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="text" id = "startTime" name="startTime" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+                        <input type="text" id = "startTime" name="startTime" value="<%=date %>" />
                     </td>
                 </tr>
 <tr>

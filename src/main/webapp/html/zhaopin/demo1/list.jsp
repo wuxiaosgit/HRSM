@@ -49,16 +49,17 @@
 	</div>
 	<div></div>
 	<div class="div_search">
-			<form action="../zhaopin/selective.do" method="post">
+			<form action="../zhaopin/selectZhaoRoleDeptPages.do" method="post">
 				职位名称:
-				<input type="text" name="roleBean.roleName" id="demo1_input_roleId" /> 
+				<input type="text" name="roleBean.roleName" value="${roleName }" id="demo1_input_roleId" /> 
 				
 				职位分类:
-				<select name="roleBean.deptBean.deptShortName" style="width: 100px;">
-					<option selected="selected">-请选择-</option>
-					<option value="管理">管理</option>
-					<option value="技术">技术</option>
-					<option value="实施">实施</option>
+				<select name="roleBean.deptBean.deptShortName" value="" style="width: 100px;">
+				
+					<option >-请选择-</option>
+					<option value="管理" <c:if test="${type eq '管理' }">selected="selected"</c:if>>管理</option>
+					<option value="技术" <c:if test="${type eq '管理' }">selected="selected"</c:if>>技术</option>
+					<option value="实施" <c:if test="${type eq '管理' }">selected="selected"</c:if>>实施</option>
 				</select>
 				
 				 登记日期:
