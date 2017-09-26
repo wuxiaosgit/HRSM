@@ -17,4 +17,5 @@ public interface ZhaopinService {
 	public List<ZhaopinBean> selectZhaoRoleDeptPages(Map<String, Object> map);
 	public List<ZhaopinBean> selective(ZhaopinBean zhaopinBean);
 	public List<ZhaopinBean> selectiveALl(ZhaopinBean zhaopinBean);
+	public ZhaopinBean selectRoleByZhaopin(String roleName);
 }

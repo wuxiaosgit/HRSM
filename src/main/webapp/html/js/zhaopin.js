@@ -133,15 +133,16 @@ $(document).ready(function(){
     	});
     });
     
-    $(function(){
+   /* $(function(){
     	$("#demo2_add_roleName").change(function(){
     		var getValue = $("#demo2_add_roleName").val();
     		$.ajax({
         		type:'post',
-        		/*date:{"deptName":getValue},*/
+        		date:{"deptName":getValue},
         		contentType: "application/json",
         		dateType:'json',
         		url: encodeURI(encodeURI('../jianli/selectRoleByRoleName.do?roleName='+getValue)),
+   
         		success:function(data){
         			alert(data.deptBean.deptShortName)
         			$("#demo2_add_hidden").val(data.roleId);
@@ -149,6 +150,27 @@ $(document).ready(function(){
         			$("#demo2_add_deptShortname").val(data.deptBean.deptShortName);
         		}
         	});
-    	});
+    	});*/
+    	
+    	
+    	 $(function(){
+    	    	$("#demo2_add_roleName").change(function(){
+    	    		var getValue = $("#demo2_add_roleName").val();
+    	    		$.ajax({
+    	        		type:'post',
+    	        		/*date:{"deptName":getValue},*/
+    	        		contentType: "application/json",
+    	        		dateType:'json',
+    	        		url: encodeURI(encodeURI('../zhaopin/selectRoleByZhaopin.do?roleName='+getValue)),
+    	   
+    	        		success:function(data){
+    	        			alert(data.roleBean.deptBean.deptShortName)
+    	        			$("#demo2_add_hidden").val(data.roleBean.roleId);
+    	        			$("#demo2_add_hidden2").val(data.zhaopinId);
+    	        			$("#demo2_add_roleNumber").val(data.roleBean.roleNumber);
+    	        			$("#demo2_add_deptShortname").val(data.roleBean.deptBean.deptShortName);
+    	        		}
+    	        	});
+    	    	});
     });
     

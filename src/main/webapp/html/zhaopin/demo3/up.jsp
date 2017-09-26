@@ -225,6 +225,7 @@
 			<table border="1" width="100%" class="table_a">
 			<tr>
 					<td colspan="2">
+					<input type="text" name="zhaopinId" value="${jianliBean.zhaopinId}" />
 					<input type="hidden" name="jianliid" value="${jianliBean.jianliId}" />
 					<input type="hidden" id="demo3_up_hidden" name="method" value="up"/>
 						面试结果：	
@@ -260,7 +261,8 @@
 				 	<c:when test="${jianliBean.state==1}">
 	
 				 		<tr>
-                    <td>一面面试人：<input type="text" name="mianshiren" value="${user.userName }"/> 面试时间：
+                    <td>
+                    一面面试人：<input type="text" name="mianshiren" value="${user.userName }"/> 面试时间：
                     <input name="mianshitime" value="<%=date %>"/>
 					</td>
                     <td>

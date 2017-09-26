@@ -21,4 +21,5 @@ public interface JianliService {
 	public List<JianliBean> selectJianliRoleDeptPagesBySelective(JianliBean jianliBean);
 	public List<JianliBean> selectJianliRoleDeptPagesBySelective2(JianliBean jianliBean);
 	public List<JianliBean> selectJianliRoleDeptPagesBySelective3(JianliBean jianliBean);
+	public List<JianliBean> SelectRoleDept();
 }

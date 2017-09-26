@@ -70,5 +70,9 @@ public class JianliServiceImpl implements JianliService{
 		// TODO Auto-generated method stub
 		return jianliDao.selectJianliRoleDeptPagesBySelective3(jianliBean);
 	}
+	public List<JianliBean> SelectRoleDept() {
+		// TODO Auto-generated method stub
+		return jianliDao.SelectRoleDept();
+	}
 
 }

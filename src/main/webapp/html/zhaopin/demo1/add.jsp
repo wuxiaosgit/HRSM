@@ -6,6 +6,7 @@
         <title>职位发布登记</title>
         <meta http-equiv="content-type" content="text/html;charset=utf-8" />
         <link href="../html/css/mine.css" type="text/css" rel="stylesheet" />
+         <link rel="stylesheet" href="../html/css/screen.css" />
          <script type="text/javascript" src="../html/js/jquery-3.2.1.min.js"></script>
          <script type="text/javascript" src="../html/js/zhaopin.js"></script>
           <script type="text/javascript" src="../html/js/jquery.validate.js"></script>

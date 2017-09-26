@@ -62,6 +62,11 @@ public class ZhaopinServiceImpl implements ZhaopinService {
 		return zhaopinDao.selectiveALl(zhaopinBean);
 	}
 
+	public ZhaopinBean selectRoleByZhaopin(String roleName) {
+		// TODO Auto-generated method stub
+		return zhaopinDao.selectRoleByZhaopin(roleName);
+	}
+
 
 	
 	

@@ -16,7 +16,7 @@ public class ZhaopinBean {
 	private String endTime;
 	private String jobmiaoshu;
 	private String yaoqiu;
-	private int state;
+	private Integer state;
 	private RoleBean roleBean;
 	
 	private PageUtil pageUtil;
@@ -42,9 +42,9 @@ public class ZhaopinBean {
 		this.deptId = deptId;
 	}
 	
-	public void setRoleId(String roleId) {
+	public void setRoleId(int roleId) {
 		/*roleId = Integer.parseInt(roleId);*/
-		this.roleId = Integer.parseInt(roleId);
+		this.roleId = roleId;
 	}
 	
 	public String getDengjiren() {
@@ -80,14 +80,15 @@ public class ZhaopinBean {
 	public int getZhaopinId() {
 		return zhaopinId;
 	}
-	public void setZhaopinId(String zhaopinId) {
-		this.zhaopinId = Integer.parseInt(zhaopinId);
-	}
 	
-	public int getState() {
+	
+	public void setZhaopinId(int zhaopinId) {
+		this.zhaopinId = zhaopinId;
+	}
+	public Integer getState() {
 		return state;
 	}
-	public void setState(int state) {
+	public void setState(Integer state) {
 		this.state = state;
 	}
 	

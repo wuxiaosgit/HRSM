@@ -39,4 +39,6 @@ public interface JianliDao {
 	List<JianliBean> selectJianliRoleDeptPagesBySelective2(JianliBean jianliBean);
 
 	List<JianliBean> selectJianliRoleDeptPagesBySelective3(JianliBean jianliBean);
+
+	List<JianliBean> SelectRoleDept();
 }

@@ -186,7 +186,7 @@
 					<tr>
                     <td>简历附件：</td>
                     <td>
-                        <input type="file" name="fujian" value="${jianliBean.fujian }" />
+                         <a href="../jianli/download.do?jianliId=${jianliBean.jianliId}">${jianliBean.filename }</a>
                     </td>                
                 </tr>
 

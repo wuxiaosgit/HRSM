@@ -209,4 +209,17 @@ public class ZhaopinController {
 		}*/
 		return "/html/zhaopin/demo1/view.jsp";
 	}
+	//-----------------通过招聘名获取职位信息-----------------------------------------
+	@RequestMapping("selectRoleByZhaopin")
+	public @ResponseBody ZhaopinBean selectRoleByZhaopin(HttpServletRequest request,HttpServletResponse response) throws Exception{
+		String roleName = request.getParameter("roleName");
+		roleName =  java.net.URLDecoder.decode(roleName, "UTF-8");
+		//System.out.println(roleName);
+		//RoleBean rb = roleService.selectRoleByRoleName(roleName);
+		//System.out.println(rb.getDeptBean().getDeptShortName());
+		ZhaopinBean zb = zhaopinService.selectRoleByZhaopin(roleName);
+		System.out.println(zb);
+		response.setContentType("text/xml;charset=UTF-8"); 
+		return zb;
+	} 
 }

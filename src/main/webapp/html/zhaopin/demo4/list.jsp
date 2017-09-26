@@ -129,72 +129,7 @@
 						</td>        
 						</tr>
 					</c:forEach>
-                    <tr id="product1">
-                        <td><a href="view.jsp">张华</a></td>
-                        <td>男</td>
-						<td>北京航空航天大学</td>
-                        <td>本科</td> 
-						<td>计算机科学与应用</td> 						
-                        <td>高级工程师</td>
-						<td>5年</td>
-						<td>2013-09-08</td>
-						<td width="40px;" >建议录用</td>
-                        <td>
-							<a href="add.jsp">面试结果</a>						   
-							<a href="../../pmag/demo1/add.jsp">入职办理</a>
-						
-						</td>                        
-                    </tr> 
-					 <tr id="product1">
-                        <td><a href="view.jsp">王宇</a></td>
-                        <td>男</td>
-						<td>清华大学</td>
-                        <td>本科</td> 
-						<td>软件工程与开发</td> 						
-                        <td>技术培训师</td>
-						<td>2年</td>
-						<td>2013-09-08</td>
-						<td width="40px;" >建议录用</td>
-                        <td>
-							<a href="add.jsp">面试结果</a>								   
-							<a href="../../pmag/demo1/add.jsp">入职办理</a>
-							
-						</td>                        
-                    </tr> 
-					
-					<tr id="product1">
-                        <td><a href="view.jsp">张茜</a></td>
-                        <td>女</td>
-						<td>北京矿业大学</td>
-                        <td>本科</td> 
-						<td>人力资源管理</td> 						
-                        <td>人事专员</td>
-						<td>5年</td>
-						<td>2013-09-08</td>
-						<td width="40px;" >建议录用</td>
-                        <td>
-							<a href="add.jsp">面试结果</a>							   
-							<a href="../../pmag/demo1/add.jsp">入职办理</a>
-								
-						</td>                        
-                    </tr> 
-					<tr id="product1">
-                        <td><a href="view.jsp">李梅</a></td>
-                        <td>女</td>
-						<td>北京财经大学</td>
-                        <td>本科</td> 
-						<td>会计</td> 						
-                        <td>财务主管</td>
-						<td>5年</td>
-						<td>2013-09-08</td>
-						<td width="40px;" >录用</td>
-                        <td>
-						<!--录用状态 没有  面试结果登记-->
-<!-- 							<a href="add.html">面试结果</a> -->							   
-							<a href="../../pmag/demo1/add.jsp">入职办理</a>
-								
-						</td>                        
-                    </tr> 
+           
                     <tr>
                         <td colspan="10" style="text-align: center;">						
 		<input type="hidden" value="${totlePages }" id="tp" />

@@ -58,7 +58,19 @@ public class JianliBean {
     
     private String filename;
     
-    private RoleBean roleBean;
+    private int zhaopinId;
+    
+    private ZhaopinBean zhaopinBean;
+    
+    public ZhaopinBean getZhaopinBean() {
+		return zhaopinBean;
+	}
+
+	public void setZhaopinBean(ZhaopinBean zhaopinBean) {
+		this.zhaopinBean = zhaopinBean;
+	}
+
+	private RoleBean roleBean;
 
     public Integer getJianliId() {
         return jianliId;
@@ -248,6 +260,14 @@ public class JianliBean {
 	}
 
 	
+
+	public int getZhaopinId() {
+		return zhaopinId;
+	}
+
+	public void setZhaopinId(String zhaopinId) {
+		this.zhaopinId = Integer.parseInt(zhaopinId);
+	}
 
 	public String getFujian() {
 		return fujian;
