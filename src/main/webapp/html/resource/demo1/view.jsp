@@ -82,7 +82,10 @@
 				<tr>
                     <td>是否启用：</td>
                      <td>
-						${deptBean.deptState }
+						<c:choose>
+						<c:when test="${deptBean.deptState  eq 1 }">启用</c:when>
+						<c:otherwise>禁用</c:otherwise>
+						</c:choose>
 					</td>                
                 </tr>
             </table>

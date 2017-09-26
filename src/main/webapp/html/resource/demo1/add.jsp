@@ -37,25 +37,26 @@
                 <tr>
                     <td>部门简称：<span style="color:red">*</span>：</td>
                     <td>
-                       <input type="text" required="required" name="deptShortName" value="${deptBean.deptShortName }" /> 
+                       <input type="text" id=1 required="required" name="deptShortName" value="${deptBean.deptShortName }" /> 
                     </td>
                 </tr>
                
                 <tr>
                     <td>部门全称：<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text" required="required" name="deptName" value="${deptBean.deptName }" /></td>
+						<input type="text" id=2 required="required" name="deptName" value="${deptBean.deptName }" /></td>
                 </tr>
                 <tr>
                     <td>上级部门：<span style="color:red">*</span>：</td>
                     <td>
-						<select name="deptUp">
+						<select name="deptUp" id=3>
 						<option value="0">
 						顶级部门</option>
 						
 						<c:forEach  items="${topDepts }" var="top">
-						<option value="${top.deptId }">
-						${top.deptName }</option>
+						<option value="${top.deptId }" 
+						<c:if  test="${top.deptId eq deptBean.deptUp }" >selected="selected"</c:if>
+						>	${top.deptName }</option>
 						</c:forEach> 
 						</select>
 					</td>
@@ -63,7 +64,7 @@
                 <tr>
                     <td>地址<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="text" name="deptAddress"  value="${deptBean.deptAddress }" />
+                        <input type="text" id=4 name="deptAddress"  value="${deptBean.deptAddress }" />
                     </td>
                 </tr>
 
@@ -72,7 +73,7 @@
                     <td>简介：</td>
                     <td>
                         
-						 <textarea name="deptJianjie">
+						 <textarea name="deptJianjie" id=5>
 						 ${deptBean.deptJianjie }</textarea>
                     </td>                
                 </tr>
@@ -81,7 +82,7 @@
                     <td>备注：</td>
                     <td>
                         
-						 <textarea name="deptRemark">
+						 <textarea name="deptRemark" id=6>
 						 ${deptBean.deptRemark }
 						 </textarea>
                     </td>                
@@ -90,9 +91,13 @@
 				<tr>
                     <td>是否启用：</td>
                     <td>
-                        <select name="deptState">
-							<option value="1">是</option>
-							<option value="0">否</option>
+                        <select name="deptState" id=7>
+							<option value="1" 
+							<c:if  test="${1 eq deptBean.deptState }" >selected="selected"</c:if>
+							>是</option>
+							<option value="0"
+							<c:if  test="${0 eq deptBean.deptState }" >selected="selected"</c:if>
+							>否</option>
 						</select>
                     </td>                
                 </tr>
@@ -100,7 +105,7 @@
                 <tr>
                     <td colspan="2" align="center">
                         <input type="submit" value="提交">
-						<input type="reset" value="清空">
+						<button type="button" onclick="kong()">清空</button>
                     </td>
                 </tr>  
             </table>
@@ -108,3 +113,15 @@
         </div>
     </body>
 </html>
+<script type="text/javascript">
+function kong(){
+	$("#1").val("");
+	$("#2").val("");
+	$("#3").val("0");
+	$("#4").val("");
+	$("#5").val("");
+	$("#6").val("");
+	$("#7").val("0");
+	
+}
+</script>

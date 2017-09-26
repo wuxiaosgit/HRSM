@@ -18,20 +18,10 @@ public class UserServiceImpl implements UserService {
 	public void insertUser(UserBean userBean) {
 		userDao.insertUser(userBean);
 	}
-
-
-
-	
-
 	public UserBean login(UserBean userBean) {
 		// TODO Auto-generated method stub
 		return userDao.login(userBean);
 	}
-
-
-
-
-
 	public List<UserBean> listUser(UserBean userBean) {
 		// TODO Auto-generated method stub
 		userBean.setCurrentNum((userBean.getCurrentNum()-1)*8);
@@ -40,11 +30,6 @@ public class UserServiceImpl implements UserService {
 		
 		return listUser;
 	}
-
-
-
-
-
 	public void deleteUser(Integer userId) {
 		// TODO Auto-generated method stub
 		userDao.deleteUser(userId);
@@ -58,32 +43,22 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return userDao.getUserById(userId);
 	}
-
-
-
-
-
 	public void updateUser(UserBean userBean) {
 		// TODO Auto-generated method stub
 		userDao.updateUser(userBean);
 	}
-
-
-
-
-
 	public Integer max(UserBean userBean) {
 		// TODO Auto-generated method stub
 		return userDao.max(userBean);
 	}
 
-
-
-
-
 	public UserBean oldPasswrod(UserBean userBean) {
 		// TODO Auto-generated method stub
 		return userDao.oldPasswrod(userBean);
+	}
+	public List<UserBean> ajaxLogin(String ajaxLogin) {
+		// TODO Auto-generated method stub
+		return userDao.ajaxLogin(ajaxLogin);
 	}
 
 }
