@@ -9,13 +9,11 @@ public class TrainBean {
 	private  String  trainTeacher;//培训讲师
 	private  String  trainGoal;//培训目的
 
-	private  Date    trainStarttime;//开始事件
-	private  Date    trainEndtime;//结束事件
+	private  String    trainStarttime;//开始事件
+	private  String    trainEndtime;//结束事件
 	private  String  trainPeople;//参会人员
 	private  String  trainJianjie;//简介
 	private  String  trainZiliao;//资料
-	private  String    trainStart;
-	private  String    trainEnd;
 
 	private  String  trainSumup;//培训总结
 	private  Integer trainState;//审核状态 0：起草 1：审核中 2审核通过 3 驳回
@@ -35,25 +33,6 @@ public class TrainBean {
 		this.currentNum = currentNum;
 	}
 	
-	public String getTrainStart() {
-		return trainStart;
-	}
-
-
-
-	public void setTrainStart(String trainStart) {
-		this.trainStart = trainStart;
-	}
-
-
-	public String getTrainEnd() {
-		return trainEnd;
-	}
-
-	public void setTrainEnd(String trainEnd) {
-		this.trainEnd = trainEnd;
-	}
-
 	public String getTrainResult() {
 		return trainResult;
 	}
@@ -127,19 +106,19 @@ public class TrainBean {
 		this.trainGoal = trainGoal;
 	}
 
-	public Date getTrainStarttime() {
+	public String getTrainStarttime() {
 		return trainStarttime;
 	}
 
-	public void setTrainStarttime(Date trainStarttime) {
+	public void setTrainStarttime(String trainStarttime) {
 		this.trainStarttime = trainStarttime;
 	}
 
-	public Date getTrainEndtime() {
+	public String getTrainEndtime() {
 		return trainEndtime;
 	}
 
-	public void setTrainEndtime(Date trainEndtime) {
+	public void setTrainEndtime(String trainEndtime) {
 		this.trainEndtime = trainEndtime;
 	}
 
@@ -174,5 +153,20 @@ public class TrainBean {
 	public void setTrainSumup(String trainSumup) {
 		this.trainSumup = trainSumup;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "TrainBean [trainId=" + trainId + ", trainName=" + trainName + ", trainTeacher=" + trainTeacher
+				+ ", trainGoal=" + trainGoal + ", trainStarttime=" + trainStarttime + ", trainEndtime=" + trainEndtime
+				+ ", trainPeople=" + trainPeople + ", trainJianjie=" + trainJianjie + ", trainZiliao=" + trainZiliao
+				+ ", trainSumup=" + trainSumup + ", trainState=" + trainState + ", trainFeekBack=" + trainFeekBack
+				+ ", isDelete=" + isDelete + ", trainIdea=" + trainIdea + ", trainResult=" + trainResult
+				+ ", currentNum=" + currentNum + "]";
+	}
+	
+	
 
 }

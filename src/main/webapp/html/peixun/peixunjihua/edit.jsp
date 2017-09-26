@@ -49,34 +49,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                        <input type="text" name="trainTeacher" value="${train.trainTeacher}" /> 
                     </td>
                 </tr>
-               
                 <tr>
                     <td>培训时间<span style="color:red">*</span>：</td>
                     <td><input type="text" name="trainStarttime" value="${train.trainStarttime}"/></td>
                 </tr>
                 <tr>
                     <td>至</td>
-                    <td><input type="text" name="trainEndtime" value="${train.trainEndtime }"/></td>
+                    <td><input type="text" name="trainEndtime" value="${train.trainEndtime}"/></td>
                 </tr>
                 <tr>
                     <td>培训目的<span style="color:red">*</span>：</td>
                     <td><textarea name="trainGoal" >${train.trainGoal}</textarea>
                     </td>
                 </tr>
-
 				<tr>
                     <td>参训人员<span style="color:red">*</span>：</td>
                     <td><textarea name="trainPeople" >${train.trainPeople}</textarea>
                     </td>                
                 </tr>
-
 				<tr>
                     <td>培训简介：</td>
                     <td>
                     <textarea name="trainJianjie" >${train.trainJianjie}</textarea>
                     </td>                
                 </tr>
-
 				<tr>
                     <td>培训资料：</td>
                     <td>
@@ -89,16 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                    </c:otherwise>
 	                    </c:choose>
                     </td>
-                                 
                 </tr>
-
-				<!-- <tr>
-                    <td></td>
-                    <td>
-                        <a href="" >技术专家和教学专家的合作.zip</a> &nbsp;&nbsp;<a href="">删除</a>
-                    </td>                
-                </tr> -->
-				
                 <tr>
                     <td colspan="2" align="center">
                         <input type="submit" value="保存"	 onclick="saveTrain(0);"> 
@@ -106,7 +93,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </td>
                 </tr>  
             </table>
-            </form>
-        </div>
+          </form>
+      </div>
 </body>
 </html>

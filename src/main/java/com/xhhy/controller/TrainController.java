@@ -1,10 +1,6 @@
 package com.xhhy.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,44 +21,29 @@ public class TrainController {
 	//添加
 	@RequestMapping("insert.do")
 	public ModelAndView insertTrain(TrainBean train,@RequestParam("file")MultipartFile file) throws Exception{
-		System.out.println("0");
-		TrainBean newTrain = new TrainBean();
-		newTrain.setTrainName(train.getTrainName());
-		newTrain.setTrainTeacher(train.getTrainTeacher());
-		newTrain.setTrainGoal(train.getTrainGoal());
-		
-		newTrain.setTrainStarttime(train.getTrainStarttime());
-		newTrain.setTrainEndtime(train.getTrainEndtime());
-		newTrain.setTrainPeople(train.getTrainPeople());
-		newTrain.setTrainJianjie(train.getTrainJianjie());
-		newTrain.setTrainState(train.getTrainState());
-		newTrain.setTrainFeekBack(1);
-		newTrain.setIsDelete(0);
+		train.setTrainFeekBack(1);
+		train.setIsDelete(0);
 		
 		//文件上传 
-		trainService.saveTrainAndFilePath(newTrain,file);
+		trainService.saveTrainAndFilePath(train,file);
 		
 		return listTrain(null);
 	}
 	
 	@RequestMapping("list.do")
 	public ModelAndView listTrain(TrainBean train){
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-			
-		if(train != null){
-			try {
-				train.setTrainStarttime(sdf.parse(train.getTrainStart()));
-				train.setTrainEndtime(sdf.parse(train.getTrainEnd()));
-			} catch(ParseException e) {
-				e.printStackTrace();
-			}
-		}else{
-			train= new TrainBean();
-			
+		if(train==null){
+			train = new TrainBean();
 		}
 		List<TrainBean> trainList = trainService.listTrain(train);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("trainList", trainList);
+		mav.addObject("train", train);
+		Integer max = trainService.max(train);
+		mav.addObject("maxSize",max);//总记录数
+		mav.addObject("pageNum",(int)Math.ceil(max/10.0));//总页数
+		mav.addObject("currentPage",train.getCurrentNum());//当前页码 第几页，默认第一页
+		
 		mav.setViewName("../html/peixun/peixunjihua/list.jsp");
 		return mav;
 	}
@@ -91,15 +72,9 @@ public class TrainController {
 	}
 	
 	//修改
-	/**
-	 * @param @RequestParam("file")MultipartFile file
-	 */
 	@RequestMapping("updateTrain.do")
 	public ModelAndView updateTrain(TrainBean train) throws Exception{
-		
 		trainService.updateById(train);
-		//trainService.saveTrainAndFilePath(train,file);
-		
 		return listTrain(null);
 	}
 	
@@ -116,10 +91,21 @@ public class TrainController {
 	 */
 	//复核首页查询
 	@RequestMapping("fuheList.do")
-	public ModelAndView queryByState(){
-		List<TrainBean> trainList = trainService.queryByState(1);
+	public ModelAndView queryByState(TrainBean train){
+		if(train == null){
+			train = new TrainBean();
+		}
 		ModelAndView mav = new ModelAndView();
+		if(train.getTrainState()==null ||train.getTrainState() != 1){
+			train.setTrainState(1);
+		}
+		List<TrainBean> trainList = trainService.listTrain(train);
 		mav.addObject("trainList", trainList);
+		
+		Integer max = trainService.max(train);
+		mav.addObject("maxSize",max);//总记录数
+		mav.addObject("pageNum",(int)Math.ceil(max/10.0));//总页数
+		mav.addObject("currentPage",train.getCurrentNum());//当前页码 第几页，默认第一页
 		mav.setViewName("../html/peixun/peixunfuhe/list.jsp");
 		return mav;
 	}
@@ -135,22 +121,31 @@ public class TrainController {
 		return mav;
 	}
 	
-	//培训复核-培训复核
+	//培训复核
 	@RequestMapping("updateFuheTrain.do")
 	public ModelAndView updateFuheTrain(TrainBean train) throws Exception{
-		
 		trainService.updateById(train);
-		//trainService.saveTrainAndFilePath(train,file);
 		
 		return listTrain(null);
 	}
 	
 	//培训反馈--首页
 	@RequestMapping("fankuiList.do")
-	public ModelAndView fankuiTrainList(){
-		List<TrainBean> trainList = trainService.queryByState(2);
+	public ModelAndView fankuiTrainList(TrainBean train){
+		if(train == null){
+			train = new TrainBean();
+		}
 		ModelAndView mav = new ModelAndView();
+		if(train.getTrainState()==null ||train.getTrainState() != 2){
+			train.setTrainState(2);
+		}
+		List<TrainBean> trainList = trainService.listTrain(train);
 		mav.addObject("trainList", trainList);
+		
+		Integer max = trainService.max(train);
+		mav.addObject("maxSize",max);//总记录数
+		mav.addObject("pageNum",(int)Math.ceil(max/10.0));//总页数
+		mav.addObject("currentPage",train.getCurrentNum());//当前页码 第几页，默认第一页
 		mav.setViewName("../html/peixun/peixunfankui/list.jsp");
 		return mav;
 	}
@@ -170,15 +165,8 @@ public class TrainController {
 	//培训反馈--修改
 	@RequestMapping("updateFankuiTrain.do")
 	public ModelAndView updateFankuiTrain(TrainBean train) throws Exception{
-		
 		trainService.updateById(train);
-		//trainService.saveTrainAndFilePath(train,file);
-		
 		return listTrain(null);
 	}
-	
-	
-	
-	
 	
 }

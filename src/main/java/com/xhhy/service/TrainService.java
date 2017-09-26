@@ -20,6 +20,6 @@ public interface TrainService {
 	
 	public void updateById(TrainBean train);
 
-	public List<TrainBean> queryByState(int state);
-	
+	public Integer max(TrainBean train);
+
 }

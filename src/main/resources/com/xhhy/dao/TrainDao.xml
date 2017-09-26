@@ -36,31 +36,42 @@
 	<if test="trainName != null and trainName != ''">
 			train_name like "%"#{trainName}"%"
 		</if>
-		<if test="trainState != null">
+		<if test="trainState != null and trainState !=-1">
 			and train_state = #{trainState}
 		</if>
-		<if test="trainStarttime != null">
-			and train_starttime = #{trainStarttime}
+		<if test="trainStarttime != null and trainStarttime !='' ">
+			and train_starttime &gt;= #{trainStarttime}
 		</if>
-		<if test="trainEndtime !=null">
-			and train_endtime = #{trainEndtime}
+		<if test="trainEndtime !=null and trainEndtime != '' ">
+			and train_starttime &lt;= #{trainEndtime}
 		</if>
-			and is_delete = 0
-			order by train_id DESC;
+			and is_delete = 0 
+			order by train_id DESC
 			limit #{currentNum},10
 	</where>
 	
 </select>
 
+<select id="max" parameterType="com.xhhy.domain.TrainBean" resultType="int">
+	select count(*) from train_tb where is_delete = 0
+		<if test="trainName != null and trainName != ''">
+			and train_name like "%"#{trainName}"%"
+		</if>
+		<if test="trainState != null">
+			and train_state = #{trainState}
+		</if>
+		<if test="trainStarttime != null and trainStarttime !=''">
+			and train_starttime &gt;= #{trainStarttime}
+		</if>
+		<if test="trainEndtime !=null and trainEndtime !=''">
+			and train_endtime &lt;= #{trainEndtime}
+		</if>
+</select>
+
 
 <select id="queryById" parameterType="int" resultType="com.xhhy.domain.TrainBean">
 	<include refid="queryTrainList" />
-		where	is_delete = 0 and train_id = #{trainId} 
-</select>
-
-<select id="queryByState" parameterType="int" resultType="com.xhhy.domain.TrainBean" >
-	<include refid="queryTrainList"/>
-	where train_state = #{trainState} and is_delete = 0
+		where is_delete = 0 and train_id = #{trainId} 
 </select>
 
 <delete id="deleteById" parameterType="int">

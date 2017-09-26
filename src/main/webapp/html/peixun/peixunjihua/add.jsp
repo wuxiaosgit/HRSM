@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
@@ -21,23 +20,19 @@
 		var o = document.getElementById("train_state");
 		o.value = i; 
 		/* $("#train_state").val(i); */
-		
 		$("#formId").submit(); 
 		/* document.forms[0].submit(); */
 	}
 </script>
-
 </head>
 <body>
 	<div class="div_head">
 		<span> <span style="float: left">当前位置是：-》培训管理 -》添加培训计划</span> <span
 			style="float: right; margin-right: 8px; font-weight: bold"> <a
-				style="text-decoration: none"
-				href="../train/list.do">【返回】</a>
+				style="text-decoration: none" href="train/list.do">【返回】</a>
 		</span>
 		</span>
 	</div>
-	<div></div>
 	<div style="font-size: 13px; margin: 10px 5px">
 		<form action="train/insert.do" id="fromId" method="post"
 			enctype="multipart/form-data">
@@ -53,7 +48,6 @@
 					</td>
 					<td><input type="text" name="trainTeacher" /></td>
 				</tr>
-
 				<tr>
 					<td>培训时间<span style="color: red">*</span>：
 					</td>
@@ -74,23 +68,14 @@
 					</td>
 					<td><textarea name="trainPeople"></textarea></td>
 				</tr>
-
 				<tr>
 					<td>培训简介：</td>
 					<td><textarea name="trainJianjie"></textarea></td>
 				</tr>
-
 				<tr>
 					<td>培训资料：</td>
 					<td><input type="file" name="file" /></td>
 				</tr>
-				<!--
-				<tr>
-                    <td></td>
-                    <td>
-                        <a href="" >技术专家和教学专家的合作.zip</a> &nbsp;&nbsp;<a href="">删除</a>
-                    </td>                
-                </tr> -->
 				<tr>
 					<td colspan="2" align="center">
 						<input type="submit" value="保存"	 onclick="saveTrain(0);"> 
@@ -100,7 +85,5 @@
 			</table>
 		</form>
 	</div>
-
-
 </body>
 </html>

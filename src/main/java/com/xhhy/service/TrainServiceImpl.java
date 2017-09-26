@@ -27,7 +27,10 @@ public class TrainServiceImpl implements TrainService {
 	}
 
 	public List<TrainBean> listTrain(TrainBean train) {
-		return trainDao.listTrain(train);
+		train.setCurrentNum((train.getCurrentNum()-1)*10);
+		List<TrainBean> listTrain = trainDao.listTrain(train);
+		train.setCurrentNum(train.getCurrentNum()/8+1);
+		return listTrain;
 	}
 
 	public void  saveTrainAndFilePath(TrainBean train,MultipartFile file) throws Exception {
@@ -65,10 +68,8 @@ public class TrainServiceImpl implements TrainService {
 		
 	}
 
-	public List<TrainBean> queryByState(int state) {
-		
-		return trainDao.queryByState(state);
+	public Integer max(TrainBean train) {
+		return trainDao.max(train);
 	}
-
 
 }

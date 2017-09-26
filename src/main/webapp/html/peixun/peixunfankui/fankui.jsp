@@ -31,81 +31,81 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <a style="text-decoration: none" href="../train/fankuiList.do">【返回】</a>
                 </span>
             </span>
-        </div>
-        <div></div>
-        <div style="font-size: 13px;margin: 10px 5px">
-            <form action="../train/updateFuheTrain.do" method="post">
+    </div>
+    <div style="font-size: 13px;margin: 10px 5px">
+        <form action="../train/updateFuheTrain.do" method="post">
             <input type="hidden" name="trainState" id="train_state" value="${train.trainState}">
             <input type="hidden" name="trainId" value="${train.trainId}">
-            <table border="1" width="100%" class="table_a">
-                <tr>
-                    <td width="120px;">培训名称<span style="color:red">*</span>：</td>
-                    <td><input type="text" name="trainName" readonly="readonly" value="${train.trainName}"/></td>
-                </tr>
-                <tr>
-                    <td>培训讲师<span style="color:red">*</span>：</td>
-                    <td>
-                       <input type="text" name="trainTeacher" readonly="readonly" value="${train.trainTeacher}" /> 
-                    </td>
-                </tr>
-               
-                <tr>
-                    <td>培训时间<span style="color:red">*</span>：</td>
-                    <td><input type="text" name="trainStarttime" readonly="readonly" value="${train.trainStarttime}"/></td>
-                </tr>
-                <tr>
-                    <td>至</td>
-                    <td><input type="text" name="trainEndtime" readonly="readonly" value="${train.trainEndtime }"/></td>
-                </tr>
-                <tr>
-                    <td>培训目的<span style="color:red">*</span>：</td>
-                    <td><textarea name="trainGoal" readonly="readonly" >${train.trainGoal}</textarea>
-                    </td>
-                </tr>
-
+          <table border="1" width="100%" class="table_a">
+             <tr>
+                 <td width="120px;">培训名称<span style="color:red">*</span>：</td>
+                 <td>
+                 	<input type="text" name="trainName" readonly="readonly" value="${train.trainName}"/></td>
+             </tr>
+             <tr>
+                  <td>培训讲师<span style="color:red">*</span>：</td>
+                  <td>
+                     <input type="text" name="trainTeacher" readonly="readonly" value="${train.trainTeacher}" /> 
+                  </td>
+              </tr>
+              <tr>
+                  <td>培训时间<span style="color:red">*</span>：</td>
+                  <td>
+                  	<input type="text" name="trainStarttime" readonly="readonly" value="${train.trainStarttime}"/></td>
+              </tr>
+              <tr>
+                  <td>至</td>
+                  <td>
+                  	<input type="text" name="trainEndtime" readonly="readonly" value="${train.trainEndtime }"/></td>
+              </tr>
+              <tr>
+                  <td>培训目的<span style="color:red">*</span>：</td>
+                  <td>
+                  	<textarea name="trainGoal" readonly="readonly" >${train.trainGoal}</textarea>
+                  </td>
+              </tr>
+			  <tr>
+                   <td>参训人员<span style="color:red">*</span>：</td>
+                   <td>
+                   	   <textarea name="trainPeople" readonly="readonly">${train.trainPeople}</textarea>
+                   </td>                
+               </tr>
+			   <tr>
+                   <td>培训简介：</td>
+                   <td>
+                   	   <textarea name="trainJianjie" readonly="readonly">${train.trainJianjie}</textarea>
+                   </td>                
+               </tr>
 				<tr>
-                    <td>参训人员<span style="color:red">*</span>：</td>
-                    <td><textarea name="trainPeople" readonly="readonly">${train.trainPeople}</textarea>
-                    </td>                
-                </tr>
-
-				<tr>
-                    <td>培训简介：</td>
-                    <td>
-                    <textarea name="trainJianjie" readonly="readonly">${train.trainJianjie}</textarea>
-                    </td>                
-                </tr>
-
-				<tr>
-                    <td>培训资料：</td>
-                    <td>
-	                    <c:choose>
-		                    <c:when test="${train.trainZiliao !=null && train.trainZiliao != ''}">
-		                    	<input type="text" name="trainZiliao" readonly="readonly" value="${train.trainZiliao}">
-		                    </c:when>
-		                    <c:otherwise>
-		                    	<input type="file" name="file"/>
-		                    </c:otherwise>
-	                    </c:choose>
-                    </td>
-                                 
-                </tr>
-                
+                   <td>培训资料：</td>
+                   <td>
+                    <c:choose>
+	                    <c:when test="${train.trainZiliao !=null && train.trainZiliao != ''}">
+	                    	<input type="text" name="trainZiliao" readonly="readonly" value="${train.trainZiliao}">
+	                    </c:when>
+	                    <c:otherwise>
+	                    	<input type="file" name="file"/>
+	                    </c:otherwise>
+                    </c:choose>
+                   </td>
+               </tr>
                 <tr>
                     <td>审核意见：</td>
                     <td>
-                    <textarea name="trainAdvice" readonly="readonly" >${train.trainAdvice}</textarea>
+                    	<textarea name="trainIdea" readonly="readonly" >${train.trainIdea}</textarea>
                     </td>                
                 </tr>
                 <tr>
                 	<label>培训反馈</label><br/>
                 	<td>培训反馈:</td>
+                	<td>
                 	<select name="trainFeekBack">
-                		<option value="">请选择</option>
-                		<option value="1">优</option>
-                		<option value="2">良</option>
-                		<option value="3">差</option>
+                		<option value="" <c:if test="${train.trainFeekBack ==null ||train.trainFeekBack == -1 }">selected = "selected"</c:if>>--请选择--</option>
+                		<option value="1" <c:if test="${train.trainFeekBack==1}">selected="selected"</c:if>>优</option>
+                		<option value="2" <c:if test="${train.trainFeekBack==2}">selected="selected"</c:if>>良</option>
+                		<option value="3" <c:if test="${train.trainFeekBack==3}">selected="selected"</c:if>>差</option>
                 	</select>
+                	</td>
                 </tr>
                 <tr>
 	                <td>培训总结:</td>
@@ -115,14 +115,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                <td>考核结果:</td>
 	                <td><textarea name="trainResult" >${train.trainResult}</textarea></td>
                 </tr>
-                
                 <tr>
                     <td colspan="2" align="center">
-                        <input type="submit" value="保存"	 onclick="saveTrain(2);"> 
+                        <input type="submit" value="保存"	/> 
                     </td>
                 </tr>  
             </table>
-            </form>
-        </div>
+        </form>
+    </div>
 </body>
 </html>
