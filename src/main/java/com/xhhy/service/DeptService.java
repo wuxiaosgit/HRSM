@@ -13,4 +13,5 @@ public interface DeptService {
 	public void insertDept(DeptBean deptBean);
 	public void updateDept(DeptBean deptBean);
 	public void deleteDept(Integer deptId);
+	public List<DeptBean> getChildDept(Integer deptUp);
 }

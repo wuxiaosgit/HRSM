@@ -11,4 +11,5 @@ public interface DeptDao {
 	public void updateDept(DeptBean deptBean);
 	public void deleteDept(Integer deptId);
 	public List<DeptBean> getTopDept();
+	public List<DeptBean> getChildDept(Integer deptUp);
 }

@@ -19,9 +19,13 @@
 <script type="text/javascript" src="dtree.js"></script>
 <script src="js/jquery-3.2.1.min.js" type="text/javascript"
 	charset="utf-8"></script>
+<link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">   
+<link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">   
+<script type="text/javascript" src="easyui/jquery.min.js"></script>   
+<script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>  
 
 <script language=javascript>
-            function expand(el)
+          /*   function expand(el)
             {
                 childobj = document.getElementById(el);
 
@@ -34,11 +38,35 @@
                     childobj.style.display = 'none';
                 }
                 return;
-            }
+            } */
+            $(function(){
+
+        		$('#tt').tree({
+        			url : '../dept/deptTree.do',
+        			animate : true,
+        			onClick : function(node) {
+        				if(node.id != 0){
+        					//alert(node);
+        					window.parent.frames['wecom'].location = '../dept/getDeptById.do?deptId='+node.id;
+        					//window.ifm.frames['wecom'].location = 'html/login.jsp';
+        				} 
+        			}
+
+        		});
+            	
+            });
         </script>
 </head>
 <body >
-  	<div class="div_head">
+	
+<ul id="tt" class="easyui-tree">   
+
+</ul>   
+
+
+
+
+  	<%-- <div class="div_head">
             <span>
                 <span style="float:left">部门树</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
@@ -77,7 +105,7 @@
 				<td colspan=2></td>
 			</tr>
 		</table>
-	</c:forEach>
+	</c:forEach> --%>
 	<script type="text/javascript">
 					<!--
 					d = new dTree('d');
