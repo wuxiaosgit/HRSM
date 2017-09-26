@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span>
                 <span style="float:left">当前位置是：-》培训管理 -》修改培训计划</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
-                    <a style="text-decoration: none" href="../peixunjihua/list.jsp">【返回】</a>
+                    <a style="text-decoration: none" href="../train/list.do">【返回】</a>
                 </span>
             </span>
         </div>
@@ -48,33 +48,33 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </tr>
                 <tr>
                     <td>培训目的<span style="color:red">*</span>：</td>
-                    <td><textarea name="trainGoal" value="${train.trainGoal}" readonly="readonly"></textarea>
+                    <td><textarea name="trainGoal" readonly="readonly">${train.trainGoal}</textarea>
                     </td>
                 </tr>
 
 				<tr>
                     <td>参训人员<span style="color:red">*</span>：</td>
-                    <td><textarea name="trainPeople" value="${train.trainPeople}" readonly="readonly"></textarea>
+                    <td><textarea name="trainPeople" readonly="readonly">${train.trainPeople}</textarea>
                     </td>                
                 </tr>
 
 				<tr>
                     <td>培训简介：</td>
-                    <td><textarea name="trainJianjie" value="${train.trainJianjie}" readonly="readonly"></textarea>
+                    <td><textarea name="trainJianjie" readonly="readonly">${train.trainJianjie}</textarea>
                     </td>                
                 </tr>
 
 				<tr>
                     <td>培训资料：</td>
-                    <td><input type="file" name="trainZiliao" /></td>                
+                    <td><input type="text" name="trainZiliao" value="${train.trainZiliao}" /></td>                
                 </tr>
 
-				<tr>
+				<!-- <tr>
                     <td></td>
                     <td>
                         <a href="" >技术专家和教学专家的合作.zip</a> &nbsp;&nbsp;<a href="">删除</a>
                     </td>                
-                </tr>
+                </tr> -->
                   
             </table>
             </form>
