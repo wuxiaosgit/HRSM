@@ -143,6 +143,7 @@ public class UserController {
 		}*/
 		mav.addObject("userBeans",userBeans);
 		mav.addObject("deptBeans",deptService.listDept());
+		
 		mav.addObject("deptId",userBean.getDeptId());
 		mav.addObject("userName",userBean.getUserName());
 		mav.addObject("role",roleService.getRoleById(userBean.getRoleId()));

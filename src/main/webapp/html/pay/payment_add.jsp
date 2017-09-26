@@ -1,4 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/html/pay/";
+%> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 发他妈的工资 -->
 <html>
     <head>
         <title>薪资发放</title>
@@ -7,7 +14,6 @@
     </head>
 
     <body>
-
         <div class="div_head">
             <span>
                 <span style="float:left">当前位置是：-》薪酬发放管理 -》发薪</span>
@@ -16,20 +22,13 @@
                 </span>
             </span>
         </div>
-        <div></div>
 
         <div style="font-size: 13px;margin: 10px 5px">
             <form action="./admin.php?c=goods&a=add" method="post" enctype="multipart/form-data">
             <table border="1" width="100%" class="table_a">
-               
                 <tr>
                     <td>部门</td>
                     <td>
-                        <select name="f_goods_category_id">
-                            <option value="0">请选择</option>
-                            <option value="1">人事部</option>
-                            <option value="2">财务部</option>
-                        </select>
                         <select name="f_goods_category_id">
                             <option value="0">请选择</option>
                             <option value="1">人事部</option>

@@ -1,4 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/html/pay/";
+%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- 展示具体内容 -->
 <html>
     <head>
         <title>薪酬标准管理</title>
@@ -24,37 +31,37 @@
                 <tr>
                     <td width="120px;">薪酬标准编号：</td>
                     <td>
-						a1001
+						${wageBean.wageBm}
 					</td>
                 </tr>
                 <tr>
                     <td>薪酬标准名称：</td>
                     <td>
-						高级开发工程师
+						${wageBean.wageName}
 					</td>
                 </tr>
                 <tr>
                     <td>薪酬总额：</td>
                      <td>
-						15000 元
+						${wageBean.all}元
 					</td>
                 </tr>
                 <tr>
                     <td>制定人：</td>
                      <td>
-						张XX
+						${wageBean.zzrName}
 					</td>
                 </tr>
                 <tr>
                     <td>登记人：</td>
                      <td>
-						张XX
+						${wageBean.djrName}
 					</td>
                 </tr>
                 <tr>
                     <td>登记时间：</td>
                      <td>
-						2015-10-29
+						${wageBean.wageDate}
 					</td>
                 </tr>
 
@@ -62,59 +69,59 @@
 				<tr>
                     <td>基本工资：</td>
                      <td>
-						12000 元
+						${wageBean.basePay}
 					</td>               
                 </tr>
 
 				<tr>
                     <td>绩效奖金：</td>
                      <td>
-						1000 元
+						${wageBean.awarPay}
 					</td>                
                 </tr>
 
 				<tr>
                     <td>交通补助：</td>
                     <td>
-                        100 元
+                        ${wageBean.travelPay}
                     </td>                
                 </tr>
 
 				<tr>
                     <td>通讯补助：</td>
                     <td>
-                       100 元
+                       ${wageBean.phonePay}
                     </td>                
                 </tr>
 
 				<tr>
                     <td>餐补：</td>
                     <td>
-                        350 元
+                        ${wageBean.mealPay}
                     </td>                
                 </tr>
 				<tr>
                     <td>住房补助：</td>
                     <td>
-                       300 元
+                       ${wageBean.housePay}
                     </td>                
                 </tr>
 				<tr>
                     <td>出差补助：</td>
                     <td> 
-                       1000 元
+                       ${wage.missionPay}
                     </td>                
                 </tr>
 				<tr>
                     <td>加班补助：</td>
                     <td>
-                        150 元
+                        ${wageBean.overtimePay}元
                     </td>                
                 </tr>	
 				<tr>
                     <td>备注：</td>
                     <td>
-                       基本工资+补助
+                    	   ${wageBean.remark}
                     </td>                
                 </tr>
             </table>
