@@ -133,24 +133,11 @@ public class ZhaopinController {
 	}
 	//---------------------------分页展示所有招聘信息-------------------------------------
 	@RequestMapping("selectZhaoRoleDeptPages")
-	public String selectZhaoRoleDeptPages(Model model,RoleBean roleBean,
-			DeptBean deptBean,ZhaopinBean zhaopinBean,PageUtil pageUtil){
-		//System.out.println(pageUtil);
-
-		deptBean.setDeptState(State.UNDEL);
-		roleBean.setRoleState(State.UNDEL);
-		roleBean.setDeptBean(deptBean);
-		zhaopinBean.setRoleBean(roleBean);
-		
-		zhaopinBean.setState(State.UNDEL);
-		
+	public String selectZhaoRoleDeptPages(Model model,ZhaopinBean zhaopinBean,PageUtil pageUtil){
 		List<ZhaopinBean> list = zhaopinService.selectZhaoRoleDept();
 		int pageNum = 1;//页码
 		int pn = pageUtil.getPageNum();
-		//System.out.println(pn);
-	/*	if(pn != null){
-			pageNum = Integer.parseInt(pn);
-		}*/
+
 		if(pn !=0){
 			pageNum = pn;
 		}
@@ -170,13 +157,13 @@ public class ZhaopinController {
 		pageUtil.setTotleRows(totleRows);
 		
 		int pageStart = pageUtil.getStart();
-		//System.out.println(pageStart);
+
 		
 		Map<String,Object> map =new HashMap<String, Object>();
 		map.put("zb", zhaopinBean);
 		map.put("pageUtil", pageUtil);
 		map.put("pageStart", pageStart);
-		//System.out.println(map.get("zb"));
+
 		List<ZhaopinBean> lists = zhaopinService.selectZhaoRoleDeptPages(map);
 		model.addAttribute("list", lists);
 		model.addAttribute("pageNum", pageNum);
@@ -184,9 +171,15 @@ public class ZhaopinController {
 		model.addAttribute("totlePages", totlePages);
 		model.addAttribute("totleRows", totleRows);
 		model.addAttribute("pn", pn);
-		/*for (ZhaopinBean zhaopinBean : list) {
-			System.out.println(zhaopinBean.getRoleBean());
+		/*if(zhaopinBean!=null){
+			model.addAttribute("roleName", zhaopinBean.getRoleBean().getRoleName());
+			model.addAttribute("startTime", zhaopinBean.getStartTime());
+			model.addAttribute("type", zhaopinBean.getRoleBean().getDeptBean().getDeptShortName());
+			model.addAttribute("endTime", zhaopinBean.getEndTime());
 		}*/
+		
+
+
 		return "/html/zhaopin/demo1/list.jsp";
 	}
 	//---------------------------页面展示所有招聘信息-------------------------------------

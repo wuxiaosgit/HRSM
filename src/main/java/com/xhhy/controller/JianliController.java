@@ -166,23 +166,12 @@ public class JianliController {
 		//---------------------------分页展示所有简历信息-------------------------------------
 		@RequestMapping("selectJianliRoleDeptPages")
 		public String selectJianliRoleDeptPages2(Model model,PageUtil pageUtil){
-			//System.out.println(pageUtil);
-
-			//deptBean.setDeptState(State.UNDEL);
-			//roleBean.setRoleState(State.UNDEL);
-			//roleBean.setDeptBean(deptBean);
-			//jianliBean.setRoleBean(roleBean);
-			
-			//jianliBean.setState(State.SAVE);
 			
 			List<JianliBean> list = jianliService.selectJianliRoleDept();
-			//System.out.println(list.get(0).getRoleBean().getDeptBean().getDeptName());
+			
 			int pageNum = 1;//页码
 			int pn = pageUtil.getPageNum();
-			//System.out.println(pn);
-		/*	if(pn != null){
-				pageNum = Integer.parseInt(pn);
-			}*/
+	
 			if(pn !=0){
 				pageNum = pn;
 			}
@@ -202,10 +191,9 @@ public class JianliController {
 			pageUtil.setTotleRows(totleRows);
 			
 			int pageStart = pageUtil.getStart();
-			//System.out.println(pageStart);
-			//System.out.println(pageNum);
+			
 			Map<String,Object> map =new HashMap<String, Object>();
-			//map.put("zb", jianliBean);
+			
 			map.put("pageUtil", pageUtil);
 			map.put("pageStart", pageStart);
 
@@ -217,9 +205,7 @@ public class JianliController {
 			model.addAttribute("totlePages", totlePages);
 			model.addAttribute("totleRows", totleRows);
 			model.addAttribute("pn", pn);
-			/*for (ZhaopinBean zhaopinBean : list) {
-				System.out.println(zhaopinBean.getRoleBean());
-			}*/
+			
 			return "/html/zhaopin/demo2/list.jsp";
 		}
 		
