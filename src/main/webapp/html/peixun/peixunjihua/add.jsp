@@ -54,7 +54,7 @@
 					<td><input type="text" name="trainStarttime" /></td>
 				</tr>
 				<tr>
-					<td>至</td>
+					<td>至<span style="color: red">*</span>：</td>
 					<td><input type="text" name="trainEndtime" /></td>
 				</tr>
 				<tr>
