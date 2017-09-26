@@ -3,7 +3,7 @@
 		submitHandler: function(form) {
 			 form.submit(); 
 		}
-	});       
+	});
 	$().ready(function() {
 		// validate the comment form when it is submitted
 		//$("#demo1_add_form").validate();
@@ -12,7 +12,52 @@
 		$("#demo1_add_form").validate({
 			rules: {
 
-				//lastname: "required",
+				demo2_add_deptShortname: "required",
+				xingbie:"required",
+				zhaopinType:"required",
+				zhaopinNum: {
+					required: true
+				},
+				endTime: {
+					required: true,
+					date:true
+				},
+				startTime: {
+					required: true,
+					date:true
+				},
+				jobmiaoshu: {
+					required: true
+				},
+				yaoqiu: "required"
+			},
+			messages: {
+				//firstname: "Please enter your firstname",
+				//lastname: "Please enter your lastname",
+				zhaopinNum: {
+					required: "数字不能为空",
+					minlength: "Your username must consist of at least 2 characters"
+				},
+				startTime: {
+					required: "时间不能为空"
+				
+				},
+				endTime: {
+					required: "时间不能为空"
+				
+				},
+				email: "Please enter a valid email address",
+				agree: "Please accept our policy",
+				topic: "Please select at least 2 topics"
+			}
+		});
+		
+		$("#demo2_add_form").validate({
+			rules: {
+
+				demo2_add_deptShortname: "required",
+				xingbie:"required",
+				zhaopinType:"required",
 				zhaopinNum: {
 					required: true
 				},

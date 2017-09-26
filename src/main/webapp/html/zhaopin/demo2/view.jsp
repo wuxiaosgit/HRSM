@@ -176,7 +176,7 @@
 					<tr>
                     <td>简历附件：</td>
                     <td>
-                        <a href="#">张华个人简历.doc</a>
+                        <a href="../jianli/download.do?jianliId=${jianliBean.jianliId}">${jianliBean.filename }</a>
                     </td>                
                 </tr>
 				</tr>

@@ -19,9 +19,7 @@
      jobmiaoshu,yaoqiu,state
   </sql>
   
-  <select id="selectAll" resultMap="BaseResultMap">
-  	select * from zhaopin_tb where state=1
-  </select>
+  
   <resultMap id="ZhaopinRole" type="com.xhhy.domain.ZhaopinBean" extends="BaseResultMap">
   	<association property="roleBean" javaType="RoleBean">
   		 <id property="roleId" column="role_id" />
@@ -37,12 +35,24 @@
 			<result property="deptName" column="dept_name"/>
 			<result property="deptShortName" column="dept_shortname"/>
 			<result property="deptUp" column="dept_up"/>
-			<result property="deptAdress" column="dept_address"/>
+			<result property="deptAddress" column="dept_address"/>
 			<result property="deptJianjie" column="dept_jianjie"/>
 			<result property="deptRemark" column="dept_remark"/>
 		</association>
 		</association>
 	</resultMap> 
+	
+	<select id="selectRoleByZhaopin" resultMap="ZhaopinRole" parameterType="String">
+		select * from zhaopin_tb z,role_tb r,dept_tb d
+		where 
+  		z.role_id = r.role_id and r.dept_id = d.dept_id and state = 1
+  		and r.role_name = #{roleName}
+	</select>
+	
+	<select id="selectAll" resultMap="ZhaopinRole">
+  	select * from zhaopin_tb z,role_tb r,dept_tb d where 
+  	z.role_id = r.role_id and r.dept_id = d.dept_id and state = 1
+  </select>
 	<select id="selectiveALl" resultMap="ZhaopinRole" parameterType="com.xhhy.domain.ZhaopinBean">
 		select * from zhaopin_tb z,role_tb r,dept_tb d
 		<where>
@@ -266,8 +276,8 @@ d.dept_id,dept_state,dept_name,dept_shortname,dept_up,dept_address,dept_jianjie,
       <if test="yaoqiu != null" >
         yaoqiu = #{yaoqiu,jdbcType=LONGVARCHAR},
       </if>
-      <if test="state != null" >
-        state = 1
+      <if test="state != null and state!=''" >
+        state = #{state,jdbcType=INTEGER}
       </if>
     </set>
     where zhaopin_id = #{zhaopinId,jdbcType=INTEGER}

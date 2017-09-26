@@ -28,12 +28,13 @@
     <result column="fujian" property="fujian" jdbcType="VARCHAR" />
     <result column="yijian" property="yijian" jdbcType="LONGVARCHAR" />
     <result column="state" property="state" jdbcType="INTEGER"/>
+    <result column="zhaopin_id" property="zhaopinId" jdbcType="INTEGER"/>
   </resultMap>
   <sql id="Base_Column_List" >
     jianli_id, job_id, xingming, xingbie, zhaopin_type, email, tel, address, live, mianmao, 
     IDCard, school, xueli, zhuanye, jianyan, xizi, yinjiesheng, zizhi, dtime, tuijian, 
     tuijianren, tuijianTime,
-    jianli, fujian, yijian,state
+    jianli, fujian, yijian,state,zhaopin_id
   </sql>
  
   <select id="selectAll" resultMap="BaseResultMap">
@@ -162,6 +163,13 @@
 			and dtime &gt; #{dtime}
 		</if>
  	</select>
+ 	
+ 	
+ 	<!--  <resultMap type="com.xhhy.domain.JianliBean" id="selectJianliRoleDeptMap2" extends="BaseResultMap">
+  		<association property="jianliBean" column="jianli_id"  select="com.xhhy.dao.JianliDao.selectByPrimaryKey" javaType="JianliBean"></association>
+  	</resultMap>
+ 	<select id="SelectRoleDept" resultMap="selectJianliRoleDeptMap2"></select> -->
+ 
  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from jianli_tb
@@ -176,7 +184,7 @@
       xizi, yinjiesheng, zizhi, 
       dtime, tuijian, tuijianren, 
       tuijianTime, jianli, fujian, 
-      yijian,state)
+      yijian,state,zhaopin_id)
     values (#{jianliId,jdbcType=INTEGER}, #{jobId,jdbcType=VARCHAR}, #{xingming,jdbcType=VARCHAR}, 
       #{xingbie,jdbcType=VARCHAR}, #{zhaopinType,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
       #{tel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{live,jdbcType=VARCHAR}, 
@@ -185,7 +193,7 @@
       #{xizi,jdbcType=DOUBLE}, #{yinjiesheng,jdbcType=VARCHAR}, #{zizhi,jdbcType=VARCHAR}, 
       #{dtime,jdbcType=TIMESTAMP}, #{tuijian,jdbcType=VARCHAR}, #{tuijianren,jdbcType=VARCHAR}, 
       #{tuijiantime,jdbcType=TIMESTAMP}, #{jianli,jdbcType=LONGVARCHAR}, #{fujian,jdbcType=VARCHAR}, 
-      #{yijian,jdbcType=LONGVARCHAR}, #{state,jdbcType=INTEGER})
+      #{yijian,jdbcType=LONGVARCHAR}, #{state,jdbcType=INTEGER},#{zhaopinId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.xhhy.domain.JianliBean" >
     insert into jianli_tb
@@ -271,6 +279,9 @@
       <if test="state != null" >
         state,
       </if>
+       <if test="zhaopinId != null" >
+        zhaopin_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="jianliId != null" >
@@ -354,6 +365,9 @@
       <if test="state != null" >
         #{state,jdbcType=INTEGER},
       </if>
+      <if test="zhaopinId != null" >
+        #{zhaopinId,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.xhhy.domain.JianliBean" >
@@ -433,6 +447,9 @@
       </if>
       <if test="state != null" >
         state = #{state,jdbcType=INTEGER},
+      </if>
+       <if test="zhaopinId != null" >
+        zhaopin_id = #{zhaopinId,jdbcType=VARCHAR},
       </if>
     </set>
     where jianli_id = #{jianliId,jdbcType=INTEGER}

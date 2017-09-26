@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,9 +25,11 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.xhhy.domain.DeptBean;
 import com.xhhy.domain.JianliBean;
 import com.xhhy.domain.RoleBean;
+import com.xhhy.domain.ZhaopinBean;
 import com.xhhy.service.DeptService;
 import com.xhhy.service.JianliService;
 import com.xhhy.service.RoleService;
+import com.xhhy.service.ZhaopinService;
 import com.xhhy.utils.PageUtil;
 import com.xhhy.utils.State;
 
@@ -35,6 +38,8 @@ import com.xhhy.utils.State;
 public class JianliController {
 	@Autowired
 	private JianliService jianliService;
+	@Autowired
+	private ZhaopinService zhaopinService;
 	@Autowired
 	private RoleService roleService;
 	@Autowired
@@ -97,7 +102,10 @@ public class JianliController {
 		 MultipartHttpServletRequest multipartRequest =(MultipartHttpServletRequest) request;
 		 MultipartFile file = multipartRequest.getFile("newfile");
 		 String fileName = file.getOriginalFilename();
-		 String fujian = "f:/"+fileName;
+		 String mime = file.getContentType();
+		 System.out.println(mime);
+		 
+		 String fujian = "f:/"+UUID.randomUUID().toString()+"."+mime;
 		 try {
 			InputStream in = file.getInputStream();
 			
@@ -134,10 +142,10 @@ public class JianliController {
 	//------------------------获取部门信息和职位信息-----------------------------------------
 		@RequestMapping("SelectRoleDept")
 		public String listRole(Model model){
-			List<RoleBean> roles = roleService.SelectRoleDept();
+			List<ZhaopinBean> zhaopinBean = zhaopinService.selectAll();
 			List<DeptBean> db = deptService.listDept();
 			//System.out.println(roles);
-			model.addAttribute("roles",roles);
+			model.addAttribute("zhaopinBean",zhaopinBean);
 			model.addAttribute("db", db);
 			return "/html/zhaopin/demo2/add.jsp";
 		}

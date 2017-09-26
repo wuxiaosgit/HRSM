@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.xhhy.domain.JianliBean;
 import com.xhhy.domain.MianshiBean;
+import com.xhhy.domain.ZhaopinBean;
 import com.xhhy.service.JianliService;
 import com.xhhy.service.MianshiService;
+import com.xhhy.service.ZhaopinService;
 import com.xhhy.utils.PageUtil;
 import com.xhhy.utils.State;
 
@@ -23,6 +25,8 @@ public class MianshiController {
 	private MianshiService mianshiService;
 	@Autowired
 	private JianliService jianliService;
+	@Autowired
+	private ZhaopinService zhaopinService;
 	//------------------------查询所有面试信息------------------------------
 		@RequestMapping("selectAll")
 		public String selectAll(Model model){
@@ -65,7 +69,7 @@ public class MianshiController {
 		}
 		//-------------------------添加面试信息--------------------------
 		@RequestMapping("insertSelective")
-		public String insertSelective(MianshiBean mianshiBean,String method){
+		public String insertSelective(MianshiBean mianshiBean,String method,int zhaopinId){
 			int jianliId = mianshiBean.getJianliid();
 			int state = mianshiBean.getState();
 			if(method.equals("del")){
@@ -73,7 +77,28 @@ public class MianshiController {
 				return "selectJianliMianshiRoleDeptPages.do";
 			}else{
 				mianshiService.insertSelective(mianshiBean);
-				jianliService.updateByPrimaryKeyAndState(state+1,jianliId);
+				state +=1;
+				jianliService.updateByPrimaryKeyAndState(state,jianliId);
+				if(state == 4){
+					//System.out.println("zhaopinId" +zhaopinId);
+					ZhaopinBean zhaopinBean = zhaopinService.selectByPrimaryKey(zhaopinId);
+					//System.out.println(zhaopinBean);
+					int zhaopinNum = zhaopinBean.getZhaopinNum() - 1;
+					System.out.println("zhaopinNum:"+zhaopinNum);
+					if(zhaopinNum==0){
+						/*zhaopinBean.setZhaopinNum(zhaopinNum);
+						zhaopinBean.setState(0);
+						System.out.println("state:"+zhaopinBean.getState());*/
+						ZhaopinBean zhaopinBean2 = new ZhaopinBean();
+						zhaopinBean2.setZhaopinId(zhaopinId);
+						zhaopinBean2.setZhaopinNum(zhaopinNum);
+						zhaopinService.updateByPrimaryKeySelective(zhaopinBean2);
+					}else{
+						zhaopinBean.setZhaopinNum(zhaopinNum);
+						zhaopinService.updateByPrimaryKeySelective(zhaopinBean);
+					}
+					
+				}
 				return "selectJianliMianshiRoleDeptPages.do";
 			}
 			
@@ -81,17 +106,8 @@ public class MianshiController {
 		//-----------------在面试管理中分页展示所简历信息selectJianliRoleDeptPages---------------------------
 				@RequestMapping("selectJianliMianshiRoleDeptPages")
 				public String selectJianliMianshiRoleDeptPages(Model model,PageUtil pageUtil){
-					//System.out.println(pageUtil);
 
-					//deptBean.setDeptState(State.UNDEL);
-					//roleBean.setRoleState(State.UNDEL);
-					//roleBean.setDeptBean(deptBean);
-					//jianliBean.setRoleBean(roleBean);
-					
-					//jianliBean.setState(State.SAVE);
-					
 					List<JianliBean> list = jianliService.selectJianliMianshiRoleDept();
-					System.out.println(list.get(0).getRoleBean().getDeptBean().getDeptName());
 					int pageNum = 1;//页码
 					int pn = pageUtil.getPageNum();
 					//System.out.println(pn);

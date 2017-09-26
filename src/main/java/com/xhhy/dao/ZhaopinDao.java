@@ -29,4 +29,6 @@ public interface ZhaopinDao {
 	List<ZhaopinBean> selective(ZhaopinBean zhaopinBean);
 
 	List<ZhaopinBean> selectiveALl(ZhaopinBean zhaopinBean);
+
+	ZhaopinBean selectRoleByZhaopin(String roleName);
 }

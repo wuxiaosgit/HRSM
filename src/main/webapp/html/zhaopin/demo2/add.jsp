@@ -6,6 +6,7 @@
         <title>简历管理添加</title>
         <meta http-equiv="content-type" content="text/html;charset=utf-8" />
         <link href="../html/css/mine.css" type="text/css" rel="stylesheet" />
+        <link rel="stylesheet" href="../html/css/screen.css" />
           <script type="text/javascript" src="../html/js/jquery-3.2.1.min.js"></script>
          <script type="text/javascript" src="../html/js/zhaopin.js"></script>
           <script type="text/javascript" src="../html/js/jquery.validate.js"></script>
@@ -27,16 +28,17 @@
         <div style="font-size: 13px;margin: 10px 5px">
            <!--  <form action="../../../zhaopin/insertSelective.do" method="post"> -->
             <%-- ../jianli/selectByPrimaryKey.do?jianliId=${list.jianliId } --%>
-             <form action="../jianli/insertSelective.do" method="post" id="" enctype="multipart/form-data">
+             <form action="../jianli/insertSelective.do" method="post" id="demo2_add_form"  enctype="multipart/form-data">
             <table border="1" width="100%" class="table_a">
                 <tr>
                     <td width="120px;">应聘职位名称<span style="color:red">*</span>：</td>
                     <td>
                     <input type="hidden" id="demo2_add_hidden" name="jobId" />
+             		 <input type="hidden" id="demo2_add_hidden2" name="zhaopinId" />
 					<select id="demo2_add_roleName">
 						<option value="0">--请选择--</option>
-						<c:forEach items="${ roles}" var = "role">
-							<option value="${role.roleName }">${role.roleName }</option>
+						<c:forEach items="${ zhaopinBean}" var = "role">
+							<option value="${role.roleBean.roleName }">${role.roleBean.roleName}</option>
 						</c:forEach>
 					</select>
 					
@@ -59,13 +61,13 @@
                 <tr>
                     <td>姓名<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text"  name="xingming" value="" />
+						<input type="text" id="xingming" name="xingming" value="" />
 					</td>
                 </tr>
                 <tr>
                     <td>性别<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="text" name="xingbie"  />
+                        <input type="text" id="xingbie" name="xingbie"  />
                     </td>
                 </tr>
 
@@ -73,7 +75,7 @@
 				<tr>
                     <td>招聘类型<span style="color:red">*</span>：</td>
                     <td>
-                       <select name="zhaopinType">
+                       <select name="zhaopinType" id="zhaopinType">
 						<option value="">-请选择-</option>
 						<option value="社会招聘">社会招聘</option>
 						<option value="校园招聘">校园招聘</option>
