@@ -50,10 +50,8 @@
 		}
 		 if (user1 == null ) {
 			 //添加
-			 alert("添加");
 		return ajaxLogin(userLogin);
 		}else{
-			 alert("修改");
 			//修改
 			return true;
 		}
