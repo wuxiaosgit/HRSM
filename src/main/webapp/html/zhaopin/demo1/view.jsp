@@ -4,8 +4,8 @@
 <html>
     <head>
         <title>职位发布管理</title>
-        <meta http-equiv="content-type" content="text/html;charset=utf-8">
-        <link href="../html/css/mine.css" type="text/css" rel="stylesheet">
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <link href="../html/css/mine.css" type="text/css" rel="stylesheet" />
     </head>
 
     <body>
@@ -26,7 +26,7 @@
                 <tr>
                     <td width="120px;">部门：</td>
                     <td>
-						<input type="text" value="产品设计中心"/>
+						<input type="text" value="${zb.roleBean.deptBean.deptName }"/>
 					</td>
                 </tr>
                 <tr>
@@ -41,26 +41,26 @@
                 <tr>
                     <td>招聘人数：</td>
                      <td>
-					<input type="text" readonly value="${zhaopinBean.zhaopinNum }"/>	
+					<input type="text" readonly value="${zb.zhaopinNum }"/>	
 					</td>
                 </tr>
                 <tr>
                     <td>职位名称：</td>
                      <td>
-						<input type="text" readonly value="技术培训师">
+						<input type="text" readonly value="${zb.roleBean.roleName }">
 					</td>
                 </tr>
                 <tr>
                     <td>职业编码：</td>
                      <td>
-						BDQN-BM03
+						${zb.roleBean.roleNumber }
 					</td>
                 </tr>
                 <tr>
                     <td>职位分类：</td>
                      <td>
 						<select>
-							<option>技术</option>
+							<option>${zb.roleBean.deptBean.deptShortName }</option>
 						</select>
 					</td>
                 </tr>
@@ -69,21 +69,21 @@
 				<tr>
                     <td>登记人：</td>
                      <td>
-						${zhaopinBean.dengjiren }
+						${zb.dengjiren }
 					</td>               
                 </tr>
 
 				<tr>
                     <td>登记时间：</td>
                      <td>
-						${zhaopinBean.startTime }
+						${zb.startTime }
 					</td>                
                 </tr>
 
 				<tr>
                     <td>截止日期：</td>
                     <td>
-                        ${zhaopinBean.endTime }
+                        ${zb.endTime }
                     </td>                
                 </tr>
 
@@ -91,7 +91,7 @@
                     <td>职位描述：</td>
                     <td>
                        <textarea cols="70" rows="12">
-					  	${zhaopinBean.jobmiaoshu }
+					  	${zb.roleBean.roleDescribe }
 					   </textarea>
                     </td>                
                 </tr>
@@ -100,7 +100,7 @@
                     <td>招聘要求：</td>
                     <td>
                        <textarea cols="70" rows="12">
-						${zhaopinBean.yaoqiu }
+						${zb.yaoqiu }
 					   </textarea>
                     </td>                
                 </tr>

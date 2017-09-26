@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="Utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
@@ -24,19 +25,19 @@
             <table border="1" width="100%" class="table_a">
                 <tr>
                     <td width="120px;">应聘职位名称：</td>
-                    <td><input type="text" name="f_goods_name" value="高级开发工程师" /></td>
+                    <td><input type="text" name="f_goods_name" value="${jianliBean.roleBean.roleName }" /></td>
                 </tr>
                 <tr>
                     <td>应聘职位编码：</td>
                     <td>
-                       <input type="text" name="f_goods_name" value="a1006" /> 
+                       <input type="text" name="f_goods_name" value="${jianliBean.roleBean.roleNumber }" /> 
                     </td>
                 </tr>
                
                 <tr>
                     <td>职位分类：</td>
                     <td>
-						<input type="text" name="f_goods_price"  /></td>
+						<input type="text" name="deptShortName"  value="${jianliBean.roleBean.deptBean.deptShortName }" /></td>
                 </tr>
                 <tr>
                     <td>姓名：</td>
@@ -47,10 +48,7 @@
                 <tr>
                     <td>性别：</td>
                     <td>
-                        <select>
-							<option>男</option>
-							<option>女</option>							
-						</select>
+                       <input type="text" value="${jianliBean.xingbie }"/>
                     </td>
                 </tr>
 
@@ -60,8 +58,8 @@
                     <td>
                        <select>
 						<option>-请选择-</option>
-						<option>社会招聘</option>
-						<option selected>校园招聘</option>
+						<option value="社会招聘" <c:if test="${jianliBean.zhaopinType eq '社会招聘'}">selected="selected"</c:if>>社会招聘</option>
+						<option value="校园招聘" <c:if test="${jianliBean.zhaopinType eq '校园招聘'}">selected="selected"</c:if>>校园招聘</option>
 					   </select>
                     </td>                
                 </tr>
@@ -117,8 +115,8 @@
                     <td>
 						  <select>
 						<option>-请选择-</option>
-						<option>本科</option>
-						<option selected >硕士</option>
+						<option value="本科" <c:if test="${jianliBean.xueli eq '本科'}">selected="selected"</c:if>>本科</option>
+						<option value="硕士" <c:if test="${jianliBean.xueli eq '硕士'}">selected="selected"</c:if>>硕士</option>
 					   </select>
                     </td>
                 </tr>
@@ -145,8 +143,8 @@
                     <td>
                         <select>
 							<option>-请选择-</option>
-							<option selected >在职</option>
-							<option>离职</option>
+							<option value="在职" <c:if test="${jianliBean.zizhi eq '在职'}">selected="selected"</c:if>>在职</option>
+							<option value="离职" <c:if test="${jianliBean.zizhi eq '离职'}">selected="selected"</c:if>>离职</option>
 						</select>
                     </td>                
                 </tr>
@@ -155,8 +153,8 @@
                     <td>
                          <select>
 							<option>-请选择-</option>
-							<option>是</option>
-							<option selected>否</option>
+							<option value="应届" <c:if test="${jianliBean.yinjiesheng eq '应届'}">selected="selected"</c:if>>应届</option>
+							<option value="毕业" <c:if test="${jianliBean.yinjiesheng eq '毕业'}">selected="selected"</c:if>>毕业</option>
 						</select>
                     </td>                
                 </tr>
@@ -164,7 +162,7 @@
 					<tr>
                     <td>登记时间：</td>
                     <td>
-                        <input type="text" name="f_goods_image" value="${jianliBean.time }" />
+                        <input type="text" name="f_goods_image" value="${jianliBean.dtime }" />
                     </td>                
                 </tr>
 				
@@ -178,7 +176,7 @@
 					<tr>
                     <td>简历附件：</td>
                     <td>
-                        <a href="#">张华个人简历.doc</a>
+                        <a href="../jianli/download.do?jianliId=${jianliBean.jianliId}">${jianliBean.filename }</a>
                     </td>                
                 </tr>
 				</tr>
@@ -187,8 +185,8 @@
                     <td>
                       <select>
 							<option>-请选择-</option>
-							<option>是</option>
-							<option>否</option>
+							<option value="是" <c:if test="${jianliBean.tuijian eq '是'}">selected="selected"</c:if>>是</option>
+							<option value="否" <c:if test="${jianliBean.tuijian eq '否'}">selected="selected"</c:if>>否</option>
 						</select>
 						推荐人：<input type="text" value="${jianliBean.tuijianren }"/>
 						推荐时间：<input type="text" value="${jianliBean.tuijiantime }"/>

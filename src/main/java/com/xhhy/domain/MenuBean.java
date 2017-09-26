@@ -10,9 +10,32 @@ public class MenuBean implements Serializable {
 	private Integer menuState;
 	private String  menuName;
 	private String  menuUrl;
+	private String  menuRemark;
+	private Integer menuPaixu;
+	//分页
+	private Integer currentNum=1;
 	private List<MenuBean> menuList=new ArrayList<MenuBean>();
 	
 	
+	public String getMenuRemark() {
+		return menuRemark;
+	}
+	public void setMenuRemark(String menuRemark) {
+		this.menuRemark = menuRemark;
+	}
+	
+	public Integer getCurrentNum() {
+		return currentNum;
+	}
+	public void setCurrentNum(Integer currentNum) {
+		this.currentNum = currentNum;
+	}
+	public Integer getMenuPaixu() {
+		return menuPaixu;
+	}
+	public void setMenuPaixu(Integer menuPaixu) {
+		this.menuPaixu = menuPaixu;
+	}
 	public Integer getTopId() {
 		return topId;
 	}

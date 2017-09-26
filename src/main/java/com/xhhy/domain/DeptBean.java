@@ -1,16 +1,34 @@
 package com.xhhy.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DeptBean implements Serializable {
 	private Integer deptId;
 	private Integer deptState;
 	private String deptName;
 	private String deptShortName;
-	private String deptUp;
-	private String deptAdress;
+	private Integer deptUp;
+	private String deptAddress;
 	private String deptJianjie;
 	private String deptRemark;
+	private List<DeptBean> deptBeans=new ArrayList<DeptBean>();
+	private DeptBean deptBean;
+	
+	
+	public DeptBean getDeptBean() {
+		return deptBean;
+	}
+	public void setDeptBean(DeptBean deptBean) {
+		this.deptBean = deptBean;
+	}
+	public List<DeptBean> getDeptBeans() {
+		return deptBeans;
+	}
+	public void setDeptBeans(List<DeptBean> deptBeans) {
+		this.deptBeans = deptBeans;
+	}
 	public Integer getDeptId() {
 		return deptId;
 	}
@@ -35,17 +53,19 @@ public class DeptBean implements Serializable {
 	public void setDeptShortName(String deptShortName) {
 		this.deptShortName = deptShortName;
 	}
-	public String getDeptUp() {
+	
+	public Integer getDeptUp() {
 		return deptUp;
 	}
-	public void setDeptUp(String deptUp) {
+	public void setDeptUp(Integer deptUp) {
 		this.deptUp = deptUp;
 	}
-	public String getDeptAdress() {
-		return deptAdress;
+	
+	public String getDeptAddress() {
+		return deptAddress;
 	}
-	public void setDeptAdress(String deptAdress) {
-		this.deptAdress = deptAdress;
+	public void setDeptAddress(String deptAddress) {
+		this.deptAddress = deptAddress;
 	}
 	public String getDeptJianjie() {
 		return deptJianjie;
@@ -62,8 +82,8 @@ public class DeptBean implements Serializable {
 	@Override
 	public String toString() {
 		return "DeptBean [deptId=" + deptId + ", deptState=" + deptState + ", deptName=" + deptName + ", deptShortName="
-				+ deptShortName + ", deptUp=" + deptUp + ", deptAdress=" + deptAdress + ", deptJianjie=" + deptJianjie
-				+ ", deptRemark=" + deptRemark + "]";
+				+ deptShortName + ", deptUp=" + deptUp + ", deptAddress=" + deptAddress + ", deptJianjie=" + deptJianjie
+				+ ", deptRemark=" + deptRemark + ", deptBeans=" + deptBeans + "]";
 	}
 	
 	

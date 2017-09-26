@@ -16,8 +16,23 @@
 <title>用户登录</title>
 
 <link href="css/login.css" type="text/css" rel="stylesheet" />
-
-</head>
+        <script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+    </head>
+<script type="text/javascript">
+	function f(){
+		var password=document.getElementById("userPassword").value;
+		var userLogin=document.getElementById("userLogin").value;
+		 if (userLogin == null||userLogin == ""||userLogin == " ") {
+			 alert("用户名不能为空");
+			 return false;
+		}
+		 if (password == null || password == "" || password == " ") {
+			 alert("密码不能为空");
+			 return false;
+		}
+		return true;
+	}
+</script>
 <body id="userlogin_body">
 
 	<div id="user_login">
@@ -30,31 +45,35 @@
 				</ul>
 			</dd>
 			<dd id="user_main">
-			<form action="../user/login.do" method="post">
+			<form action="../user/login.do" method="post" onsubmit="return f();">
 				<ul>
 					<li class="user_main_l"></li>
 					<li class="user_main_c">
 						<div class="user_main_box">
 							<ul>
 								<li class="user_main_text">用户名：</li>
-								<li class="user_main_input"><input name="userLogin"
-									maxlength="20" id="userLogin" class="txtusernamecssclass">
+								<li class="user_main_input">
+								<input name="userLogin"
+									maxlength="20" id=userLogin value="${cookie.userLogin.value }" class="txtusernamecssclass">
+								<span id=4></span>
 								</li>
 							</ul>
 							<ul>
 								<li class="user_main_text">密 码：</li>
-								<li class="user_main_input"><input type="password"
-									name="userPassword" id="userPassword" class="txtpasswordcssclass">
+								<li class="user_main_input"><input  type="password"
+									name="userPassword" id="userPassword"  value="${cookie.userPassword.value }" class="txtpasswordcssclass">
+								<span id=5></span>
 								</li>
 							</ul>
 							<ul>
 								<li class="user_main_text">Cookie：</li>
-								<li class="user_main_input"><select name="DropExpiration"
-									id="DropExpiration">
-										<option selected="" value="None">不保存</option>
-										<option value="Day">保存一天</option>
-										<option value="Month">保存一月</option>
-										<option value="Year">保存一年</option>
+								<li class="user_main_input"><select name="cookie"
+									id="cookie">
+										<option  value="0" <c:if test="${cookie.maxDay.value eq 0 }"> selected="selected"  </c:if> >不保存</option>
+										<option value="1" <c:if test="${cookie.maxDay.value eq 1 }"> selected="selected"  </c:if> >保存一天</option>
+										<option value="30" <c:if test="${cookie.maxDay.value eq 30 }"> selected="selected"  </c:if> >保存一月</option>
+										<option value="90" <c:if test="${cookie.maxDay.value eq 90 }"> selected="selected"  </c:if>  >保存一季度</option>
+										<option value="365" <c:if test="${cookie.maxDay.value eq 365 }"> selected="selected"  </c:if> >保存一年</option>
 								</select></li>
 							</ul>
 						</div>

@@ -12,7 +12,15 @@ public class RoleBean implements Serializable{
 	private String roleDescribe;
 	private String roleRemark;
 	private Integer roleState;
-	
+	//分页
+	private Integer currentNum=1;
+		
+	public Integer getCurrentNum() {
+			return currentNum;
+		}
+		public void setCurrentNum(Integer currentNum) {
+			this.currentNum = currentNum;
+		}
 	public String getRoleNumber() {
 		return roleNumber;
 	}
@@ -63,8 +71,9 @@ public class RoleBean implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "RoleBean [roleId=" + roleId + ", deptId=" + deptId + ", roleName=" + roleName + ", roleDescribe="
-				+ roleDescribe + ", roleRemark=" + roleRemark + ", roleState=" + roleState + "]";
+		return "RoleBean [roleId=" + roleId + ", deptId=" + deptId + ", deptBean=" + deptBean + ", roleName=" + roleName
+				+ ", roleNumber=" + roleNumber + ", roleDescribe=" + roleDescribe + ", roleRemark=" + roleRemark
+				+ ", roleState=" + roleState + "]";
 	}
 	
 	

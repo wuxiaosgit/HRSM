@@ -24,11 +24,117 @@
 			and role_state =#{roleState}
 			</if>
 			<if test="deptId != null ">
+			and dept_id= #{deptId}
+			</if>
+		</where>
+			ORDER BY role_id DESC limit #{currentNum},8 
+	</select>
+	<select id="max" parameterType="RoleBean" resultType="int">
+		select count(*) from role_tb
+		<where>
+			<if test="roleName != null and roleName !=''">
+			role_name like "%"#{roleName}"%"
+			</if>
+			<if test="roleState != null ">
+			and role_state =#{roleState}
+			</if>
+			<if test="deptId != null ">
 			and dept_id=#{deptId}
 			</if>
 		</where>
 	</select>
+	<select id="getRoleById" parameterType="int" resultMap="role">
+		select * from role_tb
+		where role_id=#{roleId}
+	</select>
+	<insert id="insertRoleMenu" parameterType="map">
+		insert into role_menu_tb (role_id,menu_id) values(#{roleId},#{menuId})
+	</insert>
+	<insert id="insertRole" parameterType="RoleBean" useGeneratedKeys="true" keyColumn="role_id" keyProperty="roleId">
+		insert into role_tb
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="roleState != null">
+			role_state,
+			</if>
+			<if test="roleName != null">
+			role_name,
+			</if>
+			<if test="roleNumber != null">
+			role_number,
+			</if>
+			<if test="deptId != null">
+			dept_id,
+			</if>
+			<if test="roleRemark != null">
+			role_remark,
+			</if>
+			<if test="roleDescribe != null">
+			role_describe,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="roleState != null">
+			#{roleState},
+			</if>
+			<if test="roleName != null">
+			#{roleName},
+			</if>
+			<if test="roleNumber != null">
+			#{roleNumber},
+			</if>
+			<if test="deptId != null">
+			#{deptId},
+			</if>
+			<if test="roleRemark != null">
+			#{roleRemark},
+			</if>
+			<if test="roleDescribe != null">
+			#{roleDescribe},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateRole" parameterType="RoleBean">
+		update role_tb
+		<set>
+			<if test="deptId != null">
+				dept_id = #{deptId},
+			</if>
+			<if test="roleName != null">
+				role_name = #{roleName},
+			</if>
+			
+			<if test="roleState != null">
+				role_state= #{roleState},
+			</if>
+			<if test="roleNumber != null">
+				role_number = #{roleNumber},
+			</if>
+			<if test="roleDescribe != null">
+				role_describe = #{roleDescribe},
+			</if>
+			<if test="roleRemark != null">
+				role_remark = #{roleRemark},
+			</if>
+		</set>
+		where role_id = #{roleId}
+	</update>
+	<delete id="deleteRole" parameterType="int">
+		DELETE FROM role_tb where role_id=#{roleId}
+	</delete>
+	<delete id="deleteRoleMenu" parameterType="int">
+		DELETE FROM role_menu_tb where role_id=#{roleId}
+	</delete>
 	<select id="SelectRoleDept" resultMap="role">
 		select * from role_tb ,dept_tb where role_tb.dept_id = dept_tb.dept_id
+	</select>
+	<select id="selectRoleByDeptName" resultMap="role" parameterType="String" >
+		select * from role_tb ,dept_tb where role_tb.dept_id = dept_tb.dept_id and dept_name=#{deptName}
+	</select>
+	<select id="selectRoleByRoleName" resultMap="role" parameterType="String">
+			select * from role_tb where role_name=#{roleName}
+	</select>
+		<select id="selectByPrimaryKey" parameterType="int" resultMap="role">
+	
+		select * from role_tb where role_id = #{roleId}
 	</select>
 </mapper>

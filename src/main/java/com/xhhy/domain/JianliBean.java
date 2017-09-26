@@ -40,28 +40,44 @@ public class JianliBean {
 
     private String zizhi;
 
-    private Date time;
+    private String dtime;
 
     private String tuijian;
 
     private String tuijianren;
 
-    private Date tuijiantime;
+    private String tuijiantime;
     
     private String jianli;
 
-    private byte[] fujian;
+    private String fujian;
 
     private String yijian;
     
     private int state;
+    
+    private String filename;
+    
+    private int zhaopinId;
+    
+    private ZhaopinBean zhaopinBean;
+    
+    public ZhaopinBean getZhaopinBean() {
+		return zhaopinBean;
+	}
+
+	public void setZhaopinBean(ZhaopinBean zhaopinBean) {
+		this.zhaopinBean = zhaopinBean;
+	}
+
+	private RoleBean roleBean;
 
     public Integer getJianliId() {
         return jianliId;
     }
 
-    public void setJianliId(Integer jianliId) {
-        this.jianliId = jianliId;
+    public void setJianliId(String jianliId) {
+        this.jianliId = Integer.parseInt(jianliId);
     }
 
     public String getJobId() {
@@ -200,14 +216,7 @@ public class JianliBean {
         this.zizhi = zizhi == null ? null : zizhi.trim();
     }
 
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
+   
     public String getTuijian() {
         return tuijian;
     }
@@ -224,13 +233,23 @@ public class JianliBean {
         this.tuijianren = tuijianren == null ? null : tuijianren.trim();
     }
 
-    public Date getTuijiantime() {
-        return tuijiantime;
-    }
+   
 
-    public void setTuijiantime(Date tuijiantime) {
-        this.tuijiantime = tuijiantime;
-    }
+	public String getDtime() {
+		return dtime;
+	}
+
+	public void setDtime(String dtime) {
+		this.dtime = dtime;
+	}
+
+	public String getTuijiantime() {
+		return tuijiantime;
+	}
+
+	public void setTuijiantime(String tuijiantime) {
+		this.tuijiantime = tuijiantime;
+	}
 
 	public String getJianli() {
 		return jianli;
@@ -240,11 +259,21 @@ public class JianliBean {
 		this.jianli = jianli;
 	}
 
-	public byte[] getFujian() {
+	
+
+	public int getZhaopinId() {
+		return zhaopinId;
+	}
+
+	public void setZhaopinId(String zhaopinId) {
+		this.zhaopinId = Integer.parseInt(zhaopinId);
+	}
+
+	public String getFujian() {
 		return fujian;
 	}
 
-	public void setFujian(byte[] fujian) {
+	public void setFujian(String fujian) {
 		this.fujian = fujian;
 	}
 
@@ -263,6 +292,22 @@ public class JianliBean {
 	public void setState(int state) {
 		this.state = state;
 	}
+	
+	public RoleBean getRoleBean() {
+		return roleBean;
+	}
+
+	public void setRoleBean(RoleBean roleBean) {
+		this.roleBean = roleBean;
+	}
+
+	public String getFilename() {
+		return filename;
+	}
+
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 
 	@Override
 	public String toString() {
@@ -270,11 +315,14 @@ public class JianliBean {
 				+ xingbie + ", zhaopinType=" + zhaopinType + ", email=" + email + ", tel=" + tel + ", address="
 				+ address + ", live=" + live + ", mianmao=" + mianmao + ", idcard=" + idcard + ", school=" + school
 				+ ", xueli=" + xueli + ", zhuanye=" + zhuanye + ", jianyan=" + jianyan + ", xizi=" + xizi
-				+ ", yinjiesheng=" + yinjiesheng + ", zizhi=" + zizhi + ", time=" + time + ", tuijian=" + tuijian
+				+ ", yinjiesheng=" + yinjiesheng + ", zizhi=" + zizhi + ", dtime=" + dtime + ", tuijian=" + tuijian
 				+ ", tuijianren=" + tuijianren + ", tuijiantime=" + tuijiantime + ", jianli=" + jianli + ", fujian="
-				+ Arrays.toString(fujian) + ", yijian=" + yijian + ", state=" + state + "]";
+				+ fujian + ", yijian=" + yijian + ", state=" + state + ", filename=" + filename + ", roleBean="
+				+ roleBean + "]";
 	}
 
+	
+	
 	
 	
 	

@@ -3,23 +3,111 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.xhhy.dao.DeptDao">
-		<resultMap type="DeptBean" id="dept">
-			<id property="deptId" column="dept_id"/>
-			<result property="deptState" column="dept_state"/>
-			<result property="deptName" column="dept_name"/>
-			<result property="deptShortName" column="dept_shortname"/>
-			<result property="deptUp" column="dept_up"/>
-			<result property="deptAdress" column="dept_address"/>
-			<result property="deptJianjie" column="dept_jianjie"/>
-			<result property="deptRemark" column="dept_remark"/>
-		</resultMap>
+	<resultMap type="DeptBean" id="dept">
+		<id property="deptId" column="dept_id" />
+		<result property="deptState" column="dept_state" />
+		<result property="deptName" column="dept_name" />
+		<result property="deptShortName" column="dept_shortname" />
+		<result property="deptUp" column="dept_up" />
+		<result property="deptAddress" column="dept_address" />
+		<result property="deptJianjie" column="dept_jianjie" />
+		<result property="deptRemark" column="dept_remark" />
+		<association property="deptBean" javaType="DeptBean"
+			select="com.xhhy.dao.DeptDao.getDeptById" column="dept_up"></association>
+	</resultMap>
 
 
 	<select id="listDept" resultMap="dept">
 		select * from dept_tb
 	</select>
-	<select id="getDeptById" parameterType="int" resultMap="dept">
-		select * from dept_tb where dept_id=#{deptId}
+	<select id="getTopDept" resultMap="dept">
+		select * from dept_tb where dept_up=0
 	</select>
 
+	<select id="getDeptById" parameterType="int" resultMap="dept">
+		select *
+		from dept_tb where dept_id=#{deptId}
+	</select>
+	<insert id="insertDept" parameterType="DeptBean">
+		insert into dept_tb
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="deptName != null">
+				dept_name ,
+			</if>
+			<if test="deptShortName != null">
+				dept_shortname,
+			</if>
+			
+			<if test="deptUp != null">
+				dept_up,
+			</if>
+			<if test="deptAddress != null">
+				dept_address,
+			</if>
+			<if test="deptJianjie != null">
+				dept_jianjie ,
+			</if>
+			<if test="deptRemark != null">
+				dept_remark,
+			</if>
+			<if test="deptState != null">
+				dept_state,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="deptName != null">
+				#{deptName},
+			</if>
+			<if test="deptShortName != null">
+				#{deptShortName},
+			</if>
+			
+			<if test="deptUp != null">
+				#{deptUp},
+			</if>
+			<if test="deptAddress != null">
+				#{deptAddress},
+			</if>
+			<if test="deptJianjie != null">
+				 #{deptJianjie},
+			</if>
+			<if test="deptRemark != null">
+				#{deptRemark},
+			</if>
+			<if test="deptState != null">
+				#{deptState},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateDept" parameterType="DeptBean">
+		update dept_tb
+		<set>
+			<if test="deptName != null">
+				dept_name = #{deptName},
+			</if>
+			<if test="deptShortName != null">
+				dept_shortname = #{deptShortName},
+			</if>
+			
+			<if test="deptUp != null">
+				dept_up= #{deptUp},
+			</if>
+			<if test="deptAddress != null">
+				dept_address = #{deptAddress},
+			</if>
+			<if test="deptJianjie != null">
+				dept_jianjie = #{deptJianjie},
+			</if>
+			<if test="deptRemark != null">
+				dept_remark = #{deptRemark},
+			</if>
+			<if test="deptState != null">
+				dept_state = #{deptState},
+			</if>
+		</set>
+		where dept_id = #{deptId}
+	</update>
+	<delete id="deleteDept" parameterType="int">
+		DELETE FROM dept_tb where dept_id=#{deptId}
+	</delete>
 </mapper>

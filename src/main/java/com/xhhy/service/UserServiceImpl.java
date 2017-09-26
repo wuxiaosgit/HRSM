@@ -15,32 +15,50 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserDao userDao;
 
-	public void insertUser(UserBean user) {
-		userDao.insertUser(user);
-		/*String str = null;
-		System.out.println(str.length());*/
+	public void insertUser(UserBean userBean) {
+		userDao.insertUser(userBean);
 	}
-
-
-
-	
-
 	public UserBean login(UserBean userBean) {
 		// TODO Auto-generated method stub
 		return userDao.login(userBean);
 	}
-
-
-
-
-
 	public List<UserBean> listUser(UserBean userBean) {
 		// TODO Auto-generated method stub
-		if (userBean.getUserName()!=null&&!"".equals(userBean.getUserName())) {
-			
-			userBean.setUserName("%"+userBean.getUserName()+"%");
-		}
-		return userDao.listUser(userBean);
+		userBean.setCurrentNum((userBean.getCurrentNum()-1)*8);
+		List<UserBean> listUser = userDao.listUser(userBean);
+		userBean.setCurrentNum(userBean.getCurrentNum()/8+1);
+		
+		return listUser;
+	}
+	public void deleteUser(Integer userId) {
+		// TODO Auto-generated method stub
+		userDao.deleteUser(userId);
+	}
+
+
+
+
+
+	public UserBean getUserById(Integer userId) {
+		// TODO Auto-generated method stub
+		return userDao.getUserById(userId);
+	}
+	public void updateUser(UserBean userBean) {
+		// TODO Auto-generated method stub
+		userDao.updateUser(userBean);
+	}
+	public Integer max(UserBean userBean) {
+		// TODO Auto-generated method stub
+		return userDao.max(userBean);
+	}
+
+	public UserBean oldPasswrod(UserBean userBean) {
+		// TODO Auto-generated method stub
+		return userDao.oldPasswrod(userBean);
+	}
+	public List<UserBean> ajaxLogin(String ajaxLogin) {
+		// TODO Auto-generated method stub
+		return userDao.ajaxLogin(ajaxLogin);
 	}
 
 }

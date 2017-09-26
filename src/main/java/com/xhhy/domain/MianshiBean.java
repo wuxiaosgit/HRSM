@@ -9,7 +9,7 @@ public class MianshiBean {
 
     private String mianshiren;
 
-    private Date mianshitime;
+    private String mianshitime;
 
     private Integer state;
 
@@ -39,11 +39,11 @@ public class MianshiBean {
         this.mianshiren = mianshiren == null ? null : mianshiren.trim();
     }
 
-    public Date getMianshitime() {
+    public String getMianshitime() {
         return mianshitime;
     }
 
-    public void setMianshitime(Date mianshitime) {
+    public void setMianshitime(String mianshitime) {
         this.mianshitime = mianshitime;
     }
 

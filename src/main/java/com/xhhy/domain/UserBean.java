@@ -2,6 +2,8 @@ package com.xhhy.domain;
 
 import java.io.Serializable;
 
+import com.xhhy.utils.PageUtil;
+
 public class UserBean implements Serializable{
 	
 	private Integer userId;
@@ -15,7 +17,7 @@ public class UserBean implements Serializable{
 	private String userLogin;
 	private String userAddress;
 	private String userPassword;
-	private int userState;
+	private Integer userState=1;
 	private String userGender;
 	private String userIdcard;
 	private String userPhone;
@@ -23,8 +25,17 @@ public class UserBean implements Serializable{
 	private String userEmail;
 	private String userPicture;
 	private String userRemark;
+	//分页
+	private Integer currentNum=1;
 
-
+	
+	
+	public Integer getCurrentNum() {
+		return currentNum;
+	}
+	public void setCurrentNum(Integer currentNum) {
+		this.currentNum = currentNum;
+	}
 	public RoleBean getRoleBean() {
 		return roleBean;
 	}

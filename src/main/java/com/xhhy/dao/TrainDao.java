@@ -8,7 +8,14 @@ public interface TrainDao {
 
 	public void insertTrain(TrainBean train);
 	
-	public List<TrainBean> listTrain();
+	public List<TrainBean> listTrain(TrainBean train);
 	
-	public List<TrainBean> queryLike(TrainBean train);
+	public TrainBean queryById(Integer trainId);
+	
+	public void deleteById(Integer trainId);
+
+	public void updateById(TrainBean train);
+
+	public Integer max(TrainBean train);
+
 }
