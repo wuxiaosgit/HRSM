@@ -74,7 +74,7 @@
 				<tr>
 					<td width="120px;">培训名称<span style="color: red">*</span>：
 					</td>
-					<td><input type="text"  name="trainName" onblur="yzName(this.value);"/></td>
+					<td><input type="text"  name="trainName" /></td>
 				</tr>
 				<tr>
 					<td>培训讲师<span style="color: red">*</span>：

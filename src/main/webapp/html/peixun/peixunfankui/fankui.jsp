@@ -4,7 +4,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/html/";
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<title>培训管理</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8">
 	<link href="css/mine.css" type="text/css" rel="stylesheet">
-	<script type="text/javascript" src="html/js/jquery-3.2.1.js"></script>
+	<script type="text/javascript" src="html/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="html/js/jquery.validate.js"></script>
 </head>
 <body>
@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </span>
     </div>
     <div style="font-size: 13px;margin: 10px 5px">
-        <form action="../train/updateFuheTrain.do" method="post">
+        <form action="../train/updateFuheTrain.do"  id="formId" method="post">
             <input type="hidden" name="trainState" id="train_state" value="${train.trainState}">
             <input type="hidden" name="trainId" value="${train.trainId}">
           <table border="1" width="100%" class="table_a">
