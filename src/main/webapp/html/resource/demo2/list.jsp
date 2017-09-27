@@ -336,7 +336,9 @@
          </c:choose> 
          <c:if test="${currentPage lt pageNum }"><a href='javascript:nextpage("next");'>下一页</a></c:if>
          <c:if test="${currentPage ge pageNum }"><a style="color:gray;">下一页</a></c:if> 
-         <a href='javascript:nextpage("last");' >尾页</a>
+         <c:if test="${currentPage lt pageNum }"> <a href='javascript:nextpage("last");' >尾页</a></c:if>
+         <c:if test="${currentPage ge pageNum }"><a style="color:gray;">尾页</a></c:if> 
+        
          
          
          
