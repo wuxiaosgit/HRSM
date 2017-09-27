@@ -18,4 +18,6 @@ public interface TrainDao {
 
 	public Integer max(TrainBean train);
 
+	public TrainBean queryByName(String trainName);
+
 }

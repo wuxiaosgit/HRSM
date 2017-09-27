@@ -22,4 +22,6 @@ public interface TrainService {
 
 	public Integer max(TrainBean train);
 
+	public TrainBean queryByName(String trainName);
+
 }

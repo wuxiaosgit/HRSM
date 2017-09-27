@@ -13,16 +13,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<title>培训管理</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8">
 	<link href="css/mine.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="html/js/jquery-3.2.1.js"></script>
+	<script type="text/javascript" src="html/js/jquery.validate.js"></script>
 </head>
-<script type="text/javascript" src="html/js/jquery-3.2.1.js"></script>
-<script type="text/javascript">
-	function saveTrain(i) {
-		var o = document.getElementById("train_state");
-		o.value = i; 
-		$("#formId").submit();
-	}
-</script>
-
 <body>
 	<div class="div_head">
             <span>
@@ -97,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </tr>
                 <tr>
                 	<label>培训反馈</label><br/>
-                	<td>培训反馈:</td>
+                	<td>培训反馈<span style="color:red">*</span>：</td>
                 	<td>
                 	<select name="trainFeekBack">
                 		<option value="" <c:if test="${train.trainFeekBack ==null ||train.trainFeekBack == -1 }">selected = "selected"</c:if>>--请选择--</option>
@@ -108,20 +101,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 	</td>
                 </tr>
                 <tr>
-	                <td>培训总结:</td>
+	                <td>培训总结<span style="color:red">*</span>：</td>
 	                <td><textarea name="trainSumup">${train.trainSumup}</textarea></td>
                 </tr>
                 <tr>
-	                <td>考核结果:</td>
+	                <td>考核结果<span style="color:red">*</span>：</td>
 	                <td><textarea name="trainResult" >${train.trainResult}</textarea></td>
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
-                        <input type="submit" value="保存"	/> 
+                        <input type="button" value="保存"	/> 
                     </td>
                 </tr>  
             </table>
         </form>
     </div>
+<script type="text/javascript">
+	function saveTrain(i) {
+		var o = document.getElementById("train_state");
+		o.value = i; 
+		$("#formId").submit();
+	}
+</script>
 </body>
 </html>

@@ -68,6 +68,11 @@
 		</if>
 </select>
 
+<select id="queryByName" parameterType="string" resultType="com.xhhy.domain.TrainBean">
+<include refid="queryTrainList"/>
+where train_name = #{trainName}
+</select>
+
 
 <select id="queryById" parameterType="int" resultType="com.xhhy.domain.TrainBean">
 	<include refid="queryTrainList" />
@@ -120,7 +125,6 @@
 		<if test="trainResult !=null and trainResult != '' ">
 			train_result = #{trainResult}
 		</if>
-		
 	</set>
 		where train_id = #{trainId} and is_delete = 0
 </update>
