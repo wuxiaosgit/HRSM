@@ -52,22 +52,22 @@
         <div></div>
         <div class="div_search">
             <span>
-                <form action="../mianshi/selectJianliRoleDeptPagesBySelective2.do" method="post">
+                <form action="../mianshi/selectJianliMianshiRoleDeptPages.do" method="post">
 					姓名: 
-					<input type="text" name="xingming" size="10px" />
+					<input type="text" name="xingming" value="${xingming_1 }" size="10px" />
 					 应聘职位: 
-					<input type="text" name="roleBean.roleName" size="20px" />
+					<input type="text" name="roleName" value="${roleName_1 }" size="20px" />
 					工作经验: 
-					<input type="text" name="jianyan" size="10px" />
+					<input type="text" name="jianyan" value="${jianyan_1}" size="10px" />
 					简历状态: 
 					<select name="state">
-						<option value="0">-请选择-</option>
-						<option value="1">推荐面试</option>
-						<option value="2">推荐二面</option>
-						<option value="3">推荐三面</option>
+						<option value="-1">-请选择-</option>
+						<option value="1" <c:if test="${state_1 eq 1 }">selected = "selected"</c:if>>推荐面试</option>
+						<option value="2" <c:if test="${state_1 eq 2 }">selected = "selected"</c:if>>推荐二面</option>
+						<option value="3" <c:if test="${state_1 eq 3 }">selected = "selected"</c:if>>推荐三面</option>
 					</select>
 					登记日期: 
-					<input type="text" size="20px" name="dtime" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+					<input type="text" size="20px" name="dtime" value="${dtime_1 }" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
                     <input value="查询" type="submit" />
 					
                 </form>
@@ -126,7 +126,8 @@
                         <td>
               
 							<a href="../mianshi/selectByJianliId.do?jianliId=${list.jianliId}&method=change">面试结果登记</a>						   
-							<a href="../mianshi/updateMianshiByPrimaryKeySelective.do?jianliId=${list.jianliId}&method=del">删除</a>
+							<a href="../mianshi/updateMianshiByPrimaryKeySelective.do?jianliId=${list.jianliId}&method=del"
+							onclick="return confirm('您确认要删除吗？');">删除</a>
 						</td>        
 						</tr>
 					</c:forEach>

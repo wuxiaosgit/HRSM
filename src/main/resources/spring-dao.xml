@@ -12,7 +12,7 @@
 	<!-- 数据源 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mysql://localhost:3306/20170920?characterEncoding=utf-8"></property>
+		<property name="url" value="jdbc:mysql://192.168.0.131:3306/20170920?characterEncoding=utf-8"></property>
 
 
 		<property name="username" value="root"></property>

@@ -67,6 +67,25 @@ public class ZhaopinServiceImpl implements ZhaopinService {
 		return zhaopinDao.selectRoleByZhaopin(roleName);
 	}
 
+	@Override
+	public List<ZhaopinBean> selectZhaoRoleDept(Map<String, Object> map ){
+		
+		// TODO Auto-generated method stub
+		return zhaopinDao.selectZhaoRoleDept(map);
+	}
+
+	@Override
+	public List<ZhaopinBean> selectZhaoRoleDepts(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return zhaopinDao.selectZhaoRoleDepts(map);
+	}
+
+	@Override
+	public List<ZhaopinBean> selectZhaoRoleDeptPage(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return zhaopinDao.selectZhaoRoleDeptPage(map);
+	}
+
 
 	
 	

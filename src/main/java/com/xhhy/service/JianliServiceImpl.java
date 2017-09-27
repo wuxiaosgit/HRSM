@@ -30,9 +30,9 @@ public class JianliServiceImpl implements JianliService{
 		// TODO Auto-generated method stub
 		jianliDao.insertSelective(jianliBean);
 	}
-	public List<JianliBean> selectJianliRoleDept() {
+	public List<JianliBean> selectJianliRoleDept(Map<String, Object> map) {
 		// TODO Auto-generated method stub
-		return jianliDao.selectJianliRoleDept();
+		return jianliDao.selectJianliRoleDept(map);
 	}
 	public List<JianliBean> selectJianliRoleDeptPages(Map<String, Object> map) {
 		// TODO Auto-generated method stub

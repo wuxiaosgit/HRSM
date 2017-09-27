@@ -12,7 +12,7 @@ public interface JianliService {
 	public JianliBean selectByPrimaryKey(int jianliId);
 	public void insertSelective(JianliBean jianliBean);
 	public List<JianliBean> selectJianliRoleDeptPages(Map<String, Object> map);
-	public List<JianliBean> selectJianliRoleDept();
+	public List<JianliBean> selectJianliRoleDept(Map<String, Object> map);
 	public void updateByPrimaryKeyAndState(int state, int roleId);
 	public List<JianliBean> selectJianliMianshiRoleDept();
 	public List<JianliBean> selectJianliMianshiRoleDeptPages(Map<String, Object> map);

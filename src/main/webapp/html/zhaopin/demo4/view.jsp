@@ -183,14 +183,10 @@
                 </tr>
 				</tr>
 					<tr>
-                    <td>是否推荐面试：</td>
+                    <td>推荐人：</td>
                     <td>
-                      <select>
-							<option>-请选择-</option>
-							<option>是</option>
-							<option>否</option>
-						</select>
-						推荐人：<input type="text" value="徐徐">
+                     
+						<input type="text" value="徐徐">
 						推荐时间：<input type="text" value="2013-09-08">
                     </td>                
                 </tr>

@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.xa.Xid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,7 +50,7 @@ public class JianliController {
 	public String selectAll(Model model){
 		
 		List<JianliBean> list = jianliService.selectAll();
-		//System.out.println(list);
+
 		model.addAttribute("list",list);
 		
 		return "/html/zhaopin/demo2/list.jsp";
@@ -57,9 +58,9 @@ public class JianliController {
 	//------------------------根据ID查询单条简历信息------------------------------------------
 	@RequestMapping("selectByPrimaryKey")
 	public String selectByPrimaryKey(Model model,int jianliId,String method){
-		//System.out.println(zhaopinId);
+
 		JianliBean jianliBean = jianliService.selectByPrimaryKey(jianliId);
-		//System.out.println(zhaopinBean);
+
 		model.addAttribute("jianliBean",jianliBean);
 		if(method.equals("change")){
 			return "/html/zhaopin/demo2/up.jsp";
@@ -71,16 +72,14 @@ public class JianliController {
 	//-----------------------多选择修改简历-----------------------------------------
 	@RequestMapping("updateByPrimaryKeySelective")
 	public String updateByPrimaryKeySelective(JianliBean jianliBean,String method ){
-		//System.out.println(zhaopinBean.getZhaopinId());
-		System.out.println(method);
 		if(method!=null&&method.equals("del")){
 			jianliBean.setState(State.DEL);
 			jianliService.updateByPrimaryKeySelective(jianliBean);
-			return "selectJianliRoleDeptPages.do";
+			return "redirect:selectJianliRoleDeptPages.do";
 		}else{
-			//jianliBean.setState(State.UNDEL);
+
 			jianliService.updateByPrimaryKeySelective(jianliBean);
-			return "selectJianliRoleDeptPages.do";
+			return "redirect:selectJianliRoleDeptPages.do";
 		}
 		
 	}
@@ -88,8 +87,7 @@ public class JianliController {
 	
 	@RequestMapping("updateByPrimaryKeyAndState")
 	public void updateByPrimaryKeyAndState(int state,int jianliId){
-			//System.out.println("state="+state);
-			//System.out.println(jianliId);
+
 			jianliService.updateByPrimaryKeyAndState(state,jianliId);
 		}
 		
@@ -98,12 +96,12 @@ public class JianliController {
 	//-------------------------添加简历-上传文件-------------------------
 	@RequestMapping("insertSelective")
 	public String insertSelective(JianliBean jianliBean,HttpServletRequest request,HttpServletResponse response){
-		//System.out.println(jianliBean);
+
 		 MultipartHttpServletRequest multipartRequest =(MultipartHttpServletRequest) request;
 		 MultipartFile file = multipartRequest.getFile("newfile");
 		 String fileName = file.getOriginalFilename();
 		 String mime = file.getContentType();
-		 System.out.println(mime);
+		 //System.out.println(mime);
 		 
 		 String fujian = "f:/"+UUID.randomUUID().toString()+"."+mime;
 		 try {
@@ -122,7 +120,7 @@ public class JianliController {
 		jianliBean.setFilename(fileName);
 		jianliService.insertSelective(jianliBean);
 		
-		return "selectJianliRoleDeptPages.do";
+		return "redirect:selectJianliRoleDeptPages.do";
 	}
 	//-------------------------文件下载-------------------------------
 	@RequestMapping("download.do")
@@ -144,7 +142,7 @@ public class JianliController {
 		public String listRole(Model model){
 			List<ZhaopinBean> zhaopinBean = zhaopinService.selectAll();
 			List<DeptBean> db = deptService.listDept();
-			//System.out.println(roles);
+
 			model.addAttribute("zhaopinBean",zhaopinBean);
 			model.addAttribute("db", db);
 			return "/html/zhaopin/demo2/add.jsp";
@@ -155,9 +153,9 @@ public class JianliController {
 		public @ResponseBody RoleBean selectRoleByRoleName(HttpServletRequest request,HttpServletResponse response) throws Exception{
 			String roleName = request.getParameter("roleName");
 			roleName =  java.net.URLDecoder.decode(roleName, "UTF-8");
-			//System.out.println(roleName);
+
 			RoleBean rb = roleService.selectRoleByRoleName(roleName);
-			//System.out.println(rb.getDeptBean().getDeptShortName());
+
 			response.setContentType("text/xml;charset=UTF-8"); 
 			return rb;
 		} 
@@ -165,9 +163,16 @@ public class JianliController {
 		
 		//---------------------------分页展示所有简历信息-------------------------------------
 		@RequestMapping("selectJianliRoleDeptPages")
-		public String selectJianliRoleDeptPages2(Model model,PageUtil pageUtil){
-			
-			List<JianliBean> list = jianliService.selectJianliRoleDept();
+		public String selectJianliRoleDeptPages2(Model model,JianliBean jianliBean,String roleName,PageUtil pageUtil){
+			if(jianliBean==null){
+				jianliBean = new JianliBean();
+			}
+			Map<String,Object> map =new HashMap<String, Object>();
+			map.put("xingming", jianliBean.getXingming());
+			map.put("roleName", roleName);
+			map.put("jianyan", jianliBean.getJianyan());
+			map.put("dtime", jianliBean.getDtime());
+			List<JianliBean> list = jianliService.selectJianliRoleDept(map);
 			
 			int pageNum = 1;//页码
 			int pn = pageUtil.getPageNum();
@@ -192,14 +197,20 @@ public class JianliController {
 			
 			int pageStart = pageUtil.getStart();
 			
-			Map<String,Object> map =new HashMap<String, Object>();
+			
 			
 			map.put("pageUtil", pageUtil);
 			map.put("pageStart", pageStart);
+		
+
 
 			List<JianliBean> lists = jianliService.selectJianliRoleDeptPages(map);
 
 			model.addAttribute("list", lists);
+			model.addAttribute("xingming_1", jianliBean.getXingming());
+			model.addAttribute("roleName_1", roleName);
+			model.addAttribute("jianyan_1", jianliBean.getJianyan());
+			model.addAttribute("dtime_1", jianliBean.getDtime());
 			model.addAttribute("pageNum", pageNum);
 			model.addAttribute("pageRows", pageRows);
 			model.addAttribute("totlePages", totlePages);

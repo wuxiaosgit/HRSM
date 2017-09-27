@@ -49,21 +49,21 @@
         <div></div>
         <div class="div_search">
             <span>
-                <form action="../luyong/selectJianliRoleDeptPagesBySelective3.do" method="post">
+                <form action="../luyong/selectJianliLuyongRoleDeptPages.do" method="post">
 					姓名: 
-					<input type="text" name="xingming"  size="10px" />
+					<input type="text" name="xingming" value="${xingming_1 }"  size="10px" />
 					 应聘职位: 
-					<input type="text" name="roleBean.roleName" size="20px" />
+					<input type="text" name="roleName" value="${roleName_1 }" size="20px" />
 					工作经验: 
-					<input type="text"  name="jianyan" size="10px" />
+					<input type="text"  name="jianyan" value="${jianyan_1}" size="10px" />
 					简历状态: 
 					<select name="state">
-						<option value="0">-请选择-</option>
-						<option value="4">建议录用</option>
-						<option value="5">录用</option>
+						<option value="-1">-请选择-</option>
+						<option value="4" <c:if test="${state_1 eq 4 }">selected = "selected"</c:if>>建议录用</option>
+						<option value="5" <c:if test="${state_1 eq 5 }">selected = "selected"</c:if>>录用</option>
 					</select>
 					登记日期: 
-					<input type="text" size="20px" name="dtime" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+					<input type="text" size="20px" name="dtime" value="${dtime_1 }" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
                     <input value="查询" type="submit" />
 					
                 </form>

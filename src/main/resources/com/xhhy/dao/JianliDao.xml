@@ -52,6 +52,19 @@
   	where 
   	job_id = role_tb.role_id and role_tb.dept_id = dept_tb.dept_id
   	and jianli_tb.state not in (0)
+  	  		<if test="xingming!=null and xingming!=''">
+  			and xingming like "%"#{xingming}"%"
+  		</if>
+  		<if test="roleName!=null and roleName!=''">
+  			and role_name like "%"#{roleName}"%"
+  		</if>
+  		<if test="jianyan!=null and jianyan!=''">
+  			and jianyan like "%"#{jianyan}"%"
+  		</if>
+  		<if test="dtime!=null and dtime!=''">
+  			and dtime &gt; #{dtime}
+  		</if>
+order by dtime desc
   </select>
   <select id="selectJianliMianshiRoleDept"  resultMap="selectJianliRoleDeptMap">
   	select * from 
@@ -59,6 +72,19 @@
   	where 
   	job_id = role_tb.role_id and role_tb.dept_id = dept_tb.dept_id
   	and jianli_tb.state not in (0,4,5,6)
+  	  		<if test="xingming!=null and xingming!=''">
+  			and xingming like "%"#{xingming}"%"
+  		</if>
+  		<if test="roleName!=null and roleName!=''">
+  			and role_name like "%"#{roleName}"%"
+  		</if>
+  		<if test="jianyan!=null and jianyan!=''">
+  			and jianyan like "%"#{jianyan}"%"
+  		</if>
+  		<if test="dtime!=null and dtime!=''">
+  			and dtime &gt; #{dtime}
+  		</if>
+order by dtime desc
   </select>
   <select id="selectJianliLuyongRoleDept"  resultMap="selectJianliRoleDeptMap">
   	select * from 
@@ -66,6 +92,19 @@
   	where 
   	job_id = role_tb.role_id and role_tb.dept_id = dept_tb.dept_id
   	and jianli_tb.state not in (0,1,2,3,6)
+  	  		<if test="xingming!=null and xingming!=''">
+  			and xingming like "%"#{xingming}"%"
+  		</if>
+  		<if test="roleName!=null and roleName!=''">
+  			and role_name like "%"#{roleName}"%"
+  		</if>
+  		<if test="jianyan!=null and jianyan!=''">
+  			and jianyan like "%"#{jianyan}"%"
+  		</if>
+  		<if test="dtime!=null and dtime!=''">
+  			and dtime &gt; #{dtime}
+  		</if>
+order by dtime desc
   </select>
   
    <select id="selectByPrimaryKey" resultMap="selectJianliRoleDeptMap" parameterType="java.lang.Integer" >
@@ -82,6 +121,19 @@
   	where 
   	job_id = role_tb.role_id and role_tb.dept_id = dept_tb.dept_id
   	and jianli_tb.state not in (0)
+  		<if test="xingming!=null and xingming!=''">
+  			and xingming like "%"#{xingming}"%"
+  		</if>
+  		<if test="roleName!=null and roleName!=''">
+  			and role_name like "%"#{roleName}"%"
+  		</if>
+  		<if test="jianyan!=null and jianyan!=''">
+  			and jianyan like "%"#{jianyan}"%"
+  		</if>
+  		<if test="dtime!=null and dtime!=''">
+  			and dtime &gt; #{dtime}
+  		</if>
+order by dtime desc
   limit #{pageStart},#{pageUtil.pageRows}
   </select>
    <select id="selectJianliMianshiRoleDeptPages" parameterType="Map" resultMap="selectJianliRoleDeptMap">
@@ -90,6 +142,22 @@
   	where 
   	job_id = role_tb.role_id and role_tb.dept_id = dept_tb.dept_id
   	and jianli_tb.state not in (0,4,5,6)
+  	<if test="xingming!=null and xingming!=''">
+  			and xingming like "%"#{xingming}"%"
+  		</if>
+  		<if test="roleName!=null and roleName!=''">
+  			and role_name like "%"#{roleName}"%"
+  		</if>
+  		<if test="jianyan!=null and jianyan!=''">
+  			and jianyan like "%"#{jianyan}"%"
+  		</if>
+  		<if test="state!=null">
+  			and state = #{state}
+  		</if>
+  		<if test="dtime!=null and dtime!=''">
+  			and dtime &gt; #{dtime}
+  		</if>
+  		order by dtime desc
   limit #{pageStart},#{pageUtil.pageRows}
   </select>
    <select id="selectJianliLuyongRoleDeptPages" parameterType="Map" resultMap="selectJianliRoleDeptMap">
@@ -98,6 +166,22 @@
   	where 
   	job_id = role_tb.role_id and role_tb.dept_id = dept_tb.dept_id
   	and jianli_tb.state not in (0,1,2,3,6)
+  	<if test="xingming!=null and xingming!=''">
+  			and xingming like "%"#{xingming}"%"
+  		</if>
+  		<if test="roleName!=null and roleName!=''">
+  			and role_name like "%"#{roleName}"%"
+  		</if>
+  		<if test="jianyan!=null and jianyan!=''">
+  			and jianyan like "%"#{jianyan}"%"
+  		</if>
+  		<if test="state!=null">
+  			and state = #{state}
+  		</if>
+  		<if test="dtime!=null and dtime!=''">
+  			and dtime &gt; #{dtime}
+  		</if>
+  		order by dtime desc
   limit #{pageStart},#{pageUtil.pageRows}
   </select>
  
