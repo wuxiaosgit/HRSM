@@ -31,7 +31,7 @@
                     <td>
                      <input type="hidden" name="state" value="${jianliBean.state}" />
 					<input type="hidden" name="jianliId" value="${jianliBean.jianliId}"/>
-					<input type="text" name= "roleName" value="${jianliBean.roleBean.roleName }" />
+					<input type="text" readonly="readonly" name= "roleName" value="${jianliBean.roleBean.roleName }" />
 					
 					</td>
                 </tr>
@@ -46,18 +46,18 @@
                 <tr>
                     <td>职位分类<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text" name="deptShortName"  value="${jianliBean.roleBean.deptBean.deptShortName }" /></td>
+						<input type="text" readonly="readonly" name="deptShortName"  value="${jianliBean.roleBean.deptBean.deptShortName }" /></td>
                 </tr>
                 <tr>
                     <td>姓名<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text"  name="xingming" value="${jianliBean.xingming }" />
+						<input type="text" readonly="readonly"  name="xingming" value="${jianliBean.xingming }" />
 					</td>
                 </tr>
                 <tr>
                     <td>性别<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="text" name="xingbie" value="${jianliBean.xingbie }" />
+                        <input type="text" readonly="readonly" name="xingbie" value="${jianliBean.xingbie }" />
                     </td>
                 </tr>
 
@@ -65,7 +65,7 @@
 				<tr>
                     <td>招聘类型<span style="color:red">*</span>：</td>
                     <td>
-                       <select name="zhaopinType">
+                       <select name="zhaopinType" readonly="readonly">
 						<option value="">-请选择-</option>
 						<option value="社会招聘" <c:if test="${jianliBean.zhaopinType eq '社会招聘'}">selected="selected"</c:if>>社会招聘</option>
 						<option value="校园招聘" <c:if test="${jianliBean.zhaopinType eq '校园招聘'}">selected="selected"</c:if>>校园招聘</option>
@@ -76,53 +76,53 @@
 				<tr>
                     <td>EMAIL：</td>
                     <td>
-                        <input type="text" name="email" value="${jianliBean.email }" />
+                        <input type="text" readonly="readonly" name="email" value="${jianliBean.email }" />
                     </td>                
                 </tr>
 
 				<tr>
                     <td>联系电话：</td>
                     <td>
-                        <input type="text" name="tel" value="${jianliBean.tel }"/>
+                        <input type="text" readonly="readonly" name="tel" value="${jianliBean.tel }"/>
                     </td>                
                 </tr>
 
 				<tr>
                     <td>户口所在地：</td>
                     <td>
-                        <input type="text" name="address" value="${jianliBean.address }"  />
+                        <input type="text" readonly="readonly" name="address" value="${jianliBean.address }"  />
                     </td>                
                 </tr>
 
 				<tr>
                     <td>住址：</td>
                     <td>
-                        <input type="text" name="live" value="${jianliBean.live }" />
+                        <input type="text" readonly="readonly" name="live" value="${jianliBean.live }" />
                     </td>                
                 </tr>
 				<tr>
                     <td>政治面貌：</td>
                     <td>
-                        <input type="text" name="mianmao" value="${jianliBean.mianmao }" />
+                        <input type="text" readonly="readonly" name="mianmao" value="${jianliBean.mianmao }" />
                     </td>                
                 </tr>
 				<tr>
                     <td>身份证号：</td>
                     <td>
-                        <input type="text" name="idcard" value="${jianliBean.idcard }"  />
+                        <input type="text" readonly="readonly" name="idcard" value="${jianliBean.idcard }"  />
                     </td>                
                 </tr>
 				<tr>
                     <td>毕业院校：</td>
                     <td>
-                        <input type="text" name="school" value="${jianliBean.school }" />
+                        <input type="text" readonly="readonly" name="school" value="${jianliBean.school }" />
                     </td>                
                 </tr>	
 
 				<tr>
                     <td>学历：</td>
                     <td>
-						  <select name="xueli">
+						  <select name="xueli" readonly="readonly">
 						<option>-请选择-</option>
 						<option value="本科" <c:if test="${jianliBean.xueli eq '本科'}">selected="selected"</c:if>>本科</option>
 						<option value="硕士" <c:if test="${jianliBean.xueli eq '硕士'}">selected="selected"</c:if>>硕士</option>
@@ -132,25 +132,25 @@
 				<tr>
                     <td>专业：</td>
                     <td>
-                        <input type="text" name="zhuanye" value="${jianliBean.zhuanye }"/>
+                        <input type="text" readonly="readonly" name="zhuanye" value="${jianliBean.zhuanye }"/>
                     </td>                
                 </tr>
 					<tr>
                     <td>工作经验：</td>
                     <td>
-                        <input type="text" name="jianyan" value="${jianliBean.jianyan }" />
+                        <input type="text" readonly="readonly" name="jianyan" value="${jianliBean.jianyan }" />
                     </td>                
                 </tr>
 					<tr>
                     <td>薪资要求：</td>
                     <td>
-                        <input type="text" name="xizi" value="${jianliBean.xizi }" />（月薪）
+                        <input type="text" readonly="readonly" name="xizi" value="${jianliBean.xizi }" />（月薪）
                     </td>                
                 </tr>
 					<tr>
                     <td>是否在职：</td>
                     <td>
-                        <select name="zizhi">
+                        <select name="zizhi" readonly="readonly">
 							<option>-请选择-</option>
 							<option value="在职" <c:if test="${jianliBean.zizhi eq '在职'}">selected="selected"</c:if>>在职</option>
 							<option value="离职" <c:if test="${jianliBean.zizhi eq '离职'}">selected="selected"</c:if>>离职</option>
@@ -160,7 +160,7 @@
 					<tr>
                     <td>是否应届生：</td>
                     <td>
-                         <select name="yinjiesheng">
+                         <select name="yinjiesheng" readonly="readonly">
 							<option>-请选择-</option>
 							<option value="应届" <c:if test="${jianliBean.yinjiesheng eq '应届'}">selected="selected"</c:if>>应届</option>
 							<option value="毕业" <c:if test="${jianliBean.yinjiesheng eq '毕业'}">selected="selected"</c:if>>毕业</option>
@@ -171,7 +171,7 @@
 					<tr>
                     <td>登记时间：</td>
                     <td>
-                        <input type="text" name="dtime" value="${jianliBean.dtime }"
+                        <input type="text" readonly="readonly" name="dtime" value="${jianliBean.dtime }"
                         onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
                     </td>                
                 </tr>
@@ -179,7 +179,7 @@
 					<tr>
                     <td>个人履历：</td>
                     <td>
-                       <textarea cols="70" rows="13" name="jianli">
+                       <textarea cols="70" readonly="readonly" rows="13" name="jianli">
 							${jianliBean.jianli }
 						</textarea>
                     </td>                
@@ -193,22 +193,18 @@
                 </tr>
 
 					<tr>
-                    <td>是否有人推荐面试：</td>
+                    <td>推荐人：</td>
                     <td>
-                      <select name="tuijian">
-							<option>-请选择-</option>
-							<option value="是" <c:if test="${jianliBean.tuijian eq '是'}">selected="selected"</c:if>>是</option>
-							<option value="否" <c:if test="${jianliBean.tuijian eq '否'}">selected="selected"</c:if>>否</option>
-						</select>
-						推荐人：<input type="text" name="tuijianren" value="${jianliBean.tuijianren }"/>
-						推荐时间：<input type="text" name="tuijiantime" value="${jianliBean.tuijiantime }"
+                      
+						<input type="text" readonly="readonly" name="tuijianren" value="${jianliBean.tuijianren }"/>
+						推荐时间：<input type="text" readonly="readonly" name="tuijiantime" value="${jianliBean.tuijiantime }"
 						onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
                     </td>                
                 </tr>
 					<tr>
                     <td>推荐面试意见：</td>
                     <td>
-                       <textarea cols="70" rows="13" name="yijian">
+                       <textarea cols="70" readonly="readonly"  rows="13" name="yijian">
                        	${jianliBean.yijian }
                        </textarea>
                     </td>                
@@ -225,19 +221,31 @@
 			<table border="1" width="100%" class="table_a">
 			<tr>
 					<td colspan="2">
-					<input type="text" name="zhaopinId" value="${jianliBean.zhaopinId}" />
+					<input type="hidden" name="zhaopinId" value="${jianliBean.zhaopinId}" />
 					<input type="hidden" name="jianliid" value="${jianliBean.jianliId}" />
 					<input type="hidden" id="demo3_up_hidden" name="method" value="up"/>
 						面试结果：	
 					 <select name="state" id="demo3_up_select">
-							<option>-请选择-</option>
+							 <c:if test="${jianliBean.state eq 1}">
+								<option jianliId="${jianliBean.state}" value="0" <c:if test="${jianliBean.state eq 0}">selected="selected" </c:if> >删除</option>
+								<option jianliId="${jianliBean.state}" value="1" <c:if test="${jianliBean.state eq 1}">selected="selected" </c:if>>推荐面试</option>
+							</c:if>
+							<c:if test="${jianliBean.state eq 2}">
+								<option jianliId="${jianliBean.state}" value="0" <c:if test="${jianliBean.state eq 0}">selected="selected" </c:if> >删除</option>
+								<option jianliId="${jianliBean.state}" value="2" <c:if test="${jianliBean.state eq 2}">selected="selected" </c:if>>推荐二面</option>
+							</c:if>
+							<c:if test="${jianliBean.state eq 3}">
+								<option jianliId="${jianliBean.state}" value="0" <c:if test="${jianliBean.state eq 0}">selected="selected" </c:if> >删除</option>
+								<option jianliId="${jianliBean.state}" value="3" <c:if test="${jianliBean.state eq 3}">selected="selected" </c:if>>推荐三面</option>
+							</c:if>
+							<%-- <option>-请选择-</option>
 							<option value="0" <c:if test="${jianliBean.state eq '0'}">selected="selected"</c:if>>删除</option>
 							<option value="1" <c:if test="${jianliBean.state eq '1'}">selected="selected"</c:if>>推荐面试</option>
 							<option value="2" <c:if test="${jianliBean.state eq '2'}">selected="selected"</c:if>>推荐二面</option>
 							<option value="3" <c:if test="${jianliBean.state eq '3'}">selected="selected"</c:if>>推荐三面</option>
 							<option value="4" <c:if test="${jianliBean.state eq '4'}">selected="selected"</c:if>>建议录用</option>
 							<option value="5" <c:if test="${jianliBean.state eq '5'}">selected="selected"</c:if>>录用</option>
-							<option value="6" <c:if test="${jianliBean.state eq '6'}">selected="selected"</c:if>>存档</option>
+							<option value="6" <c:if test="${jianliBean.state eq '6'}">selected="selected"</c:if>>存档</option> --%>
 						</select>
 						<script>
 							$(function(){
@@ -266,22 +274,22 @@
                     <input name="mianshitime" value="<%=date %>"/>
 					</td>
                     <td>
-                     二面面试人：<input type="text"  value="" /> 面试时间：
-                     <input  value=""/>
+                     二面面试人：<input type="text" readonly="readonly" value="" /> 面试时间：
+                     <input readonly="readonly"  value=""/>
                     </td>
                 </tr>
 				</tr>
 					<tr>
                     <td>一面面试评价：<textarea cols="70" rows="3" name="pingjia"></textarea></td>
                     <td>
-                      二面面试评价：<textarea cols="70" rows="3"></textarea>
+                      二面面试评价：<textarea  readonly="readonly" cols="70" rows="3"></textarea>
                     </td>                
                 </tr>
 				</tr>
 					<tr>
-                    <td>三面面试人：<input type="text" value=""/> 面试时间：<input value=""/></td>
+                    <td>三面面试人：<input type="text" readonly="readonly" value=""/> 面试时间：<input readonly="readonly" value=""/></td>
                     <td>
-                      三面面试评价：<textarea cols="70" rows="3"></textarea>
+                      三面面试评价：<textarea cols="70" readonly="readonly" rows="3"></textarea>
                     </td>                
                 </tr>
 				 <tr>
@@ -294,8 +302,8 @@
 				 	<c:when test="${jianliBean.state==2}">
 
 				 		<tr>
-                    <td>一面面试人：<input type="text" value="${lists[0].mianshiren }"/> 面试时间：
-                    <input value="${lists[0].mianshitime }"/>
+                    <td>一面面试人：<input type="text" readonly="readonly" value="${lists[0].mianshiren }"/> 面试时间：
+                    <input readonly="readonly" value="${lists[0].mianshitime }"/>
 					</td>
                     <td>
                      二面面试人：<input type="text" name="mianshiren" value="${user.userName }" /> 面试时间：
@@ -304,16 +312,16 @@
                 </tr>
 				</tr>
 					<tr>
-                    <td>一面面试评价：<textarea cols="70" rows="3">${lists[0].pingjia }</textarea></td>
+                    <td>一面面试评价：<textarea  readonly="readonly" cols="70" rows="3">${lists[0].pingjia }</textarea></td>
                     <td>
                       二面面试评价：<textarea cols="70" rows="3" name="pingjia"></textarea>
                     </td>                
                 </tr>
 				</tr>
 					<tr>
-                    <td>三面面试人：<input type="text" value=""/> 面试时间：<input value=""/></td>
+                    <td>三面面试人：<input readonly="readonly" type="text" value=""/> 面试时间：<input readonly="readonly" value=""/></td>
                     <td>
-                      三面面试评价：<textarea cols="70" rows="3"></textarea>
+                      三面面试评价：<textarea  readonly="readonly" cols="70" rows="3"></textarea>
                     </td>                
                 </tr>
 				 <tr>
@@ -326,19 +334,19 @@
 				 	<c:when test="${jianliBean.state==3}">
 				 	
 				 		<tr>
-                    <td>一面面试人：<input type="text" value="${lists[0].mianshiren }"/> 面试时间：
-                    <input value="${lists[0].mianshitime }"/>
+                    <td>一面面试人：<input type="text" readonly="readonly" value="${lists[0].mianshiren }"/> 面试时间：
+                    <input readonly="readonly" value="${lists[0].mianshitime }"/>
 					</td>
                     <td>
-                     二面面试人：<input type="text" value="${lists[1].mianshiren }" /> 面试时间：
-                     <input  value="${lists[1].mianshitime }"/>
+                     二面面试人：<input type="text" readonly="readonly" value="${lists[1].mianshiren }" /> 面试时间：
+                     <input readonly="readonly"  value="${lists[1].mianshitime }"/>
                     </td>
                 </tr>
 				</tr>
 					<tr>
-                    <td>一面面试评价：<textarea cols="70" rows="3">${lists[0].pingjia }</textarea></td>
+                    <td>一面面试评价：<textarea readonly="readonly" cols="70" rows="3">${lists[0].pingjia }</textarea></td>
                     <td>
-                      二面面试评价：<textarea cols="70" rows="3">${lists[1].pingjia }</textarea>
+                      二面面试评价：<textarea readonly="readonly" cols="70" rows="3">${lists[1].pingjia }</textarea>
                     </td>                
                 </tr>
 				</tr>

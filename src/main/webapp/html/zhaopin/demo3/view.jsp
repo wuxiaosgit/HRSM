@@ -191,14 +191,9 @@
                 </tr>
 
 					<tr>
-                    <td>是否有人推荐面试：</td>
-                    <td>
-                      <select name="tuijian">
-							<option>-请选择-</option>
-							<option value="是" <c:if test="${jianliBean.tuijian eq '是'}">selected="selected"</c:if>>是</option>
-							<option value="否" <c:if test="${jianliBean.tuijian eq '否'}">selected="selected"</c:if>>否</option>
-						</select>
-						推荐人：<input type="text" name="tuijianren" value="${jianliBean.tuijianren }"/>
+                    <td>推荐人：</td>
+                   <td>
+						<input type="text" name="tuijianren" value="${jianliBean.tuijianren }"/>
 						推荐时间：<input type="text" name="tuijiantime" value="${jianliBean.tuijiantime }"
 						onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
                     </td>                

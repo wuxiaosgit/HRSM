@@ -34,7 +34,7 @@
                     <td width="120px;">部门<span style="color:red">*</span>：</td>
                     <td>
                     <input type="hidden" name="roleId" id="demo1_add_hidden" />
-                    <select id="demo1_add_select" >
+                    <select id="demo1_add_select" name="deptName">
 						<option value="0">--请选择--</option>
 						<c:forEach items="${db}" var="db">
 							<option value="${db.deptName }">${db.deptName }</option>

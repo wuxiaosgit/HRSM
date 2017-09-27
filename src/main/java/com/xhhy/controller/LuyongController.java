@@ -26,24 +26,16 @@ public class LuyongController {
 	//-----------------在面试管理中分页展示所简历信息selectJianliRoleDeptPages---------------------------
 			//------------------分页展示录用信息-----------------------------
 			@RequestMapping("selectJianliLuyongRoleDeptPages")
-			public String selectJianliLuyongRoleDeptPages(Model model,PageUtil pageUtil){
-				//System.out.println(pageUtil);
-
-				//deptBean.setDeptState(State.UNDEL);
-				//roleBean.setRoleState(State.UNDEL);
-				//roleBean.setDeptBean(deptBean);
-				//jianliBean.setRoleBean(roleBean);
-				
-				//jianliBean.setState(State.SAVE);
-				
+			public String selectJianliLuyongRoleDeptPages(Model model,JianliBean jianliBean,Integer state,String roleName,PageUtil pageUtil){
+				if(jianliBean==null){
+					jianliBean = new JianliBean();
+				}
+				if(state != null && state==-1){
+					state = null;
+				}
 				List<JianliBean> list = jianliService.selectJianliLuyongRoleDept();
-				//System.out.println(list.get(0).getRoleBean().getDeptBean().getDeptName());
 				int pageNum = 1;//页码
 				int pn = pageUtil.getPageNum();
-				//System.out.println(pn);
-			/*	if(pn != null){
-					pageNum = Integer.parseInt(pn);
-				}*/
 				if(pn !=0){
 					pageNum = pn;
 				}
@@ -69,10 +61,20 @@ public class LuyongController {
 				//map.put("zb", jianliBean);
 				map.put("pageUtil", pageUtil);
 				map.put("pageStart", pageStart);
+				map.put("xingming", jianliBean.getXingming());
+				map.put("roleName", roleName);
+				map.put("jianyan", jianliBean.getJianyan());
+				map.put("dtime", jianliBean.getDtime());
+				map.put("state", state);
 
 				List<JianliBean> lists = jianliService.selectJianliLuyongRoleDeptPages(map);
 
 				model.addAttribute("list", lists);
+				model.addAttribute("xingming_1", jianliBean.getXingming());
+				model.addAttribute("roleName_1", roleName);
+				model.addAttribute("jianyan_1", jianliBean.getJianyan());
+				model.addAttribute("dtime_1", jianliBean.getDtime());
+				model.addAttribute("state_1", state);
 				model.addAttribute("pageNum", pageNum);
 				model.addAttribute("pageRows", pageRows);
 				model.addAttribute("totlePages", totlePages);
@@ -105,15 +107,15 @@ public class LuyongController {
 			public String insertSelective(int state,int jianliId){
 				state +=1;
 				jianliService.updateByPrimaryKeyAndState(state,jianliId);
-				return "selectJianliLuyongRoleDeptPages.do";
+				return "redirect:selectJianliLuyongRoleDeptPages.do";
 			}
 			
 			//---------------------------多条件分页展示所有简历信息-------------------------------------
 			@RequestMapping("selectJianliRoleDeptPagesBySelective3")
 			public String selectJianliRoleDeptPagesBySelective3(Model model,JianliBean jianliBean){
-				System.out.println(jianliBean);
+				//System.out.println(jianliBean);
 				List<JianliBean> list = jianliService.selectJianliRoleDeptPagesBySelective3(jianliBean);
-				System.out.println(list);
+				//System.out.println(list);
 				model.addAttribute("list", list);
 				return "/html/zhaopin/demo4/list.jsp";
 			}

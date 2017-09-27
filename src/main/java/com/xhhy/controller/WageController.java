@@ -104,7 +104,7 @@ public class WageController {
 		}if(stat=="-- 已通过--"){
 			sta=2;
 		} */
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("wageBm", wagebmm);
 		map.put("sta", wagestat);
 		List<WageBean> list = service.queryByLike(map);

@@ -49,24 +49,19 @@
 	</div>
 	<div></div>
 	<div class="div_search">
-			<form action="../zhaopin/selectZhaoRoleDeptPages.do" method="post">
+			<form action="../zhaopin/selectZhaoRoleDeptPage.do" method="post">
 				职位名称:
-				<input type="text" name="roleBean.roleName" value="${roleName }" id="demo1_input_roleId" /> 
+				<input type="text" name="roleName" value="${roleName1 }" id="demo1_input_roleId" /> 
 				
 				职位分类:
-				<select name="roleBean.deptBean.deptShortName" value="" style="width: 100px;">
 				
-					<option >-请选择-</option>
-					<option value="管理" <c:if test="${type eq '管理' }">selected="selected"</c:if>>管理</option>
-					<option value="技术" <c:if test="${type eq '管理' }">selected="selected"</c:if>>技术</option>
-					<option value="实施" <c:if test="${type eq '管理' }">selected="selected"</c:if>>实施</option>
-				</select>
+				<input type="text" name="deptShortName" value="${deptShortName1 }"  />
 				
 				 登记日期:
-				<input type="text" name="startTime"
+				<input type="text" name="startTime" value="${startTime1 }"
 					onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
 				截止日期:
-				<input type="text" name="endTime"
+				<input type="text" name="endTime" value="${endTime1 }"
 					onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
 				<input value="查询" type="submit" />
 			</form>
