@@ -113,9 +113,6 @@ function nextpage(obj){
 						</td> 				
                         <td>
 	                        <c:choose>
-		                        <c:when test="${train.trainState==2}">
-		                        	<a href="train/toFankuiTrain.do?trainId=${train.trainId}&method=toFankuiTrain">培训反馈</a>
-		                        </c:when>
 		                        <c:when test="${train.trainState==0}">
 										<a href="train/toEdit.do?trainId=${train.trainId}&method=toEdit">修改</a>
 										<a href="train/queryViewById.do?method=queryViewById&trainId=${train.trainId}">明细</a>
@@ -124,7 +121,12 @@ function nextpage(obj){
 		                        <c:when test="${train.trainState==1}">
 		                        	<a href="train/queryViewById.do?method=queryViewById&trainId=${train.trainId}">明细</a>
 		                        </c:when>
-		                        <c:otherwise></c:otherwise>
+		                        <c:when test="${train.trainState==2}">
+		                        	<a href="train/toFankuiTrain.do?trainId=${train.trainId}&method=toFankuiTrain">培训反馈</a>
+		                        </c:when>
+		                        <c:otherwise>
+		                        	<a href="javascript:if(confirm('确定删除?')){location.href='train/deleteById.do?trainId=${train.trainId}&method=deleteById'};">删除</a>
+		                        </c:otherwise>
 	                        </c:choose>
 						</td>                        
                     </tr> 

@@ -53,19 +53,22 @@
 </select>
 
 <select id="max" parameterType="com.xhhy.domain.TrainBean" resultType="int">
-	select count(*) from train_tb where is_delete = 0
-		<if test="trainName != null and trainName != ''">
-			and train_name like "%"#{trainName}"%"
+	select count(*) from train_tb <where>
+	<if test="trainName != null and trainName != ''">
+			train_name like "%"#{trainName}"%"
 		</if>
-		<if test="trainState != null">
+		<if test="trainState != null and trainState !=-1">
 			and train_state = #{trainState}
 		</if>
-		<if test="trainStarttime != null and trainStarttime !=''">
+		<if test="trainStarttime != null and trainStarttime !='' ">
 			and train_starttime &gt;= #{trainStarttime}
 		</if>
-		<if test="trainEndtime !=null and trainEndtime !=''">
-			and train_endtime &lt;= #{trainEndtime}
+		<if test="trainEndtime !=null and trainEndtime != '' ">
+			and train_starttime &lt;= #{trainEndtime}
 		</if>
+			and is_delete = 0 
+			
+	</where>
 </select>
 
 <select id="queryByName" parameterType="string" resultType="com.xhhy.domain.TrainBean">

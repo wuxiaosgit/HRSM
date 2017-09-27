@@ -46,6 +46,7 @@ public class TrainController {
 		mav.addObject("trainList", trainList);
 		mav.addObject("train", train);
 		Integer max = trainService.max(train);
+		System.out.println(max);
 		mav.addObject("maxSize",max);//总记录数
 		mav.addObject("pageNum",(int)Math.ceil(max/10.0));//总页数
 		mav.addObject("currentPage",train.getCurrentNum());//当前页码 第几页，默认第一页

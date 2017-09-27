@@ -17,9 +17,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script type="text/javascript" src="html/js/jquery.validate.js"></script>
 <script type="text/javascript" language="javascript" src="<%=basePath%>html/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
-$(function(){
-	alert(0)
-})
 	$().ready(function(){
 		$("#formId").validate({
 			rules:{
