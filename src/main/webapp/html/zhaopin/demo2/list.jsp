@@ -96,13 +96,36 @@
 							<a href="../jianli/selectByPrimaryKey.do?jianliId=${list.jianliId}&method=change">修改</a>						   
 							<a href="../jianli/updateByPrimaryKeySelective.do?jianliId=${list.jianliId}&method=del">删除</a>
 							<select name="state" id="demo2_select_state${list.jianliId}" onchange="stateChange(this)">
+							<c:if test="${list.state eq 1}">
 							<option jianliId="${list.jianliId}" value="0" <c:if test="${list.state eq 0}">selected="selected" </c:if>>删除</option>
-							<option jianliId="${list.jianliId}" value="1" <c:if test="${list.state eq 1}">selected="selected" </c:if>>推荐面试</option>
+							<option jianliId="${list.jianliId}" value="1" <c:if test="${list.state eq 1}">selected="selected" </c:if>>推荐一面</option>
+							<option jianliId="${list.jianliId}" value="2" <c:if test="${list.state eq 2}">selected="selected" </c:if>>推荐二面</option>
+							</c:if>
+							<c:if test="${list.state eq 2}">
+							<option jianliId="${list.jianliId}" value="0" <c:if test="${list.state eq 0}">selected="selected" </c:if>>删除</option>
 							<option jianliId="${list.jianliId}" value="2" <c:if test="${list.state eq 2}">selected="selected" </c:if>>推荐二面</option>
 							<option jianliId="${list.jianliId}" value="3" <c:if test="${list.state eq 3}">selected="selected" </c:if>>推荐三面</option>
+							</c:if>
+							<c:if test="${list.state eq 3}">
+							<option jianliId="${list.jianliId}" value="0" <c:if test="${list.state eq 0}">selected="selected" </c:if>>删除</option>
+							<option jianliId="${list.jianliId}" value="3" <c:if test="${list.state eq 3}">selected="selected" </c:if>>推荐三面</option>
+							<option jianliId="${list.jianliId}" value="4" <c:if test="${list.state eq 4}">selected="selected" </c:if>>建议录用</option>
+							</c:if>
+							<c:if test="${list.state eq 4}">
+							<option jianliId="${list.jianliId}" value="4" <c:if test="${list.state eq 4}">selected="selected" </c:if>>建议录用</option>
+							<option jianliId="${list.jianliId}" value="5" <c:if test="${list.state eq 5}">selected="selected" </c:if>>录用</option>
+							</c:if>
+							<c:if test="${list.state eq 5}">
+							<option jianliId="${list.jianliId}" value="5" <c:if test="${list.state eq 5}">selected="selected" </c:if>>录用</option>
+							</c:if>
+							<c:if test="${list.state eq 6}">
+							<option jianliId="${list.jianliId}" value="0" <c:if test="${list.state eq 0}">selected="selected" </c:if>>删除</option>
+							<option jianliId="${list.jianliId}" value="1" <c:if test="${list.state eq 1}">selected="selected" </c:if>>推荐面试</option>
 							<option jianliId="${list.jianliId}" value="4" <c:if test="${list.state eq 4}">selected="selected" </c:if>>建议录用</option>
 							<option jianliId="${list.jianliId}" value="5" <c:if test="${list.state eq 5}">selected="selected" </c:if>>录用</option>
 							<option jianliId="${list.jianliId}" value="6" <c:if test="${list.state eq 6}">selected="selected" </c:if> >存档</option>
+							</c:if>
+							
 						</select>
 						</td>        
 						</tr>
@@ -144,7 +167,7 @@
         </div>
         <script>
         function stateChange(e){
-        	state = e.value;
+        	var state = e.value;
         	  var index = e.selectedIndex;
         	  var store_num = e.options[index].getAttribute("jianliId");
         	

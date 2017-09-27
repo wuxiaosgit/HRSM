@@ -1,6 +1,11 @@
 package com.xhhy.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,9 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import com.xhhy.domain.DeptBean;
-import com.xhhy.domain.MenuBean;
-import com.xhhy.domain.UserBean;
 import com.xhhy.service.DeptService;
 import com.xhhy.service.UserService;
 
@@ -23,6 +29,49 @@ public class DeptController {
 	private DeptService deptService;
 	@Autowired
 	private UserService userService;
+	
+	
+	@RequestMapping("deptTree.do")
+	public void deptree(HttpServletRequest request, HttpServletResponse response){
+		String parameter = request.getParameter("id");
+		Integer deptId=null;
+		if (parameter!=null) {
+			deptId = Integer.valueOf(parameter);
+			
+		}
+		//System.out.println(deptId);
+		List<DeptBean> deptBeans=null;
+		JsonArray ja=new JsonArray();
+		if (deptId==null) {
+			deptBeans=deptService.getTopDept();
+		}else{
+			deptBeans=deptService.getChildDept(deptId);
+		}
+		for (DeptBean deptBean : deptBeans) {
+			JsonObject jo=new JsonObject();
+			jo.addProperty("id", deptBean.getDeptId());
+			jo.addProperty("text", deptBean.getDeptName());
+			jo.addProperty("state", "closed");
+			ja.add(jo);
+		}
+		String json =ja.toString(); //"[{\"id\":1,\"text\":\"系统管理\",\"state\":\"closed\"},{\"id\":2,\"text\":\"人事管理\",\"state\":\"closed\"},{\"id\":3,\"text\":\"档案管理\"}]";
+		//System.out.println(json);
+		response.setContentType("json/application;charset=utf-8");
+		PrintWriter out=null;
+		try {
+			out = response.getWriter();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		String json1 = "[{\"id\":1,\"text\":\"系统管理\",\"state\":\"closed\",\"children\":[{\"id\":11,\"text\":\"部门管理\"},{\"id\":12,\"text\":\"人事管理\"}]},{\"id\":2,\"text\":\"人事管理\"},{\"id\":3,\"text\":\"档案管理\"}]";
+	
+		out.print(json);
+		out.flush();
+		out.close();
+		
+	}
+	
 	@RequestMapping("listdept.do")
 	public String listdept(){
 		List<DeptBean> deptBeans= deptService.listDept();

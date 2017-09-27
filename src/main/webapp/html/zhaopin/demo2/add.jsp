@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="Utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.text.SimpleDateFormat"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
@@ -10,6 +11,7 @@
           <script type="text/javascript" src="../html/js/jquery-3.2.1.min.js"></script>
          <script type="text/javascript" src="../html/js/zhaopin.js"></script>
           <script type="text/javascript" src="../html/js/jquery.validate.js"></script>
+           <script type="text/javascript" src="../html/js/jianli_validate.js"></script>
         <script language="javascript" type="text/javascript" src="../html/My97DatePicker/WdatePicker.js"></script>
     </head>
 
@@ -86,14 +88,14 @@
 				<tr>
                     <td>EMAIL：</td>
                     <td>
-                        <input type="text" name="email"  />
+                        <input type="text" id="email" name="email"  />
                     </td>                
                 </tr>
 
 				<tr>
                     <td>联系电话：</td>
                     <td>
-                        <input type="text" name="tel" />
+                        <input type="text" id="tel" name="tel" />
                     </td>                
                 </tr>
 
@@ -180,8 +182,13 @@
 			
 					<tr>
                     <td>登记时间：</td>
+                     <%
+			
+              		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+              		String date = sdf.format(new Date());
+              %>
                     <td>
-                        <input type="text" name="dtime"  onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+                        <input type="text" name="dtime"   value="<%=date %>" />
                     </td>                
                 </tr>
 				
@@ -208,7 +215,7 @@
 							<option value="否">否</option>
 						</select>
 						推荐人：<input type="text" name="tuijianren" value="" />
-						推荐时间：<input type="text" name="tuijiantime" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
+						推荐时间：<input type="text" name="tuijiantime" id="tuijiantime" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
                     </td>                
                 </tr>
 			

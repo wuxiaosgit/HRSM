@@ -23,6 +23,9 @@
 	<select id="getTopDept" resultMap="dept">
 		select * from dept_tb where dept_up=0
 	</select>
+	<select id="getChildDept" resultMap="dept">
+		select * from dept_tb where dept_up=#{deptUp} 
+	</select>
 
 	<select id="getDeptById" parameterType="int" resultMap="dept">
 		select *

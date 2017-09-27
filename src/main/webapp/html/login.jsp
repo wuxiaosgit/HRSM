@@ -17,9 +17,10 @@
 
 <link href="css/login.css" type="text/css" rel="stylesheet" />
         <script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="js/jquery.validate.js" type="text/javascript" charset="utf-8"></script>
     </head>
 <script type="text/javascript">
-	function f(){
+/* 	function f(){
 		var password=document.getElementById("userPassword").value;
 		var userLogin=document.getElementById("userLogin").value;
 		 if (userLogin == null||userLogin == ""||userLogin == " ") {
@@ -31,7 +32,32 @@
 			 return false;
 		}
 		return true;
-	}
+	} */
+	$(function(){
+		$("#form").validate({
+			rules:{
+				userLogin:{
+					required : true,
+					minlength:	2
+				},
+				userPassword:{
+					required : true,
+					minlength:	2
+				},
+				
+			},
+			messages:{
+				userLogin:{
+					required:'用户名不能为空'	,
+					minlength:'最小长度为2'
+				},
+				userPassword:{
+					required : '密码不能为空',
+					minlength:	'最小长度为2'
+				},
+			}
+		});
+	});
 </script>
 <body id="userlogin_body">
 
@@ -45,7 +71,7 @@
 				</ul>
 			</dd>
 			<dd id="user_main">
-			<form action="../user/login.do" method="post" onsubmit="return f();">
+			<form id="form" action="../user/login.do" method="post" onsubmit="return f();">
 				<ul>
 					<li class="user_main_l"></li>
 					<li class="user_main_c">
@@ -55,14 +81,14 @@
 								<li class="user_main_input">
 								<input name="userLogin"
 									maxlength="20" id=userLogin value="${cookie.userLogin.value }" class="txtusernamecssclass">
-								<span id=4></span>
+								<!-- <span id=4></span> -->
 								</li>
 							</ul>
 							<ul>
 								<li class="user_main_text">密 码：</li>
 								<li class="user_main_input"><input  type="password"
 									name="userPassword" id="userPassword"  value="${cookie.userPassword.value }" class="txtpasswordcssclass">
-								<span id=5></span>
+								<!-- <span id=5></span> -->
 								</li>
 							</ul>
 							<ul>

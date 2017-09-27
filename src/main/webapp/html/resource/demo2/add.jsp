@@ -19,6 +19,8 @@
 	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 <script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+<!-- 验证框架 -->
+<script type="text/javascript" src="js/jquery.validate.js"></script>
 </head>
 <script type="text/javascript">
 	function selectrole(obj) {
@@ -50,10 +52,8 @@
 		}
 		 if (user1 == null ) {
 			 //添加
-			 alert("添加");
 		return ajaxLogin(userLogin);
 		}else{
-			 alert("修改");
 			//修改
 			return true;
 		}
@@ -91,7 +91,7 @@
 	<div></div>
 
 	<div style="font-size: 13px; margin: 10px 5px">
-		<form action="../user/insertUser.do" method="post" onsubmit="return f(${user1});">
+		<form id="form" action="../user/insertUser.do" method="post" onsubmit="return f(${user1});">
 			<input type="hidden" id=6 name="userId" value="${user1.userId }" />
 			<table border="1" width="100%" class="table_a">
 				<tr>

@@ -56,4 +56,10 @@ public class DeptServiceImpl implements DeptService {
 		return deptDao.getTopDept();
 	}
 
+	@Override
+	public List<DeptBean> getChildDept(Integer deptUp) {
+		// TODO Auto-generated method stub
+		return deptDao.getChildDept(deptUp);
+	}
+
 }

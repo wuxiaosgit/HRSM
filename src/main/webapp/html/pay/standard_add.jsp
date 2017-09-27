@@ -5,6 +5,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/html/pay/";
 %> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 添加审核 -->
 <html>
     <head>
         <title>薪酬标准管理添加</title>
@@ -121,10 +122,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <td>薪酬总额：</td>
                     <td>
 						 <input type="text" readonly name="all" id="all" value="0" />元
+						 <input type="hidden" name="wageStatment" value="1">
                     </td>
                 </tr>
-
-
 				<tr>
                     <td>备注：</td>
                     <td>

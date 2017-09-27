@@ -2,6 +2,7 @@ package com.xhhy.domain;
 
 import java.io.File;
 import java.io.Serializable;
+import java.sql.Date;
 
 import org.springframework.util.FileCopyUtils;
 
@@ -32,7 +33,7 @@ public class PmagBean implements Serializable{
 	private String pmagBankId;//银行卡号
 	private String pmagInsuranceId;//社保卡号
 	private String pmagPeg;//登记人
-	private String pmagTime;//建党时间
+	private Date pmagTime;//建党时间
 	private String pmagFamily;//家庭关系
 	private String pmagRemark;//备注
 	public int getPmagId() {
@@ -64,6 +65,12 @@ public class PmagBean implements Serializable{
 	}
 	public void setPmagDoomCode(String pmagDoomCode) {
 		this.pmagDoomCode = pmagDoomCode;
+	}
+	public String getPmagCheng() {
+		return pmagCheng;
+	}
+	public void setPmagCheng(String pmagCheng) {
+		this.pmagCheng = pmagCheng;
 	}
 	public String getPmagName() {
 		return pmagName;
@@ -179,10 +186,10 @@ public class PmagBean implements Serializable{
 	public void setPmagPeg(String pmagPeg) {
 		this.pmagPeg = pmagPeg;
 	}
-	public String getPmagTime() {
+	public Date getPmagTime() {
 		return pmagTime;
 	}
-	public void setPmagTime(String pmagTime) {
+	public void setPmagTime(Date pmagTime) {
 		this.pmagTime = pmagTime;
 	}
 	public String getPmagFamily() {
@@ -197,10 +204,5 @@ public class PmagBean implements Serializable{
 	public void setPmagRemark(String pmagRemark) {
 		this.pmagRemark = pmagRemark;
 	}
-	public String getPmagCheng() {
-		return pmagCheng;
-	}
-	public void setPmagCheng(String pmagCheng) {
-		this.pmagCheng = pmagCheng;
-	}	
+	
 }
