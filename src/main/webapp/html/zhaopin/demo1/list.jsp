@@ -95,7 +95,8 @@
 						<td><a
 							href="../zhaopin/selectByPrimaryKey.do?zhaopinId=${list.zhaopinId}&method=change">变更</a>
 							&nbsp;&nbsp; <a
-							href="../zhaopin/updateByPrimaryKeySelective.do?zhaopinId=${list.zhaopinId}&method=del">删除</a>
+							href="../zhaopin/updateByPrimaryKeySelective.do?zhaopinId=${list.zhaopinId}&method=del"
+							onclick="return confirm('您确认要删除吗？');">删除</a>
 						</td>
 					</tr>
 				</c:forEach>

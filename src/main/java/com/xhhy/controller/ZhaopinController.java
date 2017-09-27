@@ -280,7 +280,7 @@ public class ZhaopinController {
 		//RoleBean rb = roleService.selectRoleByRoleName(roleName);
 		//System.out.println(rb.getDeptBean().getDeptShortName());
 		ZhaopinBean zb = zhaopinService.selectRoleByZhaopin(roleName);
-		System.out.println(zb);
+		//System.out.println(zb);
 		response.setContentType("text/xml;charset=UTF-8"); 
 		return zb;
 	} 

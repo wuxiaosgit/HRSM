@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body>
 	<div class="div_head">
         <span>
-            <span style="float:left">当前位置是：-》培训管理 -》修改培训计划</span>
+            <span style="float:left">当前位置是：-》培训管理 -》培训计划明细</span>
             <span style="float:right;margin-right: 8px;font-weight: bold">
                 <a style="text-decoration: none" href="train/list.do">【返回】</a>
             </span>

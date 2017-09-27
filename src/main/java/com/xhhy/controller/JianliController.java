@@ -50,7 +50,7 @@ public class JianliController {
 	public String selectAll(Model model){
 		
 		List<JianliBean> list = jianliService.selectAll();
-		//System.out.println(list);
+
 		model.addAttribute("list",list);
 		
 		return "/html/zhaopin/demo2/list.jsp";
@@ -58,9 +58,9 @@ public class JianliController {
 	//------------------------根据ID查询单条简历信息------------------------------------------
 	@RequestMapping("selectByPrimaryKey")
 	public String selectByPrimaryKey(Model model,int jianliId,String method){
-		//System.out.println(zhaopinId);
+
 		JianliBean jianliBean = jianliService.selectByPrimaryKey(jianliId);
-		//System.out.println(zhaopinBean);
+
 		model.addAttribute("jianliBean",jianliBean);
 		if(method.equals("change")){
 			return "/html/zhaopin/demo2/up.jsp";
@@ -77,7 +77,7 @@ public class JianliController {
 			jianliService.updateByPrimaryKeySelective(jianliBean);
 			return "redirect:selectJianliRoleDeptPages.do";
 		}else{
-			//jianliBean.setState(State.UNDEL);
+
 			jianliService.updateByPrimaryKeySelective(jianliBean);
 			return "redirect:selectJianliRoleDeptPages.do";
 		}
@@ -87,8 +87,7 @@ public class JianliController {
 	
 	@RequestMapping("updateByPrimaryKeyAndState")
 	public void updateByPrimaryKeyAndState(int state,int jianliId){
-			//System.out.println("state="+state);
-			//System.out.println(jianliId);
+
 			jianliService.updateByPrimaryKeyAndState(state,jianliId);
 		}
 		
@@ -97,12 +96,12 @@ public class JianliController {
 	//-------------------------添加简历-上传文件-------------------------
 	@RequestMapping("insertSelective")
 	public String insertSelective(JianliBean jianliBean,HttpServletRequest request,HttpServletResponse response){
-		//System.out.println(jianliBean);
+
 		 MultipartHttpServletRequest multipartRequest =(MultipartHttpServletRequest) request;
 		 MultipartFile file = multipartRequest.getFile("newfile");
 		 String fileName = file.getOriginalFilename();
 		 String mime = file.getContentType();
-		 System.out.println(mime);
+		 //System.out.println(mime);
 		 
 		 String fujian = "f:/"+UUID.randomUUID().toString()+"."+mime;
 		 try {
@@ -143,7 +142,7 @@ public class JianliController {
 		public String listRole(Model model){
 			List<ZhaopinBean> zhaopinBean = zhaopinService.selectAll();
 			List<DeptBean> db = deptService.listDept();
-			//System.out.println(roles);
+
 			model.addAttribute("zhaopinBean",zhaopinBean);
 			model.addAttribute("db", db);
 			return "/html/zhaopin/demo2/add.jsp";
@@ -154,9 +153,9 @@ public class JianliController {
 		public @ResponseBody RoleBean selectRoleByRoleName(HttpServletRequest request,HttpServletResponse response) throws Exception{
 			String roleName = request.getParameter("roleName");
 			roleName =  java.net.URLDecoder.decode(roleName, "UTF-8");
-			//System.out.println(roleName);
+
 			RoleBean rb = roleService.selectRoleByRoleName(roleName);
-			//System.out.println(rb.getDeptBean().getDeptShortName());
+
 			response.setContentType("text/xml;charset=UTF-8"); 
 			return rb;
 		} 

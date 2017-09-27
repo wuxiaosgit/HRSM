@@ -21,9 +21,15 @@ public class TrainController {
 	//添加
 	@RequestMapping("insert.do")
 	public ModelAndView insertTrain(TrainBean train,@RequestParam("file")MultipartFile file) throws Exception{
-		train.setTrainFeekBack(1);
-		train.setIsDelete(0);
+		if(train==null){
+			throw new Exception("不能为空");
+		}
+		TrainBean tb = trainService.queryByName(train.getTrainName());
+		if(tb!=null){
+			throw new Exception("用户名重复");
+		}
 		
+		train.setIsDelete(0);
 		//文件上传 
 		trainService.saveTrainAndFilePath(train,file);
 		
@@ -84,8 +90,6 @@ public class TrainController {
 		return listTrain(null);
 	}
 	
-	
-	
 	/*
 	 * 培训复核
 	 */
@@ -101,6 +105,7 @@ public class TrainController {
 		}
 		List<TrainBean> trainList = trainService.listTrain(train);
 		mav.addObject("trainList", trainList);
+		mav.addObject("train", train);
 		
 		Integer max = trainService.max(train);
 		mav.addObject("maxSize",max);//总记录数
@@ -141,6 +146,7 @@ public class TrainController {
 		}
 		List<TrainBean> trainList = trainService.listTrain(train);
 		mav.addObject("trainList", trainList);
+		mav.addObject("train", train);
 		
 		Integer max = trainService.max(train);
 		mav.addObject("maxSize",max);//总记录数

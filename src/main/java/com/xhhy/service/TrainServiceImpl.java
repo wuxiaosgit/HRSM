@@ -72,4 +72,9 @@ public class TrainServiceImpl implements TrainService {
 		return trainDao.max(train);
 	}
 
+	public TrainBean queryByName(String trainName) {
+		
+		return trainDao.queryByName(trainName);
+	}
+
 }

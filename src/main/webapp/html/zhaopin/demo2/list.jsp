@@ -94,7 +94,7 @@
                         <td>
               
 							<a href="../jianli/selectByPrimaryKey.do?jianliId=${list.jianliId}&method=change">修改</a>						   
-							<a href="../jianli/updateByPrimaryKeySelective.do?jianliId=${list.jianliId}&method=del">删除</a>
+							<a href="../jianli/updateByPrimaryKeySelective.do?jianliId=${list.jianliId}&method=del" onclick="return confirm('您确认要删除吗？');">删除</a>
 							<select name="state" id="demo2_select_state${list.jianliId}" onchange="stateChange(this)">
 							<c:if test="${list.state eq 6}">
 								<option jianliId="${list.jianliId}" value="6" <c:if test="${list.state eq 6}">selected="selected" </c:if> >存档</option>
@@ -171,7 +171,7 @@
         	xmlHttp.open("post", "updateByPrimaryKeyAndState.do?state="+state+"&jianliId="+store_num, true);
         	xmlHttp.onreadystatechange=function(){
         		
-        		alert("修改成功");
+        		
         	};
         	xmlHttp.send(null);
         }
