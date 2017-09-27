@@ -74,21 +74,18 @@ public class MianshiController {
 			int state = mianshiBean.getState();
 			if(method.equals("del")){
 				jianliService.updateByPrimaryKeyAndState(state,jianliId);
-				return "selectJianliMianshiRoleDeptPages.do";
+				return "redirect:selectJianliMianshiRoleDeptPages.do";
 			}else{
 				mianshiService.insertSelective(mianshiBean);
 				state +=1;
+				System.out.println("state:"+state);
 				jianliService.updateByPrimaryKeyAndState(state,jianliId);
 				if(state == 4){
-					//System.out.println("zhaopinId" +zhaopinId);
 					ZhaopinBean zhaopinBean = zhaopinService.selectByPrimaryKey(zhaopinId);
-					//System.out.println(zhaopinBean);
+					System.out.println(zhaopinBean);
 					int zhaopinNum = zhaopinBean.getZhaopinNum() - 1;
-					System.out.println("zhaopinNum:"+zhaopinNum);
+					//System.out.println("zhaopinNum:"+zhaopinNum);
 					if(zhaopinNum==0){
-						/*zhaopinBean.setZhaopinNum(zhaopinNum);
-						zhaopinBean.setState(0);
-						System.out.println("state:"+zhaopinBean.getState());*/
 						ZhaopinBean zhaopinBean2 = new ZhaopinBean();
 						zhaopinBean2.setZhaopinId(zhaopinId);
 						zhaopinBean2.setZhaopinNum(zhaopinNum);
@@ -99,14 +96,19 @@ public class MianshiController {
 					}
 					
 				}
-				return "selectJianliMianshiRoleDeptPages.do";
+				return "redirect:selectJianliMianshiRoleDeptPages.do";
 			}
 			
 		}
 		//-----------------在面试管理中分页展示所简历信息selectJianliRoleDeptPages---------------------------
 				@RequestMapping("selectJianliMianshiRoleDeptPages")
-				public String selectJianliMianshiRoleDeptPages(Model model,PageUtil pageUtil){
-
+				public String selectJianliMianshiRoleDeptPages(Model model,String roleName,Integer state,JianliBean jianliBean,PageUtil pageUtil){
+					if(jianliBean==null){
+						jianliBean = new JianliBean();
+					}
+					if(state != null && state==-1){
+						state = null;
+					}
 					List<JianliBean> list = jianliService.selectJianliMianshiRoleDept();
 					int pageNum = 1;//页码
 					int pn = pageUtil.getPageNum();
@@ -133,16 +135,25 @@ public class MianshiController {
 					pageUtil.setTotleRows(totleRows);
 					
 					int pageStart = pageUtil.getStart();
-					System.out.println(pageStart);
-					System.out.println(pageNum);
+					
 					Map<String,Object> map =new HashMap<String, Object>();
 					//map.put("zb", jianliBean);
 					map.put("pageUtil", pageUtil);
 					map.put("pageStart", pageStart);
+					map.put("xingming", jianliBean.getXingming());
+					map.put("roleName", roleName);
+					map.put("jianyan", jianliBean.getJianyan());
+					map.put("dtime", jianliBean.getDtime());
+					map.put("state", state);
 
 					List<JianliBean> lists = jianliService.selectJianliMianshiRoleDeptPages(map);
 
 					model.addAttribute("list", lists);
+					model.addAttribute("xingming_1", jianliBean.getXingming());
+					model.addAttribute("roleName_1", roleName);
+					model.addAttribute("jianyan_1", jianliBean.getJianyan());
+					model.addAttribute("dtime_1", jianliBean.getDtime());
+					model.addAttribute("state_1", state);
 					model.addAttribute("pageNum", pageNum);
 					model.addAttribute("pageRows", pageRows);
 					model.addAttribute("totlePages", totlePages);
@@ -157,15 +168,15 @@ public class MianshiController {
 				@RequestMapping("updateMianshiByPrimaryKeySelective")
 				public String updateMianshiByPrimaryKeySelective(JianliBean jianliBean,String method ){
 					//System.out.println(zhaopinBean.getZhaopinId());
-					System.out.println(method);
+					//System.out.println(method);
 					if(method!=null&&method.equals("del")){
 						jianliBean.setState(State.DEL);
 						jianliService.updateByPrimaryKeySelective(jianliBean);
-						return "selectJianliMianshiRoleDeptPages.do";
+						return "redirect:selectJianliMianshiRoleDeptPages.do";
 					}else{
 						//jianliBean.setState(State.UNDEL);
 						jianliService.updateByPrimaryKeySelective(jianliBean);
-						return "selectJianliMianshiRoleDeptPages.do";
+						return "redirect:selectJianliMianshiRoleDeptPages.do";
 					}
 					
 				}

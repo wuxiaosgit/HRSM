@@ -20,7 +20,7 @@ public interface JianliDao {
 
 	List<JianliBean> selectAll();
 
-	List<JianliBean> selectJianliRoleDept();
+	List<JianliBean> selectJianliRoleDept(Map<String, Object> map);
 
 	List<JianliBean> selectJianliRoleDeptPages(Map<String, Object> map);
 
