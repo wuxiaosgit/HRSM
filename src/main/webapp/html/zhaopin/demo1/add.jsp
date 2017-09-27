@@ -42,7 +42,7 @@
                     <td>
                     <input type="hidden" name="roleId" id="demo1_add_hidden" />
                     <select id="demo1_add_select" name="deptName">
-						<option value="0">--请选择--</option>
+						<option value="">--请选择--</option>
 						<c:forEach items="${db}" var="db">
 							<option value="${db.deptName }">${db.deptName }</option>
 						</c:forEach>
@@ -54,7 +54,7 @@
                     <td>招聘类型<span style="color:red">*</span>：</td>
                     <td>
                      <select name="zhaopinType">
-						<option>-请选择-</option>
+						<option value="">-请选择-</option>
 						<option value="校园招聘">校园招聘</option>
 						<option value="社会招聘">社会招聘</option>
 					 </select>
@@ -69,8 +69,8 @@
                 <tr>
                     <td>职位名称<span style="color:red">*</span>：</td>
                     <td>
-                    <select id="demo1_add_roleName">
-						<option value="0">--请选择--</option>
+                    <select id="demo1_add_roleName" name="roleName">
+						<option value="">--请选择--</option>
 					</select>
 						<!-- <input type="text" id="demo1_add_roleName" readonly name="roleName" value="" /> -->
 					</td>
@@ -112,7 +112,7 @@
                 </tr>
 
 				<tr>
-                    <td>职位描述<span style="color:red">*</span>：</td>
+                    <td>职位描述<span style="color:red"></span>：</td>
                     <td>
                        <textarea cols="70" id="demo1_add_roleDescribe" rows="12" id="jobmiaoshu" name="jobmiaoshu">  
 					
@@ -122,7 +122,7 @@
                 </tr>
 
 				<tr>
-                    <td>招聘要求<span style="color:red">*</span>：</td>
+                    <td>招聘要求<span style="color:red"></span>：</td>
                     <td>
                        <textarea cols="70" rows="12" id="yaoqiu" name="yaoqiu"> 
 					
