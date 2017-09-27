@@ -103,7 +103,7 @@ public class JianliController {
 		 String mime = file.getContentType();
 		 //System.out.println(mime);
 		 
-		 String fujian = "f:/"+UUID.randomUUID().toString()+"."+mime;
+		 String fujian = "f:/"+UUID.randomUUID().toString()+fileName.substring(fileName.lastIndexOf("."));
 		 try {
 			InputStream in = file.getInputStream();
 			

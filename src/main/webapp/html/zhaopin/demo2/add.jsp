@@ -11,8 +11,16 @@
           <script type="text/javascript" src="../html/js/jquery-3.2.1.min.js"></script>
          <script type="text/javascript" src="../html/js/zhaopin.js"></script>
           <script type="text/javascript" src="../html/js/jquery.validate.js"></script>
+           <script type="text/javascript" src="../html/js/validate_ex.js"></script>
            <script type="text/javascript" src="../html/js/jianli_validate.js"></script>
+           
         <script language="javascript" type="text/javascript" src="../html/My97DatePicker/WdatePicker.js"></script>
+   
+   <style type="text/css">
+   	.error{
+   		color:red;
+   	}
+   </style>
     </head>
 
     <body>
@@ -36,7 +44,7 @@
                     <input type="hidden" id="demo2_add_hidden" name="jobId" />
              		 <input type="hidden" id="demo2_add_hidden2" name="zhaopinId" />
 					<select id="demo2_add_roleName" name="roleName">
-						<option value="0">-请选择- </option>
+						<option value="">-请选择- </option>
 						<c:forEach items="${ zhaopinBean}" var = "role">
 							<option value="${role.roleBean.roleName }">${role.roleBean.roleName}</option>
 						</c:forEach>
@@ -67,7 +75,8 @@
                 <tr>
                     <td>性别<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="text" id="xingbie" name="xingbie"  />
+                        <input type="radio" value="男" checked="checked" name="xingbie"  />男&nbsp;&nbsp;&nbsp;
+                        <input type="radio" value="女" name="xingbie"  /> 女
                     </td>
                 </tr>
 
@@ -76,7 +85,7 @@
                     <td>招聘类型<span style="color:red">*</span>：</td>
                     <td>
                        <select name="zhaopinType" id="zhaopinType">
-						<option value="">-请选择-</option>
+						<option value="">-请选择- </option>
 						<option value="社会招聘">社会招聘</option>
 						<option value="校园招聘">校园招聘</option>
 					   </select>
@@ -84,14 +93,14 @@
                 </tr>
 
 				<tr>
-                    <td>EMAIL：</td>
+                    <td>EMAIL<span style="color:red">*</span>：</td>
                     <td>
                         <input type="text" id="email" name="email"  />
                     </td>                
                 </tr>
 
 				<tr>
-                    <td>联系电话：</td>
+                    <td>联系电话<span style="color:red">*</span>：</td>
                     <td>
                         <input type="text" id="tel" name="tel" />
                     </td>                
@@ -133,7 +142,7 @@
                     <td>学历：</td>
                     <td>
 						  <select name="xueli">
-						<option>-请选择-</option>
+						<option value="">-请选择-</option>
 						<option value="本科">本科</option>
 						<option value="硕士">硕士</option>
 					   </select>
@@ -152,7 +161,7 @@
                     </td>                
                 </tr>
 					<tr>
-                    <td>薪资要求：</td>
+                    <td>薪资要求<span style="color:red">*</span>：</td>
                     <td>
                         <input type="text" name="xizi" />（月薪）
                     </td>                
@@ -161,7 +170,7 @@
                     <td>是否在职：</td>
                     <td>
                         <select name="zizhi">
-							<option>-请选择-</option>
+							<option value="">-请选择-</option>
 							<option value="在职">在职</option>
 							<option value="离职">离职</option>
 						</select>
@@ -171,7 +180,7 @@
                     <td>是否应届生：</td>
                     <td>
                          <select name="yinjiesheng">
-							<option>-请选择-</option>
+							<option value="">-请选择-</option>
 							<option value="应届">应届</option>
 							<option value="毕业">毕业</option>
 						</select>
