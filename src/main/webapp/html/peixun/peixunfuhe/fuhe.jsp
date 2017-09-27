@@ -13,16 +13,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<title>培训管理</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8">
 	<link href="css/mine.css" type="text/css" rel="stylesheet">
-</head>
 <script type="text/javascript" src="html/js/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="html/js/jquery.validate.js"></script>
+<script type="text/javascript" language="javascript" src="<%=basePath%>html/My97DatePicker/WdatePicker.js"></script>
 <script type="text/javascript">
-	function saveTrain(i) {
-		var o = document.getElementById("train_state");
-		o.value = i; 
-		$("#formId").submit();
-	}
+	$().ready(function(){
+		$("#formId").validate({
+			rules:{
+				trainName:"required",
+				trainTeacher:"required",
+				trainStarttime:"required",
+				trainEndtime:"required",
+				trainGoal:"required",
+				trainPeople:{
+					required:true
+				}
+			},
+			messages:{
+				trainName:{
+					required:'培训名称不能为空'
+				},
+				trainTeacher:{
+					required:'培训讲师不能为空'
+				},
+				trainStarttime:{
+					required:'培训开始时间不能为空'
+				},
+				trainEndtime:{
+					required:'培训结束时间不能为空'
+				},
+				trainGoal:{
+					required:'培训目的不能为空'
+				},
+				trainPeople:{
+					required:'参训人员不能为空'
+				}
+			}
+		});
+	})
 </script>
-
+</head>
 <body>
 	<div class="div_head">
             <span>
@@ -52,13 +82,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <tr>
                     <td>培训时间<span style="color:red">*</span>：</td>
                     <td>
-                    	<input type="text" name="trainStarttime" value="${train.trainStarttime}"/>
+                    	<input type="text" name="trainStarttime" value="${train.trainStarttime}" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd'})"/>
                     </td>
                 </tr>
                 <tr>
                     <td>至</td>
                     <td>
-                    	<input type="text" name="trainEndtime" value="${train.trainEndtime }"/>
+                    	<input type="text" name="trainEndtime" value="${train.trainEndtime }" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd'})"/>
                     </td>
                 </tr>
                 <tr>
@@ -96,17 +126,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <tr>
                     <td>审核意见：</td>
                     <td>
-                    <textarea name="trainAdvice" >${train.trainIdea}</textarea>
+                    <textarea name="trainIdea" >${train.trainIdea}</textarea>
                     </td>                
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
-                        <input type="submit" value="申请通过"	 onclick="saveTrain(2);"> 
-						<input type="submit" value="驳回" 	onclick="saveTrain(3);">
+                        <input type="button" value="申请通过"	 onclick="javascript:saveTrain(2);"> 
+						<input type="button" value="驳回" 	onclick="javascript:saveTrain(3);">
                     </td>
                 </tr>  
             </table>
         </form>
     </div>
+    <script type="text/javascript">
+	function saveTrain(i) {
+		var o = document.getElementById("train_state");
+		o.value = i; 
+		$("#formId").submit();
+	}
+</script>
 </body>
 </html>

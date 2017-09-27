@@ -84,7 +84,6 @@ function nextpage(obj){
                         <td width="">培训名称</td>
                         <td width="15%">培训讲师</td>						
                         <td width="15%">培训时间</td>
-                        <td >培训反馈</td>
 						<td width="15%">审核状态</td>                   
                         <td align="center" width="15%">操作</td>
                     </tr>
@@ -94,14 +93,6 @@ function nextpage(obj){
                         <td>${train.trainName}</td>
                         <td>${train.trainTeacher}</td>
 						<td>${train.trainStarttime}</td>
-                        <td>
-	                        <c:choose>
-		                        <c:when test="${train.trainFeekBack==1}">优</c:when>
-		                        <c:when test="${train.trainFeekBack==2}">良</c:when>
-		                        <c:when test="${train.trainFeekBack==3}">差</c:when>
-		                        <c:otherwise></c:otherwise>
-	                        </c:choose>
-                        </td> 
 						<td>
 							<c:choose>
 								<c:when test="${train.trainState==0}">起草</c:when>
@@ -119,7 +110,7 @@ function nextpage(obj){
 		                        <c:when test="${train.trainState==0}">
 										<a href="train/toEdit.do?trainId=${train.trainId}&method=toEdit">修改</a>
 										<a href="train/queryViewById.do?method=queryViewById&trainId=${train.trainId}">明细</a>
-										<a href="train/deleteById.do?trainId=${train.trainId}&method=deleteById">删除</a>
+										<a href="javascript:if(confirm('确定删除?')){location.href='train/deleteById.do?trainId=${train.trainId}&method=deleteById'};">删除</a>
 								</c:when> 
 		                        <c:when test="${train.trainState==1}">
 		                        	<a href="train/queryViewById.do?method=queryViewById&trainId=${train.trainId}">明细</a>
