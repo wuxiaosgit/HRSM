@@ -31,4 +31,10 @@ public interface ZhaopinDao {
 	List<ZhaopinBean> selectiveALl(ZhaopinBean zhaopinBean);
 
 	ZhaopinBean selectRoleByZhaopin(String roleName);
+
+	List<ZhaopinBean> selectZhaoRoleDept(Map<String, Object> map);
+
+	List<ZhaopinBean> selectZhaoRoleDepts(Map<String, Object> map);
+
+	List<ZhaopinBean> selectZhaoRoleDeptPage(Map<String, Object> map);
 }

@@ -28,8 +28,6 @@
         <div></div>
 
         <div style="font-size: 13px;margin: 10px 5px">
-           <!--  <form action="../../../zhaopin/insertSelective.do" method="post"> -->
-            <%-- ../jianli/selectByPrimaryKey.do?jianliId=${list.jianliId } --%>
              <form action="../jianli/insertSelective.do" method="post" id="demo2_add_form"  enctype="multipart/form-data">
             <table border="1" width="100%" class="table_a">
                 <tr>
@@ -37,8 +35,8 @@
                     <td>
                     <input type="hidden" id="demo2_add_hidden" name="jobId" />
              		 <input type="hidden" id="demo2_add_hidden2" name="zhaopinId" />
-					<select id="demo2_add_roleName">
-						<option value="0">--请选择--</option>
+					<select id="demo2_add_roleName" name="roleName">
+						<option value="0">-请选择- </option>
 						<c:forEach items="${ zhaopinBean}" var = "role">
 							<option value="${role.roleBean.roleName }">${role.roleBean.roleName}</option>
 						</c:forEach>
@@ -207,14 +205,12 @@
                 </tr>
 			
 					<tr>
-                    <td>是否有人推荐面试：</td>
                     <td>
-                      <select name="tuijian">
-							<option>-请选择-</option>
-							<option value="是">是</option>
-							<option value="否">否</option>
-						</select>
-						推荐人：<input type="text" name="tuijianren" value="" />
+                    	推荐人：   
+                    
+                    </td>
+                    <td>
+						  <input type="text" name="tuijianren" value="" />
 						推荐时间：<input type="text" name="tuijiantime" id="tuijiantime" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})"/>
                     </td>                
                 </tr>

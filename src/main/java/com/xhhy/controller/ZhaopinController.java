@@ -134,6 +134,10 @@ public class ZhaopinController {
 	//---------------------------分页展示所有招聘信息-------------------------------------
 	@RequestMapping("selectZhaoRoleDeptPages")
 	public String selectZhaoRoleDeptPages(Model model,ZhaopinBean zhaopinBean,PageUtil pageUtil){
+		/*if(zhaopinBean ==null){
+			zhaopinBean  = new  ZhaopinBean();
+		}
+		if( !=null)*/
 		List<ZhaopinBean> list = zhaopinService.selectZhaoRoleDept();
 		int pageNum = 1;//页码
 		int pn = pageUtil.getPageNum();
@@ -171,22 +175,87 @@ public class ZhaopinController {
 		model.addAttribute("totlePages", totlePages);
 		model.addAttribute("totleRows", totleRows);
 		model.addAttribute("pn", pn);
-		/*if(zhaopinBean!=null){
-			model.addAttribute("roleName", zhaopinBean.getRoleBean().getRoleName());
-			model.addAttribute("startTime", zhaopinBean.getStartTime());
-			model.addAttribute("type", zhaopinBean.getRoleBean().getDeptBean().getDeptShortName());
-			model.addAttribute("endTime", zhaopinBean.getEndTime());
-		}*/
-		
-
 
 		return "/html/zhaopin/demo1/list.jsp";
 	}
+	
+	
+	//---------------------------分页展示所有招聘信息-------------------------------------
+		@RequestMapping("selectZhaoRoleDeptPage")
+		public String selectZhaoRoleDeptPage(Model model,
+				String roleName,String deptShortName,ZhaopinBean zhaopinBean,PageUtil pageUtil){
+			if(zhaopinBean ==null){
+				zhaopinBean  = new  ZhaopinBean();
+			}
+			Map<String,Object> map =new HashMap<String, Object>();
+			map.put("roleName", roleName);
+			map.put("deptShortName", deptShortName);
+			map.put("startTime", zhaopinBean.getStartTime());
+			map.put("endTime", zhaopinBean.getEndTime());
+			List<ZhaopinBean> list = zhaopinService.selectZhaoRoleDepts(map);
+			System.out.println(list.size());
+			int pageNum = 1;//页码
+			int pn = pageUtil.getPageNum();
+
+			if(pn !=0){
+				pageNum = pn;
+			}
+			//分页参数
+			int pageRows = State.PAGEROWS;//每页显示的记录数
+			int totleRows = 0;//符合条件的所有记录数
+			int totlePages = 0;//总共的页数
+			//计算符合条件的记录数
+			totleRows = list.size();
+			//计算总共的页数
+			totlePages = totleRows%pageRows==0?totleRows/pageRows:totleRows/pageRows+1;
+		
+			
+			pageUtil.setPageNum(pageNum);
+			pageUtil.setPageRows(pageRows);
+			pageUtil.setTotlePages(totlePages);
+			pageUtil.setTotleRows(totleRows);
+			
+			int pageStart = pageUtil.getStart();
+
+			map.put("pageUtil", pageUtil);
+			map.put("pageStart", pageStart);
+
+			List<ZhaopinBean> lists = zhaopinService.selectZhaoRoleDeptPage(map);
+			model.addAttribute("roleName1", roleName);
+			model.addAttribute("deptShortName1", deptShortName);
+			model.addAttribute("startTime1", zhaopinBean.getStartTime());
+			model.addAttribute("endTime1", zhaopinBean.getEndTime());
+			model.addAttribute("list", lists);
+			model.addAttribute("pageNum", pageNum);
+			model.addAttribute("pageRows", pageRows);
+			model.addAttribute("totlePages", totlePages);
+			model.addAttribute("totleRows", totleRows);
+			model.addAttribute("pn", pn);
+
+			return "/html/zhaopin/demo1/list.jsp";
+		}
 	//---------------------------页面展示所有招聘信息-------------------------------------
 		@RequestMapping("selectZhaoRoleDept")
-		public String selectZhaoRoleDept(Model model){
-			List<ZhaopinBean> list = zhaopinService.selectZhaoRoleDept();
+		public String selectZhaoRoleDept(Model model,ZhaopinBean zhaopinBean,String roleName,String deptShortName){
+			if(zhaopinBean==null){
+				zhaopinBean = new ZhaopinBean();
+			}
+			if(deptShortName!=null && deptShortName=="-1"){
+				deptShortName = null;
+			}
+			System.out.println(roleName);
+			System.out.println(deptShortName);
+			Map<String, Object> map = new HashMap<String,Object>();
+			map.put("roleName", roleName);
+			map.put("deptShortName", deptShortName);
+			map.put("zhaopinBean", zhaopinBean);
+			List<ZhaopinBean> list = zhaopinService.selectZhaoRoleDept(map);
+			System.out.println(list.size());
 			model.addAttribute("list", list);
+			model.addAttribute("startTime", zhaopinBean.getStartTime());
+			model.addAttribute("endTime", zhaopinBean.getEndTime());
+			model.addAttribute("roleName", roleName);
+			model.addAttribute("deptShortName", deptShortName);
 			return "/html/zhaopin/demo1/list.jsp";
 		}
 	//--------------------页面展示单条招聘信息-------------------------------------

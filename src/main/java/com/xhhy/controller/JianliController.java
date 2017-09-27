@@ -12,6 +12,7 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.xa.Xid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,16 +72,14 @@ public class JianliController {
 	//-----------------------多选择修改简历-----------------------------------------
 	@RequestMapping("updateByPrimaryKeySelective")
 	public String updateByPrimaryKeySelective(JianliBean jianliBean,String method ){
-		//System.out.println(zhaopinBean.getZhaopinId());
-		System.out.println(method);
 		if(method!=null&&method.equals("del")){
 			jianliBean.setState(State.DEL);
 			jianliService.updateByPrimaryKeySelective(jianliBean);
-			return "selectJianliRoleDeptPages.do";
+			return "redirect:selectJianliRoleDeptPages.do";
 		}else{
 			//jianliBean.setState(State.UNDEL);
 			jianliService.updateByPrimaryKeySelective(jianliBean);
-			return "selectJianliRoleDeptPages.do";
+			return "redirect:selectJianliRoleDeptPages.do";
 		}
 		
 	}
@@ -122,7 +121,7 @@ public class JianliController {
 		jianliBean.setFilename(fileName);
 		jianliService.insertSelective(jianliBean);
 		
-		return "selectJianliRoleDeptPages.do";
+		return "redirect:selectJianliRoleDeptPages.do";
 	}
 	//-------------------------文件下载-------------------------------
 	@RequestMapping("download.do")
@@ -165,9 +164,16 @@ public class JianliController {
 		
 		//---------------------------分页展示所有简历信息-------------------------------------
 		@RequestMapping("selectJianliRoleDeptPages")
-		public String selectJianliRoleDeptPages2(Model model,PageUtil pageUtil){
-			
-			List<JianliBean> list = jianliService.selectJianliRoleDept();
+		public String selectJianliRoleDeptPages2(Model model,JianliBean jianliBean,String roleName,PageUtil pageUtil){
+			if(jianliBean==null){
+				jianliBean = new JianliBean();
+			}
+			Map<String,Object> map =new HashMap<String, Object>();
+			map.put("xingming", jianliBean.getXingming());
+			map.put("roleName", roleName);
+			map.put("jianyan", jianliBean.getJianyan());
+			map.put("dtime", jianliBean.getDtime());
+			List<JianliBean> list = jianliService.selectJianliRoleDept(map);
 			
 			int pageNum = 1;//页码
 			int pn = pageUtil.getPageNum();
@@ -192,14 +198,20 @@ public class JianliController {
 			
 			int pageStart = pageUtil.getStart();
 			
-			Map<String,Object> map =new HashMap<String, Object>();
+			
 			
 			map.put("pageUtil", pageUtil);
 			map.put("pageStart", pageStart);
+		
+
 
 			List<JianliBean> lists = jianliService.selectJianliRoleDeptPages(map);
 
 			model.addAttribute("list", lists);
+			model.addAttribute("xingming_1", jianliBean.getXingming());
+			model.addAttribute("roleName_1", roleName);
+			model.addAttribute("jianyan_1", jianliBean.getJianyan());
+			model.addAttribute("dtime_1", jianliBean.getDtime());
 			model.addAttribute("pageNum", pageNum);
 			model.addAttribute("pageRows", pageRows);
 			model.addAttribute("totlePages", totlePages);
