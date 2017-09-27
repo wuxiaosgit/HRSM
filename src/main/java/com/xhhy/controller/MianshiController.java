@@ -78,11 +78,11 @@ public class MianshiController {
 			}else{
 				mianshiService.insertSelective(mianshiBean);
 				state +=1;
-				System.out.println("state:"+state);
+				//System.out.println("state:"+state);
 				jianliService.updateByPrimaryKeyAndState(state,jianliId);
 				if(state == 4){
 					ZhaopinBean zhaopinBean = zhaopinService.selectByPrimaryKey(zhaopinId);
-					System.out.println(zhaopinBean);
+					//System.out.println(zhaopinBean);
 					int zhaopinNum = zhaopinBean.getZhaopinNum() - 1;
 					//System.out.println("zhaopinNum:"+zhaopinNum);
 					if(zhaopinNum==0){

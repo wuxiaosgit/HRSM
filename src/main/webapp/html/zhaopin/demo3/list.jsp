@@ -126,7 +126,8 @@
                         <td>
               
 							<a href="../mianshi/selectByJianliId.do?jianliId=${list.jianliId}&method=change">面试结果登记</a>						   
-							<a href="../mianshi/updateMianshiByPrimaryKeySelective.do?jianliId=${list.jianliId}&method=del">删除</a>
+							<a href="../mianshi/updateMianshiByPrimaryKeySelective.do?jianliId=${list.jianliId}&method=del"
+							onclick="return confirm('您确认要删除吗？');">删除</a>
 						</td>        
 						</tr>
 					</c:forEach>
