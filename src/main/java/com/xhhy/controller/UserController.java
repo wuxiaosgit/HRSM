@@ -243,4 +243,147 @@ public class UserController {
 		
 		return;
 	}
+	/*@RequestMapping("excl.do")
+	public void excel(String ids, HttpServletResponse response) {
+		response.setContentType("text/html;charset=utf-8");
+	
+		// 创建excel表头部分
+		String[] excelHeader = { "门诊编号", "患者姓名", "主治医生", "挂号时间", "挂号科室", "状态",
+				"年龄", "备注" };
+		// 创建集合（从数据库中查询出来）
+
+		List<Hosregister> list = new ArrayList<Hosregister>();
+		Hosregister hosregister = null;
+
+		String[] idss = ids.split(",");
+		for (String string : idss) {
+		
+			hosregister =hosregisterService.selectByPrimaryKey(Integer
+					.valueOf(string));
+			list.add(hosregister);
+		}
+		System.out.println(list.size());
+		// 创建Excel对象
+		HSSFWorkbook wb = new HSSFWorkbook();
+		// 创建sheet
+		HSSFSheet sheet = wb.createSheet("学生信息");
+		// sheet.createFreezePane(1, 3); 冻结
+		// 设置列宽
+		sheet.setColumnWidth(0, 3500);
+		sheet.setColumnWidth(1, 3500);
+		sheet.setColumnWidth(2, 3500);
+		sheet.setColumnWidth(3, 5000);
+		sheet.setColumnWidth(4, 3500);
+		sheet.setColumnWidth(5, 3500);
+		sheet.setColumnWidth(6, 3500);
+		sheet.setColumnWidth(7, 3500);
+		sheet.setColumnWidth(8, 3500);
+
+		
+
+		// 创建行（第一行表头）
+		HSSFRow row = sheet.createRow((int) 0);
+		// 创建样式
+		HSSFCellStyle style = wb.createCellStyle();
+		// 居中
+		style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+
+		HSSFFont headfont = wb.createFont();
+		headfont.setFontName("黑体");
+		headfont.setFontHeightInPoints((short) 15);// 字体大小
+		headfont.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);// 加粗
+		style.setFont(headfont);
+
+		// 设置第一行表头信息
+		for (int i = 0; i < excelHeader.length; i++) {
+			HSSFCell cell = row.createCell(i);
+			cell.setCellValue(excelHeader[i]);
+			cell.setCellStyle(style);
+			// 自动修改列
+			// sheet.autoSizeColumn(i);
+		}
+
+		// 设置其余行的列的值
+		// 创建样式
+		HSSFCellStyle styleOrder = wb.createCellStyle();
+		// 居中
+		styleOrder.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+
+		for (int i = 0; i < list.size(); i++) {
+			row = sheet.createRow(i + 1);
+			hosregister = list.get(i);
+			// 每一行放值
+			HSSFCell cell1 = row.createCell(0);
+			cell1.setCellValue(hosregister.getHosrid());
+			cell1.setCellStyle(styleOrder);
+			HSSFCell cell2 = row.createCell(1);
+			if(hosregister.getHosrage()==null){
+				cell2.setCellValue("未录入");
+			}else{
+			cell2.setCellValue(hosregister.getHosrname());
+			}
+			cell2.setCellStyle(styleOrder);
+			HSSFCell cell3 = row.createCell(2);
+			
+			cell3.setCellValue(hosregister.getDoctor().getDname());
+			cell3.setCellStyle(styleOrder);
+			HSSFCell cell4 = row.createCell(3);
+			Tools tools=new Tools();
+			try {
+				cell4.setCellValue(tools.DateToString(hosregister.getHosrdate(),null));
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			cell4.setCellStyle(styleOrder);
+			HSSFCell cell5 = row.createCell(4);
+			cell5.setCellValue(keshiService.selectByPrimaryKey(hosregister.getDoctor().getDkeshiid()).getKeshiname());
+			cell5.setCellStyle(styleOrder);
+			
+			String str = "";
+			if (hosregister.getHosrstate() == 1) {
+				str = "已退号";
+			} else if (hosregister.getHosrstate() == 0) {
+				str = "已挂号";
+			} 
+			HSSFCell cell6 = row.createCell(5);
+			cell6.setCellValue(str);
+			cell6.setCellStyle(styleOrder);
+			HSSFCell cell7 = row.createCell(6);
+			if(hosregister.getHosrage()==null){
+				cell7.setCellValue("未录入");
+			}else{
+				cell7.setCellValue(hosregister.getHosrage());
+			}
+			cell7.setCellStyle(styleOrder);
+			
+			HSSFCell cell8 = row.createCell(7);
+			if(hosregister.getHosrremake()==null||"".equals(hosregister.getHosrremake())){
+				cell8.setCellValue("未录入");
+			}else{
+			cell8.setCellValue(hosregister.getHosrremake());
+			}
+			cell8.setCellStyle(styleOrder);
+		}
+
+		// 设置下载时客户端Excel的名称
+		String filename = "挂号记录.xls";
+		try {
+			filename = URLEncoder.encode(filename, "utf-8");
+
+			// 设置响应信息类型
+			response.setContentType("application/vnd.ms-excel");
+			// 是指
+			// 设置响应的头信息
+			response.setHeader("Content-disposition", "attachment;filename="
+					+ filename);
+			// 通过输出流将文件输出到客户端
+			OutputStream ouputStream = response.getOutputStream();
+			wb.write(ouputStream);
+			ouputStream.flush();
+			ouputStream.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}*/
 }

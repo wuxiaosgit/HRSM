@@ -18,7 +18,7 @@
 	charset="utf-8"></script>
 </head>
 <script type="text/javascript">
-	var flagAjax = "test";
+
 	function testdeptId() {
 		var deptId = document.getElementById("deptId").value;
 		if (deptId == -1) {
@@ -28,7 +28,21 @@
 			return true;
 		}
 	}
-
+	
+	function c(){
+		
+			 var alls = document.getElementsByName("menu");
+			var ch = document.getElementById("checkall");
+		if (ch.checked) {
+			for ( var i = 0; i < alls.length; i++) {
+				alls[i].checked = true;
+			}
+		} else {
+			for ( var i = 0; i < alls.length; i++) {
+				alls[i].checked = false;
+			}
+		}  
+	}
 	function confirm() {
 
 		if (testdeptId()) {
@@ -38,6 +52,7 @@
 		return false;
 	}
 </script>
+
 <body>
 
 	<div class="div_head">
@@ -65,7 +80,7 @@
 					<td>职位名称<span style="color: red">*</span>：
 					</td>
 					<td><input type="text" required="required" name="roleName"
-						value="${roleBean.roleName }" /> <span id="nameInfo"></span></td>
+						value="${roleBean.roleName }"/> <span id="nameInfo"></span></td>
 				</tr>
 
 				<tr>
@@ -81,14 +96,15 @@
 				</tr>
 
 				<tr>
-					<td>菜单权限<span style="color: red">*</span>：
+					<td>菜单权限<span style="color: red">*</span>：<br>
+					 <input type="checkbox" onChange="c()" id="checkall"/>
 					</td>
 					<td><c:forEach items="${menus }" var="top">
 							<input type="checkbox" name="menu"
 								<c:forEach items="${roleMenus }" var="roleMenu">
 									<c:if test="${roleMenu.menuId eq top.menuId  }">
 					  checked="checked"
-                    </c:if>
+                   	 </c:if>
 						</c:forEach>
 								value="${top.menuId }" />${top.menuName }<br />
 							<c:forEach items="${top.menuList }" var="item">

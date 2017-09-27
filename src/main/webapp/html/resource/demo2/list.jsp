@@ -102,6 +102,23 @@
     			alert("请选中要操作的项");
     		}
     	}
+    	function excl() {
+    		var alls = document.getElementsByName("check");
+    		var ids = new Array();
+    		for ( var i = 0; i < alls.length; i++) {
+    			if (alls[i].checked) {
+    				ids.push(alls[i].value);
+    			}
+    		}
+    		if (ids.length > 0) {
+    			if (confirm("确认导出?")) {
+    				window.location.href = "../user/excl.do?ids="
+    						+ ids;
+    			}
+    		} else {
+    			alert("请选中要操作的项");
+    		}
+    	}
     	function quanbu(){
     		
     		$("#deptId").val(-1);
@@ -121,6 +138,7 @@
                 <span style="float: right; margin-right: 8px; font-weight: bold;">
                     <a style="text-decoration: none;" href="../dept/getDept.do?type=add">【添加】</a>
 					<a style="text-decoration: none;" onClick="delAll()">【删除】</a>
+					<a style="text-decoration: none;" onClick="excl()">【excl】</a>
                 </span>
             </span>
         </div>
@@ -173,7 +191,9 @@
                 <tbody>
 						<tr style="font-weight: bold;">						
                         <td width="40px;">序号</td>
-                        <td width="30px;"><input type="checkbox" onChange="checkall()" id="checkall"/></td>						
+                        <td width="30px;">
+                        <input type="checkbox" onChange="checkall()" id="checkall"/>
+                        </td>						
 						<td width="80px;">账号</td>
                         <td width="80px;">姓名</td>
                         <td width="80px;">角色</td>
