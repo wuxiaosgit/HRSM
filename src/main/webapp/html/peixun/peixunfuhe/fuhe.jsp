@@ -12,14 +12,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <base href="<%=basePath%>">
 	<title>培训管理</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<link href="css/mine.css" type="text/css" rel="stylesheet">
+	<link href="html/css/mine.css" type="text/css" rel="stylesheet">
 <script type="text/javascript" src="html/js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="html/js/jquery.validate.js"></script>
 <script type="text/javascript" language="javascript" src="<%=basePath%>html/My97DatePicker/WdatePicker.js"></script>
-
-</head>
-<body>
 <script type="text/javascript">
+$(function(){
+	alert(0)
+})
 	$().ready(function(){
 		$("#formId").validate({
 			rules:{
@@ -55,17 +55,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 	})
 </script>
+</head>
+<body>
 	<div class="div_head">
             <span>
                 <span style="float:left">当前位置是：-》培训管理 -》培训复核</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
-                    <a style="text-decoration: none" href="../train/fuheList.do">【返回】</a>
+                    <a style="text-decoration: none" href="train/fuheList.do">【返回】</a>
                 </span>
             </span>
         </div>
         <div></div>
         <div style="font-size: 13px;margin: 10px 5px">
-            <form action="../train/updateFuheTrain.do"  id="formId" method="post">
+            <form action="train/updateFuheTrain.do"  id="formId" method="post">
             <input type="hidden" name="trainState" id="train_state" >
             <input type="hidden" name="trainId" value="${train.trainId}">
             

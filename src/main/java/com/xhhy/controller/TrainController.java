@@ -105,6 +105,7 @@ public class TrainController {
 		}
 		List<TrainBean> trainList = trainService.listTrain(train);
 		mav.addObject("trainList", trainList);
+		mav.addObject("train", train);
 		
 		Integer max = trainService.max(train);
 		mav.addObject("maxSize",max);//总记录数
@@ -145,6 +146,7 @@ public class TrainController {
 		}
 		List<TrainBean> trainList = trainService.listTrain(train);
 		mav.addObject("trainList", trainList);
+		mav.addObject("train", train);
 		
 		Integer max = trainService.max(train);
 		mav.addObject("maxSize",max);//总记录数

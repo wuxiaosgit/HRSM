@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span>
                 <span style="float:left">当前位置是：-》培训管理 -》修改培训计划</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
-                    <a style="text-decoration: none" href="../train/list.do">【返回】</a>
+                    <a style="text-decoration: none" href="train/list.do">【返回】</a>
                 </span>
             </span>
         </div>
@@ -117,6 +117,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                    </c:otherwise>
 	                    </c:choose>
                     </td>
+                  
                 </tr>
                 <tr>
                     <td colspan="2" align="center">

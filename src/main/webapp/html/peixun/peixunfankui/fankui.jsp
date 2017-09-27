@@ -12,21 +12,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <base href="<%=basePath%>">
 	<title>培训管理</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<link href="css/mine.css" type="text/css" rel="stylesheet">
+	<link href="html/css/mine.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="html/js/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript" src="html/js/jquery.validate.js"></script>
+	<script type="text/javascript">
+	$().ready(function(){
+		$("#formId").validate({
+			rules:{
+				trainFeekBack:"required",
+				trainSumup:"required",
+				trainResult:"required",
+			},
+			messages:{
+				trainFeekBack:{
+					required:'培训反馈不能为空'
+				},
+				trainSumup:{
+					required:'培训总结不能为空'
+				},
+				trainResult:{
+					required:'考核结果不能为空'
+				}
+			}
+		});
+	});
+</script>
 </head>
 <body>
 	<div class="div_head">
             <span>
                 <span style="float:left">当前位置是：-》培训管理 -》培训反馈</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
-                    <a style="text-decoration: none" href="../train/fankuiList.do">【返回】</a>
+                    <a style="text-decoration: none" href="train/fankuiList.do">【返回】</a>
                 </span>
             </span>
     </div>
     <div style="font-size: 13px;margin: 10px 5px">
-        <form action="../train/updateFuheTrain.do"  id="formId" method="post">
+        <form action="train/updateFuheTrain.do"  id="formId" method="post">
             <input type="hidden" name="trainState" id="train_state" value="${train.trainState}">
             <input type="hidden" name="trainId" value="${train.trainId}">
           <table border="1" width="100%" class="table_a">
@@ -89,8 +111,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </td>                
                 </tr>
                 <tr>
-                	<label>培训反馈</label><br/>
-                	<td>培训反馈<span style="color:red">*</span>：</td>
+                	<td>培训反馈<span style="color:red">*</span>：</td><br/>
                 	<td>
                 	<select name="trainFeekBack">
                 		<option value="" <c:if test="${train.trainFeekBack ==null ||train.trainFeekBack == -1 }">selected = "selected"</c:if>>--请选择--</option>
@@ -110,18 +131,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
-                        <input type="button" value="保存"	/> 
+                        <input type="submit" value="保存"	/> 
                     </td>
                 </tr>  
             </table>
         </form>
     </div>
-<script type="text/javascript">
-	function saveTrain(i) {
-		var o = document.getElementById("train_state");
-		o.value = i; 
-		$("#formId").submit();
-	}
-</script>
 </body>
 </html>
