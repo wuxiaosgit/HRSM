@@ -131,7 +131,7 @@ public class TrainController {
 	public ModelAndView updateFuheTrain(TrainBean train) throws Exception{
 		trainService.updateById(train);
 		
-		return listTrain(null);
+		return queryByState(null);
 	}
 	
 	//培训反馈--首页
@@ -172,7 +172,7 @@ public class TrainController {
 	@RequestMapping("updateFankuiTrain.do")
 	public ModelAndView updateFankuiTrain(TrainBean train) throws Exception{
 		trainService.updateById(train);
-		return listTrain(null);
+		return fankuiTrainList(null);
 	}
 	
 }
