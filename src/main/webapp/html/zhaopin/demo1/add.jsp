@@ -13,6 +13,13 @@
           <script type="text/javascript" src="../html/js/jquery.validate.js"></script>
            <script type="text/javascript" src="../html/js/zhaopin_validate.js"></script>
          <script language="javascript" type="text/javascript" src="../html/My97DatePicker/WdatePicker.js"></script>
+    
+    	<style type="text/css" >
+    		.error{
+    		
+    			color:red;
+    		}
+    	</style>
     </head>
 
     <body>
