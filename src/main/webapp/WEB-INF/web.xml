@@ -4,7 +4,15 @@
   
   <error-page>
   	<exception-type>java.lang.Exception</exception-type>
-  	<location>/html/error.jsp</location>
+  	<location>/html/404.jsp</location>
+  </error-page>
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/html/404.jsp</location>
+  </error-page>
+  <error-page>
+  	<error-code>400</error-code>
+  	<location>/html/404.jsp</location>
   </error-page>
   
  <servlet>

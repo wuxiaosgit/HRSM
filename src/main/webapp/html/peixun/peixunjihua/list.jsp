@@ -124,9 +124,7 @@ function nextpage(obj){
 		                        <c:when test="${train.trainState==2}">
 		                        	<a href="train/toFankuiTrain.do?trainId=${train.trainId}&method=toFankuiTrain">培训反馈</a>
 		                        </c:when>
-		                        <c:otherwise>
-		                        	<a href="javascript:if(confirm('确定删除?')){location.href='train/deleteById.do?trainId=${train.trainId}&method=deleteById'};">删除</a>
-		                        </c:otherwise>
+		                        <c:otherwise></c:otherwise>
 	                        </c:choose>
 						</td>                        
                     </tr> 

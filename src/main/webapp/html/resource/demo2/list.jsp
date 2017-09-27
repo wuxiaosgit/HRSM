@@ -116,7 +116,7 @@
     						+ ids;
     			}
     		} else {
-    			alert("请选中要操作的项");
+    			alert("请选中要导出的项");
     		}
     	}
     	function quanbu(){
@@ -201,6 +201,8 @@
 						<td width="100px;">状态</td>                                        
                         <td align="center" width="100px;">操作</td>
                     </tr>
+                    
+                    <c:if test="${empty userBeans }">查不到数据</c:if>
 				<c:forEach items="${userBeans }" var="item">
                     <tr id="product1">
                         <td>${item.userId }</td>
@@ -230,6 +232,7 @@
                     </tr> 
 					</c:forEach>
                     <tr>
+                     <c:if test="${!empty userBeans }">
                         <td colspan="20" style="text-align: center;">	
                         
                         
@@ -345,6 +348,7 @@
          
          
                         </td>
+                    </c:if>
                     </tr>
                 </tbody>
             </table>

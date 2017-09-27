@@ -52,6 +52,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		});
 	})
 </script>
+<style type="text/css">
+	.error{
+		color: red;
+	}
+</style>
 </head>
 <body>
 	<div class="div_head">
