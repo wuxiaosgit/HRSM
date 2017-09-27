@@ -24,11 +24,6 @@ public class TrainController {
 		if(train==null){
 			throw new Exception("不能为空");
 		}
-		TrainBean tb = trainService.queryByName(train.getTrainName());
-		if(tb!=null){
-			throw new Exception("用户名重复");
-		}
-		
 		train.setIsDelete(0);
 		//文件上传 
 		trainService.saveTrainAndFilePath(train,file);
