@@ -122,7 +122,8 @@ function nextpage(obj){
 		                        	<a href="train/queryViewById.do?method=queryViewById&trainId=${train.trainId}">明细</a>
 		                        </c:when>
 		                        <c:when test="${train.trainState==2}">
-		                        	<a href="train/toFankuiTrain.do?trainId=${train.trainId}&method=toFankuiTrain">培训反馈</a>
+		                        	<%-- <a href="train/toFankuiTrain.do?trainId=${train.trainId}&method=toFankuiTrain">培训反馈</a> --%>
+		                        	--
 		                        </c:when>
 		                        <c:otherwise>
 		                        	<a href="javascript:if(confirm('确定删除?')){location.href='train/deleteById.do?trainId=${train.trainId}&method=deleteById'};">删除</a>
