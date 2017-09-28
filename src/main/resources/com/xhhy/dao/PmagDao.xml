@@ -4,7 +4,7 @@
 <mapper namespace="com.xhhy.dao.PmagDao">
 	<sql id="my_sql">
 		select pmag_id,pmag_code,pmag_state,pmag_verifystate,pmag_bank,pmag_bankid,pmag_insuranceid,pmag_peg,pmag_time,pmag_family,pmag_remark,pmag_dept,pmag_doom,pmag_doomcode,pmag_name,pmag_sex,pmag_email,
-			  pmag_phone,pmag_address,pmag_shen,pmag_hukou,pmag_miao,pmag_xiao,pmag_ye,pmag_li,pmag_jing,pmag_cheng,pmag_money
+			  pmag_phone,pmag_address,pmag_shen,pmag_hukou,pmag_miao,pmag_xiao,pmag_ye,pmag_li,pmag_jing,pmag_cheng,pmag_money,pmag_filename,pmag_filetype,pmag_fileurl
 		from pmag_tb 
 	</sql>
 	<resultMap type="com.xhhy.domain.PmagBean" id="pmag">
@@ -15,7 +15,7 @@
 		<result property="pmagCheng" column="pmag_cheng"/>
 		<result property="pmagName" column="pmag_name"/>
 		<result property="pmagSex" column="pmag_sex"/>
-		<result property="pmagEmai" column="pmag_email"/>
+		<result property="pmagEmail" column="pmag_email"/>
 		<result property="pmagPhone" column="pmag_phone"/>
 		<result property="pmagAddress" column="pmag_address"/>
 		<result property="pmagShen" column="pmag_shen"/>
@@ -35,14 +35,23 @@
 		<result property="pmagPeg" column="pmag_peg"/>
 		<result property="pmagTime" column="pmag_time" jdbcType="TIMESTAMP"/>
 		<result property="pmagFamily" column="pmag_family"/>
-		<result property="pmagRemark" column="pmag_remark"/>	
+		<result property="pmagRemark" column="pmag_remark"/>
+		<result property="pmagFileName" column="pmag_filename"/>
+		<result property="pmagFileType" column="pmag_filetype"/>
+		<result property="pmagFileURL" column="pmag_fileurl"/>	
 	</resultMap>
 	<insert id="insertPmag" parameterType="com.xhhy.domain.PmagBean" >
-		insert into pmag_tb(pmag_code,pmag_state,pmag_verifystate,pmag_money,pmag_bank,pmag_bankid,pmag_insuranceid,pmag_peg,pmag_time,pmag_family,pmag_remark,
+		insert into pmag_tb(pmag_code,pmag_state,pmag_verifystate,pmag_money,pmag_bank,pmag_bankid,pmag_insuranceid,pmag_peg,pmag_time,pmag_family,pmag_remark,pmag_filename,pmag_filetype,pmag_fileurl,
 							pmag_dept,pmag_doom,pmag_doomcode,pmag_name,pmag_sex,pmag_email,pmag_phone,pmag_address,pmag_shen,pmag_hukou,pmag_miao,pmag_xiao,pmag_ye,pmag_li,pmag_jing,pmag_cheng)
-					 values(#{pmagCode},#{pmagState},#{pmagVerifyState},#{pmagMoney},#{pmagBank},#{pmagBankId},#{pmagInsuranceId},#{pmagPeg},#{pmagTime},#{pmagFamily},#{pmagRemark},
-					 	#{pmagDept},#{pmagDoom},#{pmagDoomCode},#{pmagName},#{pmagSex},#{pmagEmai},#{pmagPhone},#{pmagAddress},#{pmagShen},#{pmagHuKou},#{pmagMiao},#{pmagXiao},#{pmagYe},#{pmagLi},#{pmagJing},#{pmagCheng})
+					 values(#{pmagCode},#{pmagState},#{pmagVerifyState},#{pmagMoney},#{pmagBank},#{pmagBankId},#{pmagInsuranceId},#{pmagPeg},#{pmagTime},#{pmagFamily},#{pmagRemark},#{pmagFileName},#{pmagFileType},#{pmagFileURL},
+					 	#{pmagDept},#{pmagDoom},#{pmagDoomCode},#{pmagName},#{pmagSex},#{pmagEmail},#{pmagPhone},#{pmagAddress},#{pmagShen},#{pmagHuKou},#{pmagMiao},#{pmagXiao},#{pmagYe},#{pmagLi},#{pmagJing},#{pmagCheng})
 	</insert> 
+	<!-- 有起草到待审核 -->
+	<update id="pmagupdate" parameterType="com.xhhy.domain.PmagBean">
+		update pmag_tb set pmag_code=#{pmagCode},pmag_state=#{pmagState},pmag_verifystate=#{pmagVerifyState},pmag_money=#{pmagMoney},pmag_bank=#{pmagBank},pmag_bankid=#{pmagBankId},pmag_insuranceid=#{pmagInsuranceId},pmag_peg=#{pmagPeg},pmag_time=#{pmagTime},pmag_family=#{pmagFamily},pmag_remark=#{pmagRemark},pmag_filename=#{pmagFileName},pmag_filetype=#{pmagFileType},pmag_fileurl=#{pmagFileURL},
+							pmag_dept=#{pmagDept},pmag_doom=#{pmagDoom},pmag_doomcode=#{pmagDoomCode},pmag_name=#{pmagName},pmag_sex=#{pmagSex},pmag_email=#{pmagEmail},pmag_phone=#{pmagPhone},pmag_address=#{pmagAddress},pmag_shen=#{pmagShen},pmag_hukou=#{pmagHuKou},pmag_miao=#{pmagMiao},pmag_xiao=#{pmagXiao},pmag_ye=#{pmagYe},pmag_li=#{pmagLi},pmag_jing=#{pmagJing},pmag_cheng=#{pmagCheng} where pmag_id=#{pmagId}
+	</update>
+	
 	<!-- 人事档案模糊查询 -->
 	<select id="queryLike"  parameterType="map" resultMap="pmag">
 		<include refid="my_sql"></include> 
@@ -59,6 +68,7 @@
 		<if test="datestart !=null and dateend !=null ">	
 			and date(pmag_time) between date(#{datestart,jdbcType=TIMESTAMP}) and  date(#{dateend,jdbcType=TIMESTAMP})	
 		</if> 
+			order by pmag_state
 		    limit #{start},#{pageRows}		
 	</select> 
 	<select id="selectLike"  parameterType="map" resultType="long">
@@ -81,7 +91,6 @@
 	<select id="queryLike2" parameterType="map" resultMap="pmag">
 		<include refid="my_sql"></include>
 		<where>
-			pmag_state =2 
 			<if test="pmagName !=null and pmagName !=''">
 			and pmag_name like "%"#{pmagName}"%"
 		</if>
@@ -89,27 +98,35 @@
 			and date(pmag_time) between date(#{datestart,jdbcType=TIMESTAMP}) and  date(#{dateend,jdbcType=TIMESTAMP})	
 		</if> 
 		</where>
+		order by pmag_state
 			limit #{start},#{pageRows}	
 	</select>
 	<select id="selectLike2" parameterType="map" resultType="long">
 		select count(*) as totleRows from pmag_tb
 		<where>
-			pmag_state =2 
 			<if test="pmagName !=null and pmagName !=''">
 			and pmag_name like "%"#{pmagName}"%"
-		</if>
-		<if test="datestart !=null and dateend !=null ">	
-			and date(pmag_time) between date(#{datestart,jdbcType=TIMESTAMP}) and  date(#{dateend,jdbcType=TIMESTAMP})	
-		</if> 
+			</if>
+			<if test="datestart !=null and dateend !=null ">	
+				and date(pmag_time) between date(#{datestart,jdbcType=TIMESTAMP}) and  date(#{dateend,jdbcType=TIMESTAMP})	
+			</if> 
 		</where>
 		
 	</select>
-	
-	<!--明细  -->
-	<select id="selectAll" parameterType="com.xhhy.domain.PmagBean" resultMap="pmag">
+
+
+		<!-- 修该和明细 和复核和办理-->
+	<select id="pmagXG" parameterType="com.xhhy.domain.PmagBean" resultMap="pmag">
 		<include refid="my_sql"></include>
 		where pmag_id=#{pmagId}
 	</select>
+	<!-- 成功和失败 -->
+	<update id="updateFail" parameterType="com.xhhy.domain.PmagBean">
+		update pmag_tb set pmag_state =#{pmagState} where pmag_id=#{pmagId}	
+	</update>
+	
+	
+	
 	<!-- 删除档案状态 -->
 	<update id="pmagByDt" parameterType="com.xhhy.domain.PmagBean">
 		update pmag_tb set pmag_verifystate=4  where pmag_id=#{pmagId}
@@ -122,25 +139,5 @@
 	<delete id="deletePmag" parameterType="com.xhhy.domain.PmagBean">
 		delete from pmag_tb where pmag_id=#{pmagId}
 	</delete>
-	<!-- 修改 -->
-	<select id="pmagXG" parameterType="com.xhhy.domain.PmagBean" resultMap="pmag">
-		<include refid="my_sql"></include>
-		where pmag_id=#{pmagId}
-	</select>
-	<!-- 复核 -->
-	<select id="pmagReView" parameterType="com.xhhy.domain.PmagBean" resultMap="pmag">
-		<include refid="my_sql"></include>
-		where pmag_id=#{pmagId}
-	</select>
-	<select id="selectKai2" resultMap="pmag">
-		<include refid="my_sql"></include>
-		where pmag_state = 2
-	</select>
-	<update id="updateFail" parameterType="com.xhhy.domain.PmagBean">
-		update pmag_tb set pmag_state =4 where pmag_id=#{pmagId}
-			
-	</update>
-	<update id="updateSuccess" parameterType="com.xhhy.domain.PmagBean">
-		update pmag_tb set pmag_state = 3 where pmag_id =#{pmagId}
-	</update>
+	
 </mapper>

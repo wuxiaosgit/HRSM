@@ -14,11 +14,11 @@ import org.apache.ibatis.annotations.Update;
 import com.xhhy.domain.WageBean;
 
 public interface WageDao {
-	public List<WageBean> selectAll();
 	public void insertWage(WageBean wage);
-	public WageBean selectById(int wageId);
 	public void updateWage(WageBean wage);
 	public void deleteWage(int wageId);   
-	public List<WageBean> selectBySta(int wageSta);
-	public List<WageBean> queryByLike(Map<String,Object> map);
+	public List<WageBean> queryWage(Map<String,Object> map);
+	public long selectAllCount();
+	public WageBean selectById(int wageId);
+	public  List<WageBean> listWage();
 }

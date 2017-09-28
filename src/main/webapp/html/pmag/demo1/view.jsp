@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -10,7 +11,7 @@
    		 <base href="<%=basePath%>">
         <title>薪酬标准管理添加</title>
         <meta http-equiv="content-type" content="text/html;charset=utf-8">
-        <link href="../../css/mine.css" type="text/css" rel="stylesheet">
+        <link href="<%=basePath%>html/css/mine.css" type="text/css" rel="stylesheet">
     </head>
 
     <body>
@@ -19,7 +20,7 @@
             <span>
                 <span style="float:left">当前位置是：-》人事管理 -》人事档案管理</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
-                    <a style="text-decoration: none" href="html/pmag/demo1/list.jsp">【返回】</a>
+                    <a style="text-decoration: none" href="pmag/querylike.do">【返回】</a>
                 </span>
             </span>
         </div>
@@ -42,7 +43,11 @@
                 <tr>
                     <td>档案状态<span style="color:red">*</span>：</td>
                     <td>
-						${pmag.pmagState}
+						<c:if test="${pmag.pmagVerifyState==1}">试用期</c:if>
+						<c:if test="${pmag.pmagVerifyState==2}">正式员工</c:if>
+						<c:if test="${pmag.pmagVerifyState==3}">离职</c:if>
+						<c:if test="${pmag.pmagVerifyState==4}">已删除</c:if>
+						<c:if test="${pmag.pmagVerifyState==5}">实习员工</c:if> 
 					</td>
                 </tr>
                 <tr>
@@ -73,15 +78,15 @@
 
 				<tr>
                     <td>性别：</td>
-                    <td>
-                     <input type="radio" name="pmagSex" checked value="${pmag.pmagSex}"/>男 <input type="radio" name="pmagSex" value="${pmag.pmagSex}"/>女 
+                    <td>                  		
+                   			<input type="text" name="pmagSex" value="${pmag.pmagSex}"/>
                     </td>                
                 </tr>
 
 				<tr>
                     <td>EMAIL：</td>
                     <td>
-                        <input type="text" name="f_goods_image"  value="${pmag.pmagEmai}"/>
+                        <input type="text" name="f_goods_image"  value="${pmag.pmagEmail}"/>
                     </td>                
                 </tr>
 
@@ -134,13 +139,19 @@
 				<tr>
                     <td>学历：</td>
                     <td>
-                    ${pmag.pmagLi}
+                     <c:if test="${pmag.pmagLi==1}">专科</c:if>
+                     <c:if test="${pmag.pmagLi==2}">本科</c:if>
+                     <c:if test="${pmag.pmagLi==3}">硕士</c:if>
+                     <c:if test="${pmag.pmagLi==4}">博士</c:if>
                     </td>                
                 </tr>
 				<tr>
                     <td>薪酬标准：</td>
                     <td>
-                      ${pmag.pmagMoney}
+                     <input type="text" name="pmagMoney" value="${pmag.pmagMoney}"></input>
+                  <%--   <c:if test="${pmag.pmagMoney==1}">高级软件工程师</c:if>
+					<c:if test="${pmag.pmagMoney==2}">中级软件工程师</c:if>
+					<c:if test="${pmag.pmagMoney==3}">初级软件工程师</c:if> --%>
                     </td>                
                 </tr>
 				<tr>
@@ -194,13 +205,10 @@
 				<tr>
                     <td>简历附件：</td>
                     <td>
-                       
+                        <a href="pmag/download.do?pmagId=${pmag.pmagId}">${pmag.pmagFileName}</a>
                     </td>  
-                    <td>
-                        <a href="">张华个人简历.doc</a>
-                    </td>                
+                                   
                 </tr>
-				
                
             </table>
             </form>

@@ -30,7 +30,7 @@ public class DeptController {
 	@Autowired
 	private UserService userService;
 	
-	///ni 
+
 	@RequestMapping("deptTree.do")
 	public void deptree(HttpServletRequest request, HttpServletResponse response){
 		String parameter = request.getParameter("id");

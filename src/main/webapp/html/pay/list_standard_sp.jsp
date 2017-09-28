@@ -29,8 +29,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div></div>
 	<div class="div_search">
 		<span>
-			<form action="#" method="get">
-				薪酬标准编号: <input type="text" /> <input value="查询" type="submit" />
+			<form action="selectBySta.do" method="get">
+				薪酬标准编号: <input type="text" name="wageBm" value="${wageBm}"/> <input value="查询" type="submit" />
 			</form>
 		</span>
 	</div>
@@ -39,7 +39,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<tbody>
 				<tr style="font-weight: bold;">
 					<td width="40px;">序号</td>
-					<td width="30px;"><input type="checkbox" /></td>
 					<td width="80px;">薪酬编码</td>
 					<td>薪酬标准类型</td>
 					<td width="100px;">审核状态</td>
@@ -49,9 +48,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<c:forEach items="${list}" var="wage">
 					<tr id="product1">
 						<td>2</td>
-						<td><input type="checkbox" /></td>
 						<td>${wage.wageBm}</td>
-						<td><a href="standard_view.do?wageId=${wage.wageId }">${wage.wageName}</a></td>
+						<td><a href="standard_view_sp.do?wageId=${wage.wageId }">${wage.wageName}</a></td>
 						<c:choose>
 							<c:when test="${wage.wageStatment=='0'}"><td>正在写</td></c:when>
 							<c:when test="${wage.wageStatment=='1'}"><td>审核中</td></c:when>
@@ -62,9 +60,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</tr>
 				</c:forEach>
 				<tr>
-					<td colspan="20" style="text-align: center;"><a
-						style="text-decoration: none;" href="#"> 首页 上一页 ... 7 8 9 10
-							11 12 ... 下一页 尾页 共1234条 每页显示 10/23 </a></td>
+					<td colspan="20" style="text-align: center;">
+							<c:if test="${page.pageNum==1}">
+		             			首页&nbsp;&nbsp;&nbsp;&nbsp;
+			 				        上一页&nbsp;&nbsp;&nbsp;&nbsp;
+							</c:if> 
+							<c:if test="${page.pageNum > 1 }">
+							<a href="selectBySta.do?pageNum=1&wagebmm=${wageBm }">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+							<a href="selectBySta.do?pageNum=${page.pageNum - 1 }&wagebmm=${wageBm }">上一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+							</c:if> 
+							<c:if test="${page.pageNum == page.totlePages}">
+									 下一页&nbsp;&nbsp;&nbsp;&nbsp;
+			 					           尾页&nbsp;&nbsp;&nbsp;&nbsp;
+							 </c:if> 
+							 <c:if test="${page.pageNum != page.totlePages }">
+							 <a href="selectBySta.do?pageNum=${page.pageNum + 1 }&wagebmm=${wageBm }">下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+							 <a href="selectBySta.do?pageNum=${page.totlePages}&wagebmm=${wageBm }">尾页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			 				 </c:if> 当前页 ${page.pageNum }&nbsp;&nbsp;&nbsp;&nbsp;
+						分页单位${page.pageRows }&nbsp;&nbsp;&nbsp;&nbsp; 总页数${page.totlePages }&nbsp;&nbsp;&nbsp;&nbsp;
+						总条数${page.totleRows }
+						</td>
 				</tr>
 			</tbody>
 		</table>

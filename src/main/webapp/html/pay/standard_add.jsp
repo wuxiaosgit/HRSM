@@ -13,14 +13,73 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <link href="../css/mine.css" type="text/css" rel="stylesheet">
         <base href="<%=basePath%>">
         <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
-        <script type="text/javascript">
-       		var money=0;//all
-        	function save(obj){
-        		var input=document.getElementById("all");
-        		var i=obj.value;
-        		money=eval(money+"+"+i);
-        		input.value=money;
-        	}
+		<script type="text/javascript" src="../js/jquery.validate.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$("#myForm").validate({
+					rules : {
+						wageBm : {
+							required : true ,
+							minlength:5,
+						},
+						wageName  : {
+							required : true ,
+						},
+						zzrName :{
+							required : true ,
+							minlength:2	,
+							maxlength:4	
+						},
+						djrName :{
+							required : true ,
+							minlength:2	,
+							maxlength:4	
+						},
+						basePay:{
+							required : true,
+							max : 7000
+						}
+					},
+					messages:{
+						wageBm : {
+							required : '*编码标准编号为必填项*',
+							minlength:'编码标准编号长度必须大于5',
+						},
+						wageName  : {
+							required : '编码标准名称为必填项' ,
+						},
+						zzrName :{
+							required : '制作人名字为必填项' ,
+							minlength:'制作人名字长度必须大于2'	,
+							maxlength:'制作人名字必须小于5'	
+						},
+						djrName :{
+							required : '登记人名字为必填项' ,
+							minlength:'登记人名字长度必须大于2'	,
+							maxlength:'登记人名字长度必须小于5'	
+						},
+						basePay:{
+							required : '基本工资为必填项',
+							max : '基本工资多不能超过7000'
+						}
+					}
+				});
+			});
+		</script>
+		<script type="text/javascript">
+			var money=0;//all
+	   		var jb=0;
+	    	function save(){
+	    		var inputs=document.getElementsByClassName("mon");
+	    		for(var i=0;i<inputs.length;i++){
+	    			jb=eval(inputs[i].value+"+0");
+	    			money+=jb;
+	    			jb=0;
+	    		}
+	    		var input=document.getElementById("all");
+	    		input.value=money;
+	    		money=0;
+	    	}
         </script>
     </head>
     <body>
@@ -28,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span>
                 <span style="float:left">当前位置是：-》薪酬标准管理》添加</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
-                    <a style="text-decoration: none" href="list_standard.html">【返回】</a>
+                    <a style="text-decoration: none" href="wage/list.do">【返回】</a>
                 </span>
             </span>
         </div>
@@ -68,53 +127,53 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<tr>
                     <td>基本工资<span style="color:red">*</span>：</td>
                     <td>
-                        <input type="text" name="basePay" onblur="save(this)" value="0"/>元
+                        <input class="mon" type="text" name="basePay" onblur="save(this)" value="0"/>元
                     </td>                
                 </tr>
 
 				<tr>
                     <td>绩效奖金：</td>
                     <td>
-                        <input type="text" name="awarPay" value="0" onblur="save(this)" />元
+                        <input type="text" class="mon" name="awarPay" value="0" onblur="save(this)" />元
                     </td>                
                 </tr>
 
 				<tr>
                     <td>交通补助：</td>
                     <td>
-                        <input type="text" name="travelPay" value="0" onblur="save(this)"/>元
+                        <input type="text" class="mon" name="travelPay" value="0" onblur="save(this)"/>元
                     </td>                
                 </tr>
 
 				<tr>
                     <td>通讯补助：</td>
                     <td>
-                        <input type="text" name="phonePay" value="0" onblur="save(this)"/>元
+                        <input type="text" class="mon" name="phonePay" value="0" onblur="save(this)"/>元
                     </td>                
                 </tr>
 
 				<tr>
                     <td>餐补：</td>
                     <td>
-                        <input type="text" name="mealPay" value="0" onblur="save(this)"/>元
+                        <input type="text" class="mon" name="mealPay" value="0" onblur="save(this)"/>元
                     </td>                
                 </tr>
 				<tr>
                     <td>住房补助：</td>
                     <td>
-                        <input type="text" name="housePay" value="0" onblur="save(this)"/>元
+                        <input type="text" class="mon" name="housePay" value="0" onblur="save(this)"/>元
                     </td>                
                 </tr>
 				<tr>
                     <td>出差补助：</td>
                     <td>
-                        <input type="text" name="missionPay" value="0" onblur="save(this)"/>元
+                        <input type="text" class="mon" name="missionPay" value="0" onblur="save(this)"/>元
                     </td>                
                 </tr>
 				<tr>
                     <td>加班补助：</td>
                     <td>
-                        <input type="text" name="overtimePay" value="0" onblur="save(this)"/>元
+                        <input type="text" class="mon" name="overtimePay" value="0" onblur="save(this)"/>元
                     </td>                
                 </tr>	
 

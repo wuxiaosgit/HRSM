@@ -18,18 +18,23 @@
 		<result property="housePay" column="house_pay"></result>
 		<result property="missionPay" column="mission_pay"></result>
 		<result property="overtimePay" column="overtime_pay"></result>
-		<result property="allpay" column="all_pay"></result>
+		<result property="all" column="all_pay"></result>
 		<result property="remark" column="ss_remark"></result>
 		<result property="wageStatment" column="ss_statment"></result>
 	</resultMap>
 	<select id="selectAll" resultMap="wage">
 		select ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,
-		travel_pay,phone_pay,meal_pay,house_pay,mission_pay,overtime_pay,
-		ss_remark from salary_standard_tb
+		travel_pay,phone_pay,meal_pay,house_pay,mission_pay,overtime_pay,ss_statment,
+		ss_remark,all_pay from salary_standard_tb 
+		limit #{pageNum},#{pageRows}
 	</select>
-	<select id="selectById" resultMap="wage" parameterType="int">
-		select ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,travel_pay,phone_pay,
-		meal_pay,house_pay,mission_pay,overtime_pay,ss_remark from salary_standard_tb where ss_id=#{wageId}
+	<select id="listWage" resultMap="wage">
+		select ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,
+		travel_pay,phone_pay,meal_pay,house_pay,mission_pay,overtime_pay,ss_statment,
+		ss_remark,all_pay from salary_standard_tb 
+	</select>
+	<select id="selectCount" resultType="long">
+		select count(*) from salary_standard_tb
 	</select>
 	<insert id="insertWage" parameterType="com.xhhy.domain.WageBean">
 		insert into salary_standard_tb(ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,travel_pay,
@@ -48,22 +53,48 @@
 	<delete id="deleteWage" parameterType="int">
 		delete from salary_standard_tb where ss_id=#{wageId}
 	</delete>
-	<select id="selectBySta" resultMap="wage" parameterType="int">
+	<select id="queryWage" parameterType="map"  resultMap="wage">
 		select ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,
-		travel_pay,phone_pay,meal_pay,house_pay,mission_pay,overtime_pay,
-		ss_remark from salary_standard_tb where ss_statment=#{wageSta}
-	</select>
-	<select id="queryByLike" parameterType="map"  resultMap="wage">
-		select ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,
-		travel_pay,phone_pay,meal_pay,house_pay,mission_pay,overtime_pay,
-		ss_remark  ss_statment from salary_standard_tb 
+		travel_pay,phone_pay,meal_pay,house_pay,mission_pay,overtime_pay,all_pay,
+		ss_remark,ss_statment from salary_standard_tb 
+		
 		<where>
-		 <if test="wageBm!=null and wageBm=''"> 
-				and ss_bm=#{wageBm}
+			 <if test="wageBm!=null and wageBm!=''"> 
+				    ss_bm like "%"#{wageBm}"%"
 			</if> 
-			<if test="sta!=null and sta=''"> 
-				and ss_statment=#{sta}
+			<if test="wageStat!=null and wageStat!='' and wageStat!='0'"> 
+					and ss_statment=#{wageStat}
 			</if> 
+			<if test="wageId!=null and wageId!=''">
+					and ss_id=#{wageId}
+			</if>
+			<if test="wageName!=null and wageName!=''">
+				and ss_name=#{wageName}
+			</if>
 		</where>
+				limit #{start},#{pageRows}
+		
+	</select>
+	<select id="selectAllCount" resultType="long">
+		select count(*) from salary_standard_tb 
+		<where>
+			 <if test="wageBm!=null and wageBm!=''"> 
+					and ss_name like "%"#{wageBm}"%"
+			</if> 
+			<if test="wageStat!=null and wageStat!='' and wageStat!='0'"> 
+					and ss_statment=#{wageStat}
+			</if> 
+			<if test="wageId!=null and wageId!=''">
+					and ss_id=#{wageId}
+			</if>
+			<if test="wageName!=null and wageName!=''">
+				and ss_name=#{wageName}
+			</if>
+		</where>
+	</select>
+	<select id="selectById" parameterType="int" resultMap="wage">
+		select ss_id,ss_bm,ss_name,ss_date,ss_zzr,ss_djr,base_pay,award_pay,
+		travel_pay,phone_pay,meal_pay,house_pay,mission_pay,overtime_pay,all_pay,
+		ss_remark,ss_statment from salary_standard_tb where ss_id=#{wageId}
 	</select>
 </mapper>

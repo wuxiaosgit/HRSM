@@ -16,7 +16,7 @@ public class PmagBean implements Serializable{
 	private String pmagCheng;//职称
 	private String pmagName;//姓名
 	private String pmagSex;//性别
-	private String pmagEmai;//Email
+	private String pmagEmail;//Email
 	private String pmagPhone;//联系电话
 	private String pmagAddress;//住址
 	private String pmagShen;//身份
@@ -36,6 +36,9 @@ public class PmagBean implements Serializable{
 	private Date pmagTime;//建党时间
 	private String pmagFamily;//家庭关系
 	private String pmagRemark;//备注
+	private String pmagFileName;//文件名
+	private String pmagFileType;//文件类型
+	private String pmagFileURL;//文件路径
 	public int getPmagId() {
 		return pmagId;
 	}
@@ -84,11 +87,11 @@ public class PmagBean implements Serializable{
 	public void setPmagSex(String pmagSex) {
 		this.pmagSex = pmagSex;
 	}
-	public String getPmagEmai() {
-		return pmagEmai;
+	public String getPmagEmail() {
+		return pmagEmail;
 	}
-	public void setPmagEmai(String pmagEmai) {
-		this.pmagEmai = pmagEmai;
+	public void setPmagEmail(String pmagEmail) {
+		this.pmagEmail = pmagEmail;
 	}
 	public String getPmagPhone() {
 		return pmagPhone;
@@ -204,5 +207,37 @@ public class PmagBean implements Serializable{
 	public void setPmagRemark(String pmagRemark) {
 		this.pmagRemark = pmagRemark;
 	}
+	public String getPmagFileName() {
+		return pmagFileName;
+	}
+	public void setPmagFileName(String pmagFileName) {
+		this.pmagFileName = pmagFileName;
+	}
+	public String getPmagFileType() {
+		return pmagFileType;
+	}
+	public void setPmagFileType(String pmagFileType) {
+		this.pmagFileType = pmagFileType;
+	}
+	public String getPmagFileURL() {
+		return pmagFileURL;
+	}
+	public void setPmagFileURL(String pmagFileURL) {
+		this.pmagFileURL = pmagFileURL;
+	}
+	@Override
+	public String toString() {
+		return "PmagBean [pmagId=" + pmagId + ", pmagCode=" + pmagCode + ", pmagDept=" + pmagDept + ", pmagDoom="
+				+ pmagDoom + ", pmagDoomCode=" + pmagDoomCode + ", pmagCheng=" + pmagCheng + ", pmagName=" + pmagName
+				+ ", pmagSex=" + pmagSex + ", pmagEmail=" + pmagEmail + ", pmagPhone=" + pmagPhone + ", pmagAddress="
+				+ pmagAddress + ", pmagShen=" + pmagShen + ", pmagHuKou=" + pmagHuKou + ", pmagMiao=" + pmagMiao
+				+ ", pmagXiao=" + pmagXiao + ", pmagYe=" + pmagYe + ", pmagLi=" + pmagLi + ", pmagJing=" + pmagJing
+				+ ", pmagState=" + pmagState + ", pmagVerifyState=" + pmagVerifyState + ", pmagMoney=" + pmagMoney
+				+ ", pmagBank=" + pmagBank + ", pmagBankId=" + pmagBankId + ", pmagInsuranceId=" + pmagInsuranceId
+				+ ", pmagPeg=" + pmagPeg + ", pmagTime=" + pmagTime + ", pmagFamily=" + pmagFamily + ", pmagRemark="
+				+ pmagRemark + ", pmagFileName=" + pmagFileName + ", pmagFileType=" + pmagFileType + ", pmagFileURL="
+				+ pmagFileURL + "]";
+	}
+	
 	
 }
