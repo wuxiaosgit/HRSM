@@ -61,7 +61,7 @@ function nextpage(obj){
                 	培训名称: <input type="text"  name="trainName" value="${train.trainName}"/>
 					审核状态: 
 					<select name="trainState">
-						<option value="-1"<c:if test="${train.trainState ==null || train.trainState==-1}">selected</c:if>>--请选择--</option>
+						<option value="-1"<c:if test="${train.trainState==-1}">selected</c:if>>--请选择--</option>
 						<option value="0"<c:if test="${train.trainState==0}">selected</c:if>>起草</option>
 						<option value="1"<c:if test="${train.trainState==1}">selected</c:if>>审核中</option>
 						<option value="2"<c:if test="${train.trainState==2}">selected</c:if>>审核通过</option>
@@ -116,6 +116,7 @@ function nextpage(obj){
 		                        <c:when test="${train.trainState==0}">
 										<a href="train/toEdit.do?trainId=${train.trainId}&method=toEdit">修改</a>
 										<a href="train/queryViewById.do?method=queryViewById&trainId=${train.trainId}">明细</a>
+										<a href="javascript:if(confirm('确定删除?')){location.href='train/deleteById.do?trainId=${train.trainId}&method=deleteById'};">删除</a>
 								</c:when> 
 		                        <c:when test="${train.trainState==1}">
 		                        	<a href="train/queryViewById.do?method=queryViewById&trainId=${train.trainId}">明细</a>
@@ -123,12 +124,8 @@ function nextpage(obj){
 		                        <c:when test="${train.trainState==2}">
 		                        	<a href="train/toFankuiTrain.do?trainId=${train.trainId}&method=toFankuiTrain">培训反馈</a>
 		                        </c:when>
-		                        <c:when test="${train.trainState==2}">
-		                        	<a href="train/toFankuiTrain.do?trainId=${train.trainId}&method=toFankuiTrain">培训反馈</a>
-		                        </c:when>
 		                        <c:otherwise>
-									<a href="javascript:if(confirm('确定删除?')){location.href='train/deleteById.do?trainId=${train.trainId}&method=deleteById'};">删除</a>
-		                        	<a href="train/queryViewById.do?method=queryViewById&trainId=${train.trainId}">明细</a>
+		                        	<a href="javascript:if(confirm('确定删除?')){location.href='train/deleteById.do?trainId=${train.trainId}&method=deleteById'};">删除</a>
 		                        </c:otherwise>
 	                        </c:choose>
 						</td>                        
