@@ -25,6 +25,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						wageName  : {
 							required : true ,
 						},
+						wageDate  : {
+							required : true ,
+						},
 						zzrName :{
 							required : true ,
 							minlength:2	,
@@ -37,7 +40,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						},
 						basePay:{
 							required : true,
-							max : 7000
+							max : 7000,
+							digits : true
+						},
+						overtimePay :{
+							digits : true
+						},
+						awarPay :{
+							digits : true
+						},
+						travelPay :{
+							digits : true
+						},
+						phonePay :{
+							digits : true
+						},
+						mealPay :{
+							digits : true
+						},
+						housePay :{
+							digits : true
+						},
+						missionPay:{
+							digits : true
 						}
 					},
 					messages:{
@@ -47,6 +72,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						},
 						wageName  : {
 							required : '编码标准名称为必填项' ,
+						},
+						wageName  : {
+							required : '编码标准名称为必填项' ,
+						},
+						wageDate  : {
+							required : '登记日期为必填项' ,
 						},
 						zzrName :{
 							required : '制作人名字为必填项' ,
@@ -60,7 +91,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						},
 						basePay:{
 							required : '基本工资为必填项',
-							max : '基本工资多不能超过7000'
+							max : '基本工资多不能超过7000',
+							digits : '基本工资为正整数'
+						},
+						overtimePay :{
+							digits : '加班费为正整数'
+						},
+						awarPay :{
+							digits : '绩效奖金是正整数'
+						},
+						travelPay :{
+							digits : '交通补助是正整数'
+						},
+						phonePay :{
+							digits : '通讯补助是正整数'
+						},
+						mealPay :{
+							digits : '餐补是正整数'
+						},
+						housePay :{
+							digits : '房补是正整数'
+						},
+						missionPay:{
+							digits : '出差补助是正整数'
 						}
 					}
 				});
@@ -102,7 +155,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <tr>
                     <td>薪酬标准名称<span style="color:red">*</span>：</td>
                     <td>
-                       <input type="text" name="wageName" value="" /> 
+                       <input type="text" name="wageName"  /> 
                     </td>
                 </tr>
                
@@ -127,7 +180,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<tr>
                     <td>基本工资<span style="color:red">*</span>：</td>
                     <td>
-                        <input class="mon" type="text" name="basePay" onblur="save(this)" value="0"/>元
+                        <input class="mon" type="text" name="basePay" onblur="save(this)" />元
                     </td>                
                 </tr>
 

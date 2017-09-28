@@ -9,9 +9,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
+    
         <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <title>薪酬标准管理</title>
-        <link href="../css/mine.css" type="text/css" rel="stylesheet" />
+        <link href="../../css/mine.css" type="text/css" rel="stylesheet" />
     </head>
  <script type="text/javascript">
 	function checkall() {
@@ -62,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="div_search">
             <span>
                 <form action="list.do" method="post">
-                  		  薪酬标准类型: 
+                  		  薪酬标准编码: 
 					<input type="text" name="wagebmm" value="${wageBm}"/>
 					 审核状态: 
 					<select name="wagestat">

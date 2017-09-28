@@ -10,9 +10,72 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <head>
         <title>薪酬标准管理添加</title>
         <meta http-equiv="content-type" content="text/html;charset=utf-8">
-        <link href="../css/mine.css" type=	"text/css" rel="stylesheet">
+        <link href="../../css/mine.css" type=	"text/css" rel="stylesheet">
         <base href="<%=basePath%>">
         <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="../js/jquery.validate.js"></script>
+        <script type="text/javascript">
+			$(function() {
+				$("#myForm").validate({
+					rules : {
+						basePay:{
+							required : true,
+							max : 7000,
+							number : true		
+						},
+						overtimePay :{
+							number : true		
+						},
+						awarPay :{
+							number : true		
+						},
+						travelPay :{
+							number : true		
+						},
+						phonePay :{
+							number : true		
+						},
+						mealPay :{
+							number : true		
+						},
+						housePay :{
+							number : true		
+						},
+						missionPay:{
+							number : true		
+						}
+					},
+					messages:{
+						basePay:{
+							required : '基本工资为必填项',
+							max : '基本工资多不能超过7000',
+							digits : '基本工资为数字'
+						},
+						overtimePay :{
+							digits : '加班费为数字	'
+						},
+						awarPay :{
+							digits : '绩效奖金是数字'
+						},
+						travelPay :{
+							digits : '交通补助是数字'
+						},
+						phonePay :{
+							digits : '通讯补助是数字'
+						},
+						mealPay :{
+							digits : '餐补是数字'
+						},
+						housePay :{
+							digits : '房补是数字'
+						},
+						missionPay:{
+							digits : '出差补助是数字'
+						}
+					}
+				});
+			});
+		</script>
         <script type="text/javascript">
        		var money=0;//all
        		var jb=0;
@@ -34,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <span>
                 <span style="float:left">当前位置是：-》薪酬标准管理》添加</span>
                 <span style="float:right;margin-right: 8px;font-weight: bold">
-                    <a style="text-decoration: none" href="wage/list.do">【返回】</a>
+                    <a style="text-decoration: none" href="list_standard.html">【返回】</a>
                 </span>
             </span>
         </div>

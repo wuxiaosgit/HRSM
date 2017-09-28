@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</script>
         <title>薪酬——审核</title>
         <meta http-equiv="content-type" content="text/html;charset=utf-8">
-        <link href="../css/mine.css" type="text/css" rel="stylesheet">
+        <link href="../../css/mine.css" type="text/css" rel="stylesheet">
     </head>
     <body>
 

@@ -45,7 +45,7 @@ public class WageController {
 	}
 	//全部查询
 	@RequestMapping(value="list.do")
-	public ModelAndView selectList(@RequestParam(value="pageNum",defaultValue="1") Integer pageNum,String wagebmm,Integer wageStat,Integer wageId ){
+	public ModelAndView selectList(@RequestParam(value="pageNum",defaultValue="1") Integer pageNum,String wagebmm,Integer wagestat,Integer wageId ){
 		int pageRows=5;
 		long allCount = service.selectAllCount();
 		int totleRows=Integer.parseInt(allCount+"");
@@ -55,12 +55,12 @@ public class WageController {
 		map.put("start", page.getStart());
 		map.put("pageRows", 5);
 		map.put("wageBm", wagebmm);
-		map.put("wageStat", wageStat);
+		map.put("wageStat", wagestat);
 		List<WageBean> list = service.queryWage(map);
 		mav.addObject("wageBm", wagebmm);
 		mav.addObject("list", list);
 		mav.addObject("page", page);
-		mav.addObject("wageStat", wageStat);
+		mav.addObject("wageStat", wagestat);
 		return mav;
 	}
 	//传入bm和审核状态查询出List

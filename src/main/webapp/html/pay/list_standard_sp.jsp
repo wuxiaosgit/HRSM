@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <title>薪酬标准管理</title>
 
-<link href="../css/mine.css" type="text/css" rel="stylesheet" />
+<link href="../../css/mine.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
 	<style>

@@ -294,28 +294,28 @@ public class PmagController {
 	@RequestMapping("pmagbyDt.do")
 	public ModelAndView pmagbyDt(int pmagId){
 		pmagService.pmagByDt(pmagId);
-		ModelAndView model=new ModelAndView("querylike.do");
+		ModelAndView model=new ModelAndView("redirect:querylike.do");
 		return model;
 	}
 	//恢复档案状态
 	@RequestMapping("pmagbyHf.do")
 	public ModelAndView pmagbyHf(int pmagId){
 		pmagService.pmagByHf(pmagId);
-		ModelAndView model=new ModelAndView("querylike.do");
+		ModelAndView model=new ModelAndView("redirect:querylike.do");
 		return model;
 	}
 	//永久删除
 	@RequestMapping("delectPmag.do")
 	public ModelAndView deletePmag(int pmagId,ModelMap map){
 		pmagService.deletePmag(pmagId);
-		ModelAndView model=new ModelAndView("querylike.do");
+		ModelAndView model=new ModelAndView("redirect:querylike.do");
 		return model;
 	}
 	/*....................有起草到审核状态..................*/
 	@RequestMapping("pmagupdate.do")
 	public String pmagUpdate(PmagBean pmag){
 		pmagService.pmagupdate(pmag);
-		return "querylike.do";
+		return "redirect:querylike.do";
 	}
 	
 }
