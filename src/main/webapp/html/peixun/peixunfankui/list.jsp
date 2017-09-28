@@ -39,8 +39,8 @@ function nextpage(obj){
 	else {
 		currentNum=obj;
 	}
-}
 location.href="train/fuheList.do?trainName=${trainName}&trainState=1&trainStarttime=${trainStarttime}&trainEndtime=${trainEndtime}&currentNum="+currentNum;
+}
 </script>    
 </head>
 <body>

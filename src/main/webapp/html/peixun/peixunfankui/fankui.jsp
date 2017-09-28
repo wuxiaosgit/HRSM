@@ -54,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </span>
     </div>
     <div style="font-size: 13px;margin: 10px 5px">
-        <form action="train/updateFuheTrain.do"  id="formId" method="post">
+        <form action="train/updateFankuiTrain.do"  id="formId" method="post">
             <input type="hidden" name="trainState" id="train_state" value="${train.trainState}">
             <input type="hidden" name="trainId" value="${train.trainId}">
           <table border="1" width="100%" class="table_a">

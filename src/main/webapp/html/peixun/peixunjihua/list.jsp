@@ -36,8 +36,8 @@ function nextpage(obj){
 		else {
 			currentNum=obj;
 		}
-	}
 	location.href="train/list.do?trainName=${trainName}&trainState=${trainState}&trainStarttime=${trainStarttime}&trainEndtime=${trainEndtime}&currentNum="+currentNum;
+	}
 </script>
 
 <style>
@@ -124,7 +124,10 @@ function nextpage(obj){
 		                        <c:when test="${train.trainState==2}">
 		                        	<a href="train/toFankuiTrain.do?trainId=${train.trainId}&method=toFankuiTrain">培训反馈</a>
 		                        </c:when>
-		                        <c:otherwise></c:otherwise>
+		                        <c:otherwise>
+		                        	<a href="javascript:if(confirm('确定删除?')){location.href='train/deleteById.do?trainId=${train.trainId}&method=deleteById'};">删除</a>
+		                        </c:otherwise>
+
 	                        </c:choose>
 						</td>                        
                     </tr> 

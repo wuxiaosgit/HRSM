@@ -119,12 +119,11 @@ public class TrainController {
 		return mav;
 	}
 	
-	//培训复核
+	//培训复核/
 	@RequestMapping("updateFuheTrain.do")
 	public ModelAndView updateFuheTrain(TrainBean train) throws Exception{
 		trainService.updateById(train);
-		
-		return listTrain(null);
+		return queryByState(null);
 	}
 	
 	//培训反馈--首页
@@ -165,19 +164,8 @@ public class TrainController {
 	@RequestMapping("updateFankuiTrain.do")
 	public ModelAndView updateFankuiTrain(TrainBean train) throws Exception{
 		trainService.updateById(train);
-		
-		ModelAndView mav = new ModelAndView();
-		
-		List<TrainBean> trainList = trainService.listTrain(train);
-		mav.addObject("trainList", trainList);
-		mav.addObject("train", train);
-		Integer max = trainService.max(train);
-		mav.addObject("maxSize",max);//总记录数
-		mav.addObject("pageNum",(int)Math.ceil(max/10.0));//总页数
-		mav.addObject("currentPage",train.getCurrentNum());//当前页码 第几页，默认第一页
-		
-		mav.setViewName("../html/peixun/peixunfankui/fankui.jsp");
-		return mav;
+
+		return fankuiTrainList(null);
 	}
 	
 }
