@@ -38,6 +38,8 @@
                     <td width="120px">姓名</td>
                     <td>
 						<input type="text" name="userName" value="${user.userName }"/>
+						<input type="hidden" name="userLogin" value="${user.userLogin }"/>
+						<input type="hidden" name="userPassword" value="${user.userPassword }"/>
 					</td>
                 </tr>
                 <tr>

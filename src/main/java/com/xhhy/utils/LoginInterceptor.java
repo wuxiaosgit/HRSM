@@ -27,16 +27,17 @@ public class LoginInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object arg2) throws Exception {
 		// TODO Auto-generated method stub
 		HttpSession session =request.getSession();
-		//System.out.println(request.getServletPath());
+//		System.out.println(request.getServletPath());
+//		System.out.println(request.getMethod());
 		Object user = session.getAttribute("user");
-		if(user!=null || ("/user/login.do".equals(request.getServletPath()))&& "POST".equals(request.getMethod()) ){
+		if(user!=null || ("/user/login.do".equals(request.getServletPath()))&& "POST".equals(request.getMethod())){
 			return true;
 		}else{
 			
 			request.getRequestDispatcher("/html/login.jsp").forward(request, response);
+			return false;
 			
 		}
-		return false;
 	}
 
 	

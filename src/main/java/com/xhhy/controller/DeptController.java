@@ -30,7 +30,7 @@ public class DeptController {
 	@Autowired
 	private UserService userService;
 	
-	
+	///ni 
 	@RequestMapping("deptTree.do")
 	public void deptree(HttpServletRequest request, HttpServletResponse response){
 		String parameter = request.getParameter("id");
@@ -148,16 +148,16 @@ public class DeptController {
 		return new ModelAndView("../html/resource/demo1/wecom.jsp");
 	}
 	
-	@RequestMapping("deleteDept.do")
-	public ModelAndView deleteDept(Integer deptId){
-		deptService.deleteDept(deptId);
-		return selectDept();
-	}
+/*	@RequestMapping("deleteDept.do")
+	public  deleteDept(Integer deptId){
+	}*/
+	
 	@RequestMapping("noDeleteDept.do")
 	public ModelAndView noDeleteDept(Integer deptId){
+		/*deptService.deleteDept(deptId);
 		DeptBean deptBean=deptService.getDeptById(deptId);
-		deptBean.setDeptState(0);
-		deptService.updateDept(deptBean);
-		return selectDept();
+		deptBean.setDeptState(0);*/
+		deptService.deleteDept(deptId);
+		return new ModelAndView("../html/resource/demo1/wecom.jsp");
 	}
 }

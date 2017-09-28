@@ -25,7 +25,7 @@
                 <span style="float:right;margin-right: 8px;font-weight: bold">
 				    <a style="text-decoration: none" href="../dept/getTopDept.do?deptId=${deptBean.deptId }">【修改部门】</a>					
 					<a style="text-decoration: none" href="../dept/getTopDept.do">【添加部门】</a>					
-					<a style="text-decoration: none" href="../dept/noDeleteDept.do?deptId=${deptBean.deptId }">【删除部门】</a>
+					<a style="text-decoration: none" href="../dept/noDeleteDept.do?deptId=${deptBean.deptId }" onclick="return confirm('确认删除？？');">【删除部门】</a>
                 </span>
             </span>
         </div>

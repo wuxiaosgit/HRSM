@@ -127,6 +127,7 @@ function nextpage(obj){
 		                        <c:otherwise>
 		                        	<a href="javascript:if(confirm('确定删除?')){location.href='train/deleteById.do?trainId=${train.trainId}&method=deleteById'};">删除</a>
 		                        </c:otherwise>
+
 	                        </c:choose>
 						</td>                        
                     </tr> 

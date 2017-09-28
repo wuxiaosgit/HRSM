@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -14,6 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFCellStyle;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -85,27 +93,34 @@ public class UserController {
 		return selectUser(null);
 	}*/
 	@RequestMapping("gerenUser.do")
-	public ModelAndView gerenUser(HttpServletRequest re,UserBean userBean,@RequestParam("file")MultipartFile mf){
-//		System.out.println(userBean);
-		String savePath="F:/webb/YXSS/src/main/webapp/html/protrait/"+mf.getOriginalFilename();
-//		System.out.println(savePath);
-		try {
-			InputStream in= mf.getInputStream();
-			OutputStream out=new FileOutputStream(savePath);
-			FileCopyUtils.copy(in, out);
-		} catch (Exception e) {
-			e.printStackTrace();
+	public String gerenUser(HttpServletRequest re,UserBean userBean,@RequestParam("file")MultipartFile mf){
+		if (mf.getOriginalFilename()!=null||!"".equals(mf.getOriginalFilename())) {
+			String savePath="F:/"+mf.getOriginalFilename();
+			try {
+				InputStream in= mf.getInputStream();
+				OutputStream out=new FileOutputStream(savePath);
+				FileCopyUtils.copy(in, out);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			userBean.setUserPicture(savePath);
 		}
-		userBean.setUserPicture(savePath);
 		userService.updateUser(userBean);
 		
 		ServletContext servletContext = re.getSession().getServletContext();
 		servletContext.setAttribute("user",userBean);
-		return new ModelAndView("../html/msg.jsp");
+		return "../html/right.jsp";
 	}
 	@RequestMapping("deleteUser.do")
 	public ModelAndView deleteUser(Integer userId){
 		userService.deleteUser(userId);
+		return selectUser(null);
+	}
+	@RequestMapping("deleteUserAll.do")
+	public ModelAndView deleteUserAll(Integer[] ids){
+		for (int i = 0; i < ids.length; i++) {
+			userService.deleteUser(ids[i]);
+		}
 		return selectUser(null);
 	}
 	@RequestMapping("noDeleteUser.do")
@@ -184,6 +199,9 @@ public class UserController {
 				System.out.println();
 			}*/
 			mav.addObject("menus",menus);
+			if (cookie != null) {
+				
+		
 			Cookie cookie1=new Cookie("userLogin", userBean.getUserLogin());
 			cookie1.setMaxAge(60*60*24*cookie);
 			cookie1.setPath("/");
@@ -196,13 +214,14 @@ public class UserController {
 			response.addCookie(cookie1);
 			response.addCookie(cookie2);
 			response.addCookie(cookie3);
+			}
 		}
 		
 		return mav;
 	}
 	@RequestMapping("out.do")
 	public ModelAndView out(HttpServletRequest re){
-		ModelAndView mav=new ModelAndView("../html/login.jsp");
+		ModelAndView mav=new ModelAndView("redirect:../html/login.jsp");
 		 HttpSession session = re.getSession();
 		 session.removeAttribute("user");
 		return mav;
@@ -235,5 +254,158 @@ public class UserController {
 		}
 		
 		return;
+	}
+	@RequestMapping("excl.do")
+	public void excel(Integer[] ids, HttpServletResponse response) {
+		response.setContentType("text/html;charset=utf-8");
+		// 创建excel表头部分
+		String[] excelHeader = { "用户编号", "用户姓名", "用户名","密码", "电话", "邮箱", "身份证号",
+				"状态", "备注" };
+		// 创建集合（从数据库中查询出来）
+
+		List<UserBean> list = new ArrayList<UserBean>();
+		UserBean userBean = null;
+
+		
+		for (int i = 0; i < ids.length; i++) {
+			userBean =userService.getUserById(ids[i]);
+			list.add(userBean);
+		}
+		System.out.println(list.size());
+		// 创建Excel对象
+		HSSFWorkbook wb = new HSSFWorkbook();
+		// 创建sheet
+		HSSFSheet sheet = wb.createSheet("用户信息");
+		// sheet.createFreezePane(1, 3); 冻结
+		// 设置列宽
+		sheet.setColumnWidth(0, 3500);
+		sheet.setColumnWidth(1, 3500);
+		sheet.setColumnWidth(2, 3500);
+		sheet.setColumnWidth(3, 5000);
+		sheet.setColumnWidth(4, 3500);
+		sheet.setColumnWidth(5, 3500);
+		sheet.setColumnWidth(6, 3500);
+		sheet.setColumnWidth(7, 3500);
+		sheet.setColumnWidth(8, 3500);
+
+		
+
+		// 创建行（第一行表头）
+		HSSFRow row = sheet.createRow((int) 0);
+		// 创建样式
+		HSSFCellStyle style = wb.createCellStyle();
+		// 居中
+		
+		style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+
+		HSSFFont headfont = wb.createFont();
+		headfont.setFontName("黑体");
+		headfont.setFontHeightInPoints((short) 15);// 字体大小
+		headfont.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);// 加粗
+		style.setFont(headfont);
+
+		// 设置第一行表头信息
+		for (int i = 0; i < excelHeader.length; i++) {
+			HSSFCell cell = row.createCell(i);
+			cell.setCellValue(excelHeader[i]);
+			cell.setCellStyle(style);
+			// 自动修改列
+			// sheet.autoSizeColumn(i);
+		}
+
+		// 设置其余行的列的值
+		// 创建样式
+		HSSFCellStyle styleOrder = wb.createCellStyle();
+		// 居中
+		styleOrder.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+
+		for (int i = 0; i < list.size(); i++) {
+			row = sheet.createRow(i + 1);
+			userBean = list.get(i);
+			// 每一行放值
+			HSSFCell cell1 = row.createCell(0);
+			cell1.setCellValue(userBean.getUserId());
+			cell1.setCellStyle(styleOrder);
+			HSSFCell cell2 = row.createCell(1);
+			if(userBean.getUserName()==null){
+				cell2.setCellValue("未录入");
+			}else{
+			cell2.setCellValue(userBean.getUserName());
+			}
+			cell2.setCellStyle(styleOrder);
+			HSSFCell cell3 = row.createCell(2);
+			
+			cell3.setCellValue(userBean.getUserLogin());
+			cell3.setCellStyle(styleOrder);
+			HSSFCell cell4 = row.createCell(3);
+			
+				cell4.setCellValue(userBean.getUserPassword());
+			
+			cell4.setCellStyle(styleOrder);
+			HSSFCell cell5 = row.createCell(4);
+			if(userBean.getUserPhone()==null||"".equals(userBean.getUserPhone())){
+				cell5.setCellValue("未录入");
+			}else{
+			cell5.setCellValue(userBean.getUserPhone());
+			}
+			cell5.setCellStyle(styleOrder);
+			HSSFCell cell6 = row.createCell(5);
+			if(userBean.getUserEmail()==null||"".equals(userBean.getUserEmail())){
+				cell6.setCellValue("未录入");
+			}else{
+			cell6.setCellValue(userBean.getUserEmail());
+			}
+			cell6.setCellStyle(styleOrder);
+			
+			HSSFCell cell7 = row.createCell(6);
+			if(userBean.getUserIdcard()==null||"".equals(userBean.getUserIdcard())){
+				cell7.setCellValue("未录入");
+			}else{
+			cell7.setCellValue(userBean.getUserIdcard());
+			}
+			cell7.setCellStyle(styleOrder);
+			
+			String str = "";
+			if (userBean.getUserState() == 1) {
+				str = "启用";
+			} else if (userBean.getUserState() == 0) {
+				str = "禁用";
+			} 
+			
+			HSSFCell cell8 = row.createCell(7);
+		
+				cell8.setCellValue(str);
+			
+			cell8.setCellStyle(styleOrder);
+			
+			HSSFCell cell9 = row.createCell(8);
+			if(userBean.getUserRemark()==null||"".equals(userBean.getUserRemark())){
+				cell9.setCellValue("未录入");
+			}else{
+			cell9.setCellValue(userBean.getUserRemark());
+			}
+			cell9.setCellStyle(styleOrder);
+		}
+
+		// 设置下载时客户端Excel的名称
+		String filename = "用户信息.xls";
+		try {
+			filename = URLEncoder.encode(filename, "utf-8");
+
+			// 设置响应信息类型
+			response.setContentType("application/vnd.ms-excel");
+			// 是指
+			// 设置响应的头信息
+			response.setHeader("Content-disposition", "attachment;filename="
+					+ filename);
+			// 通过输出流将文件输出到客户端
+			OutputStream ouputStream = response.getOutputStream();
+			wb.write(ouputStream);
+			ouputStream.flush();
+			ouputStream.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

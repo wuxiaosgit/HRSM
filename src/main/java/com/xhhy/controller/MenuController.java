@@ -82,6 +82,14 @@ public class MenuController {
 		menuService.deleteMenu(menuId);
 		return selectMenu(null);
 	}
+	@RequestMapping("deleteMenuAll.do")
+	public ModelAndView deleteMenuAll(Integer[] ids){
+		for (int i = 0; i < ids.length; i++) {
+			
+			menuService.deleteMenu(ids[i]);
+		}
+		return selectMenu(null);
+	}
 	@RequestMapping("noDeleteMenu.do")
 	public ModelAndView noDeleteMenu(Integer menuId){
 		MenuBean menu = menuService.getMenuById(menuId);

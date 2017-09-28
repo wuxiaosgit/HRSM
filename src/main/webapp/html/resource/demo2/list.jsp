@@ -71,7 +71,54 @@
     			
     			location.href="../user/selectUser.do?userName=${userName}&deptId=${deptId}&roleId=${roleId}&currentNum="+currentNum;
     		}
-    	
+    	function checkall() {
+    		var alls = document.getElementsByName("check");
+    		var ch = document.getElementById("checkall");
+    		if (ch.checked) {
+    			for ( var i = 0; i < alls.length; i++) {
+    				alls[i].checked = true;
+    			}
+    		} else {
+    			for ( var i = 0; i < alls.length; i++) {
+    				alls[i].checked = false;
+    			}
+    		}
+    	}
+    	function delAll() {
+    		var alls = document.getElementsByName("check");
+    		var ids = new Array();
+    		for ( var i = 0; i < alls.length; i++) {
+    			if (alls[i].checked) {
+    				ids.push(alls[i].value);
+    			}
+    		}
+    		if (ids.length > 0) {
+    			if (confirm("确认操作?")) {
+    				window.location.href = "../user/deleteUserAll.do?ids="
+    						+ ids;
+
+    			}
+    		} else {
+    			alert("请选中要操作的项");
+    		}
+    	}
+    	function excl() {
+    		var alls = document.getElementsByName("check");
+    		var ids = new Array();
+    		for ( var i = 0; i < alls.length; i++) {
+    			if (alls[i].checked) {
+    				ids.push(alls[i].value);
+    			}
+    		}
+    		if (ids.length > 0) {
+    			if (confirm("确认导出?")) {
+    				window.location.href = "../user/excl.do?ids="
+    						+ ids;
+    			}
+    		} else {
+    			alert("请选中要导出的项");
+    		}
+    	}
     	function quanbu(){
     		
     		$("#deptId").val(-1);
@@ -90,7 +137,8 @@
                 <span style="float: left;">当前位置是：系统管理-》用户管理</span>
                 <span style="float: right; margin-right: 8px; font-weight: bold;">
                     <a style="text-decoration: none;" href="../dept/getDept.do?type=add">【添加】</a>
-					<a style="text-decoration: none;" href="#">【删除】</a>
+					<a style="text-decoration: none;" onClick="delAll()">【删除】</a>
+					<a style="text-decoration: none;" onClick="excl()">【excl】</a>
                 </span>
             </span>
         </div>
@@ -143,7 +191,9 @@
                 <tbody>
 						<tr style="font-weight: bold;">						
                         <td width="40px;">序号</td>
-                        <td width="30px;"><input type="checkbox" /></td>						
+                        <td width="30px;">
+                        <input type="checkbox" onChange="checkall()" id="checkall"/>
+                        </td>						
 						<td width="80px;">账号</td>
                         <td width="80px;">姓名</td>
                         <td width="80px;">角色</td>
@@ -151,10 +201,12 @@
 						<td width="100px;">状态</td>                                        
                         <td align="center" width="100px;">操作</td>
                     </tr>
+                    
+                    <c:if test="${empty userBeans }">查不到数据</c:if>
 				<c:forEach items="${userBeans }" var="item">
                     <tr id="product1">
                         <td>${item.userId }</td>
-                        <td><input type="checkbox" /></td>
+                        <td><input type="checkbox" value="${item.userId }" name="check"/></td>
 						<td>${item.userLogin }</td>
                         <td><a href="../user/getUserById.do?userId=${item.userId }">${item.userName }</a></td> 
 						<td>${item.roleBean.roleName }</td> 	
@@ -180,6 +232,7 @@
                     </tr> 
 					</c:forEach>
                     <tr>
+                     <c:if test="${!empty userBeans }">
                         <td colspan="20" style="text-align: center;">	
                         
                         
@@ -286,13 +339,16 @@
          </c:choose> 
          <c:if test="${currentPage lt pageNum }"><a href='javascript:nextpage("next");'>下一页</a></c:if>
          <c:if test="${currentPage ge pageNum }"><a style="color:gray;">下一页</a></c:if> 
-         <a href='javascript:nextpage("last");' >尾页</a>
+         <c:if test="${currentPage lt pageNum }"> <a href='javascript:nextpage("last");' >尾页</a></c:if>
+         <c:if test="${currentPage ge pageNum }"><a style="color:gray;">尾页</a></c:if> 
+        
          
          
          
          
          
                         </td>
+                    </c:if>
                     </tr>
                 </tbody>
             </table>

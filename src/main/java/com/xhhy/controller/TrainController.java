@@ -164,6 +164,7 @@ public class TrainController {
 	@RequestMapping("updateFankuiTrain.do")
 	public ModelAndView updateFankuiTrain(TrainBean train) throws Exception{
 		trainService.updateById(train);
+
 		return fankuiTrainList(null);
 	}
 	
