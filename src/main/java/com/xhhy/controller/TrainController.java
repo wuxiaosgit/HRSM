@@ -21,9 +21,7 @@ public class TrainController {
 	//添加
 	@RequestMapping("insert.do")
 	public ModelAndView insertTrain(TrainBean train,@RequestParam("file")MultipartFile file) throws Exception{
-		if(train==null){
-			throw new Exception("不能为空");
-		}
+		
 		train.setIsDelete(0);
 		//文件上传 
 		trainService.saveTrainAndFilePath(train,file);
