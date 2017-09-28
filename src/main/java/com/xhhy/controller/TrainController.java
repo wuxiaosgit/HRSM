@@ -119,11 +119,10 @@ public class TrainController {
 		return mav;
 	}
 	
-	//培训复核
+	//培训复核/
 	@RequestMapping("updateFuheTrain.do")
 	public ModelAndView updateFuheTrain(TrainBean train) throws Exception{
 		trainService.updateById(train);
-		
 		return queryByState(null);
 	}
 	
