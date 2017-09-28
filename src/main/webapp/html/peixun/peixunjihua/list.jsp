@@ -36,8 +36,8 @@ function nextpage(obj){
 		else {
 			currentNum=obj;
 		}
-	}
 	location.href="train/list.do?trainName=${trainName}&trainState=${trainState}&trainStarttime=${trainStarttime}&trainEndtime=${trainEndtime}&currentNum="+currentNum;
+	}
 </script>
 
 <style>
@@ -61,7 +61,7 @@ function nextpage(obj){
                 	培训名称: <input type="text"  name="trainName" value="${train.trainName}"/>
 					审核状态: 
 					<select name="trainState">
-						<option value="-1"<c:if test="${train.trainState==-1}">selected</c:if>>--请选择--</option>
+						<option value="-1"<c:if test="${train.trainState ==null || train.trainState==-1}">selected</c:if>>--请选择--</option>
 						<option value="0"<c:if test="${train.trainState==0}">selected</c:if>>起草</option>
 						<option value="1"<c:if test="${train.trainState==1}">selected</c:if>>审核中</option>
 						<option value="2"<c:if test="${train.trainState==2}">selected</c:if>>审核通过</option>
@@ -124,7 +124,9 @@ function nextpage(obj){
 		                        <c:when test="${train.trainState==1}">
 		                        	<a href="train/queryViewById.do?method=queryViewById&trainId=${train.trainId}">明细</a>
 		                        </c:when>
-		                        <c:otherwise></c:otherwise>
+		                        <c:otherwise>
+		                        	<a href="train/queryViewById.do?method=queryViewById&trainId=${train.trainId}">明细</a>
+		                        </c:otherwise>
 	                        </c:choose>
 						</td>                        
                     </tr> 
